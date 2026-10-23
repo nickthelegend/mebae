@@ -17,7 +17,8 @@
         "anchors": true,
         "planeDetection": true,
         "meshDetection": true,
-        "hitTest": true
+        "hitTest": true,
+        "gazeTracking": true
       }
     },
     "input": {
@@ -25,37 +26,26 @@
     },
     "render": {
       "fov": 70,
-      "near": 0.001,
-      "far": 200,
+      "near": 0.01,
+      "far": 60,
       "camera": {
-        "position": [
-          0,
-          1.6,
-          1
-        ],
-        "lookAt": [
-          0,
-          0.95,
-          -1.95
-        ]
+        "position": [0, 1.4, 0.6],
+        "lookAt": [0, 0.9, -0.6]
       }
     },
     "features": {
       "locomotion": false,
-      "grabbing": true,
+      "grabbing": false,
       "physics": false,
       "sceneUnderstanding": true,
-      "environmentRaycast": true,
-      "spatialUI": {
-        "kit": "horizon",
-        "preferredColorScheme": "dark"
-      }
+      "environmentRaycast": false,
+      "spatialUI": false
     }
   },
   "dev": {
     "emulator": {
       "device": "metaQuest3",
-      "environment": "sunlit_living_room"
+      "environment": "home_office"
     }
   }
 }

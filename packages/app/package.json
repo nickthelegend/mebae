@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "@mebae/app",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
     "reference:status": "iwsdk reference status",
     "reference:warmup": "iwsdk reference warmup",
     "typecheck": "tsc --noEmit",
-    "build": "vite build",
+    "build": "vite build && node scripts/check-dist.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -36,5 +36,6 @@
   },
   "engines": {
     "node": ">=20.19.0 <21.0.0-0 || >=22.12.0 <23.0.0-0 || >=24.0.0"
-  }
+  },
+  "license": "MIT"
 }

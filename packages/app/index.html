@@ -1,16 +1,60 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link rel="icon" href="data:," />
-    <title>app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Mebae: pin each habit to the real place it happens, and watch it grow." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 30V16' stroke='%235b7f3a' stroke-width='3'/%3E%3Cpath d='M16 17C9 17 6 12 6 7c6 0 10 3 10 10zM16 15c0-6 4-9 10-9 0 5-4 9-10 9z' fill='%235b7f3a'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&family=Sono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>Mebae</title>
+    <style>
+      :root { --loam: #1d1a14; --paper: #f3ecd9; --moss: #5b7f3a; --terra: #c96a3d; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--loam); color: var(--paper); font-family: 'Rethink Sans', system-ui, sans-serif; }
+      #scene-container { position: fixed; inset: 0; }
+      #page { position: relative; z-index: 2; max-width: 34rem; margin: 0 auto; padding: 2.5rem 1rem 3rem; }
+      .packet { background: var(--paper); color: var(--loam); border-radius: 14px; padding: 1.5rem 1.25rem; box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+      .variety { font-family: 'Sono', monospace; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--terra); }
+      h1 { margin: .2rem 0 0; font-size: 2.4rem; line-height: 1.05; }
+      h1 small { font-size: 1rem; color: var(--moss); font-weight: 600; margin-left: .4rem; }
+      p { line-height: 1.5; }
+      ol { padding-left: 1.2rem; line-height: 1.5; }
+      button, label.btn { font: 600 1rem 'Rethink Sans', sans-serif; border: 0; border-radius: 999px; padding: .85rem 1.2rem; cursor: pointer; min-height: 48px; display: inline-flex; align-items: center; }
+      #enter { background: var(--moss); color: var(--paper); width: 100%; justify-content: center; font-size: 1.1rem; }
+      #enter:disabled { background: #6d6a60; cursor: not-allowed; }
+      .row { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+      .ghost { background: transparent; color: var(--paper); border: 1.5px solid rgba(243,236,217,.4) !important; }
+      #status { font-family: 'Sono', monospace; font-size: .85rem; margin-top: .9rem; min-height: 1.2rem; overflow-wrap: anywhere; }
+      #status.err { color: #ffb08a; }
+      .meta { font-family: 'Sono', monospace; font-size: .8rem; opacity: .75; }
+      input[type=file] { display: none; }
+      body.xr #page { display: none; }
+    </style>
   </head>
-  <body style="margin: 0">
+  <body>
     <div id="scene-container"></div>
+    <main id="page">
+      <section class="packet" aria-label="Mebae">
+        <div class="variety">Habit garden · mixed reality</div>
+        <h1>Mebae <small lang="ja">芽生え</small></h1>
+        <p>Pin each habit to the real place it happens. Pinch the sprout when you do it, and it grows. Come back tomorrow and it is still there.</p>
+        <ol>
+          <li>Pinch a seed in the tray on your desk.</li>
+          <li>Pick an icon, point at the spot (a doorway, the counter, your desk) and pinch.</li>
+          <li>Pinch the sprout each time you do the habit. Hold 1 s to undo.</li>
+        </ol>
+        <button id="enter" disabled>Checking for mixed reality…</button>
+      </section>
+      <p id="status" role="status"></p>
+      <div class="row">
+        <button id="export" class="ghost">Export history (JSON)</button>
+        <label class="btn ghost" for="import">Import history…<input id="import" type="file" accept="application/json,.json" /></label>
+      </div>
+      <p class="meta" id="summary"></p>
+      <p class="meta">Everything stays in this browser (IndexedDB). No account, no server. Hands only: no controllers needed.</p>
+    </main>
     <script type="module" src="/src/index.ts"></script>
   </body>
 </html>

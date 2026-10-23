@@ -71,8 +71,15 @@ export class TraySystem extends createSystem({}) {
       () => this.xrManager.removeEventListener('sessionend', end),
       garden.toast.subscribe((t) => {
         if (!t) return;
+        const wasVisible = this.toastCard.mesh.visible;
         this.drawToast(t.text, t.tone);
         this.toastUntil = performance.now() + 4200;
+        if (!wasVisible) {
+          // appear in place, then follow lazily
+          this.followHead(this.toastCard.mesh);
+          this.toastCard.mesh.position.copy(this.v);
+          this.toastCard.mesh.lookAt(this.head);
+        }
       }),
     );
   }
@@ -104,10 +111,10 @@ export class TraySystem extends createSystem({}) {
     this.menu.mesh.rotation.x = -0.9;
     this.root.add(this.menu.mesh);
 
-    this.toastCard = new CanvasCard(1024, 200, 0.4, 0.078, 'Toast');
-    this.toastCard.mesh.position.set(0, 0.25, -0.02);
+    this.toastCard = new CanvasCard(1024, 200, 0.34, 0.066, 'Toast');
     this.toastCard.mesh.visible = false;
-    this.root.add(this.toastCard.mesh);
+    this.toastCard.mesh.renderOrder = 30;
+    (this.toastCard.mesh.material as { depthTest: boolean }).depthTest = false;
 
     this.stampCard = new CanvasCard(1024, 110, 0.36, 0.039, 'Sample stamp');
     this.stampCard.mesh.position.set(0, 0.16, -0.06);
@@ -134,6 +141,7 @@ export class TraySystem extends createSystem({}) {
     if (this.entity) return; // entities live for the page; only placement resets
     this.entity = this.world.createTransformEntity(this.root, { persistent: true });
     this.entity.addComponent(XRAnchor);
+    this.world.createTransformEntity(this.toastCard.mesh, { persistent: true });
     this.seedsEntity = this.world.createTransformEntity(this.makeSeeds(), { parent: this.entity, persistent: true });
     makePressable(this.seedsEntity, 'seeds', { tap: () => this.world.getSystem(TrayEvents)?.emit('seed') });
     const menuEntity = this.world.createTransformEntity(new Object3D(), { parent: this.entity, persistent: true });
@@ -222,7 +230,22 @@ export class TraySystem extends createSystem({}) {
       this.lastVersion = ver;
       this.refresh();
     }
-    if (this.toastCard.mesh.visible && performance.now() > this.toastUntil) this.toastCard.mesh.visible = false;
+    if (this.toastCard.mesh.visible) {
+      if (performance.now() > this.toastUntil) this.toastCard.mesh.visible = false;
+      else this.followHead(this.toastCard.mesh);
+    }
+  }
+
+  /** Toasts float 55 cm ahead and 20 cm below the eyes (inside the Glasses FoV), lazily following. */
+  private followHead(o: Object3D): void {
+    this.player.head.getWorldPosition(this.head);
+    const q = this.player.head.getWorldQuaternion(new Quaternion());
+    const fwd = this.v.set(0, 0, -1).applyQuaternion(q).setY(0).normalize();
+    const target = fwd.multiplyScalar(0.55).add(this.head);
+    target.y -= 0.2;
+    if (o.position.distanceToSquared(target) > 0.0004) o.position.lerp(target, 0.12);
+    o.lookAt(this.head);
+    // `this.v` now holds the target (used to place a fresh toast directly)
   }
 
   private tryPlace(): void {

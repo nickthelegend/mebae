@@ -77,7 +77,9 @@ export class RoomSystem extends createSystem({
     }
     const kind = kindFrom(normal, point.y);
     if (best) return { label: best.label, surface: kindForLabel(best.label, kind), source: 'mesh-label' };
-    // 2. a plane label, when the runtime provides one
+    // 2. a plane label, when the runtime provides one (the smallest matching
+    // plane wins, so a door beats the wall it sits in)
+    let bestPlane: { label: string; area: number } | null = null;
     for (const e of this.queries.planes.entities) {
       const plane = e.getValue(XRPlane, '_plane') as XRPlane & { semanticLabel?: string };
       const obj = e.object3D;
@@ -87,8 +89,16 @@ export class RoomSystem extends createSystem({
       if (Math.abs(this.local.y) > 0.03) continue;
       if (!insidePolygon(this.local.x, this.local.z, plane.polygon)) continue;
       const label = plane.semanticLabel;
-      if (label && label !== 'other') return { label, surface: kindForLabel(label, kind), source: 'plane-label' };
+      if (!label || label === 'other') continue;
+      let minX = Infinity, maxX = -Infinity, minZ = Infinity, maxZ = -Infinity;
+      for (const q of plane.polygon) {
+        minX = Math.min(minX, q.x); maxX = Math.max(maxX, q.x);
+        minZ = Math.min(minZ, q.z); maxZ = Math.max(maxZ, q.z);
+      }
+      const area = (maxX - minX) * (maxZ - minZ);
+      if (!bestPlane || area < bestPlane.area) bestPlane = { label, area };
     }
+    if (bestPlane) return { label: bestPlane.label, surface: kindForLabel(bestPlane.label, kind), source: 'plane-label' };
     // 3. orientation + height
     return { label: nameFor(kind, point.y), surface: kind, source: 'orientation' };
   }

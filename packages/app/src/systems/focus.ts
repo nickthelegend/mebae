@@ -101,6 +101,7 @@ export class FocusSystem extends createSystem({}) {
     const start = () => {
       const wire = () => {
         const tray = this.world.getSystem(TraySystem);
+        if (this.sandEntity) return;
         if (!tray?.entity) return void setTimeout(wire, 50);
         this.sandEntity = this.world.createTransformEntity(this.sand, { parent: tray.entity, persistent: true });
         makePressable(this.sandEntity, 'sand', {

@@ -26,6 +26,7 @@ export class WeekSystem extends createSystem({}) {
   private palmDownSince = 0;
   palmUp = false;
   private lastKey = '';
+  private wristVer = -1;
   private m = new Matrix4();
   private wristPos = new Vector3();
   private a = new Vector3();
@@ -43,6 +44,7 @@ export class WeekSystem extends createSystem({}) {
     const start = () => {
       const wire = () => {
         const tray = this.world.getSystem(TraySystem);
+        if (this.panelEntity) return;
         if (!tray?.entity) return void setTimeout(wire, 50);
         this.panelEntity = this.world.createTransformEntity(this.panel.mesh, { parent: tray.entity, persistent: true });
         this.panel.mesh.position.set(0, 0.36, -0.06);
@@ -79,6 +81,11 @@ export class WeekSystem extends createSystem({}) {
     const tray = this.world.getSystem(TraySystem);
     if (!tray?.placed || !this.panelEntity) return;
     this.updatePalm();
+    const ver = garden.version.peek();
+    if (this.wristGroup.visible && ver !== this.wristVer) {
+      this.wristVer = ver;
+      this.drawWrist();
+    }
     const open = ui.weekOpen.peek();
     this.panel.mesh.visible = open;
     if (open) {

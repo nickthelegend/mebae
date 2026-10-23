@@ -130,6 +130,8 @@ export class TraySystem extends createSystem({}) {
     this.placed = false;
     this.placing = false;
     this.root.visible = false;
+    this.lastVersion = -1;
+    if (this.entity) return; // entities live for the page; only placement resets
     this.entity = this.world.createTransformEntity(this.root, { persistent: true });
     this.entity.addComponent(XRAnchor);
     this.seedsEntity = this.world.createTransformEntity(this.makeSeeds(), { parent: this.entity, persistent: true });
@@ -149,13 +151,8 @@ export class TraySystem extends createSystem({}) {
   }
 
   private onSessionEnd(): void {
-    for (const e of this.pots.values()) e.destroy();
-    this.pots.clear();
-    this.seedsEntity?.destroy();
-    this.entity?.destroy();
-    this.entity = null;
-    this.seedsEntity = null;
     this.placed = false;
+    this.root.visible = false;
   }
 
   menuAction(a: (typeof MENU)[number]): void {
@@ -214,6 +211,12 @@ export class TraySystem extends createSystem({}) {
     if (!this.entity) return;
     if (!this.placed) this.tryPlace();
     if (!this.placed) return;
+    // the scene anchor's persistent handle can arrive after placement
+    const t = garden.tray;
+    if (t && !t.anchorUuid && !this.root.userData.unanchored) {
+      const uuid = localStorage.getItem(IWSDK_ANCHOR_KEY);
+      if (uuid) void garden.saveTray({ ...t, anchorUuid: uuid });
+    }
     const ver = garden.version.peek();
     if (ver !== this.lastVersion) {
       this.lastVersion = ver;
@@ -224,8 +227,12 @@ export class TraySystem extends createSystem({}) {
 
   private tryPlace(): void {
     if (!this.entity || this.placing || !garden.loaded) return;
-    if (!this.entity.getValue(XRAnchor, 'attached')) return;
-    const anchorUuid = localStorage.getItem(IWSDK_ANCHOR_KEY);
+    const attached = !!this.entity.getValue(XRAnchor, 'attached');
+    const waited = performance.now() - this.sessionT0;
+    if (!attached && waited < 3000) return;
+    // no anchor after 3 s: place anyway, but do not claim persistence
+    this.root.userData.unanchored = !attached;
+    const anchorUuid = attached ? localStorage.getItem(IWSDK_ANCHOR_KEY) : null;
     const saved = garden.tray;
     if (saved && anchorUuid && saved.anchorUuid === anchorUuid) {
       this.root.position.fromArray(saved.local.p);
@@ -235,7 +242,6 @@ export class TraySystem extends createSystem({}) {
     }
     const room = this.world.getSystem(RoomSystem);
     this.player.head.getWorldPosition(this.head);
-    const waited = performance.now() - this.sessionT0;
     const desk = room?.findDesk(this.head);
     if (!desk && waited < 1800) return; // give scene understanding a moment
     this.placing = true;

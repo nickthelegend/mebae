@@ -88,13 +88,23 @@ export class PlantingSystem extends createSystem({}) {
     this.xrManager.addEventListener('sessionstart', start);
     this.cleanupFuncs.push(() => this.xrManager.removeEventListener('sessionstart', start));
     this.xrManager.addEventListener('sessionend', () => this.reset());
+    const ev = this.world.getSystem(TrayEvents)!;
+    this.cleanupFuncs.push(
+      ev.on('seed', () => this.onSeed()),
+      ev.on('pin-again', (id) => id && this.onPinAgain(id)),
+      this.world.getSystem(AimSystem)!.onSelect((e) => {
+        if (ui.mode.peek() !== 'aiming' || e.startedAt < this.aimStart + 30) return;
+        if (e.source !== this.aimSrc && this.aimSrc !== 'gaze') this.aimSrc = e.source;
+        this.place();
+      }),
+    );
   }
 
   private onSessionStart(): void {
     const tray = this.world.getSystem(TraySystem)!;
-    const ev = this.world.getSystem(TrayEvents)!;
-    // entities are created lazily once the tray entity exists
+    // entities are created once, after the tray entity exists
     const wire = () => {
+      if (this.radialEntity) return;
       if (!tray.entity) return void setTimeout(wire, 50);
       this.radialEntity = this.world.createTransformEntity(this.radial.mesh, { parent: tray.entity, persistent: true });
       this.radial.mesh.position.set(0, 0.2, -0.02);
@@ -108,15 +118,6 @@ export class PlantingSystem extends createSystem({}) {
       this.arc.visible = false;
     };
     wire();
-    this.cleanupFuncs.push(
-      ev.on('seed', () => this.onSeed()),
-      ev.on('pin-again', (id) => id && this.onPinAgain(id)),
-      this.world.getSystem(AimSystem)!.onSelect((e) => {
-        if (ui.mode.peek() !== 'aiming' || e.startedAt < this.aimStart + 30) return;
-        if (e.source !== this.aimSrc && this.aimSrc !== 'gaze') this.aimSrc = e.source;
-        this.place();
-      }),
-    );
   }
 
   private reset(): void {
@@ -124,7 +125,8 @@ export class PlantingSystem extends createSystem({}) {
     this.flight = null;
     this.preset = null;
     this.repinId = null;
-    this.radialEntity = this.seedEntity = this.reticleEntity = this.arcEntity = null;
+    this.radial.mesh.visible = this.seed.visible = this.reticle.visible = this.arc.visible = false;
+    this.world.getSystem(AimSystem)!.enabled = false;
   }
 
   private onSeed(): void {

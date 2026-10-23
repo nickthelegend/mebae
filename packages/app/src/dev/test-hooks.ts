@@ -4,8 +4,8 @@
  * exposes state for the headless e2e runs and the core's injectable clock so
  * a test can advance the day. The shipped app always uses the system clock.
  */
-import { type World, VisibilityState, createSystem } from '@iwsdk/core';
-import { activeHabits, countOn, exportLedger, growthOf } from '@mebae/core';
+import { type World, Vector3, VisibilityState, createSystem } from '@iwsdk/core';
+import { activeHabits, addDays, countOn, exportLedger, growthOf } from '@mebae/core';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
 import { AimSystem } from '../systems/aim.js';
@@ -97,6 +97,65 @@ export function install(world: World): void {
       garden.clock = { now: () => Date.now() + offsetMs };
       garden.bump();
       return garden.clock.now();
+    },
+    /** World positions of everything a test pinches. */
+    targets() {
+      const scene = world.scene;
+      const w = (name: string, local?: [number, number, number]) => {
+        const o = scene.getObjectByName(name);
+        if (!o || !o.visible) return null;
+        o.updateWorldMatrix(true, false);
+        const v = new Vector3(...(local ?? [0, 0, 0]));
+        return o.localToWorld(v).toArray();
+      };
+      const radial = scene.getObjectByName('Icon radial');
+      const icons = radial?.visible
+        ? Array.from({ length: 12 }, (_, i) => {
+            const a = (i / 12) * Math.PI * 2;
+            const r = 0.16 * 0.73;
+            return radial.localToWorld(new Vector3(Math.sin(a) * r, Math.cos(a) * r, 0)).toArray();
+          })
+        : null;
+      const tray = sys(TraySystem);
+      const seed = tray && tray.freeSlots().length ? tray.slotWorld(tray.freeSlots()[0], new Vector3()).toArray() : null;
+      const menu = scene.getObjectByName('Tray menu');
+      const menuMesh = menu?.children.find((c) => c.name === 'Tray menu') ?? menu;
+      const menuButtons = menuMesh
+        ? ['Week', 'Sample', 'Contrast', 'Large', 'One-hand'].map((_, i) => menuMesh.localToWorld(new Vector3(-0.18 + 0.036 + i * 0.072, 0, 0)).toArray())
+        : null;
+      const wristMesh = scene.getObjectByName('Wrist menu')?.children[0];
+      const wrist = wristMesh?.parent?.visible
+        ? [0, 1, 2, 3, 4, 5].map((k) => wristMesh.localToWorld(new Vector3((k % 2 ? 1 : -1) * 0.0325, 0.0303 - Math.floor(k / 2) * 0.0303, 0)).toArray())
+        : null;
+      const sprouts: Record<string, unknown> = {};
+      for (const h of activeHabits(garden.ledger)) {
+        sprouts[h.id] = {
+          label: w(`Label: ${h.label}`),
+          stake: w(`Move: ${h.label}`),
+          pot: w(`Pin again: ${h.label}`),
+        };
+      }
+      return {
+        tray: w('Seed tray'),
+        seed,
+        icons,
+        sand: w('Focus sand'),
+        sandSpan: [w('Focus sand', [-0.08, 0.05, 0]), w('Focus sand', [0.08, 0.05, 0]), w('Focus sand', [-0.08, -0.05, 0]), w('Focus sand', [0.08, -0.05, 0])],
+        menuButtons,
+        wrist,
+        week: w('Week view'),
+        reticle: w('Aim reticle'),
+        sprouts,
+      };
+    },
+    /** Test-only: marks the last n days complete for every active habit (perf scenes). */
+    fillHistory(n: number) {
+      const today = garden.today();
+      for (const h of activeHabits(garden.real)) {
+        for (let d = 1; d <= n; d++) garden.real.counts[h.id][addDays(today, -d)] = h.target;
+      }
+      void garden.commit();
+      return activeHabits(garden.real).map((h) => growthOf(garden.real, h, today).stage);
     },
     exportJson: () => exportLedger(garden.real, new Date(garden.clock.now())),
     perfStart() {

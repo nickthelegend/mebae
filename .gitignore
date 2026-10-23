@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.iwsdk/
+*.log
+.DS_Store
+.env
+.env.*
+e2e-out/
+packages/app/.mcp.json

@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-25T13:53:03.279Z",
+  "paths": {
+    "video": "/Volumes/Extreme SSD/Projects/grokbot/videos/mebae/mebae-whoa.mp4",
+    "landing": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t8/packages/landing/media/mebae-whoa.mp4"
+  },
+  "ffprobe": {
+    "duration": 35.166667,
+    "videoStream": true,
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 1364
+      }
+    ]
+  },
+  "frames": 2100,
+  "qualification": "First-day capture plus labelled sample preview. Real separate-day footage is still required.",
+  "multiDayFootage": false,
+  "initialDay": "2026-10-25",
+  "error": null
+}

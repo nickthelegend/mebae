@@ -40,6 +40,9 @@ export default async function run({ page, frame, cdp }) {
   const marks = [{ at: 0, text: `Day 1 · ${initial.today} · IWER Quest 3 · hands only` }];
   const capture = record({ page, cdp });
   let error;
+  // Sample mode swaps the ledger, so the final habits are the example garden
+  // (stage 7), not the real stage-1 sprout. Remember the real garden first.
+  let realAtStageOne = null;
   try {
     await pause(800);
     await pinch((await targets()).seed);
@@ -53,6 +56,7 @@ export default async function run({ page, frame, cdp }) {
     const habit = (await state()).habits[0];
     await pinch((await targets()).sprouts[habit.id].label);
     await until(async () => (await state()).habits[0].stage === 1, 'growth');
+    realAtStageOne = await state();
     marks.push({ at: (Date.now() - start) / 1000, text: 'One real check-in · stage 1 · no clock advancement' });
     await pause(Math.max(0, 20000 - (Date.now() - start)));
     await xr('set-transform', { device: 'headset', position: { x: -0.08, y: 1.2, z: -1.35 }, orientation: { pitch: -28, yaw: 0, roll: 0 } });
@@ -63,11 +67,13 @@ export default async function run({ page, frame, cdp }) {
   }
   const footage = await capture;
   const final = await state();
-  const report = { capturedAt, initialDay: initial.today, footage, marks, final, error: error ?? null,
+  const report = { capturedAt, initialDay: initial.today, footage, marks, realAtStageOne, final, error: error ?? null,
     multiDayFootage: false, qualification: 'First-day capture plus labelled sample preview. Real separate-day footage is still required.' };
   writeFileSync(join(process.env.MEBAE_REC_DIR, 'whoa.json'), JSON.stringify(report, null, 2));
   writeFileSync(join(process.env.MEBAE_REC_DIR, 'captions.txt'), marks.map((m, i) => `${m.at.toFixed(2)} ${(marks[i + 1]?.at ?? 35).toFixed(2)} ${m.text}`).join('\n'));
   if (error) throw new Error(error);
-  if (!footage.frames || final.habits[0]?.stage !== 1 || !final.sample) throw new Error('Whoа capture did not complete. Inspect whoa.json.');
+  const stageOne = realAtStageOne?.habits?.length === 1 && realAtStageOne.habits[0].stage === 1 && !realAtStageOne.sample && realAtStageOne.today === initial.today;
+  const sampleShown = final.sample && final.today === initial.today && final.habits.some((h) => String(h.id).startsWith('sample-'));
+  if (!footage.frames || !stageOne || !sampleShown) throw new Error('Whoа capture did not complete. Inspect whoa.json.');
   return report;
 }

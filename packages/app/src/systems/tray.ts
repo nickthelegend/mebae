@@ -15,6 +15,7 @@ import {
   XRAnchor,
   createSystem,
 } from '@iwsdk/core';
+import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
 import { makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
@@ -195,6 +196,7 @@ export class TraySystem extends createSystem({}) {
     const mat = new MeshStandardMaterial({ color: new Color('#c9a36a'), roughness: 0.55, emissive: new Color('#2a1c08'), emissiveIntensity: 0.4 });
     this.seeds = new InstancedMesh(g, mat, MAX_HABITS);
     this.seeds.name = 'Seeds';
+    bindInstanceSpherecast(this.seeds);
     return this.seeds;
   }
 
@@ -390,7 +392,9 @@ export class TraySystem extends createSystem({}) {
       const pot = new Mesh(new SphereGeometry(0.016, 10, 6, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), new MeshStandardMaterial({ color: new Color(TERRACOTTA), roughness: 0.8 }));
       pot.rotation.x = Math.PI;
       const holder = new Group();
-      holder.name = `Pin again: ${h.label}`;
+      // The named pinch target is the card, which stands above the tray.
+      // The holder origin is the pot, and that point sits inside the tray
+      // base, so a ray aimed there presses the tray instead of this card.
       holder.add(pot);
       card.mesh.position.set(0, 0.05, 0);
       holder.add(card.mesh);

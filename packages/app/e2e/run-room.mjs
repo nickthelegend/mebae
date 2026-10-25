@@ -1,9 +1,10 @@
 // Room-independent hands smoke. Uses detected furniture, with no hard-coded
 // office coordinates. Matrix runs it in IWER's built-in kitchen.
-import { check, cli, ev, pinchAt, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
+import { check, cli, consoleErrors, ev, pinchAt, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
 
 export async function main() {
   resetResults();
+  const started = Date.now();
   ev('m.wipe()');
   cli(['browser', 'reload']);
   await sleep(2500);
@@ -32,8 +33,7 @@ export async function main() {
   check('hold undoes one: 2/8', ev('m.state().habits[0].today') === 2);
   await pinchAt('hand-right', t.menuButtons[0]);
   check('Week opens with a hand pinch', ev('m.state().weekOpen'));
-  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]);
-  const errors = (logs.logs ?? logs.entries ?? []).filter((l) => l.level === 'error');
+  const errors = consoleErrors(cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]), started);
   check('zero console errors (room smoke)', errors.length === 0, JSON.stringify(errors));
   return summary();
 }

@@ -67,6 +67,21 @@ export function summary() {
   return { results, failed: failed.length };
 }
 
+/** Browser log entries at level error. `since` is epoch ms: an error from an
+ *  earlier command in this long-lived browser is not this suite. An array's
+ *  `.entries` is a method, so it must be tested with Array.isArray first. */
+export function consoleErrors(logs, since = 0) {
+  const entries = Array.isArray(logs)
+    ? logs
+    : Array.isArray(logs?.logs)
+      ? logs.logs
+      : Array.isArray(logs?.entries)
+        ? logs.entries
+        : null;
+  if (!entries) throw new Error(`browser logs: unexpected shape ${JSON.stringify(logs).slice(0, 180)}`);
+  return entries.filter((l) => l?.level === 'error' && !(since && l.timestamp < since));
+}
+
 /** Aim a hand (or gaze) ray at a world point and pinch once. */
 export async function pinchAt(device, point, hold = 0.15) {
   xr('look-at', { device, target: v3(point) });

@@ -1,483 +1,397 @@
 {
-  "recordedAt": "2026-10-25T12:10:31.284Z",
-  "sourceCommit": "0f8c671d95e98fd5f76108de23a8592185fb454f",
-  "status": "blocked",
-  "blocker": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed.",
+  "recordedAt": "2026-10-25T13:41:52.147Z",
+  "status": "completed_with_failures",
+  "ps": "/bin/ps",
+  "sourceCommit": "00cbb12",
+  "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware.",
   "startup": {
-    "command": "npx @iwsdk/cli dev up --no-open --ai-mode agent --allow-browser-automation",
-    "ok": false,
-    "cliError": "dev_up_exit",
-    "runtimeError": "runtime_owner_identity_unavailable",
-    "serverPid": null,
-    "detail": "The dev process exited with code 1 before runtime registration; no live server PID was returned.",
-    "diagnostic": {
-      "command": "ps -p $$ -o lstart=",
-      "exitCode": 127,
-      "output": "zsh:1: operation not permitted: ps"
-    },
-    "log": "\n> @mebae/app@0.1.0 dev:runtime\n> vite\n\n\n🥽 IWSDK Dev Summary (Development):\n  - Device: metaQuest3\n  - Runtime injected: 1470.5KB\n  - Activation mode: localhost\n  - SEM environment: home_office\n  - AI: agent mode (WebSocket at /__iwer_mcp)\n  - Note: Runtime only activates on localhost/local networks\n\n\n🥽 IWSDK Dev Summary (Development):\n  - Device: metaQuest3\n  - Runtime injected: 1470.5KB\n  - Activation mode: localhost\n  - SEM environment: home_office\n  - AI: agent mode (WebSocket at /__iwer_mcp)\n  - Note: Runtime only activates on localhost/local networks\n\nerror when starting dev server:\nRuntimeOwnerError: Cannot establish this process birth identity, so runtime ownership cannot be acquired safely. Retry startup; on Windows, verify PowerShell is available.\n    at acquireRuntimeOwner (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/node_modules/@iwsdk/vite-plugin-dev/dist/index.js:4797:15)\n    at acquireOwner (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/node_modules/@iwsdk/vite-plugin-dev/dist/index.js:59938:81)\n    at Http2SecureServer.<anonymous> (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/node_modules/@iwsdk/vite-plugin-dev/dist/index.js:61487:26)\n    at httpServer.listen (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/node_modules/vite/dist/node/chunks/config.js:25899:11)\n"
+    "ps": "/bin/ps",
+    "command": "npx @iwsdk/cli dev restart --open --ai-mode agent --allow-browser-automation",
+    "note": "dev up --no-open left the managed browser not_launched, so no suite could run. The live server was restarted with --open. PATH resolved ps to /bin/ps. No lstart shim.",
+    "serverPid": 26670
   },
   "commands": [
-    "cd packages/app",
-    "npm install",
-    "npm run --if-present typecheck",
-    "npx @iwsdk/cli dev status",
-    "'/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh' acquire mebae",
-    "npx @iwsdk/cli dev up --no-open --ai-mode agent --allow-browser-automation",
-    "ps -p $$ -o lstart=",
+    "hash -r && PATH=/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$PATH && command -v ps",
+    "node -e execFileSync('/bin/ps', ['-p', pid, '-o', 'lstart='], LC_ALL=C TZ=UTC)",
+    "/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh acquire mebae",
+    "npx @iwsdk/cli dev restart --open --ai-mode agent --allow-browser-automation",
+    "MEBAE_OUT=e2e-out node e2e/run.mjs kitchen",
+    "node scripts/set-device.mjs metaQuest3 home_office",
     "MEBAE_OUT=e2e-out node e2e/run.mjs quest",
     "node scripts/set-device.mjs metaVRGlasses home_office",
-    "npx @iwsdk/cli dev status",
-    "node e2e/run.mjs glasses",
-    "node scripts/set-device.mjs metaQuest3 kitchen",
-    "npx @iwsdk/cli dev status",
-    "node e2e/run.mjs kitchen",
+    "MEBAE_OUT=e2e-out node e2e/run.mjs glasses",
     "node scripts/set-device.mjs metaQuest3 home_office",
-    "npx @iwsdk/cli dev status",
-    "node e2e/run.mjs perf",
-    "node scripts/set-device.mjs metaQuest3 home_office",
-    "'/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh' release mebae (EXIT trap)",
-    "npm run build"
+    "MEBAE_OUT=e2e-out node e2e/run.mjs perf",
+    "restore packages/app/iwsdk.config.json to metaQuest3 / home_office",
+    "/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh release mebae"
   ],
+  "passFail": {
+    "quest": {
+      "passed": 30,
+      "failed": 0
+    },
+    "glasses": {
+      "passed": 8,
+      "failed": 0
+    },
+    "kitchen": {
+      "passed": 6,
+      "failed": 0
+    },
+    "perf": {
+      "passed": 6,
+      "failed": 1
+    }
+  },
+  "consoleErrors": {
+    "quest": 0,
+    "glasses": 0,
+    "kitchen": 0,
+    "perf": 0
+  },
+  "perf": {
+    "frames": 600,
+    "cpuMs": {
+      "p95": 2
+    },
+    "drawCalls": {
+      "max": 92
+    },
+    "triangles": {
+      "max": 37556
+    },
+    "gate": {
+      "cpuMsP95": 4,
+      "drawCallsMax": 50,
+      "trianglesMax": 150000
+    },
+    "cpuMsP95Pass": true,
+    "drawCallsPass": false,
+    "trianglesPass": true
+  },
   "suites": [
     {
       "suite": "quest",
-      "recordedAt": "2026-10-25T12:08:45.867Z",
+      "recordedAt": "2026-10-25T13:34:59.218Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "home_office"
       },
       "command": "MEBAE_OUT=e2e-out node e2e/run.mjs quest",
-      "status": "blocked",
-      "exitCode": 2,
-      "passed": 0,
-      "failed": 1,
-      "failedCountMeaning": "One runner interruption; no product assertion was evaluated.",
-      "executedChecks": 0,
+      "passed": 30,
+      "failed": 0,
+      "consoleErrors": 0,
       "checks": [
         {
           "name": "cold load: tray placed on a real surface",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "desk on desk"
         },
         {
           "name": "scene understanding sees the room",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "planes 13, meshes 9"
         },
         {
           "name": "3. habit created with an XRAnchor",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "{\"anchorUuid\":\"17be7c02-f31a-4856-9b41-52c23ce70ecf\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
         },
         {
           "name": "3. surface label from the room scan",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "door"
         },
         {
-          "name": "3. sprout at the hit point (±2 cm)",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "name": "3. sprout at the hit point (\u00b12 cm)",
+          "ok": true,
+          "detail": "0.00 cm, via hit-test"
         },
         {
           "name": "4. check-in reaches stage 1",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "first habit pinned and checked in under 60 s",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "11.8 s through check-in (10.0 s to pin)"
         },
         {
           "name": "5. water planted on the desk",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "desk"
         },
         {
           "name": "5. three pinches: 3/8",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "5. pinch-hold 1 s undoes one: 2/8",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "6. raking started the focus timer",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "rake 3302 ms, 191 texture writes, 25 min"
         },
         {
           "name": "7. history restored after reload",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "7. persistent anchors restored",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "[{\"habitId\":\"stretch-1\",\"status\":\"restored\"},{\"habitId\":\"water-2\",\"status\":\"restored\"}]"
         },
         {
-          "name": "7. sprouts back on their spots (±1 cm)",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "name": "7. sprouts back on their spots (\u00b11 cm)",
+          "ok": true,
+          "detail": "0.00 cm, 0.00 cm"
         },
         {
           "name": "7. focus timer survived the reload",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "7b. lost anchors go to \"Pin again\"",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "7b. a \"Pin again\" pot is in the tray",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "7b. one pinch re-pins it with a new anchor",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "8. next day check-in grows to stage 2",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "8. three missed days: resting, stage kept",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "palm up shows the wrist menu",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "wrist \"Week\" opens the week rings",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "sample garden on: only sample sprouts drawn",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "sample focus interaction leaves real history untouched",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-        },
-        {
-          "name": "sample garden off: real history untouched",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "one-hand focus cancellation uses a single pinch",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "one-hand focus starts 25 minutes",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "one-hand focus extends to 50 minutes",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "suspend completion adds exactly one stone",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "7b. lost anchors go to \"Pin again\"",
+          "ok": true,
+          "detail": "[\"pin-again\",\"pin-again\"]"
+        },
+        {
+          "name": "7b. a \"Pin again\" pot is in the tray",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "7b. one pinch re-pins it with a new anchor",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "8. next day check-in grows to stage 2",
+          "ok": true,
+          "detail": "2026-10-26"
+        },
+        {
+          "name": "8. three missed days: resting, stage kept",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "palm up shows the wrist menu",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "wrist \"Week\" opens the week rings",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "sample garden on: only sample sprouts drawn",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "sample focus interaction leaves real history untouched",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "sample garden off: real history untouched",
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "zero console errors",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         }
-      ],
-      "execution": {
-        "name": "managed runtime available",
-        "ok": false,
-        "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-      },
-      "consoleErrorCount": null,
-      "consoleErrorDetail": "Not captured: no managed browser was started.",
-      "error": "Error: Command failed: /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app//node_modules/.bin/iwsdk browser run e2e/eval.mjs --timeout 60000\n{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"cli_error\",\n    \"message\": \"No running IWSDK runtime found for /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app. Start the dev server with \\\"iwsdk dev up\\\".\"\n  }\n}\n\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at ev (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/lib.mjs:30:15)\n    at main (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run-quest.mjs:38:3)\n    at file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run.mjs:15:68"
+      ]
     },
     {
       "suite": "glasses",
-      "recordedAt": "2026-10-25T12:09:19.560Z",
+      "recordedAt": "2026-10-25T13:36:22.597Z",
       "profile": {
         "device": "metaVRGlasses",
         "environment": "home_office"
       },
-      "command": "node e2e/run.mjs glasses",
-      "status": "blocked",
-      "exitCode": 2,
-      "passed": 0,
-      "failed": 1,
-      "failedCountMeaning": "One runner interruption; no product assertion was evaluated.",
-      "executedChecks": 0,
+      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs glasses",
+      "passed": 8,
+      "failed": 0,
+      "consoleErrors": 0,
       "checks": [
         {
           "name": "Glasses profile active with gaze",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "Meta VR Glasses; [\"local-floor\",\"bounded-floor\",\"hand-tracking\",\"anchors\",\"hit-test\",\"plane-detection\",\"mesh-detection\",\"gaze-tracking\",\"eye-tracking\",\"viewer\",\"local\"]"
         },
         {
           "name": "gaze + pinch on the seed opens the radial",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "gaze aim + pinch pins a habit on the desk",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "desk"
         },
         {
           "name": "gaze + pinch checks in (stage 1)",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "gaze + pinch opens the week rings",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "gaze disconnected: hand ray closes the week view",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
-          "name": "every key element inside the Glasses FoV (37/25/43 with 3° margin)",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "name": "every key element inside the Glasses FoV (37/25/43 with 3\u00b0 margin)",
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "zero console errors (Glasses)",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         }
-      ],
-      "execution": {
-        "name": "managed runtime available",
-        "ok": false,
-        "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-      },
-      "consoleErrorCount": null,
-      "consoleErrorDetail": "Not captured: no managed browser was started.",
-      "error": "Error: Command failed: /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app//node_modules/.bin/iwsdk browser run e2e/eval.mjs --timeout 60000\n{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"cli_error\",\n    \"message\": \"No running IWSDK runtime found for /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app. Start the dev server with \\\"iwsdk dev up\\\".\"\n  }\n}\n\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at ev (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/lib.mjs:30:15)\n    at main (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run-glasses.mjs:27:3)\n    at file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run.mjs:15:68"
+      ]
     },
     {
       "suite": "kitchen",
-      "recordedAt": "2026-10-25T12:09:19.936Z",
+      "recordedAt": "2026-10-25T13:33:55.489Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "kitchen"
       },
-      "command": "node e2e/run.mjs kitchen",
-      "status": "blocked",
-      "exitCode": 2,
-      "passed": 0,
-      "failed": 1,
-      "failedCountMeaning": "One runner interruption; no product assertion was evaluated.",
-      "executedChecks": 0,
+      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs kitchen",
+      "passed": 6,
+      "failed": 0,
+      "consoleErrors": 0,
       "checks": [
         {
           "name": "tray uses detected furniture",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "table"
         },
         {
           "name": "habit pinned to a detected top",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "table"
         },
         {
           "name": "three water pinches reach 3/8",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "hold undoes one: 2/8",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "Week opens with a hand pinch",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "zero console errors (room smoke)",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "[]"
         }
-      ],
-      "execution": {
-        "name": "managed runtime available",
-        "ok": false,
-        "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
-      },
-      "consoleErrorCount": null,
-      "consoleErrorDetail": "Not captured: no managed browser was started.",
-      "error": "Error: Command failed: /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app//node_modules/.bin/iwsdk browser run e2e/eval.mjs --timeout 60000\n{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"cli_error\",\n    \"message\": \"No running IWSDK runtime found for /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app. Start the dev server with \\\"iwsdk dev up\\\".\"\n  }\n}\n\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at ev (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/lib.mjs:30:15)\n    at main (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run-room.mjs:7:3)\n    at file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run.mjs:15:68"
+      ]
     },
     {
       "suite": "perf",
-      "recordedAt": "2026-10-25T12:09:20.312Z",
+      "recordedAt": "2026-10-25T13:36:56.702Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "home_office"
       },
-      "command": "node e2e/run.mjs perf",
-      "status": "blocked",
-      "exitCode": 2,
-      "passed": 0,
+      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs perf",
+      "passed": 6,
       "failed": 1,
-      "failedCountMeaning": "One runner interruption; no product assertion was evaluated.",
-      "executedChecks": 0,
+      "consoleErrors": 0,
       "checks": [
         {
           "name": "600-frame sample",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "600 frames"
         },
         {
-          "name": "CPU p95 ≤ 4 ms",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "name": "CPU p95 \u2264 4 ms",
+          "ok": true,
+          "detail": "2.000 ms"
         },
         {
-          "name": "draw calls ≤ 50",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "name": "draw calls \u2264 50",
+          "ok": false,
+          "detail": "92"
         },
         {
-          "name": "triangles ≤ 150000",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "name": "triangles \u2264 150000",
+          "ok": true,
+          "detail": "37556"
         },
         {
           "name": "six grown plants still present",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "idle sand makes no CPU texture writes",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": ""
         },
         {
           "name": "zero console errors (performance)",
-          "ok": null,
-          "status": "not_run",
-          "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+          "ok": true,
+          "detail": "[]"
         }
       ],
-      "execution": {
-        "name": "managed runtime available",
-        "ok": false,
-        "detail": "IWSDK startup failed: runtime_owner_identity_unavailable. The sandbox denies ps, so IWSDK cannot establish process birth identity. Every suite then exited with cli_error: No running IWSDK runtime found. No app interaction or performance checks executed."
+      "frames": 600,
+      "cpuMs": {
+        "p95": 2
       },
-      "consoleErrorCount": null,
-      "consoleErrorDetail": "Not captured: no managed browser was started.",
-      "metrics": {
-        "frames": null,
-        "cpuMs": {
-          "p95": null
-        },
-        "drawCalls": {
-          "max": null
-        },
-        "triangles": {
-          "max": null
-        }
+      "drawCalls": {
+        "max": 92
       },
-      "metricsPrinted": false,
-      "error": "Error: Command failed: /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app//node_modules/.bin/iwsdk browser run e2e/eval.mjs --timeout 60000\n{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"cli_error\",\n    \"message\": \"No running IWSDK runtime found for /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app. Start the dev server with \\\"iwsdk dev up\\\".\"\n  }\n}\n\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at ev (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/lib.mjs:30:15)\n    at main (file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run-perf.mjs:7:9)\n    at file:///Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvnrm4fq/t4/packages/app/e2e/run.mjs:15:68"
+      "triangles": {
+        "max": 37556
+      },
+      "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware.",
+      "note": "Desktop Chrome has no OCULUS_multiview, so renderer.info.render.calls counts both XR views. 92 is 46 submits per eye. The gate is the raw counter, max <= 50, and this run fails it. CPU p95 and triangles pass. Unverified on Quest hardware; not a 72 fps claim."
     }
-  ],
-  "qualification": "Performance is an uncalibrated desktop CPU/render proxy. No metrics were measured or printed in this blocked run. Quest hardware frame rate, including 72 fps, remains unverified.",
-  "gatesChanged": false,
-  "verification": {
-    "typecheck": {
-      "ok": true
-    },
-    "productionBuild": {
-      "ok": true,
-      "detail": "check-dist confirmed no test hooks or test clock in production output."
-    }
-  },
-  "cleanup": {
-    "profile": {
-      "device": "metaQuest3",
-      "environment": "home_office"
-    },
-    "heavySlotReleasedByExitTrap": true,
-    "liveServerAfterStartup": false,
-    "screenshotsTracked": false
-  }
+  ]
 }

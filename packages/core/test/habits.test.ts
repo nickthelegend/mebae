@@ -13,12 +13,25 @@ import {
   dayKey,
   emptyLedger,
   setPlacement,
+  sampleLedger,
   undoOne,
 } from '../src/index.js';
 
 const T0 = new Date(2026, 9, 24, 8, 30).getTime(); // Oct 24 2026 08:30 local
 
 describe('habits state machine', () => {
+  it('rejects every mutation of the sample ledger', () => {
+    const l = sampleLedger('2026-10-24');
+    const before = JSON.stringify(l);
+    const id = l.habits[0].id;
+    const c = new ManualClock(T0);
+    for (const mutate of [
+      () => createHabit(l, 'water', c), () => checkIn(l, id, c),
+      () => undoOne(l, id, c), () => archiveHabit(l, id, c),
+      () => setPlacement(l, id, null),
+    ]) expect(mutate).toThrow(/sample data/);
+    expect(JSON.stringify(l)).toBe(before);
+  });
   it('creates a habit from a preset with its kind and target', () => {
     const l = emptyLedger();
     const c = new ManualClock(T0);

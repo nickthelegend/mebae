@@ -65,7 +65,8 @@ export class FocusSystem extends createSystem({}) {
     this.g = this.canvas.getContext('2d')!;
     this.tex = new CanvasTexture(this.canvas);
     this.mat = new ShaderMaterial({
-      uniforms: { uRake: { value: this.tex }, uFade: { value: 0 }, uHC: { value: 0 } },
+      uniforms: { uRake: { value: this.tex }, uFade: { value: 0 }, uHC: { value: 0 }, uResume: { value: 0 } },
+      side: 2,
       vertexShader: /* glsl */ `
         varying vec2 vUv;
         void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
@@ -74,12 +75,16 @@ export class FocusSystem extends createSystem({}) {
         uniform sampler2D uRake;
         uniform float uFade;
         uniform float uHC;
+        uniform float uResume;
         float h(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
         void main() {
           float grain = h(floor(vUv * 420.0)) * 0.08 + h(floor(vUv * 90.0)) * 0.05;
           vec3 sand = vec3(0.86, 0.79, 0.64) - grain;
           float g0 = texture2D(uRake, vUv).r * uFade;
           float g1 = texture2D(uRake, vUv + vec2(0.006, 0.006)).r * uFade;
+          // A restored timer has no saved pixels: reconstruct lines on the GPU.
+          float resumed = (1.0 - smoothstep(0.025, 0.07, abs(fract(vUv.y * 24.0) - 0.5))) * step(0.08, vUv.x) * step(vUv.x, 0.92);
+          g0 = max(g0, resumed * uResume * uFade);
           vec3 col = sand * (1.0 - g0 * 0.42) + vec3(0.12) * max(0.0, g1 - g0);
           col = mix(col, mix(vec3(0.08), vec3(1.0, 0.88, 0.3), g0), uHC * step(0.05, g0));
           vec2 e = min(vUv, 1.0 - vUv);
@@ -112,6 +117,7 @@ export class FocusSystem extends createSystem({}) {
           },
           drag: (p, dt) => this.rake(p, dt),
           hold: () => {
+            if (garden.isSample || garden.settings.oneHand) return;
             if (this.pressRakeMs < 150 && cancelFocus(garden.real.focus)) {
               this.clearRake();
               chimeUndo();
@@ -131,6 +137,7 @@ export class FocusSystem extends createSystem({}) {
   }
 
   private onTap(): void {
+    if (garden.isSample) return garden.say('Example garden (sample data). Turn it off to start your own focus block.');
     if (this.pressRakeMs >= 150) return;
     const f = garden.real.focus;
     const st = focusStatus(f, garden.clock);
@@ -139,7 +146,13 @@ export class FocusSystem extends createSystem({}) {
       else if (st.minutes === 25 && extendFocus(f, garden.clock)) {
         garden.say('50-minute focus block.');
         void garden.commit();
-      } else garden.say(`${fmt(st.remainingMs)} left. Pinch and hold the sand to cancel.`);
+      } else {
+        cancelFocus(f);
+        this.clearRake();
+        chimeUndo();
+        garden.say('Focus block cancelled. No stone this time.');
+        void garden.commit();
+      }
       return;
     }
     if (!st.running) garden.say('Rake the sand: pinch and drag across it for 2 s to start 25 minutes (4 s for 50).');
@@ -148,13 +161,13 @@ export class FocusSystem extends createSystem({}) {
   private begin(min: 25 | 50): void {
     if (startFocus(garden.real.focus, garden.clock, min)) {
       chimeGrow();
-      if (garden.settings.oneHand) this.drawFullRake();
       garden.say(`${min}-minute focus started. ${min === 25 ? 'Keep raking for 50.' : ''} The lines fade as time runs.`);
       void garden.commit();
     }
   }
 
   private rake(p: Vector3, dt: number): void {
+    if (garden.isSample || garden.settings.oneHand) return;
     const l = this.sand.worldToLocal(this.v.copy(p));
     const u = l.x / SAND_W + 0.5;
     const v = l.y / SAND_H + 0.5;
@@ -196,10 +209,6 @@ export class FocusSystem extends createSystem({}) {
     this.rakeWrites++;
   }
 
-  private drawFullRake(): void {
-    for (let i = 0; i < 6; i++) this.drawStroke(0.08, 0.15 + i * 0.14, 0.92, 0.15 + i * 0.14);
-  }
-
   private clearRake(): void {
     this.g.clearRect(0, 0, RAKE_PX, RAKE_PX);
     this.tex.needsUpdate = true;
@@ -210,13 +219,15 @@ export class FocusSystem extends createSystem({}) {
     const tray = this.world.getSystem(TraySystem);
     if (!tray?.placed) return;
     const now = performance.now();
-    const f = garden.real.focus;
+    const real = garden.real.focus;
+    const f = garden.ledger.focus;
     const st = focusStatus(f, garden.clock);
-    this.mat.uniforms.uFade.value = st.running ? 0.25 + 0.75 * st.remainingFraction : this.rakeMs > 0 ? 1 : 0;
+    this.mat.uniforms.uResume.value = st.running && this.rakeMs === 0 ? 1 : 0;
+    this.mat.uniforms.uFade.value = garden.isSample ? 0 : st.running ? st.remainingFraction : this.rakeMs > 0 ? 1 : 0;
     this.mat.uniforms.uHC.value = garden.settings.highContrast ? 1 : 0;
     if (now < this.nextTick) return;
     this.nextTick = now + 500;
-    const done = settle(f, garden.clock);
+    const done = settle(real, garden.clock);
     if (done) {
       this.clearRake();
       chimeGrow();
@@ -236,10 +247,12 @@ export class FocusSystem extends createSystem({}) {
       this.stones.instanceMatrix.needsUpdate = true;
       this.stones.computeBoundingSphere();
     }
-    const label = st.running
+    const label = garden.isSample
+      ? 'Example garden (sample data)'
+      : st.running
       ? `${fmt(st.remainingMs)} · ${st.minutes} min focus`
       : garden.settings.oneHand
-        ? `Pinch sand: 25 min · stones ${f.blocks.length}`
+        ? `Pinch: 25 → 50 → cancel · stones ${f.blocks.length}`
         : `Rake to focus · stones ${f.blocks.length}`;
     if (label !== this.lastLabel) {
       this.lastLabel = label;

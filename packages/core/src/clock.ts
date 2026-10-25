@@ -25,7 +25,12 @@ export class ManualClock implements Clock {
     const d = new Date(this.t);
     d.setHours(0, 0, 0, 0);
     d.setDate(d.getDate() + days);
-    this.t = d.getTime() + offsetMs;
+    const hours = Math.floor(offsetMs / 3600_000);
+    const minutes = Math.floor((offsetMs % 3600_000) / 60_000);
+    const seconds = Math.floor((offsetMs % 60_000) / 1000);
+    const ms = offsetMs % 1000;
+    d.setHours(hours, minutes, seconds, ms);
+    this.t = d.getTime();
   }
 }
 

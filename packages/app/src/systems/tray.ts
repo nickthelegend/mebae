@@ -167,6 +167,7 @@ export class TraySystem extends createSystem({}) {
     const s = garden.settings;
     if (a === 'Week') ui.weekOpen.value = !ui.weekOpen.peek();
     else if (a === 'Sample') {
+      if (ui.mode.peek() !== 'idle') return garden.say('Finish pinning or moving this sprout before switching gardens.');
       garden.setSample(!garden.isSample);
       garden.say(garden.isSample ? 'Example garden on: sample data, not your history.' : 'Back to your real garden.');
     } else {

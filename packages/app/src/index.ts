@@ -80,8 +80,10 @@ async function main(): Promise<void> {
     try {
       const l = importLedger(await f.text());
       if (!confirm(`Replace this browser's history with ${l.habits.length} habits from ${f.name}? Anchors from another headset will ask to be pinned again.`)) return;
-      garden.replaceReal(l);
-      status(`Imported ${l.habits.length} habits.`);
+      await garden.replaceReal(l);
+      // Discard live XRAnchor objects before restoring the imported handles.
+      // Reusing a matching habit id must never reuse that id's previous spot.
+      location.reload();
     } catch (e) {
       status(`Import refused: ${(e as Error).message}`, true);
     }

@@ -335,15 +335,23 @@ export class SproutSystem extends createSystem({}) {
   }
 
   private async finishCarry(src: AimSource): Promise<void> {
+    try {
+      await this.commitCarry(src);
+    } finally {
+      ui.mode.value = 'idle';
+      garden.bump();
+    }
+  }
+
+  private async commitCarry(src: AimSource): Promise<void> {
     const id = this.carryId!;
     const aim = this.world.getSystem(AimSystem)!;
     const anchors = this.world.getSystem(AnchorSystem)!;
     const tray = this.world.getSystem(TraySystem)!;
-    const hit = aim.hit(src) ?? aim.hit(this.carrySrc);
+    const hit = aim.hit(aim.preferred(src === 'left' ? 'left' : 'right'));
     const h = garden.real.habits.find((x) => x.id === id);
     this.carryId = null;
     aim.enabled = false;
-    ui.mode.value = 'idle';
     if (!h) return;
     const oldUuid = h.placement?.anchorUuid ?? null;
     if (hit && tray.contains(hit.point)) {

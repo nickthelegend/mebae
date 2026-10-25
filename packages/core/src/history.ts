@@ -26,8 +26,13 @@ const fail = (msg: string): never => {
   throw new ImportError(msg);
 };
 
+const isObject = (v: unknown): v is Record<string, unknown> =>
+  typeof v === 'object' && v !== null && !Array.isArray(v);
+const isTimestamp = (v: unknown): v is number =>
+  typeof v === 'number' && Number.isFinite(v) && Math.abs(v) <= 8.64e15;
+
 function checkHabit(h: unknown, i: number): Habit {
-  if (typeof h !== 'object' || h === null) fail(`habits[${i}] is not an object.`);
+  if (!isObject(h)) fail(`habits[${i}] is not an object.`);
   const o = h as Record<string, unknown>;
   for (const k of ['id', 'presetId', 'label', 'glyph', 'kind', 'species', 'createdDay'] as const)
     if (typeof o[k] !== 'string') fail(`habits[${i}].${k} must be a string.`);
@@ -40,7 +45,7 @@ function checkHabit(h: unknown, i: number): Habit {
   if (o.archivedDay !== null && !isDayKey(o.archivedDay)) fail(`habits[${i}].archivedDay is not a date or null.`);
   if (o.placement !== null) {
     const p = o.placement as Record<string, unknown> | undefined;
-    if (!p || typeof p.surfaceLabel !== 'string' || typeof p.surface !== 'string')
+    if (!isObject(p) || typeof p.surfaceLabel !== 'string' || !['wall', 'floor', 'table', 'ceiling', 'other'].includes(p.surface as string))
       fail(`habits[${i}].placement is malformed.`);
     if (p!.anchorUuid !== null && typeof p!.anchorUuid !== 'string') fail(`habits[${i}].placement.anchorUuid is malformed.`);
   }
@@ -58,18 +63,21 @@ export function importLedger(json: string): Ledger {
   const file = raw as Partial<ExportFile>;
   if (!file || file.format !== 'mebae.history.v1') fail('This is not a Mebae history file (format mebae.history.v1).');
   const l = file.ledger as Ledger | undefined;
-  if (!l || typeof l !== 'object') fail('The file has no ledger.');
+  if (!isObject(l)) fail('The file has no ledger.');
+  if (l!.format !== 'mebae.history.v1') fail('ledger.format must be mebae.history.v1.');
   if (l!.sample) fail('This file holds sample data. Mebae never mixes sample data with real history.');
+  if (l!.sample !== false) fail('ledger.sample must be false for real history.');
   if (!Array.isArray(l!.habits)) fail('ledger.habits must be a list.');
   const habits = l!.habits.map(checkHabit);
   const ids = new Set(habits.map((h) => h.id));
   if (ids.size !== habits.length) fail('Two habits share an id.');
   if (habits.filter((h) => h.archivedDay === null).length > MAX_HABITS)
     fail(`More than ${MAX_HABITS} active habits.`);
-  if (typeof l!.counts !== 'object' || l!.counts === null) fail('ledger.counts must be an object.');
+  if (!isObject(l!.counts)) fail('ledger.counts must be an object.');
   for (const [id, days] of Object.entries(l!.counts)) {
     const h = habits.find((x) => x.id === id);
     if (!h) fail(`counts has an entry for unknown habit "${id}".`);
+    if (!isObject(days)) fail(`counts.${id} must be an object of day counts.`);
     for (const [d, n] of Object.entries(days as Record<string, unknown>)) {
       if (!isDayKey(d)) fail(`counts.${id} has a bad date "${d}".`);
       if (typeof n !== 'number' || !Number.isInteger(n) || n < 0 || n > h!.target)
@@ -77,11 +85,11 @@ export function importLedger(json: string): Ledger {
     }
   }
   const f = l!.focus;
-  if (!f || (f.startedAt !== null && typeof f.startedAt !== 'number') || !Array.isArray(f.blocks))
+  if (!isObject(f) || (f.startedAt !== null && !isTimestamp(f.startedAt)) || !Array.isArray(f.blocks))
     fail('ledger.focus is malformed.');
   if (f.minutes !== 25 && f.minutes !== 50) fail('ledger.focus.minutes must be 25 or 50.');
   for (const b of f.blocks)
-    if (typeof b?.startedAt !== 'number' || typeof b?.completedAt !== 'number' || (b.minutes !== 25 && b.minutes !== 50))
+    if (!isObject(b) || !isTimestamp(b.startedAt) || !isTimestamp(b.completedAt) || (b.minutes !== 25 && b.minutes !== 50) || b.completedAt !== b.startedAt + b.minutes * 60_000)
       fail('A focus block is malformed.');
   const out: Ledger = {
     format: 'mebae.history.v1',

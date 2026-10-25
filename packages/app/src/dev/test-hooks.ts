@@ -5,9 +5,10 @@
  * a test can advance the day. The shipped app always uses the system clock.
  */
 import { type World, Vector3, VisibilityState, createSystem } from '@iwsdk/core';
-import { activeHabits, addDays, countOn, exportLedger, growthOf } from '@mebae/core';
+import { activeHabits, addDays, countOn, createHabit, exportLedger, growthOf, setPlacement } from '@mebae/core';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
+import { clear } from '../state/store.js';
 import { AimSystem } from '../systems/aim.js';
 import { AnchorSystem } from '../systems/anchors.js';
 import { FocusSystem } from '../systems/focus.js';
@@ -16,6 +17,8 @@ import { RoomSystem } from '../systems/room.js';
 import { SproutSystem } from '../systems/sprouts.js';
 import { TraySystem } from '../systems/tray.js';
 import { WeekSystem } from '../systems/week.js';
+import { surfaceQuaternion } from '../systems/surface-pose.js';
+import { Quaternion } from '@iwsdk/core';
 
 let offsetMs = 0;
 
@@ -23,6 +26,7 @@ export function install(world: World): void {
   const renderer = world.renderer;
   let t0 = 0;
   let sampling = false;
+  let sampleLimit = 600;
   const cpu: number[] = [];
   const calls: number[] = [];
   const tris: number[] = [];
@@ -39,6 +43,7 @@ export function install(world: World): void {
     cpu.push(performance.now() - t0);
     calls.push(renderer.info.render.calls);
     tris.push(renderer.info.render.triangles);
+    if (cpu.length >= sampleLimit) sampling = false;
     t0 = 0;
   };
 
@@ -87,7 +92,10 @@ export function install(world: World): void {
     },
     /** Test-only: move the injectable clock forward by whole days. */
     advanceDays(n: number) {
-      offsetMs += n * 86_400_000;
+      const before = Date.now() + offsetMs;
+      const after = new Date(before);
+      after.setDate(after.getDate() + n);
+      offsetMs += after.getTime() - before;
       garden.clock = { now: () => Date.now() + offsetMs };
       garden.bump();
       return garden.today();
@@ -104,6 +112,7 @@ export function install(world: World): void {
       const w = (name: string, local?: [number, number, number]) => {
         const o = scene.getObjectByName(name);
         if (!o || !o.visible) return null;
+        for (let p = o.parent; p; p = p.parent) if (!p.visible) return null;
         o.updateWorldMatrix(true, false);
         const v = new Vector3(...(local ?? [0, 0, 0]));
         return o.localToWorld(v).toArray();
@@ -146,6 +155,25 @@ export function install(world: World): void {
         week: w('Week view'),
         reticle: w('Aim reticle'),
         sprouts,
+        // Actual rectangle corners, not only centres, for the Glasses mask gate.
+        bounds: Object.fromEntries([
+          ['tray', 'Seed tray', 0.4, 0.2, true],
+          ['menu', 'Tray menu', 0.36, 0.052, false],
+          ['radial', 'Icon radial', 0.32, 0.32, false],
+          ['week', 'Week view', 0.46, 0.305, false],
+          ['focus', 'Focus timer', 0.15, 0.035, false],
+        ].map(([key, name, width, height, horizontal]) => {
+          // Tray menu has a named wrapper, so use its actual card mesh.
+          const o = scene.getObjectByName(name as string);
+          const card = name === 'Tray menu' ? o?.children.find((c) => c.name === name) ?? o : o;
+          if (!card) return [key, []];
+          card.updateWorldMatrix(true, false);
+          const pts = [-1, 1].flatMap((x) => [-1, 1].map((y) => {
+            const v = new Vector3(x * Number(width) / 2, horizontal ? 0 : y * Number(height) / 2, horizontal ? y * Number(height) / 2 : 0);
+            return card.localToWorld(v).toArray();
+          }));
+          return [key, pts];
+        })),
       };
     },
     /** Test-only: marks the last n days complete for every active habit (perf scenes). */
@@ -158,10 +186,42 @@ export function install(world: World): void {
       return activeHabits(garden.real).map((h) => growthOf(garden.real, h, today).stage);
     },
     exportJson: () => exportLedger(garden.real, new Date(garden.clock.now())),
-    perfStart() {
+    roomFixture() {
+      const d = sys(RoomSystem)?.findDesk(new Vector3(), 100);
+      if (!d) throw new Error('The room has no detected desk/table/counter top.');
+      return { centre: d.center.toArray(), halfX: d.halfX, halfZ: d.halfZ, label: d.label,
+        seated: [d.center.x, d.y + 0.45, d.center.z + d.halfZ + 0.35] };
+    },
+    /** Performance setup only: not evidence of a user interaction. */
+    async preparePerf() {
+      if (activeHabits(garden.real).length || !sys(TraySystem)?.placed) throw new Error('Perf setup needs an empty garden with its tray placed.');
+      const tray = sys(TraySystem);
+      const room = sys(RoomSystem);
+      const anchors = sys(AnchorSystem);
+      const head = world.player.head.getWorldPosition(new Vector3());
+      for (let i = 0; i < 6; i++) {
+        const target = tray.root.localToWorld(new Vector3((i % 3 - 1) * 0.3, 0, -0.24 - Math.floor(i / 3) * 0.3));
+        const hit = room.raycast(head, target.clone().sub(head).normalize());
+        if (!hit) throw new Error(`No detected surface for perf plant ${i + 1}`);
+        const info = room.classify(hit.point, hit.normal);
+        const h = createHabit(garden.real, ['read', 'water', 'deep-work', 'stretch', 'read', 'deep-work'][i], garden.clock);
+        const uuid = await anchors.create(h.id, hit.point, surfaceQuaternion(hit.normal, hit.point, head, new Quaternion()));
+        setPlacement(garden.real, h.id, { anchorUuid: uuid, surfaceLabel: info.label, surface: info.surface });
+        for (let d = 1; d <= 24; d++) garden.real.counts[h.id][addDays(garden.today(), -d)] = h.target;
+      }
+      await garden.commit();
+    },
+    forcePlantDraws() {
+      world.scene.traverse((o) => {
+        if (o.name.startsWith('Sprout: ')) o.traverse((child) => { child.frustumCulled = false; });
+      });
+    },
+    perfStart(frames = 600) {
       cpu.length = calls.length = tris.length = 0;
+      sampleLimit = frames;
       sampling = true;
     },
+    perfFrames: () => cpu.length,
     perfStop() {
       sampling = false;
       return {
@@ -176,11 +236,9 @@ export function install(world: World): void {
       localStorage.removeItem('@immersive-web-emulation-runtime/persistent-anchors');
     },
     async wipe() {
-      localStorage.clear();
-      await new Promise((r) => {
-        const req = indexedDB.deleteDatabase('mebae');
-        req.onsuccess = req.onerror = req.onblocked = () => r(null);
-      });
+      localStorage.removeItem('iwsdk_scene_anchor_uuid');
+      localStorage.removeItem('@immersive-web-emulation-runtime/persistent-anchors');
+      await clear();
     },
   };
 }

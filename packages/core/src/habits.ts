@@ -90,6 +90,7 @@ export function createHabit(
   clock: Clock,
   placement: Placement | null = null,
 ): Habit {
+  requireReal(l);
   const preset = presetById(presetId);
   if (!preset) throw new HabitError('unknown-preset', `No preset named "${presetId}".`);
   if (activeHabits(l).length >= MAX_HABITS) {
@@ -117,10 +118,15 @@ export function createHabit(
 }
 
 function requireActive(l: Ledger, id: string): Habit {
+  requireReal(l);
   const h = l.habits.find((x) => x.id === id);
   if (!h) throw new HabitError('unknown-habit', `No habit with id "${id}".`);
   if (h.archivedDay !== null) throw new HabitError('archived', `"${h.label}" was removed.`);
   return h;
+}
+
+function requireReal(l: Ledger): void {
+  if (l.sample) throw new HabitError('sample', 'The example garden is sample data. Switch back to your real garden to tend it.');
 }
 
 export function countOn(l: Ledger, id: string, day: DayKey): number {

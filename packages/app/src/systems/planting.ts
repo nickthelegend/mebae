@@ -94,7 +94,9 @@ export class PlantingSystem extends createSystem({}) {
       ev.on('pin-again', (id) => id && this.onPinAgain(id)),
       this.world.getSystem(AimSystem)!.onSelect((e) => {
         if (ui.mode.peek() !== 'aiming' || e.startedAt < this.aimStart + 30) return;
-        if (e.source !== this.aimSrc && this.aimSrc !== 'gaze') this.aimSrc = e.source;
+        const aim = this.world.getSystem(AimSystem)!;
+        this.aimSrc = aim.preferred(e.source === 'left' ? 'left' : 'right');
+        this.hit = aim.hit(this.aimSrc);
         this.place();
       }),
     );

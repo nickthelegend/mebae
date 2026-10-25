@@ -33,5 +33,17 @@ export async function save<T>(key: string, value: T): Promise<void> {
     tx.objectStore(STORE).put(value, key);
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(new Error(`Could not save ${key}: ${tx.error?.message}`));
+    tx.onabort = () => reject(new Error(`Save aborted for ${key}: ${tx.error?.message ?? 'transaction aborted'}`));
+  });
+}
+
+/** Dev test reset: keep the connection open and wait for the clear to commit. */
+export async function clear(): Promise<void> {
+  const d = await db();
+  return new Promise((resolve, reject) => {
+    const tx = d.transaction(STORE, 'readwrite');
+    tx.objectStore(STORE).clear();
+    tx.oncomplete = () => resolve();
+    tx.onerror = tx.onabort = () => reject(new Error('Could not reset test storage.'));
   });
 }

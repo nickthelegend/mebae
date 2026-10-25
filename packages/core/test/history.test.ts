@@ -44,6 +44,21 @@ describe('export / import', () => {
   });
 
   it.each([
+    ['a null day map', (f: any) => { f.ledger.counts[f.ledger.habits[0].id] = null; }, /object of day counts/],
+    ['an array of day maps', (f: any) => { f.ledger.counts = []; }, /counts must be an object/],
+    ['a false format inside the ledger', (f: any) => { f.ledger.format = 'other'; }, /ledger.format/],
+    ['an unmarked sample flag', (f: any) => { delete f.ledger.sample; }, /sample must be false/],
+    ['an invalid surface', (f: any) => { f.ledger.habits[0].placement.surface = 'imaginary'; }, /placement is malformed/],
+    ['a timestamp outside the Date range', (f: any) => { f.ledger.focus.startedAt = 1e100; }, /focus is malformed/],
+    ['an impossible focus block', (f: any) => { f.ledger.focus.blocks = [{ startedAt: T0, minutes: 25, completedAt: T0 }]; }, /focus block is malformed/],
+  ])('rejects %s with ImportError', (_name, mutate, reason) => {
+    const f = JSON.parse(exportLedger(realLedger(), new Date(T0)));
+    mutate(f);
+    expect(() => importLedger(JSON.stringify(f))).toThrow(ImportError);
+    expect(() => importLedger(JSON.stringify(f))).toThrow(reason);
+  });
+
+  it.each([
     ['not json', 'nope{', /not JSON/],
     ['wrong format', JSON.stringify({ format: 'x' }), /not a Mebae history file/],
     ['bad preset', null, /not a known preset/],

@@ -24,9 +24,13 @@ export default async function run({ page, cdp }) {
     } catch {}
   };
   session.on('Page.screencastFrame', onFrame);
-  await session.send('Page.startScreencast', { format: 'jpeg', quality: 88, everyNthFrame: 1 });
-  await new Promise((r) => setTimeout(r, secs * 1000));
-  await session.send('Page.stopScreencast');
-  session.off?.('Page.screencastFrame', onFrame);
+  try {
+    await session.send('Page.startScreencast', { format: 'jpeg', quality: 88, everyNthFrame: 1 });
+    await new Promise((r) => setTimeout(r, secs * 1000));
+  } finally {
+    await session.send('Page.stopScreencast').catch(() => {});
+    session.off?.('Page.screencastFrame', onFrame);
+    if (!cdp) await session.detach();
+  }
   return { frames: n, dir };
 }

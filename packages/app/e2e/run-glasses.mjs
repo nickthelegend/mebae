@@ -1,6 +1,6 @@
 // Meta VR Glasses profile: gaze targets, a pinch selects. Requires
 // dev.emulator.device = "metaVRGlasses" (scripts/set-device.mjs).
-import { check, cli, ev, sleep, summary, until, v3, xr } from './lib.mjs';
+import { check, cli, ev, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
 
 const SEATED = { x: -0.08, y: 1.2, z: -1.35 };
 
@@ -23,6 +23,7 @@ async function gazePinch(point) {
 }
 
 export async function main() {
+  resetResults();
   ev('m.wipe()');
   cli(['browser', 'reload']);
   await sleep(2500);
@@ -38,11 +39,17 @@ export async function main() {
   // FoV: tray corners, menu, focus card, radial and week panel
   let t = ev('m.targets()');
   const pts = { 'tray centre': t.tray, 'tray menu (left)': t.menuButtons[0], 'tray menu (right)': t.menuButtons[4], 'sand centre': t.sand };
+  const corners = {};
+  const includeBounds = (bounds, names) => names.forEach((name) => {
+    bounds[name]?.forEach((p, i) => { corners[`${name} corner ${i + 1}`] = p; });
+  });
+  includeBounds(t.bounds, ['tray', 'menu', 'focus']);
   // gaze -> seed -> radial
   await gazePinch(t.seed);
   await until(() => ev('m.state().mode') === 'radial', 'radial (gaze + pinch)');
   check('gaze + pinch on the seed opens the radial', true);
   t = ev('m.targets()');
+  includeBounds(t.bounds, ['radial']);
   pts['radial top icon'] = t.icons[0];
   pts['radial bottom icon'] = t.icons[6];
   pts['radial left icon'] = t.icons[9];
@@ -66,6 +73,7 @@ export async function main() {
   t = ev('m.targets()');
   check('gaze + pinch opens the week rings', ev('m.state().weekOpen') === true);
   pts['week panel'] = t.week;
+  includeBounds(t.bounds, ['week']);
   pts['sprout label'] = t.sprouts[dw.id].label;
 
   // with gaze disconnected, the hand ray works again
@@ -80,7 +88,7 @@ export async function main() {
 
   // reset head to straight ahead pitch for the FoV numbers
   const fov = [];
-  for (const [name, p] of Object.entries(pts)) {
+  for (const [name, p] of Object.entries({ ...pts, ...corners })) {
     if (!p) continue;
     const a = angles(SEATED, 0, PITCH, p);
     const inside = Math.abs(a.h) <= 34 && a.v <= 22 && a.v >= -40;
@@ -90,7 +98,7 @@ export async function main() {
   check('every key element inside the Glasses FoV (37/25/43 with 3° margin)', fov.every((f) => f.inside), fov.filter((f) => !f.inside).map((f) => f.name).join(', '));
   const shot = cli(['browser', 'screenshot', '--output-file', `${process.env.MEBAE_OUT ?? '/tmp'}/glasses-fov.png`]);
   console.log('screenshot', shot.screenshotPath ?? shot);
-  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 500 })]);
+  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]);
   const entries = logs.logs ?? logs.entries ?? logs;
   const errors = (Array.isArray(entries) ? entries : []).filter((l) => l.level === 'error');
   check('zero console errors (Glasses)', errors.length === 0, errors.slice(0, 3).map((e) => e.text ?? e.message).join(' | '));

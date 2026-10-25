@@ -1,4 +1,4 @@
-import { type RestoreOutcome, activeHabits, planRestore } from '@mebae/core';
+import { PERSISTENT_ANCHORS_PER_SITE, TRAY_ANCHORS, type RestoreOutcome, activeHabits, planRestore } from '@mebae/core';
 import { Matrix4, Quaternion, Vector3, createSystem } from '@iwsdk/core';
 import { garden } from '../state/garden.js';
 
@@ -29,10 +29,12 @@ export class AnchorSystem extends createSystem({}) {
   persistentSupported = false;
   anchorsSupported = false;
   private pendingCreate: { habitId: string; p: Vector3; q: Quaternion; resolve: (uuid: string | null) => void; reject: (e: Error) => void }[] = [];
+  private creating = 0;
 
   init(): void {
     const start = () => void this.onSessionStart();
     const end = () => {
+      for (const j of this.pendingCreate.splice(0)) j.reject(new Error('The immersive session ended before the spot was pinned.'));
       this.anchors.clear();
       this.poses.clear();
       this.outcomes = null;
@@ -84,6 +86,9 @@ export class AnchorSystem extends createSystem({}) {
 
   /** Creates (and tries to persist) an anchor at a world pose. */
   create(habitId: string, p: Vector3, q: Quaternion): Promise<string | null> {
+    if (!this.session) return Promise.reject(new Error('Enter your garden before pinning a spot.'));
+    if (this.anchors.size + this.pendingCreate.length + this.creating + TRAY_ANCHORS >= PERSISTENT_ANCHORS_PER_SITE)
+      return Promise.reject(new Error('All 8 anchor slots are reserved. Wait for the current move to finish.'));
     return new Promise((resolve, reject) => {
       this.pendingCreate.push({ habitId, p: p.clone(), q: q.clone(), resolve, reject });
     });
@@ -174,6 +179,8 @@ export class AnchorSystem extends createSystem({}) {
       j.reject(new Error('This browser cannot create anchors (XRFrame.createAnchor missing).'));
       return;
     }
+    const session = this.session;
+    this.creating++;
     try {
       const t = new XRRigidTransform(
         { x: j.p.x, y: j.p.y, z: j.p.z },
@@ -181,6 +188,10 @@ export class AnchorSystem extends createSystem({}) {
       );
       const a = (await frame.createAnchor(t, ref)) as PersistentAnchor;
       if (!a) throw new Error('createAnchor returned nothing');
+      if (this.session !== session) {
+        a.delete();
+        throw new Error('The immersive session ended while pinning.');
+      }
       this.anchors.set(j.habitId, a);
       this.poses.set(j.habitId, { position: j.p.clone(), quaternion: j.q.clone() });
       let uuid: string | null = null;
@@ -194,6 +205,8 @@ export class AnchorSystem extends createSystem({}) {
       j.resolve(uuid);
     } catch (e) {
       j.reject(new Error(`Anchor not created: ${(e as Error).message}`));
+    } finally {
+      this.creating--;
     }
   }
 }

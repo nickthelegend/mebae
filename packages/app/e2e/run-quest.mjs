@@ -1,7 +1,7 @@
 // Hands-only e2e on the IWER Quest 3 profile (home_office room).
 // Requires: `npx @iwsdk/cli dev up --ai-mode agent --allow-browser-automation`.
 // Spec plan steps are numbered as in specs/meta-vr/mebae.md.
-import { check, cli, dist, ev, pinchAt, sleep, summary, until, v3, xr } from './lib.mjs';
+import { check, cli, dist, ev, pinchAt, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
 
 const SEATED = { x: -0.08, y: 1.2, z: -1.35 }; // the desk chair in home_office
 
@@ -32,6 +32,7 @@ async function plant(presetIndex, aimPoint) {
 }
 
 export async function main() {
+  resetResults();
   const t0 = Date.now();
   // clean slate
   ev('m.wipe()');
@@ -59,7 +60,7 @@ export async function main() {
   await sleep(400);
   s = state();
   check('4. check-in reaches stage 1', s.habits.find((h) => h.id === stretch.id).stage === 1);
-  check('first habit pinned and checked in from cold load', true, `${(firstPinMs / 1000).toFixed(1)} s scripted to pin`);
+  check('first habit pinned and checked in under 60 s', Date.now() - t0 < 60_000, `${((Date.now() - t0) / 1000).toFixed(1)} s through check-in (${(firstPinMs / 1000).toFixed(1)} s to pin)`);
 
   // 5: counted water on the desk: 3 pinches -> 3/8, hold 1 s -> 2/8
   t = targets();
@@ -84,7 +85,9 @@ export async function main() {
   xr('look-at', { device: 'hand-right', target: v3(a) });
   await sleep(200);
   xr('set-select-value', { device: 'hand-right', value: 1 });
-  const path = [b, d, c, a, b, d, c, a, b, d];
+  // Every discrete move is capped to 120 ms of rake time by the app, so use
+  // enough real moves to cover 2 s instead of crediting time spent stationary.
+  const path = Array.from({ length: 28 }, (_, i) => [b, d, c, a][i % 4]);
   for (const p of path) {
     xr('look-at', { device: 'hand-right', target: v3(p) });
     await sleep(330);
@@ -156,12 +159,28 @@ export async function main() {
   await sleep(500);
   s = state();
   check('sample garden on: only sample sprouts drawn', s.sample && s.sprouts.every((x) => x.sample) && s.sprouts.length === 5);
+  const realBeforeSampleRake = ev('m.exportJson()');
+  await pinchAt('hand-right', targets().sand);
+  check('sample focus interaction leaves real history untouched', ev('m.exportJson()').replace(/"exportedAt": "[^"]+"/, '') === realBeforeSampleRake.replace(/"exportedAt": "[^"]+"/, ''));
   await pinchAt('hand-right', targets().menuButtons[1]);
   await sleep(500);
   s = state();
   check('sample garden off: real history untouched', !s.sample && s.habits.length === 2 && s.sprouts.every((x) => !x.sample));
 
-  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 500 })]);
+  // Every one-hand action stays a single pinch, including focus cancellation.
+  await pinchAt('hand-right', targets().menuButtons[4]);
+  await pinchAt('hand-right', targets().sand); // 25 -> 50, or cancel an existing 50
+  if (state().focus.running) await pinchAt('hand-right', targets().sand);
+  check('one-hand focus cancellation uses a single pinch', !state().focus.running);
+  await pinchAt('hand-right', targets().sand);
+  check('one-hand focus starts 25 minutes', state().focus.running && state().focus.minutes === 25);
+  await pinchAt('hand-right', targets().sand);
+  check('one-hand focus extends to 50 minutes', state().focus.minutes === 50);
+  ev('m.advanceMinutes(51)');
+  await sleep(700);
+  check('suspend completion adds exactly one stone', state().focus.stones === 1 && !state().focus.running);
+
+  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]);
   const entries = logs.logs ?? logs.entries ?? logs;
   const errors = (Array.isArray(entries) ? entries : []).filter((l) => l.level === 'error');
   check('zero console errors', errors.length === 0, errors.slice(0, 3).map((e) => e.text ?? e.message).join(' | '));

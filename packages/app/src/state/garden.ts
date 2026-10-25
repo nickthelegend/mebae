@@ -67,7 +67,7 @@ class Garden {
     if (l && !l.sample) this.real = l;
     if (s) this.settings = { ...this.settings, ...s };
     if (t) this.tray = t;
-    settle(this.real.focus, this.clock);
+    if (settle(this.real.focus, this.clock)) await save(LEDGER_KEY, this.real);
     this.loaded = true;
     this.bump();
   }
@@ -97,9 +97,10 @@ class Garden {
     this.bump();
   }
 
-  replaceReal(l: Ledger): void {
+  async replaceReal(l: Ledger): Promise<void> {
+    await save(LEDGER_KEY, l);
     this.real = l;
-    void this.commit();
+    this.bump();
   }
 
   say(text: string, tone: 'info' | 'error' = 'info'): void {

@@ -4,10 +4,12 @@ import {
   PokeInteractable,
   Pressed,
   RayInteractable,
+  Raycaster,
   Vector3,
   createSystem,
 } from '@iwsdk/core';
 import { Pressable } from './pressable-component.js';
+import { AimSystem } from '../systems/aim.js';
 
 export const HOLD_MS = 1000;
 
@@ -70,6 +72,9 @@ export class PressRouter extends createSystem({
 }) {
   private live = new Map<number, Live>();
   private prevPoint = new Map<string, Vector3>();
+  private raycaster = new Raycaster();
+  private rayOrigin = new Vector3();
+  private rayDir = new Vector3();
 
   init(): void {
     this.cleanupFuncs.push(
@@ -108,6 +113,21 @@ export class PressRouter extends createSystem({
         h.hold();
       }
       if (h.drag) {
+        const aim = this.world.getSystem(AimSystem);
+        if (aim && e.object3D) {
+          for (const src of ['right', 'left', 'gaze'] as const) {
+            if (aim.ray(src, this.rayOrigin, this.rayDir)) {
+              this.raycaster.set(this.rayOrigin, this.rayDir);
+              const hits = this.raycaster.intersectObject(e.object3D, true);
+              if (hits.length > 0) {
+                const v = lastPoint.get(key) ?? new Vector3();
+                v.copy(hits[0].point);
+                lastPoint.set(key, v);
+                break;
+              }
+            }
+          }
+        }
         const p = pointFor(key);
         const prev = this.prevPoint.get(key);
         if (p && prev && p.distanceToSquared(prev) > 1e-7) {

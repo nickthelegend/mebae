@@ -21,7 +21,7 @@ export function cli(args, { timeout = 60_000, allowFail = false } = {}) {
     throw new Error(`iwsdk ${args.slice(0, 2).join(' ')} returned non-JSON: ${out.slice(0, 400)}`);
   }
   if (!j.ok && !allowFail) throw new Error(`iwsdk ${args.slice(0, 2).join(' ')}: ${JSON.stringify(j.error).slice(0, 600)}`);
-  return j.data ?? j;
+  return j.ok ? (j.data?.result ?? j.data) : j;
 }
 
 export const xr = (action, input, opts) => cli(['xr', action, ...(input ? ['--input-json', JSON.stringify(input)] : [])], opts);
@@ -56,6 +56,7 @@ export async function until(fn, what, ms = 15_000, every = 400) {
 }
 
 const results = [];
+export const resetResults = () => { results.length = 0; };
 export function check(name, ok, detail = '') {
   results.push({ name, ok: !!ok, detail });
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `  (${detail})` : ''}`);

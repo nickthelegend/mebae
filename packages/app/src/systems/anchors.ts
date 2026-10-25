@@ -72,12 +72,17 @@ export class AnchorSystem extends createSystem({}) {
       }
       try {
         const a = await withTimeout(s.restorePersistentAnchor!(uuid), 6000, 'restore timed out');
+        if (this.session !== s) {
+          a.delete();
+          return;
+        }
         this.anchors.set(h.id, a);
         results.set(h.id, { ok: true });
       } catch (e) {
         results.set(h.id, { ok: false, reason: `Anchor not found in this space (${(e as Error).message || 'rejected'}).` });
       }
     }
+    if (this.session !== s) return;
     this.outcomes = planRestore(garden.real, results);
     const lost = this.outcomes.filter((o) => o.status === 'pin-again' && garden.real.habits.find((h) => h.id === o.habitId)?.placement);
     if (lost.length) garden.say(`${lost.length} sprout${lost.length > 1 ? 's' : ''} could not find ${lost.length > 1 ? 'their' : 'its'} spot. They wait in the tray: pinch "Pin again".`);
@@ -159,7 +164,18 @@ export class AnchorSystem extends createSystem({}) {
       } catch {
         pose = undefined;
       }
-      if (!pose) continue;
+      if (!pose) {
+        // A cached transform is not a tracked spot. Require an explicit re-pin.
+        this.anchors.delete(id);
+        this.poses.delete(id);
+        a.delete();
+        if (this.outcomes) this.outcomes = this.outcomes.filter((o) => o.habitId !== id).concat({
+          habitId: id, status: 'pin-again', reason: 'The anchor no longer has a tracked pose.',
+        });
+        garden.say('A sprout lost its spot. Pinch "Pin again" in the tray.');
+        garden.bump();
+        continue;
+      }
       let p = this.poses.get(id);
       if (!p) {
         p = { position: new Vector3(), quaternion: new Quaternion() };

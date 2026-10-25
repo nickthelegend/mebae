@@ -250,12 +250,15 @@ export class FocusSystem extends createSystem({}) {
     const label = garden.isSample
       ? 'Example garden (sample data)'
       : st.running
-      ? `${fmt(st.remainingMs)} · ${st.minutes} min focus`
+      ? garden.settings.oneHand
+        ? `${fmt(st.remainingMs)} · pinch: ${st.minutes === 25 ? '50 min' : 'cancel'}`
+        : `${fmt(st.remainingMs)} · ${st.minutes} min focus`
       : garden.settings.oneHand
         ? `Pinch: 25 → 50 → cancel · stones ${f.blocks.length}`
         : `Rake to focus · stones ${f.blocks.length}`;
-    if (label !== this.lastLabel) {
-      this.lastLabel = label;
+    const labelKey = `${label}:${garden.settings.highContrast}`;
+    if (labelKey !== this.lastLabel) {
+      this.lastLabel = labelKey;
       const hc = garden.settings.highContrast;
       this.card.draw((g, w, h) => {
         g.fillStyle = hc ? '#000' : st.running ? MOSS : 'rgba(29,26,20,0.82)';
@@ -265,7 +268,7 @@ export class FocusSystem extends createSystem({}) {
         g.font = `600 ${st.running ? `52px ${FONT_MONO}` : `40px ${FONT_UI}`}`;
         g.textAlign = 'center';
         g.textBaseline = 'middle';
-        g.fillText(label, w / 2, h / 2 + 2);
+        g.fillText(label, w / 2, h / 2 + 2, w - 40);
       });
     }
   }

@@ -57,6 +57,7 @@ export class PlantingSystem extends createSystem({}) {
   private tmp = new Vector3();
   private q = new Quaternion();
   private lastPreview = '';
+  private radialStyle = '';
   lastPlaced: { habitId: string; point: [number, number, number]; label: string; via: string } | null = null;
 
   init(): void {
@@ -137,10 +138,11 @@ export class PlantingSystem extends createSystem({}) {
     if (mode === 'radial' || mode === 'aiming') return this.cancel('Seed back in the tray.');
     if (mode !== 'idle') return;
     if (garden.isSample) return garden.say('Turn off the example garden to plant your own habits.');
+    ui.weekOpen.value = false;
     const tray = this.world.getSystem(TraySystem)!;
     const free = tray.freeSlots();
     if (!free.length) {
-      return garden.say('All 6 seeds are planted. Persistent anchors are capped at 8 per room, so Mebae keeps 6 habits. Drop a sprout in the tray to free one.');
+      return garden.say('All 6 habits are planted. Pinch a sprout’s wooden stake, then pinch the tray to free a seed.');
     }
     tray.slotWorld(free[0], this.seedHome);
     this.seed.position.copy(this.seedHome);
@@ -156,6 +158,7 @@ export class PlantingSystem extends createSystem({}) {
   private onPinAgain(habitId: string): void {
     unlockAudio();
     if (ui.mode.peek() !== 'idle') return;
+    ui.weekOpen.value = false;
     const h = garden.real.habits.find((x) => x.id === habitId);
     const preset = h && presetById(h.presetId);
     if (!h || !preset) return;
@@ -284,6 +287,12 @@ export class PlantingSystem extends createSystem({}) {
     this.player.head.getWorldPosition(this.head);
     const t = performance.now() / 1000;
     if (mode === 'radial') {
+      const style = `${garden.settings.highContrast}:${garden.settings.largeTargets}`;
+      this.radial.mesh.scale.setScalar(garden.settings.largeTargets ? 1.2 : 1);
+      if (style !== this.radialStyle) {
+        this.radialStyle = style;
+        this.drawRadial();
+      }
       // seed lifts and bobs above the tray, radial faces the viewer
       const tray = this.world.getSystem(TraySystem)!;
       this.tmp.set(0, 0.2, -0.02);

@@ -57,7 +57,10 @@ export class WeekSystem extends createSystem({}) {
             if (!p || !this.wristGroup.visible) return;
             const l = this.wrist.mesh.worldToLocal(p.clone());
             const col = l.x < 0 ? 0 : 1;
-            const row = Math.max(0, Math.min(2, Math.floor(((this.wrist.mH / 2 - l.y) / this.wrist.mH) * 3)));
+            const top = garden.isSample ? 48 : 0;
+            const y = ((this.wrist.mH / 2 - l.y) / this.wrist.mH) * this.wrist.pxH;
+            if (y < top) return;
+            const row = Math.max(0, Math.min(2, Math.floor(((y - top) / (this.wrist.pxH - top)) * 3)));
             const item = WRIST_ITEMS[row * 2 + col];
             if (item === 'Close') this.wristGroup.visible = false;
             else this.world.getSystem(TraySystem)!.menuAction(item);
@@ -81,6 +84,7 @@ export class WeekSystem extends createSystem({}) {
     const tray = this.world.getSystem(TraySystem);
     if (!tray?.placed || !this.panelEntity) return;
     this.updatePalm();
+    this.wrist.mesh.scale.setScalar(garden.settings.largeTargets ? 1.4 : 1);
     const ver = garden.version.peek();
     if (this.wristGroup.visible && ver !== this.wristVer) {
       this.wristVer = ver;
@@ -149,9 +153,17 @@ export class WeekSystem extends createSystem({}) {
       g.fillStyle = hc ? '#000' : 'rgba(29,26,20,0.9)';
       roundRect(g, 2, 2, w - 4, h - 4, 40);
       g.fill();
-      const cw = w / 2, ch = h / 3;
+      const top = garden.isSample ? 48 : 0;
+      if (garden.isSample) {
+        g.fillStyle = hc ? '#ffe14d' : SEED_PAPER;
+        g.font = `700 27px ${FONT_UI}`;
+        g.textAlign = 'center';
+        g.textBaseline = 'middle';
+        g.fillText('EXAMPLE GARDEN (SAMPLE DATA)', w / 2, 27);
+      }
+      const cw = w / 2, ch = (h - top) / 3;
       WRIST_ITEMS.forEach((t, k) => {
-        const x = (k % 2) * cw, y = Math.floor(k / 2) * ch;
+        const x = (k % 2) * cw, y = top + Math.floor(k / 2) * ch;
         g.fillStyle = on[k] ? (hc ? '#ffe14d' : MOSS) : hc ? '#222' : 'rgba(243,236,217,0.12)';
         roundRect(g, x + 12, y + 12, cw - 24, ch - 24, 26);
         g.fill();

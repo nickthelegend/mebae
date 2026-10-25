@@ -30,6 +30,9 @@ async function main(): Promise<void> {
   try {
     await garden.load();
   } catch (e) {
+    // Continue with the empty in-memory garden when persistence is unavailable.
+    // Anchor and tray systems must not wait forever for a failed load.
+    garden.loaded = true;
     status(`Storage unavailable: ${(e as Error).message}. History cannot be saved in this browser.`, true);
   }
   summary();
@@ -75,8 +78,10 @@ async function main(): Promise<void> {
     }
   };
   $<HTMLInputElement>('import').onchange = async (ev) => {
-    const f = (ev.target as HTMLInputElement).files?.[0];
+    const input = ev.target as HTMLInputElement;
+    const f = input.files?.[0];
     if (!f) return;
+    input.value = ''; // Allow retrying the same file after a refusal or cancellation.
     try {
       const l = importLedger(await f.text());
       if (!confirm(`Replace this browser's history with ${l.habits.length} habits from ${f.name}? Anchors from another headset will ask to be pinned again.`)) return;

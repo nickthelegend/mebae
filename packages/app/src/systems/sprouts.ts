@@ -31,7 +31,7 @@ import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/pa
 import { type AimSource, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
 import { surfaceQuaternion } from './surface-pose.js';
-import { TraySystem } from './tray.js';
+import { TrayEvents, TraySystem } from './tray.js';
 
 interface Sprout {
   habitId: string;
@@ -75,7 +75,6 @@ export class SproutSystem extends createSystem({}) {
   private carryId: string | null = null;
   private carryStart = 0;
   private carrySrc: AimSource = 'right';
-  private undoChipUntil = new Map<string, number>();
   private labelWorld = new Vector3();
   private nrm = new Vector3();
   private yawQ = new Quaternion();
@@ -89,6 +88,9 @@ export class SproutSystem extends createSystem({}) {
       this.cleanupFuncs.push(a.onSelect((e) => this.onSelect(e.source, e.startedAt)));
     };
     wire();
+    this.cleanupFuncs.push(this.world.getSystem(TrayEvents)!.on('drop-in-tray', () => {
+      if (ui.mode.peek() === 'carrying' && this.carryId) void this.finishCarry(this.carrySrc, true);
+    }));
     this.xrManager.addEventListener('sessionend', () => {
       for (const id of [...this.sprouts.keys()]) this.drop(id);
       this.carryId = null;
@@ -170,12 +172,6 @@ export class SproutSystem extends createSystem({}) {
       s.label.mesh.position.copy(s.group.worldToLocal(world));
       this.yawQ.setFromAxisAngle(this.up, yaw);
       s.label.mesh.quaternion.copy(s.group.quaternion).invert().multiply(this.yawQ);
-      const chip = this.undoChipUntil.get(s.habitId);
-      if (chip && now > chip) {
-        this.undoChipUntil.delete(s.habitId);
-        s.key = '';
-        this.redraw(s);
-      }
     }
   }
 
@@ -194,6 +190,11 @@ export class SproutSystem extends createSystem({}) {
       if (!garden.isSample && !anchors.hasAnchor(h.id) && h.id !== this.carryId) return; // Pin again lives in the tray
       want.add(h.id);
       let s = this.sprouts.get(h.id);
+      // Imported ids can match sample ids; never reuse the other garden's entity.
+      if (s && s.sample !== garden.isSample) {
+        this.drop(h.id);
+        s = undefined;
+      }
       if (!s) {
         s = this.create(h, garden.isSample);
         if (garden.isSample) {
@@ -267,10 +268,11 @@ export class SproutSystem extends createSystem({}) {
 
   private onTap(s: Sprout, p: Vector3 | null): void {
     unlockAudio();
+    if (garden.isSample || s.sample) return garden.say('Example garden (sample data). Turn it off to tend your own habits.');
     if (ui.mode.peek() !== 'idle') return;
-    if (garden.settings.oneHand && p && this.undoChipUntil.has(s.habitId)) {
+    if (garden.settings.oneHand && p) {
       const l = s.label.mesh.worldToLocal(p.clone());
-      if (l.y < -s.label.mH * 0.25) return this.undo(s);
+      if (Math.abs(l.x) <= s.label.mW * 0.4625 && l.y >= -s.label.mH * 0.47 && l.y <= -s.label.mH * 0.34) return this.undo(s);
     }
     let r;
     try {
@@ -286,12 +288,12 @@ export class SproutSystem extends createSystem({}) {
     s.bounce = 1;
     if (!r.completedNow) chimeTap(r.count);
     else chimeTap(5);
-    if (garden.settings.oneHand) this.undoChipUntil.set(s.habitId, performance.now() + 5000);
     s.key = '';
     void garden.commit();
   }
 
   private undo(s: Sprout): void {
+    if (garden.isSample || s.sample) return garden.say('Example garden (sample data). Turn it off to tend your own habits.');
     let r;
     try {
       r = undoOne(garden.real, s.habitId, garden.clock);
@@ -300,7 +302,6 @@ export class SproutSystem extends createSystem({}) {
     }
     if (r.saturated) return garden.say(`Nothing to undo for ${r.habit.label} today.`);
     chimeUndo();
-    this.undoChipUntil.delete(s.habitId);
     garden.say(`Undone: ${r.habit.label} ${r.habit.kind === 'counted' ? `${r.count}/${r.habit.target}` : 'not done yet today'}.`);
     s.key = '';
     void garden.commit();
@@ -311,6 +312,7 @@ export class SproutSystem extends createSystem({}) {
   private startCarry(id: string): void {
     unlockAudio();
     if (ui.mode.peek() !== 'idle' || garden.isSample) return;
+    ui.weekOpen.value = false;
     const aim = this.world.getSystem(AimSystem)!;
     this.carryId = id;
     this.carryStart = performance.now();
@@ -334,16 +336,20 @@ export class SproutSystem extends createSystem({}) {
     void this.finishCarry(src);
   }
 
-  private async finishCarry(src: AimSource): Promise<void> {
+  private async finishCarry(src: AimSource, remove = false): Promise<void> {
+    // Lock the flow before awaiting anchor work so one pinch cannot commit twice.
+    ui.mode.value = 'flying';
     try {
-      await this.commitCarry(src);
+      await this.commitCarry(src, remove);
+    } catch (e) {
+      garden.say(`Could not move it: ${(e as Error).message}`, 'error');
     } finally {
       ui.mode.value = 'idle';
       garden.bump();
     }
   }
 
-  private async commitCarry(src: AimSource): Promise<void> {
+  private async commitCarry(src: AimSource, remove: boolean): Promise<void> {
     const id = this.carryId!;
     const aim = this.world.getSystem(AimSystem)!;
     const anchors = this.world.getSystem(AnchorSystem)!;
@@ -354,7 +360,7 @@ export class SproutSystem extends createSystem({}) {
     aim.enabled = false;
     if (!h) return;
     const oldUuid = h.placement?.anchorUuid ?? null;
-    if (hit && tray.contains(hit.point)) {
+    if (remove || (hit && tray.contains(hit.point))) {
       await anchors.remove(id, oldUuid);
       archiveHabit(garden.real, id, garden.clock);
       chimeUndo();
@@ -392,7 +398,7 @@ export class SproutSystem extends createSystem({}) {
     if (!h) return;
     const g = growthOf(ledger, h, garden.today());
     const st = garden.settings;
-    const chip = st.oneHand && this.undoChipUntil.has(h.id);
+    const chip = st.oneHand && !s.sample;
     const key = JSON.stringify([g, st, chip, s.sample, h.placement?.surfaceLabel, garden.isSample]);
     if (key === s.key) return;
     s.key = key;
@@ -424,7 +430,7 @@ export class SproutSystem extends createSystem({}) {
         c.font = `700 74px ${FONT_MONO}`;
         c.fillText(`${g.todayCount}/${h.target}`, 30, 182);
         c.font = `500 30px ${FONT_UI}`;
-        c.fillText(g.todayCount >= h.target ? 'full today' : 'pinch +1 · hold 1 s: −1', 250, 182);
+        c.fillText(g.todayCount >= h.target ? 'full today' : st.oneHand ? 'pinch +1' : 'pinch +1 · hold 1 s: −1', 250, 182);
       } else {
         c.font = `700 46px ${FONT_UI}`;
         c.fillStyle = g.todayCount ? accent : ink;

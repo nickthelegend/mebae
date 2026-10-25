@@ -7,3 +7,4 @@ dist/
 .env.*
 e2e-out/
 packages/app/.mcp.json
+.loom/

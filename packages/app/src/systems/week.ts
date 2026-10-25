@@ -47,7 +47,9 @@ export class WeekSystem extends createSystem({}) {
         if (this.panelEntity) return;
         if (!tray?.entity) return void setTimeout(wire, 50);
         this.panelEntity = this.world.createTransformEntity(this.panel.mesh, { parent: tray.entity, persistent: true });
-        this.panel.mesh.position.set(0, 0.36, -0.06);
+        // Just above the tray. At 0.36 the top corners sit ~36° above a seated
+        // view aimed at the desk, outside the Glasses' 25° upward field.
+        this.panel.mesh.position.set(0, 0.2, -0.06);
         this.panel.mesh.visible = false;
         makePressable(this.panelEntity, 'week-panel', { tap: () => (ui.weekOpen.value = false) });
         this.wristEntity = this.world.createTransformEntity(this.wristGroup, { persistent: true });

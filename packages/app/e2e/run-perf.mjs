@@ -1,9 +1,10 @@
 // Six fully grown real-ledger plants, arranged on detected surfaces by a
 // dev-only fixture. This is performance setup, never hands-only evidence.
-import { check, cli, ev, resetResults, sleep, summary, until, xr } from './lib.mjs';
+import { check, cli, consoleErrors, ev, resetResults, sleep, summary, until, xr } from './lib.mjs';
 
 export async function main() {
   resetResults();
+  const started = Date.now();
   await ev('m.wipe()');
   cli(['browser', 'reload']);
   await sleep(2500);
@@ -32,8 +33,7 @@ export async function main() {
   const writes = ev('m.state().focus.rakeWrites');
   await sleep(1000);
   check('idle sand makes no CPU texture writes', ev('m.state().focus.rakeWrites') === writes);
-  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]);
-  const errors = (logs.logs ?? logs.entries ?? []).filter((l) => l.level === 'error');
+  const errors = consoleErrors(cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]), started);
   check('zero console errors (performance)', errors.length === 0, JSON.stringify(errors));
   console.log(JSON.stringify(metrics, null, 2));
   return { ...summary(), metrics, browserProfile, profile,

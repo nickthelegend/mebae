@@ -43,10 +43,16 @@ export class AimSystem extends createSystem({}) {
       if (!s) return;
       const features = (s as XRSession & { enabledFeatures?: string[] }).enabledFeatures ?? [];
       this.hitTestSupported = features.includes('hit-test') && typeof s.requestHitTestSource === 'function';
-      const sel0 = (e: XRInputSourceEvent) => this.starts.set(sourceOf(e.inputSource), performance.now());
+      const sel0 = (e: XRInputSourceEvent) => {
+        const src = sourceOf(e.inputSource);
+        if (src === 'gaze' && !this.hasGaze()) return;
+        this.starts.set(src, performance.now());
+      };
       const sel1 = (e: XRInputSourceEvent) => {
         const src = sourceOf(e.inputSource);
+        if (src === 'gaze' && !this.hasGaze()) return;
         const ev = { source: src, startedAt: this.starts.get(src) ?? performance.now(), endedAt: performance.now() };
+        this.starts.delete(src);
         this.listeners.forEach((l) => l(ev));
       };
       s.addEventListener('selectstart', sel0);
@@ -55,6 +61,7 @@ export class AimSystem extends createSystem({}) {
     const onEnd = () => {
       this.sources.clear();
       this.hits.clear();
+      this.starts.clear();
     };
     this.xrManager.addEventListener('sessionstart', onStart);
     this.xrManager.addEventListener('sessionend', onEnd);
@@ -77,6 +84,9 @@ export class AimSystem extends createSystem({}) {
   hasGaze(): boolean {
     const s = this.xrManager.getSession();
     if (!s) return false;
+    // Only the Glasses runtime grants eye gaze; never substitute a head ray.
+    const features = (s as XRSession & { enabledFeatures?: string[] }).enabledFeatures ?? [];
+    if (!features.includes('gaze-tracking')) return false;
     for (const src of s.inputSources) if (src.targetRayMode === 'gaze') return true;
     return false;
   }
@@ -91,6 +101,7 @@ export class AimSystem extends createSystem({}) {
     const frame = this.xrFrame;
     const ref = this.xrManager.getReferenceSpace();
     if (!s || !frame || !ref) return false;
+    if (src === 'gaze' && !this.hasGaze()) return false;
     for (const input of s.inputSources) {
       if (sourceOf(input) !== src) continue;
       const pose = frame.getPose(input.targetRaySpace, ref);
@@ -108,10 +119,12 @@ export class AimSystem extends createSystem({}) {
     const frame = this.xrFrame;
     const ref = this.xrManager.getReferenceSpace();
     if (!s || !frame || !ref) return;
+    this.hits.clear(); // A disconnected hand must not leave a placeable old hit.
     if (!this.enabled) return;
     const room = this.world.getSystem(RoomSystem);
     for (const input of s.inputSources) {
       const src = sourceOf(input);
+      if (src === 'gaze' && !this.hasGaze()) continue;
       if (src !== 'left' && src !== 'right' && src !== 'gaze') continue;
       let hit: AimHit | null = null;
       if (this.hitTestSupported) {

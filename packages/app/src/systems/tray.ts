@@ -15,7 +15,8 @@ import {
   XRAnchor,
   createSystem,
 } from '@iwsdk/core';
-import { makePressable } from '../interaction/press-router.js';
+import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
+import { makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
 import { CanvasCard, roundRect } from '../ui/canvas-card.js';
@@ -49,11 +50,14 @@ export class TraySystem extends createSystem({}) {
   private placing = false;
   private sessionT0 = 0;
   private seeds!: InstancedMesh;
+  private base!: Mesh;
   private seedsEntity: Entity | null = null;
   private menu!: CanvasCard;
   private toastCard!: CanvasCard;
   private stampCard!: CanvasCard;
   private pots = new Map<string, Entity>();
+  private potStyle = '';
+  private showGardenHint = false;
   private toastUntil = 0;
   private lastVersion = -1;
   private v = new Vector3();
@@ -87,7 +91,7 @@ export class TraySystem extends createSystem({}) {
   private build(): void {
     const wood = new MeshStandardMaterial({ map: woodTexture(), roughness: 0.7, color: new Color('#d8b48c') });
     const m = (x: number, y: number, z: number) => new Matrix4().makeTranslation(x, y, z);
-    const base = new Mesh(
+    const base = this.base = new Mesh(
       mergedBoxes([
         { w: TRAY_W, h: 0.012, d: TRAY_D, m: m(0, 0.006, 0) },
         { w: TRAY_W, h: 0.03, d: 0.012, m: m(0, 0.015, -TRAY_D / 2 + 0.006) },
@@ -117,18 +121,9 @@ export class TraySystem extends createSystem({}) {
     (this.toastCard.mesh.material as { depthTest: boolean }).depthTest = false;
 
     this.stampCard = new CanvasCard(1024, 110, 0.36, 0.039, 'Sample stamp');
-    this.stampCard.mesh.position.set(0, 0.16, -0.06);
+    this.stampCard.mesh.position.set(0, 0.195, -0.06);
     this.stampCard.mesh.visible = false;
-    this.stampCard.draw((g, w, h) => {
-      g.fillStyle = TERRACOTTA;
-      roundRect(g, 4, 4, w - 8, h - 8, 18);
-      g.fill();
-      g.fillStyle = SEED_PAPER;
-      g.font = `700 52px ${FONT_UI}`;
-      g.textAlign = 'center';
-      g.textBaseline = 'middle';
-      g.fillText('EXAMPLE GARDEN (SAMPLE DATA)', w / 2, h / 2 + 2);
-    });
+    this.drawSampleStamp();
     this.root.add(this.stampCard.mesh);
   }
 
@@ -141,6 +136,17 @@ export class TraySystem extends createSystem({}) {
     if (this.entity) return; // entities live for the page; only placement resets
     this.entity = this.world.createTransformEntity(this.root, { persistent: true });
     this.entity.addComponent(XRAnchor);
+    const baseEntity = this.world.createTransformEntity(this.base, { parent: this.entity, persistent: true });
+    let removing = false;
+    makePressable(baseEntity, 'tray-base', {
+      down: () => {
+        removing = ui.mode.peek() === 'carrying';
+        if (removing) this.world.getSystem(TrayEvents)?.emit('drop-in-tray');
+      },
+      tap: () => {
+        if (!removing) this.world.getSystem(TrayEvents)?.emit('seed');
+      },
+    });
     this.world.createTransformEntity(this.toastCard.mesh, { persistent: true });
     this.seedsEntity = this.world.createTransformEntity(this.makeSeeds(), { parent: this.entity, persistent: true });
     makePressable(this.seedsEntity, 'seeds', { tap: () => this.world.getSystem(TrayEvents)?.emit('seed') });
@@ -190,6 +196,7 @@ export class TraySystem extends createSystem({}) {
     const mat = new MeshStandardMaterial({ color: new Color('#c9a36a'), roughness: 0.55, emissive: new Color('#2a1c08'), emissiveIntensity: 0.4 });
     this.seeds = new InstancedMesh(g, mat, MAX_HABITS);
     this.seeds.name = 'Seeds';
+    bindInstanceSpherecast(this.seeds);
     return this.seeds;
   }
 
@@ -231,6 +238,8 @@ export class TraySystem extends createSystem({}) {
       this.lastVersion = ver;
       this.refresh();
     }
+    // The week panel supplies its own sample stamp and occupies this space.
+    this.stampCard.mesh.visible = !ui.weekOpen.peek() && (garden.isSample || (ui.mode.peek() === 'idle' && this.showGardenHint));
     if (this.toastCard.mesh.visible) {
       if (performance.now() > this.toastUntil) this.toastCard.mesh.visible = false;
       else this.followHead(this.toastCard.mesh);
@@ -320,6 +329,7 @@ export class TraySystem extends createSystem({}) {
   /** Rebuilds seeds, pots, menu and stamp from state. */
   private refresh(): void {
     const free = this.freeSlots();
+    this.showGardenHint = free.length === MAX_HABITS || free.length === 0;
     const anchors = this.world.getSystem(AnchorSystem);
     const pinAgain = garden.isSample
       ? []
@@ -327,6 +337,15 @@ export class TraySystem extends createSystem({}) {
           const o = anchors?.outcomeFor(h.id);
           return (o && o.status === 'pin-again') || (!o && anchors?.outcomes && !anchors.hasAnchor(h.id));
         });
+    const potStyle = `${garden.settings.highContrast}:${garden.settings.largeTargets}`;
+    if (potStyle !== this.potStyle) {
+      for (const [id, e] of this.pots) {
+        unregisterPressable(this.potKeyFor(id));
+        e.dispose();
+      }
+      this.pots.clear();
+      this.potStyle = potStyle;
+    }
     const m = new Matrix4();
     let n = 0;
     for (const i of free) {
@@ -343,21 +362,27 @@ export class TraySystem extends createSystem({}) {
     // pots for sprouts whose anchor did not come back
     const want = new Set(pinAgain.map((h) => h.id));
     for (const [id, e] of this.pots) if (!want.has(id)) {
-      e.destroy();
+      unregisterPressable(this.potKeyFor(id));
+      e.dispose();
       this.pots.delete(id);
     }
     pinAgain.forEach((h, k) => {
-      if (this.pots.has(h.id)) return;
+      const existing = this.pots.get(h.id);
+      if (existing) {
+        existing.object3D!.position.set((k % 3 - 1) * 0.14, 0.01 + Math.floor(k / 3) * 0.065, -0.01);
+        return;
+      }
       const card = new CanvasCard(512, 220, 0.11, 0.047, `Pin again: ${h.label}`);
       card.draw((g, w, hh) => {
-        g.fillStyle = SEED_PAPER;
+        const hc = garden.settings.highContrast;
+        g.fillStyle = hc ? '#000' : SEED_PAPER;
         roundRect(g, 4, 4, w - 8, hh - 8, 26);
         g.fill();
-        g.strokeStyle = TERRACOTTA;
+        g.strokeStyle = hc ? '#fff' : TERRACOTTA;
         g.lineWidth = 6;
         g.stroke();
-        drawIcon(g, h.glyph, 70, hh / 2, 90, MOSS, 0.12);
-        g.fillStyle = LOAM;
+        drawIcon(g, h.glyph, 70, hh / 2, 90, hc ? '#ffe14d' : MOSS, 0.12);
+        g.fillStyle = hc ? '#fff' : LOAM;
         g.font = `700 54px ${FONT_UI}`;
         g.textBaseline = 'middle';
         g.fillText('Pin again', 130, hh / 2 - 30);
@@ -367,20 +392,47 @@ export class TraySystem extends createSystem({}) {
       const pot = new Mesh(new SphereGeometry(0.016, 10, 6, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), new MeshStandardMaterial({ color: new Color(TERRACOTTA), roughness: 0.8 }));
       pot.rotation.x = Math.PI;
       const holder = new Group();
-      holder.name = `Pin again: ${h.label}`;
+      // The named pinch target is the card, which stands above the tray.
+      // The holder origin is the pot, and that point sits inside the tray
+      // base, so a ray aimed there presses the tray instead of this card.
       holder.add(pot);
       card.mesh.position.set(0, 0.05, 0);
       holder.add(card.mesh);
-      const slot = SLOT_X.length * SLOT_Z.length - 1 - k;
-      slotLocal(slot, holder.position);
-      holder.position.y = 0.03;
+      // Six independent cards, with a gap even when larger targets are on.
+      holder.position.set((k % 3 - 1) * 0.14, 0.01 + Math.floor(k / 3) * 0.065, -0.01);
+      holder.scale.setScalar(garden.settings.largeTargets ? 1.2 : 1);
       const e = this.world.createTransformEntity(holder, { parent: this.entity!, persistent: true });
       makePressable(e, this.potKeyFor(h.id), { tap: () => this.world.getSystem(TrayEvents)?.emit('pin-again', h.id) });
       this.pots.set(h.id, e);
     });
 
     this.drawMenu();
-    this.stampCard.mesh.visible = garden.isSample;
+    this.menu.mesh.scale.y = garden.settings.largeTargets ? 1.4 : 1;
+    if (!garden.isSample) this.stampCard.draw((g, w, h) => {
+      const hc = garden.settings.highContrast;
+      g.fillStyle = hc ? '#000' : SEED_PAPER;
+      roundRect(g, 4, 4, w - 8, h - 8, 18);
+      g.fill();
+      g.fillStyle = hc ? '#ffe14d' : LOAM;
+      g.font = `700 42px ${FONT_UI}`;
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.fillText(free.length ? 'No habits yet · pinch a seed or the tray to begin' : '6 of 6 habits · move a sprout into the tray to free a seed', w / 2, h / 2, w - 40);
+    });
+    else this.drawSampleStamp();
+  }
+
+  private drawSampleStamp(): void {
+    this.stampCard.draw((g, w, h) => {
+      g.fillStyle = garden.settings.highContrast ? '#000' : TERRACOTTA;
+      roundRect(g, 4, 4, w - 8, h - 8, 18);
+      g.fill();
+      g.fillStyle = garden.settings.highContrast ? '#ffe14d' : SEED_PAPER;
+      g.font = `700 52px ${FONT_UI}`;
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.fillText('EXAMPLE GARDEN (SAMPLE DATA)', w / 2, h / 2 + 2);
+    });
   }
 
   private drawMenu(): void {

@@ -1,4 +1,5 @@
 import type { PlantForm, Species, Vitality } from '@mebae/core';
+import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
 import {
   BufferAttribute,
   BufferGeometry,
@@ -241,6 +242,7 @@ export class PlantMesh {
     if (form.leaves.length) {
       this.leaves = new InstancedMesh(leafGeo(form.species), leafMat, form.leaves.length);
       this.leaves.name = `${this.group.name} leaves`;
+      bindInstanceSpherecast(this.leaves);
       form.leaves.forEach((l, i) => {
         _c.copy(LEAF_YOUNG[form.species]).lerp(LEAF_OLD[form.species], form.species === 'maple' ? l.age * 0.45 : l.age);
         if (this.vital < 1) _c.lerp(RESTING, 0.45);
@@ -251,6 +253,7 @@ export class PlantMesh {
     if (form.flowers.length) {
       this.flowers = new InstancedMesh(flowerGeo, flowerMat, form.flowers.length);
       this.flowers.name = `${this.group.name} bloom`;
+      bindInstanceSpherecast(this.flowers);
       form.flowers.forEach((f, i) => this.flowers!.setColorAt(i, _c.set(i % 2 ? '#f3ecd9' : '#e08a5c')));
       this.group.add(this.flowers);
     }

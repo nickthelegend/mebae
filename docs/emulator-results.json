@@ -1,0 +1,397 @@
+{
+  "recordedAt": "2026-10-25T13:41:52.147Z",
+  "status": "completed_with_failures",
+  "ps": "/bin/ps",
+  "sourceCommit": "00cbb12",
+  "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware.",
+  "startup": {
+    "ps": "/bin/ps",
+    "command": "npx @iwsdk/cli dev restart --open --ai-mode agent --allow-browser-automation",
+    "note": "dev up --no-open left the managed browser not_launched, so no suite could run. The live server was restarted with --open. PATH resolved ps to /bin/ps. No lstart shim.",
+    "serverPid": 26670
+  },
+  "commands": [
+    "hash -r && PATH=/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$PATH && command -v ps",
+    "node -e execFileSync('/bin/ps', ['-p', pid, '-o', 'lstart='], LC_ALL=C TZ=UTC)",
+    "/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh acquire mebae",
+    "npx @iwsdk/cli dev restart --open --ai-mode agent --allow-browser-automation",
+    "MEBAE_OUT=e2e-out node e2e/run.mjs kitchen",
+    "node scripts/set-device.mjs metaQuest3 home_office",
+    "MEBAE_OUT=e2e-out node e2e/run.mjs quest",
+    "node scripts/set-device.mjs metaVRGlasses home_office",
+    "MEBAE_OUT=e2e-out node e2e/run.mjs glasses",
+    "node scripts/set-device.mjs metaQuest3 home_office",
+    "MEBAE_OUT=e2e-out node e2e/run.mjs perf",
+    "restore packages/app/iwsdk.config.json to metaQuest3 / home_office",
+    "/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh release mebae"
+  ],
+  "passFail": {
+    "quest": {
+      "passed": 30,
+      "failed": 0
+    },
+    "glasses": {
+      "passed": 8,
+      "failed": 0
+    },
+    "kitchen": {
+      "passed": 6,
+      "failed": 0
+    },
+    "perf": {
+      "passed": 6,
+      "failed": 1
+    }
+  },
+  "consoleErrors": {
+    "quest": 0,
+    "glasses": 0,
+    "kitchen": 0,
+    "perf": 0
+  },
+  "perf": {
+    "frames": 600,
+    "cpuMs": {
+      "p95": 2
+    },
+    "drawCalls": {
+      "max": 92
+    },
+    "triangles": {
+      "max": 37556
+    },
+    "gate": {
+      "cpuMsP95": 4,
+      "drawCallsMax": 50,
+      "trianglesMax": 150000
+    },
+    "cpuMsP95Pass": true,
+    "drawCallsPass": false,
+    "trianglesPass": true
+  },
+  "suites": [
+    {
+      "suite": "quest",
+      "recordedAt": "2026-10-25T13:34:59.218Z",
+      "profile": {
+        "device": "metaQuest3",
+        "environment": "home_office"
+      },
+      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs quest",
+      "passed": 30,
+      "failed": 0,
+      "consoleErrors": 0,
+      "checks": [
+        {
+          "name": "cold load: tray placed on a real surface",
+          "ok": true,
+          "detail": "desk on desk"
+        },
+        {
+          "name": "scene understanding sees the room",
+          "ok": true,
+          "detail": "planes 13, meshes 9"
+        },
+        {
+          "name": "3. habit created with an XRAnchor",
+          "ok": true,
+          "detail": "{\"anchorUuid\":\"17be7c02-f31a-4856-9b41-52c23ce70ecf\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
+        },
+        {
+          "name": "3. surface label from the room scan",
+          "ok": true,
+          "detail": "door"
+        },
+        {
+          "name": "3. sprout at the hit point (\u00b12 cm)",
+          "ok": true,
+          "detail": "0.00 cm, via hit-test"
+        },
+        {
+          "name": "4. check-in reaches stage 1",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "first habit pinned and checked in under 60 s",
+          "ok": true,
+          "detail": "11.8 s through check-in (10.0 s to pin)"
+        },
+        {
+          "name": "5. water planted on the desk",
+          "ok": true,
+          "detail": "desk"
+        },
+        {
+          "name": "5. three pinches: 3/8",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "5. pinch-hold 1 s undoes one: 2/8",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "6. raking started the focus timer",
+          "ok": true,
+          "detail": "rake 3302 ms, 191 texture writes, 25 min"
+        },
+        {
+          "name": "7. history restored after reload",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "7. persistent anchors restored",
+          "ok": true,
+          "detail": "[{\"habitId\":\"stretch-1\",\"status\":\"restored\"},{\"habitId\":\"water-2\",\"status\":\"restored\"}]"
+        },
+        {
+          "name": "7. sprouts back on their spots (\u00b11 cm)",
+          "ok": true,
+          "detail": "0.00 cm, 0.00 cm"
+        },
+        {
+          "name": "7. focus timer survived the reload",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "one-hand focus cancellation uses a single pinch",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "one-hand focus starts 25 minutes",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "one-hand focus extends to 50 minutes",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "suspend completion adds exactly one stone",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "7b. lost anchors go to \"Pin again\"",
+          "ok": true,
+          "detail": "[\"pin-again\",\"pin-again\"]"
+        },
+        {
+          "name": "7b. a \"Pin again\" pot is in the tray",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "7b. one pinch re-pins it with a new anchor",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "8. next day check-in grows to stage 2",
+          "ok": true,
+          "detail": "2026-10-26"
+        },
+        {
+          "name": "8. three missed days: resting, stage kept",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "palm up shows the wrist menu",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "wrist \"Week\" opens the week rings",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "sample garden on: only sample sprouts drawn",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "sample focus interaction leaves real history untouched",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "sample garden off: real history untouched",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "zero console errors",
+          "ok": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "suite": "glasses",
+      "recordedAt": "2026-10-25T13:36:22.597Z",
+      "profile": {
+        "device": "metaVRGlasses",
+        "environment": "home_office"
+      },
+      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs glasses",
+      "passed": 8,
+      "failed": 0,
+      "consoleErrors": 0,
+      "checks": [
+        {
+          "name": "Glasses profile active with gaze",
+          "ok": true,
+          "detail": "Meta VR Glasses; [\"local-floor\",\"bounded-floor\",\"hand-tracking\",\"anchors\",\"hit-test\",\"plane-detection\",\"mesh-detection\",\"gaze-tracking\",\"eye-tracking\",\"viewer\",\"local\"]"
+        },
+        {
+          "name": "gaze + pinch on the seed opens the radial",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "gaze aim + pinch pins a habit on the desk",
+          "ok": true,
+          "detail": "desk"
+        },
+        {
+          "name": "gaze + pinch checks in (stage 1)",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "gaze + pinch opens the week rings",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "gaze disconnected: hand ray closes the week view",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "every key element inside the Glasses FoV (37/25/43 with 3\u00b0 margin)",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "zero console errors (Glasses)",
+          "ok": true,
+          "detail": ""
+        }
+      ]
+    },
+    {
+      "suite": "kitchen",
+      "recordedAt": "2026-10-25T13:33:55.489Z",
+      "profile": {
+        "device": "metaQuest3",
+        "environment": "kitchen"
+      },
+      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs kitchen",
+      "passed": 6,
+      "failed": 0,
+      "consoleErrors": 0,
+      "checks": [
+        {
+          "name": "tray uses detected furniture",
+          "ok": true,
+          "detail": "table"
+        },
+        {
+          "name": "habit pinned to a detected top",
+          "ok": true,
+          "detail": "table"
+        },
+        {
+          "name": "three water pinches reach 3/8",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "hold undoes one: 2/8",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "Week opens with a hand pinch",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "zero console errors (room smoke)",
+          "ok": true,
+          "detail": "[]"
+        }
+      ]
+    },
+    {
+      "suite": "perf",
+      "recordedAt": "2026-10-25T13:36:56.702Z",
+      "profile": {
+        "device": "metaQuest3",
+        "environment": "home_office"
+      },
+      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs perf",
+      "passed": 6,
+      "failed": 1,
+      "consoleErrors": 0,
+      "checks": [
+        {
+          "name": "600-frame sample",
+          "ok": true,
+          "detail": "600 frames"
+        },
+        {
+          "name": "CPU p95 \u2264 4 ms",
+          "ok": true,
+          "detail": "2.000 ms"
+        },
+        {
+          "name": "draw calls \u2264 50",
+          "ok": false,
+          "detail": "92"
+        },
+        {
+          "name": "triangles \u2264 150000",
+          "ok": true,
+          "detail": "37556"
+        },
+        {
+          "name": "six grown plants still present",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "idle sand makes no CPU texture writes",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "zero console errors (performance)",
+          "ok": true,
+          "detail": "[]"
+        }
+      ],
+      "frames": 600,
+      "cpuMs": {
+        "p95": 2
+      },
+      "drawCalls": {
+        "max": 92
+      },
+      "triangles": {
+        "max": 37556
+      },
+      "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware.",
+      "note": "Desktop Chrome has no OCULUS_multiview, so renderer.info.render.calls counts both XR views. 92 is 46 submits per eye. The gate is the raw counter, max <= 50, and this run fails it. CPU p95 and triangles pass. Unverified on Quest hardware; not a 72 fps claim."
+    }
+  ]
+}

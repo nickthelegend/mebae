@@ -84,12 +84,20 @@ class Garden {
 
   async saveSettings(): Promise<void> {
     this.bump();
-    await save(SETTINGS_KEY, this.settings);
+    try {
+      await save(SETTINGS_KEY, this.settings);
+    } catch (e) {
+      this.say(`Settings not saved: ${(e as Error).message}`, 'error');
+    }
   }
 
   async saveTray(t: TrayPose): Promise<void> {
     this.tray = t;
-    await save(TRAY_KEY, t);
+    try {
+      await save(TRAY_KEY, t);
+    } catch (e) {
+      this.say(`Tray spot not saved: ${(e as Error).message}`, 'error');
+    }
   }
 
   setSample(on: boolean): void {
@@ -104,6 +112,7 @@ class Garden {
   }
 
   say(text: string, tone: 'info' | 'error' = 'info'): void {
+    if (this.isSample && !text.toLowerCase().includes('sample data')) text = `${SAMPLE_STAMP}. ${text}`;
     this.toast.value = { text, tone, at: performance.now() };
     if (tone === 'error') console.warn(`[mebae] ${text}`);
   }

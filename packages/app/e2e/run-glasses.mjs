@@ -1,18 +1,19 @@
 // Meta VR Glasses profile: gaze targets, a pinch selects. Requires
 // dev.emulator.device = "metaVRGlasses" (scripts/set-device.mjs).
-import { check, cli, ev, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
+import { check, cli, consoleErrors, ev, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
 
 const SEATED = { x: -0.08, y: 1.2, z: -1.35 };
 
-/** Horizontal/vertical angles of a world point from the head looking along `fwd`. */
+/** Angles of a world point from the head, against the view axis.
+ *  Negative pitch looks down. Undo yaw, then undo that pitch; applying the
+ *  pitch forward reports the desk as ~70° below a view that is already aimed at it. */
 function angles(head, yawDeg, pitchDeg, p) {
   const yaw = (yawDeg * Math.PI) / 180, pitch = (pitchDeg * Math.PI) / 180;
   const d = [p[0] - head.x, p[1] - head.y, p[2] - head.z];
-  // rotate into head frame: undo yaw then pitch
   const x1 = d[0] * Math.cos(yaw) - d[2] * Math.sin(yaw);
   const z1 = d[0] * Math.sin(yaw) + d[2] * Math.cos(yaw);
-  const y2 = d[1] * Math.cos(pitch) - z1 * Math.sin(pitch);
-  const z2 = d[1] * Math.sin(pitch) + z1 * Math.cos(pitch);
+  const y2 = d[1] * Math.cos(pitch) + z1 * Math.sin(pitch);
+  const z2 = -d[1] * Math.sin(pitch) + z1 * Math.cos(pitch);
   return { h: (Math.atan2(x1, -z2) * 180) / Math.PI, v: (Math.atan2(y2, -z2) * 180) / Math.PI };
 }
 
@@ -24,6 +25,7 @@ async function gazePinch(point) {
 
 export async function main() {
   resetResults();
+  const started = Date.now();
   ev('m.wipe()');
   cli(['browser', 'reload']);
   await sleep(2500);
@@ -86,7 +88,8 @@ export async function main() {
   check('gaze disconnected: hand ray closes the week view', ev('m.state().weekOpen') === false);
   xr('set-connected', { device: 'gaze', connected: true });
 
-  // reset head to straight ahead pitch for the FoV numbers
+  // Angles from the seated view, pitched down at the desk. The gates stay
+  // ±34° horizontal and +22°/−40° vertical (37/25/43 with a 3° margin).
   const fov = [];
   for (const [name, p] of Object.entries({ ...pts, ...corners })) {
     if (!p) continue;
@@ -98,9 +101,7 @@ export async function main() {
   check('every key element inside the Glasses FoV (37/25/43 with 3° margin)', fov.every((f) => f.inside), fov.filter((f) => !f.inside).map((f) => f.name).join(', '));
   const shot = cli(['browser', 'screenshot', '--output-file', `${process.env.MEBAE_OUT ?? '/tmp'}/glasses-fov.png`]);
   console.log('screenshot', shot.screenshotPath ?? shot);
-  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]);
-  const entries = logs.logs ?? logs.entries ?? logs;
-  const errors = (Array.isArray(entries) ? entries : []).filter((l) => l.level === 'error');
+  const errors = consoleErrors(cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]), started);
   check('zero console errors (Glasses)', errors.length === 0, errors.slice(0, 3).map((e) => e.text ?? e.message).join(' | '));
   return summary();
 }

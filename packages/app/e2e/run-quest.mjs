@@ -1,7 +1,8 @@
 // Hands-only e2e on the IWER Quest 3 profile (home_office room).
 // Requires: `npx @iwsdk/cli dev up --ai-mode agent --allow-browser-automation`.
 // Spec plan steps are numbered as in specs/meta-vr/mebae.md.
-import { check, cli, dist, ev, pinchAt, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
+import { Quaternion, Vector3 } from '@iwsdk/core';
+import { check, cli, consoleErrors, dist, ev, pinchAt, resetResults, sleep, summary, until, v3, xr } from './lib.mjs';
 
 const SEATED = { x: -0.08, y: 1.2, z: -1.35 }; // the desk chair in home_office
 
@@ -79,19 +80,23 @@ export async function main() {
   await sleep(400);
   check('5. pinch-hold 1 s undoes one: 2/8', state().habits.find((h) => h.id === water.id).today === 2);
 
-  // 6: rake the sand (pinch-drag) for > 2 s
+  // 6: rake the sand (pinch-drag) for > 2 s.
+  // A held pinch freezes further look-at poses out of the WebXR frame, so
+  // discrete look-ats never add up to 2 s. One animate-to streams the ray
+  // along the sand; the app still ignores time spent holding still.
   t = targets();
-  const [a, b, c, d] = t.sandSpan;
+  const [a, b] = t.sandSpan;
+  const hand = xr('get-device-state').hands.right.position;
+  const aimAt = (p) => {
+    const dir = new Vector3(p[0] - hand.x, p[1] - hand.y, p[2] - hand.z).normalize();
+    const q = new Quaternion().setFromUnitVectors(new Vector3(0, 0, -1), dir);
+    return { x: q.x, y: q.y, z: q.z, w: q.w };
+  };
   xr('look-at', { device: 'hand-right', target: v3(a) });
   await sleep(200);
   xr('set-select-value', { device: 'hand-right', value: 1 });
-  // Every discrete move is capped to 120 ms of rake time by the app, so use
-  // enough real moves to cover 2 s instead of crediting time spent stationary.
-  const path = Array.from({ length: 28 }, (_, i) => [b, d, c, a][i % 4]);
-  for (const p of path) {
-    xr('look-at', { device: 'hand-right', target: v3(p) });
-    await sleep(330);
-  }
+  await sleep(80);
+  xr('animate-to', { device: 'hand-right', orientation: aimAt(b), duration: 3.2, easing: 'linear' }, { timeout: 20_000 });
   xr('set-select-value', { device: 'hand-right', value: 0 });
   await sleep(400);
   s = state();
@@ -109,6 +114,21 @@ export async function main() {
   const moved = before.map((p) => dist(p.position, s.sprouts.find((x) => x.id === p.id).position));
   check('7. sprouts back on their spots (±1 cm)', moved.every((m) => m < 0.01), moved.map((m) => `${(m * 100).toFixed(2)} cm`).join(', '));
   check('7. focus timer survived the reload', s.focus.running);
+
+  // One-hand focus must run while the raked 25-minute block is still going.
+  // A later day jump settles that block into a stone, and these pinches would
+  // then start a second block instead of extending and cancelling the first.
+  await pinchAt('hand-right', targets().menuButtons[4]);
+  await pinchAt('hand-right', targets().sand); // 25 -> 50, or cancel an existing 50
+  if (state().focus.running) await pinchAt('hand-right', targets().sand);
+  check('one-hand focus cancellation uses a single pinch', !state().focus.running);
+  await pinchAt('hand-right', targets().sand);
+  check('one-hand focus starts 25 minutes', state().focus.running && state().focus.minutes === 25);
+  await pinchAt('hand-right', targets().sand);
+  check('one-hand focus extends to 50 minutes', state().focus.minutes === 50);
+  ev('m.advanceMinutes(51)');
+  await sleep(700);
+  check('suspend completion adds exactly one stone', state().focus.stones === 1 && !state().focus.running);
 
   // 7b: lost anchors -> Pin again, never a guessed position
   ev('m.forgetEmulatorAnchors()');
@@ -167,22 +187,7 @@ export async function main() {
   s = state();
   check('sample garden off: real history untouched', !s.sample && s.habits.length === 2 && s.sprouts.every((x) => !x.sample));
 
-  // Every one-hand action stays a single pinch, including focus cancellation.
-  await pinchAt('hand-right', targets().menuButtons[4]);
-  await pinchAt('hand-right', targets().sand); // 25 -> 50, or cancel an existing 50
-  if (state().focus.running) await pinchAt('hand-right', targets().sand);
-  check('one-hand focus cancellation uses a single pinch', !state().focus.running);
-  await pinchAt('hand-right', targets().sand);
-  check('one-hand focus starts 25 minutes', state().focus.running && state().focus.minutes === 25);
-  await pinchAt('hand-right', targets().sand);
-  check('one-hand focus extends to 50 minutes', state().focus.minutes === 50);
-  ev('m.advanceMinutes(51)');
-  await sleep(700);
-  check('suspend completion adds exactly one stone', state().focus.stones === 1 && !state().focus.running);
-
-  const logs = cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]);
-  const entries = logs.logs ?? logs.entries ?? logs;
-  const errors = (Array.isArray(entries) ? entries : []).filter((l) => l.level === 'error');
+  const errors = consoleErrors(cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]), t0);
   check('zero console errors', errors.length === 0, errors.slice(0, 3).map((e) => e.text ?? e.message).join(' | '));
   return summary();
 }

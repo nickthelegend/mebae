@@ -13,7 +13,7 @@ are announced (about Dec 11).
 | Award it aims at | Best Reason to Come Back (secondary target; the form has no award field, every entry is considered) |
 | Platform | Immersive Web SDK 1.1.0-rc.2 (WebXR), submitted as a public URL opened in the Quest Browser |
 | Project URL | **TODO (Representative):** the GitHub Pages URL of `packages/app/dist` |
-| Video (<3 min, YouTube/Vimeo) | **TODO (Representative):** upload. No source file is recorded: `docs/whoa-result.json` is absent, and `/Volumes/Extreme SSD/Projects/grokbot/videos/mebae/` is not on disk. A finished whoa capture is a first-day take plus a labelled sample, not a multi-day recording (`packages/app/e2e/whoa.mjs`). Multi-day footage is still yours to record. |
+| Video (<3 min, YouTube/Vimeo) | **TODO (Representative):** upload. Video source recorded at `/Volumes/Extreme SSD/Projects/grokbot/videos/mebae/mebae-whoa.mp4` (35.2 s, 1280×1364 h264). Qualified by the driver as a first-day capture plus labelled sample preview, not multi-day footage (`packages/app/e2e/whoa.mjs`). Multi-day footage is still yours to record. |
 | Target launch date | **TODO (Representative)** |
 | Team | **TODO:** Representative (eligible, VR Start member) + Nick (non-Representative member) with emails and roles |
 
@@ -38,12 +38,12 @@ guessed place.
 **How we built it.** IWSDK on WebXR: hit-test placement against real surfaces, XRPlane/XRMesh labels, one XRAnchor per habit with
 `requestPersistentHandle`, hand rays and pinch everywhere (no controllers), gaze + pinch on Meta VR Glasses. Plants are an
 L-system with instanced leaves and a moss shader; chimes are synthesised with Web Audio. History stays on the headset (IndexedDB),
-with JSON export. A pure-TypeScript core is unit tested (61 passed, 0 failed, on 2026-10-25; see TESTING.md). The recorded headless IWER run was blocked before any product check.
+with JSON export. A pure-TypeScript core is unit tested (61 passed, 0 failed, on 2026-10-25; see TESTING.md). The recorded headless IWER run completed with 50 passed checks and 1 failure on the draw calls gate (max 92 vs ≤ 50 target due to desktop stereo count without multiview, 0 console errors; see TESTING.md).
 
 **What's next.** Morning and evening ritual sequences, a shared family garden, and a weekly bloom recap.
 
 **Honesty notes.** The "Example garden (sample data)" toggle shows what day 30 looks like; it is off by default and stamped on
-every view. No multi-day footage is in this repo. The whoa driver sets `multiDayFootage: false` and qualifies a finished capture as a first-day take plus a labelled sample. That capture was not recorded (`docs/whoa-result.json` is absent).
+every view. No multi-day footage is in this repo. The recorded whoa clip (`/Volumes/Extreme SSD/Projects/grokbot/videos/mebae/mebae-whoa.mp4`) has `multiDayFootage: false` and is qualified by the driver as a first-day capture plus a labelled sample preview. Real separate-day footage is still required.
 
 ## How hand interactions are implemented
 
@@ -61,8 +61,8 @@ every view. No multi-day footage is in this repo. The whoa driver sets `multiDay
 |---|---|
 | Innovation & Creativity | Habits bound to real places, with growth you see in the room. Persistent anchors drive daily repeat use |
 | Experience Design | First habit pinned and checked in under 60 s, seated, hand ray for far spots; morning/evening rituals; passthrough is the point (the room is the reminder) |
-| Technical Implementation | One persistent anchor per habit with an honest "Pin again" restore path, hit-test placement with scene labels, a wall-clock timer that survives suspend. Glasses (gaze + pinch, FoV) has an emulator suite; the recorded run executed 0 of 8 checks (TESTING.md) |
-| Polish & Presentation | Procedural L-system plants and moss shader, synthesised chimes, seed-packet brand. The whoa driver is a first-day capture plus a labelled sample; that clip is not recorded yet. Multi-day footage is still the Representative's |
+| Technical Implementation | One persistent anchor per habit with an honest "Pin again" restore path, hit-test placement with scene labels, a wall-clock timer that survives suspend. Glasses (gaze + pinch, FoV) has an emulator suite; the recorded run passed all 8 checks (0 console errors; TESTING.md) |
+| Polish & Presentation | Procedural L-system plants and moss shader, synthesised chimes, seed-packet brand. The recorded whoa clip (`/Volumes/Extreme SSD/Projects/grokbot/videos/mebae/mebae-whoa.mp4`) is a first-day capture plus a labelled sample. Multi-day footage is still the Representative's |
 | Reason to Come Back | Visible growth between sessions, weekly blooms, gentle streaks (missed days pause, never punish) |
 
 ## Representative must do

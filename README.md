@@ -33,14 +33,14 @@ Test evidence: [TESTING.md](TESTING.md).
 No text entry anywhere: icons plus short preset labels. Hands only; controllers are never required.
 
 **Gaze, honestly:** Quest 3/3S has no eye tracking, so on Quest everything far is the hand ray plus pinch. Eye gaze is used
-only on Meta VR Glasses (IWSDK gaze source + pinch). The Glasses emulator suite is in TESTING.md; the recorded run executed 0 checks.
+only on Meta VR Glasses (IWSDK gaze source + pinch). The Glasses emulator suite is in TESTING.md (8 passed, 0 failed, 0 console errors).
 
 ## Repo
 
 ```
 packages/core     pure TypeScript: habits, growth, focus timer, export/import, sample garden, L-system, restore plan (Vitest)
 packages/app      the IWSDK app (Vite + IWER emulator in dev); e2e drivers in packages/app/e2e
-packages/landing  one static page (seed packet). The hero looks for media/mebae-whoa.mp4 and the almanac looks for history.json; neither file is in this tree
+packages/landing  one static page (seed packet). The hero uses media/mebae-whoa.mp4 and the almanac looks for history.json (not in this tree)
 ```
 
 ## Run it
@@ -75,7 +75,7 @@ Representative. Nothing has been deployed.
 
 ## Unverified
 
-The IWER suites in `docs/emulator-results.json` (2026-10-25, status `blocked`) executed 0 product checks. CPU p95, draw calls, triangles, and console errors were not measured (`null`). `docs/whoa-result.json` is absent, so no whoa clip path is recorded. Core unit tests are in [TESTING.md](TESTING.md): 61 passed, 0 failed, on 2026-10-25.
+The IWER suites in `docs/emulator-results.json` (2026-10-25, status `completed_with_failures`) executed 51 checks: 50 passed, 1 failed (draw calls max 92 exceeded the ≤ 50 gate on desktop stereo proxy), 0 console errors. CPU p95 was 2 ms (gate ≤ 4 ms) and triangles max 37,556 (gate ≤ 150,000). `docs/whoa-result.json` records `/Volumes/Extreme SSD/Projects/grokbot/videos/mebae/mebae-whoa.mp4` (first-day capture plus labelled sample preview, not multi-day footage). Core unit tests are in [TESTING.md](TESTING.md): 61 passed, 0 failed, on 2026-10-25.
 
 Still unverified on hardware: persistent-anchor restore across days in Quest Browser, hit-test on real surfaces, real hand-tracking pinch reliability, and 72 fps on Quest.
 

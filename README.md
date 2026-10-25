@@ -33,14 +33,14 @@ Test evidence: [TESTING.md](TESTING.md).
 No text entry anywhere: icons plus short preset labels. Hands only; controllers are never required.
 
 **Gaze, honestly:** Quest 3/3S has no eye tracking, so on Quest everything far is the hand ray plus pinch. Eye gaze is used
-only on Meta VR Glasses (IWSDK gaze source + pinch), tested in the IWER `metaVRGlasses` profile.
+only on Meta VR Glasses (IWSDK gaze source + pinch). The Glasses emulator suite is in TESTING.md; the recorded run executed 0 checks.
 
 ## Repo
 
 ```
 packages/core     pure TypeScript: habits, growth, focus timer, export/import, sample garden, L-system, restore plan (Vitest)
 packages/app      the IWSDK app (Vite + IWER emulator in dev); e2e drivers in packages/app/e2e
-packages/landing  one static page: seed packet + real emulator clip + almanac from a real exported history
+packages/landing  one static page (seed packet). The hero looks for media/mebae-whoa.mp4 and the almanac looks for history.json; neither file is in this tree
 ```
 
 ## Run it
@@ -73,10 +73,11 @@ No hosting is needed for a device test:
 `npm run build` writes `packages/app/dist` (relative `base`), which can be published as-is to GitHub Pages by the
 Representative. Nothing has been deployed.
 
-## Unverified on hardware
+## Unverified
 
-Persistent-anchor restore across days in Quest Browser, hit-test accuracy on real surfaces, real hand-tracking pinch
-reliability, and 72 fps on Quest. Everything else in this README was exercised in the IWER emulator (TESTING.md).
+The IWER suites in `docs/emulator-results.json` (2026-10-25, status `blocked`) executed 0 product checks. CPU p95, draw calls, triangles, and console errors were not measured (`null`). `docs/whoa-result.json` is absent, so no whoa clip path is recorded. Core unit tests are in [TESTING.md](TESTING.md): 61 passed, 0 failed, on 2026-10-25.
+
+Still unverified on hardware: persistent-anchor restore across days in Quest Browser, hit-test on real surfaces, real hand-tracking pinch reliability, and 72 fps on Quest.
 
 ## Licence
 

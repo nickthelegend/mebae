@@ -1,0 +1,15 @@
+{
+  "recordedAt": "2026-10-26T23:49:25.430Z",
+  "browserCommandReady": true,
+  "endpoint": "http://127.0.0.1:56492",
+  "origin": "https://localhost:8081/",
+  "landing": "http://127.0.0.1:4321/",
+  "chromePid": 87668,
+  "serverPids": [
+    80971,
+    84965
+  ],
+  "note": "One CLI-managed Chrome for Testing, Playwright CDP; fresh isolated browser context per row. No product source changes.",
+  "browser": "Chrome/156.0.8078.4",
+  "protocolVersion": "1.3"
+}

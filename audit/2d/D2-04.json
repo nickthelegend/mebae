@@ -1,0 +1,579 @@
+{
+  "id": "D2-04",
+  "startedAt": "2026-10-26T23:47:59.203Z",
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:4321/history.json",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:4321/history.json",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "pageErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 404
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 404
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    }
+  ],
+  "failedRequests": [],
+  "observations": [
+    {
+      "label": "index.html",
+      "actual": {
+        "stylesheet": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+        "body": "\"Rethink Sans\", -apple-system, \"system-ui\", sans-serif",
+        "mono": [
+          {
+            "tag": "HEADER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SPAN",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SPAN",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SPAN",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SUMMARY",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "FOOTER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          }
+        ],
+        "fontFaces": [
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          }
+        ],
+        "loaded": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "label": "evidence.html",
+      "actual": {
+        "stylesheet": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+        "body": "\"Rethink Sans\", -apple-system, \"system-ui\", sans-serif",
+        "mono": [
+          {
+            "tag": "HEADER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "FOOTER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          }
+        ],
+        "fontFaces": [
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          }
+        ],
+        "loaded": [
+          true,
+          true
+        ]
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "index.html fonts exact",
+      "ok": true,
+      "actual": {
+        "stylesheet": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+        "body": "\"Rethink Sans\", -apple-system, \"system-ui\", sans-serif",
+        "mono": [
+          {
+            "tag": "HEADER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SPAN",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SPAN",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SPAN",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "SUMMARY",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "FOOTER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          }
+        ],
+        "fontFaces": [
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          }
+        ],
+        "loaded": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "label": "evidence.html fonts exact",
+      "ok": true,
+      "actual": {
+        "stylesheet": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+        "body": "\"Rethink Sans\", -apple-system, \"system-ui\", sans-serif",
+        "mono": [
+          {
+            "tag": "HEADER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          },
+          {
+            "tag": "FOOTER",
+            "font": "Sono, ui-monospace, SFMono-Regular, monospace"
+          }
+        ],
+        "fontFaces": [
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "unloaded"
+          },
+          {
+            "family": "Rethink Sans",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "unloaded"
+          },
+          {
+            "family": "Sono",
+            "status": "loaded"
+          }
+        ],
+        "loaded": [
+          true,
+          true
+        ]
+      }
+    },
+    {
+      "label": "Zero unexpected console/page/network errors",
+      "ok": true,
+      "actual": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "httpErrors": []
+      }
+    }
+  ],
+  "finishedAt": "2026-10-26T23:48:01.208Z",
+  "status": "PASS"
+}

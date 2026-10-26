@@ -1,0 +1,206 @@
+{
+  "id": "D2-01",
+  "startedAt": "2026-10-26T23:47:54.789Z",
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:4321/history.json",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "pageErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 404
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    }
+  ],
+  "failedRequests": [],
+  "observations": [
+    {
+      "label": "unclipped layout",
+      "actual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "headline": "Habits that grow where they happen",
+        "fontSize": "67.2px",
+        "rootFontSize": "16px",
+        "rect": {
+          "left": 190,
+          "right": 716.765625,
+          "top": 101.4375,
+          "bottom": 313.125
+        },
+        "textRects": [
+          {
+            "left": 190,
+            "right": 638.828125,
+            "top": 92.4375,
+            "bottom": 180.4375
+          },
+          {
+            "left": 190,
+            "right": 496.859375,
+            "top": 163,
+            "bottom": 251
+          },
+          {
+            "left": 190,
+            "right": 403.53125,
+            "top": 233.5625,
+            "bottom": 321.5625
+          }
+        ],
+        "wideElements": []
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "0 horizontal overflow with body clipping removed",
+      "ok": true,
+      "actual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "headline": "Habits that grow where they happen",
+        "fontSize": "67.2px",
+        "rootFontSize": "16px",
+        "rect": {
+          "left": 190,
+          "right": 716.765625,
+          "top": 101.4375,
+          "bottom": 313.125
+        },
+        "textRects": [
+          {
+            "left": 190,
+            "right": 638.828125,
+            "top": 92.4375,
+            "bottom": 180.4375
+          },
+          {
+            "left": 190,
+            "right": 496.859375,
+            "top": 163,
+            "bottom": 251
+          },
+          {
+            "left": 190,
+            "right": 403.53125,
+            "top": 233.5625,
+            "bottom": 321.5625
+          }
+        ],
+        "wideElements": []
+      }
+    },
+    {
+      "label": "Headline exact and text in viewport",
+      "ok": true,
+      "actual": {
+        "viewport": 1440,
+        "scrollWidth": 1440,
+        "headline": "Habits that grow where they happen",
+        "fontSize": "67.2px",
+        "rootFontSize": "16px",
+        "rect": {
+          "left": 190,
+          "right": 716.765625,
+          "top": 101.4375,
+          "bottom": 313.125
+        },
+        "textRects": [
+          {
+            "left": 190,
+            "right": 638.828125,
+            "top": 92.4375,
+            "bottom": 180.4375
+          },
+          {
+            "left": 190,
+            "right": 496.859375,
+            "top": 163,
+            "bottom": 251
+          },
+          {
+            "left": 190,
+            "right": 403.53125,
+            "top": 233.5625,
+            "bottom": 321.5625
+          }
+        ],
+        "wideElements": []
+      }
+    },
+    {
+      "label": "Zero unexpected console/page/network errors",
+      "ok": true,
+      "actual": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "httpErrors": []
+      }
+    }
+  ],
+  "finishedAt": "2026-10-26T23:47:56.176Z",
+  "status": "PASS"
+}

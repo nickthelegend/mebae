@@ -1,0 +1,360 @@
+{
+  "counts": {
+    "PASS": 33,
+    "FAIL": 1,
+    "UNTESTED": 1
+  },
+  "rows": [
+    {
+      "id": "D2-01",
+      "status": "PASS",
+      "log": "D2-01.json",
+      "screenshots": [
+        "D2-01.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-02",
+      "status": "PASS",
+      "log": "D2-02.json",
+      "screenshots": [
+        "D2-02.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-03",
+      "status": "PASS",
+      "log": "D2-03.json",
+      "screenshots": [
+        "D2-03.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-04",
+      "status": "PASS",
+      "log": "D2-04.json",
+      "screenshots": [
+        "D2-04-evidence.jpg",
+        "D2-04-index.jpg",
+        "D2-04.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-05",
+      "status": "PASS",
+      "log": "D2-05.json",
+      "screenshots": [
+        "D2-05.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-06",
+      "status": "PASS",
+      "log": "D2-06.json",
+      "screenshots": [
+        "D2-06.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-07",
+      "status": "PASS",
+      "log": "D2-07.json",
+      "screenshots": [
+        "D2-07.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-08",
+      "status": "PASS",
+      "log": "D2-08.json",
+      "screenshots": [
+        "D2-08.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-09",
+      "status": "PASS",
+      "log": "D2-09.json",
+      "screenshots": [
+        "D2-09.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-10",
+      "status": "PASS",
+      "log": "D2-10.json",
+      "screenshots": [
+        "D2-10-evidence.jpg",
+        "D2-10-index.jpg",
+        "D2-10.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-11",
+      "status": "PASS",
+      "log": "D2-11.json",
+      "screenshots": [
+        "D2-11-evidence.jpg",
+        "D2-11-index.jpg",
+        "D2-11.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-12",
+      "status": "PASS",
+      "log": "D2-12.json",
+      "screenshots": [
+        "D2-12-evidence.jpg",
+        "D2-12-index.jpg",
+        "D2-12.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-13",
+      "status": "PASS",
+      "log": "D2-13.json",
+      "screenshots": [
+        "D2-13.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-14",
+      "status": "PASS",
+      "log": "D2-14.json",
+      "screenshots": [
+        "D2-14-evidence.jpg",
+        "D2-14.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-15",
+      "status": "PASS",
+      "log": "D2-15.json",
+      "screenshots": [
+        "D2-15.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-16",
+      "status": "PASS",
+      "log": "D2-16.json",
+      "screenshots": [
+        "D2-16-evidence.jpg",
+        "D2-16-index.jpg",
+        "D2-16.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-17",
+      "status": "PASS",
+      "log": "D2-17.json",
+      "screenshots": [
+        "D2-17-evidence.jpg",
+        "D2-17-index.jpg",
+        "D2-17.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-18",
+      "status": "PASS",
+      "log": "D2-18.json",
+      "screenshots": [
+        "D2-18-evidence.jpg",
+        "D2-18-index.jpg",
+        "D2-18.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-19",
+      "status": "PASS",
+      "log": "D2-19.json",
+      "screenshots": [
+        "D2-19.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-20",
+      "status": "PASS",
+      "log": "D2-20.json",
+      "screenshots": [
+        "D2-20.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-21",
+      "status": "PASS",
+      "log": "D2-21.json",
+      "screenshots": [
+        "D2-21.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-22",
+      "status": "PASS",
+      "log": "D2-22.json",
+      "screenshots": [
+        "D2-22.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-23",
+      "status": "PASS",
+      "log": "D2-23.json",
+      "screenshots": [
+        "D2-23.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-24",
+      "status": "PASS",
+      "log": "D2-24.json",
+      "screenshots": [
+        "D2-24-flat.jpg",
+        "D2-24-xr.jpg",
+        "D2-24.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-25",
+      "status": "PASS",
+      "log": "D2-25.json",
+      "screenshots": [
+        "D2-25.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-26",
+      "status": "PASS",
+      "log": "D2-26.json",
+      "screenshots": [
+        "D2-26.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-27",
+      "status": "FAIL",
+      "log": "D2-27.json",
+      "screenshots": [
+        "D2-27.jpg"
+      ],
+      "failedChecks": [
+        {
+          "label": "Zero unexpected console/page/network errors",
+          "ok": false,
+          "actual": {
+            "consoleErrors": [
+              {
+                "type": "error",
+                "text": "TypeError: Cannot read properties of null (reading 'filter')\n    at activeHabits (https://localhost:8081/@fs/Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t4/packages/core/src/habits.ts:24:19)\n    at summary (https://localhost:8081/src/index.ts:23:13)\n    at main (https://localhost:8081/src/index.ts:33:3)",
+                "location": {
+                  "url": "https://localhost:8081/src/index.ts",
+                  "line": 81,
+                  "column": 10,
+                  "lineNumber": 81,
+                  "columnNumber": 10
+                }
+              }
+            ],
+            "pageErrors": [],
+            "failedRequests": [],
+            "httpErrors": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "D2-28",
+      "status": "PASS",
+      "log": "D2-28.json",
+      "screenshots": [
+        "D2-28.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-29",
+      "status": "PASS",
+      "log": "D2-29.json",
+      "screenshots": [
+        "D2-29.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-30",
+      "status": "PASS",
+      "log": "D2-30.json",
+      "screenshots": [
+        "D2-30.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-31",
+      "status": "PASS",
+      "log": "D2-31.json",
+      "screenshots": [
+        "D2-31.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-32",
+      "status": "PASS",
+      "log": "D2-32.json",
+      "screenshots": [
+        "D2-32.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-33",
+      "status": "PASS",
+      "log": "D2-33.json",
+      "screenshots": [],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-34",
+      "status": "PASS",
+      "log": "D2-34.json",
+      "screenshots": [
+        "D2-34.jpg"
+      ],
+      "failedChecks": []
+    },
+    {
+      "id": "D2-35",
+      "status": "UNTESTED",
+      "log": "D2-35.json",
+      "screenshots": [],
+      "failedChecks": []
+    }
+  ]
+}

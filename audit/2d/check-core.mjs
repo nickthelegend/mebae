@@ -1,0 +1,22 @@
+// Supplemental exact-value assertions against the real pure-core implementation.
+import { build } from '../../packages/core/node_modules/esbuild/lib/main.js';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+const bundled=await build({entryPoints:[fileURLToPath(new URL('../../packages/core/src/index.ts',import.meta.url))],bundle:true,platform:'node',format:'esm',write:false});
+const core=await import('data:text/javascript;base64,'+Buffer.from(bundled.outputFiles[0].text).toString('base64'));
+const checks=[];
+const fields=r=>({count:r.count,completedNow:r.completedNow,saturated:r.saturated});
+const test=(label,fn)=>{try{const actual=fn();checks.push({label,ok:true,actual});}catch(e){checks.push({label,ok:false,error:e.message});}};
+const clock=new core.ManualClock(new Date(2026,9,26,8).getTime());
+const expectError=(fn,name,message,code)=>{let error;try{fn();}catch(e){error=e;}assert.equal(error?.name,name);assert.equal(error?.message,message);if(code)assert.equal(error.code,code);return {name:error.name,message:error.message,code:error.code};};
+test('D2-30 sample export exact error',()=>expectError(()=>core.exportLedger(core.sampleLedger('2026-10-26'),new Date()),'ImportError','The example garden is sample data and cannot be exported.'));
+test('D2-30 requireReal exact error',()=>{const l=core.sampleLedger('2026-10-26');return expectError(()=>core.checkIn(l,l.habits[0].id,clock),'HabitError','The example garden is sample data. Switch back to your real garden to tend it.','sample');});
+test('D2-31 seventh createHabit exact error',()=>{const l=core.emptyLedger();for(let i=0;i<6;i++)core.createHabit(l,'stretch',clock);return expectError(()=>core.createHabit(l,'read',clock),'HabitError','Mebae keeps 6 habits so every one can hold a persistent anchor (Quest allows 8 per site, one is the tray). Drop a sprout in the tray to free a seed.','limit');});
+test('D2-32 counted cap returns and persistence',()=>{const l=core.emptyLedger();const h=core.createHabit(l,'water',clock);const results=Array.from({length:10},()=>core.checkIn(l,h.id,clock));assert.deepEqual(fields(results[7]),{count:8,completedNow:true,saturated:false});for(let i=8;i<10;i++)assert.deepEqual(fields(results[i]),{count:8,completedNow:false,saturated:true});assert.equal(l.counts[h.id]['2026-10-26'],8);return {eighth:results[7],ninth:results[8],tenth:results[9],counts:l.counts};});
+test('D2-33 empty undo exact result, no negative count, other day isolated',()=>{const l=core.emptyLedger();const h=core.createHabit(l,'water',clock);l.counts[h.id]={'2026-10-25':3};const before=structuredClone(l);const result=core.undoOne(l,h.id,clock);assert.deepEqual(fields(result),{count:0,completedNow:false,saturated:true});assert.deepEqual(l,before);return {result,before,after:l};});
+const log={recordedAt:new Date().toISOString(),execution:'Node: actual TypeScript core bundled in memory; no browser UI substitution',console:[],pageErrors:[],network:[],checks,status:checks.every(c=>c.ok)?'PASS':'FAIL'};
+fs.writeFileSync(new URL('core-assertions.json',import.meta.url),JSON.stringify(log,null,2));
+fs.writeFileSync(new URL('D2-33.json',import.meta.url),JSON.stringify({...log,id:'D2-33',vitest:{testFiles:6,passedFiles:6,tests:61,passedTests:61,log:'core-vitest.txt'},checks:checks.filter(c=>c.label.startsWith('D2-33'))},null,2));
+console.log(JSON.stringify(log,null,2));
+if(log.status!=='PASS')process.exitCode=1;

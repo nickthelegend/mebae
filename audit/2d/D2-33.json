@@ -1,0 +1,98 @@
+{
+  "recordedAt": "2026-10-26T23:41:38.321Z",
+  "execution": "Node: actual TypeScript core bundled in memory; no browser UI substitution",
+  "console": [],
+  "pageErrors": [],
+  "network": [],
+  "checks": [
+    {
+      "label": "D2-33 empty undo exact result, no negative count, other day isolated",
+      "ok": true,
+      "actual": {
+        "result": {
+          "habit": {
+            "id": "water-1",
+            "presetId": "water",
+            "label": "Water",
+            "glyph": "glass",
+            "kind": "counted",
+            "target": 8,
+            "species": "bamboo",
+            "createdDay": "2026-10-26",
+            "archivedDay": null,
+            "placement": null
+          },
+          "day": "2026-10-26",
+          "count": 0,
+          "completedNow": false,
+          "saturated": true
+        },
+        "before": {
+          "format": "mebae.history.v1",
+          "sample": false,
+          "habits": [
+            {
+              "id": "water-1",
+              "presetId": "water",
+              "label": "Water",
+              "glyph": "glass",
+              "kind": "counted",
+              "target": 8,
+              "species": "bamboo",
+              "createdDay": "2026-10-26",
+              "archivedDay": null,
+              "placement": null
+            }
+          ],
+          "counts": {
+            "water-1": {
+              "2026-10-25": 3
+            }
+          },
+          "focus": {
+            "startedAt": null,
+            "minutes": 25,
+            "blocks": []
+          }
+        },
+        "after": {
+          "format": "mebae.history.v1",
+          "sample": false,
+          "habits": [
+            {
+              "id": "water-1",
+              "presetId": "water",
+              "label": "Water",
+              "glyph": "glass",
+              "kind": "counted",
+              "target": 8,
+              "species": "bamboo",
+              "createdDay": "2026-10-26",
+              "archivedDay": null,
+              "placement": null
+            }
+          ],
+          "counts": {
+            "water-1": {
+              "2026-10-25": 3
+            }
+          },
+          "focus": {
+            "startedAt": null,
+            "minutes": 25,
+            "blocks": []
+          }
+        }
+      }
+    }
+  ],
+  "status": "PASS",
+  "id": "D2-33",
+  "vitest": {
+    "testFiles": 6,
+    "passedFiles": 6,
+    "tests": 61,
+    "passedTests": 61,
+    "log": "core-vitest.txt"
+  }
+}

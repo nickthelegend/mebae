@@ -1,6 +1,7 @@
 import {
   type Habit,
   type Ledger,
+  MAX_HABITS,
   activeHabits,
   archiveHabit,
   checkIn,
@@ -14,13 +15,15 @@ import {
   Color,
   CylinderGeometry,
   Group,
-  Mesh,
+  InstancedMesh,
   MeshStandardMaterial,
+  Object3D,
   Quaternion,
   Vector3,
   createSystem,
 } from '@iwsdk/core';
 import { chimeGrow, chimeTap, chimeUndo, unlockAudio } from '../fx/chimes.js';
+import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
 import { makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { PlantMesh, mossMat } from '../plants/plant-mesh.js';
 import { garden } from '../state/garden.js';
@@ -30,6 +33,7 @@ import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
 import { type AimSource, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
+import { horizontalLabelRise, SAMPLE_PLANT_SCALE, SAMPLE_SPOTS } from './garden-layout.js';
 import { surfaceQuaternion } from './surface-pose.js';
 import { TrayEvents, TraySystem } from './tray.js';
 
@@ -47,15 +51,6 @@ interface Sprout {
   wallish: boolean;
 }
 
-/** Where sample plants sit around the tray (tray-local), clearly stamped. */
-const SAMPLE_SPOTS: [number, number, number][] = [
-  [0.0, 0.22, -0.42],
-  [0.42, 0, -0.08],
-  [-0.4, 0, -0.06],
-  [-0.24, 0, -0.32],
-  [0.26, 0, -0.32],
-];
-
 const stakeMat = new MeshStandardMaterial({ color: new Color('#b98a5c'), roughness: 0.8 });
 const stakeGeo = new CylinderGeometry(0.004, 0.003, 0.07, 6);
 
@@ -66,6 +61,7 @@ const stakeGeo = new CylinderGeometry(0.004, 0.003, 0.07, 6);
  */
 export class SproutSystem extends createSystem({}) {
   private sprouts = new Map<string, Sprout>();
+  private stakes!: InstancedMesh;
   private lastVersion = -1;
   private lastDay = '';
   private dayCheck = 0;
@@ -81,6 +77,24 @@ export class SproutSystem extends createSystem({}) {
   private up = new Vector3(0, 1, 0);
 
   init(): void {
+    this.stakes = new InstancedMesh(stakeGeo, stakeMat, MAX_HABITS);
+    this.stakes.name = 'Move stakes';
+    this.stakes.count = 0;
+    bindInstanceSpherecast(this.stakes);
+    const stakesEntity = this.world.createTransformEntity(this.stakes, { persistent: true });
+    makePressable(stakesEntity, 'move-stakes', {
+      tap: (point) => {
+        if (!point) return;
+        let closest: Sprout | null = null;
+        let distance = Infinity;
+        for (const s of this.sprouts.values()) {
+          if (!s.stake) continue;
+          const d = s.stake.object3D!.position.distanceToSquared(point);
+          if (d < distance) { closest = s; distance = d; }
+        }
+        if (closest) this.startCarry(closest.habitId);
+      },
+    });
     const aim = () => this.world.getSystem(AimSystem);
     const wire = () => {
       const a = aim();
@@ -93,6 +107,7 @@ export class SproutSystem extends createSystem({}) {
     }));
     this.xrManager.addEventListener('sessionend', () => {
       for (const id of [...this.sprouts.keys()]) this.drop(id);
+      this.stakes.count = 0;
       this.carryId = null;
     });
   }
@@ -132,6 +147,7 @@ export class SproutSystem extends createSystem({}) {
     this.player.head.getWorldPosition(this.head);
     const anchors = this.world.getSystem(AnchorSystem)!;
     mossMat.uniforms.uTime.value = now / 1000;
+    let stakeCount = 0;
     for (const s of this.sprouts.values()) {
       if (!s.sample) {
         if (s.habitId === this.carryId) this.followCarry(s);
@@ -160,7 +176,7 @@ export class SproutSystem extends createSystem({}) {
         world.addScaledVector(this.nrm, 0.06);
         world.y += 0.13 * big;
       } else {
-        world.y += Math.max(0.1, (s.plant.group.userData.height ?? 0) + 0.075) + 0.02 * big;
+        world.y += horizontalLabelRise(s.plant.group.userData.height ?? 0, garden.settings.largeTargets, s.sample);
       }
       if (s.stake) {
         const st = s.stake.object3D!;
@@ -168,11 +184,16 @@ export class SproutSystem extends createSystem({}) {
         st.position.y -= 0.05 * big;
         st.quaternion.identity();
         st.scale.setScalar(big);
+        st.updateMatrixWorld();
+        this.stakes.setMatrixAt(stakeCount++, st.matrixWorld);
       }
       s.label.mesh.position.copy(s.group.worldToLocal(world));
       this.yawQ.setFromAxisAngle(this.up, yaw);
       s.label.mesh.quaternion.copy(s.group.quaternion).invert().multiply(this.yawQ);
     }
+    this.stakes.count = stakeCount;
+    this.stakes.instanceMatrix.needsUpdate = true;
+    if (stakeCount) this.stakes.computeBoundingSphere();
   }
 
   private ledgerAndHabits(): { ledger: Ledger; habits: Habit[] } {
@@ -229,6 +250,7 @@ export class SproutSystem extends createSystem({}) {
     const group = new Group();
     group.name = `Sprout: ${h.label}`;
     const plant = new PlantMesh(`${h.label} plant`);
+    if (sample) plant.group.scale.setScalar(SAMPLE_PLANT_SCALE);
     group.add(plant.group);
     const label = new CanvasCard(640, 400, 0.15, 0.094, `Label: ${h.label}`);
     group.add(label.mesh);
@@ -242,11 +264,11 @@ export class SproutSystem extends createSystem({}) {
           if (!garden.settings.oneHand) this.undo(s);
         },
       });
-      const stakeMesh = new Mesh(stakeGeo, stakeMat);
-      stakeMesh.name = `Move: ${h.label}`;
-      const stake = this.world.createTransformEntity(stakeMesh, { persistent: true });
-      makePressable(stake, `stake:${h.id}`, { tap: () => this.startCarry(h.id) });
-      s.stake = stake;
+      // Keep a named transform per handle; all six visible handles share one
+      // instanced draw and retain per-instance ray/poke hit testing.
+      const handle = new Object3D();
+      handle.name = `Move: ${h.label}`;
+      s.stake = this.world.createTransformEntity(handle, { persistent: true });
     } else {
       makePressable(entity, key, { tap: () => garden.say('This is the example garden (sample data). Turn it off in the tray menu to tend your own.') });
     }
@@ -260,7 +282,6 @@ export class SproutSystem extends createSystem({}) {
     s.plant.dispose();
     s.label.texture.dispose();
     unregisterPressable(`sprout:${id}`);
-    unregisterPressable(`stake:${id}`);
     s.stake?.destroy();
     s.entity.destroy();
     this.sprouts.delete(id);

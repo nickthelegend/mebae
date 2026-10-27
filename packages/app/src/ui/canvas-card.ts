@@ -37,6 +37,9 @@ export class CanvasCard {
       map: this.texture,
       transparent: true,
       side: DoubleSide,
+      // A flat card has no thickness: a second transparent back-face pass
+      // draws the same texels again in each eye.
+      forceSinglePass: true,
       toneMapped: false,
       depthWrite: false,
     });

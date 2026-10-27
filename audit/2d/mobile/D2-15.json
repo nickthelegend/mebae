@@ -1,19 +1,7 @@
 {
   "id": "D2-15",
-  "startedAt": "2026-10-27T00:29:54.972Z",
-  "console": [
-    {
-      "type": "error",
-      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-      "location": {
-        "url": "http://127.0.0.1:4321/history.json",
-        "line": 0,
-        "column": 0,
-        "lineNumber": 0,
-        "columnNumber": 0
-      }
-    }
-  ],
+  "startedAt": "2026-10-27T01:50:03.068Z",
+  "console": [],
   "pageErrors": [],
   "requests": [
     {
@@ -62,7 +50,7 @@
     },
     {
       "url": "http://127.0.0.1:4321/history.json",
-      "status": 404
+      "status": 200
     },
     {
       "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
@@ -103,28 +91,15 @@
     },
     {
       "label": "Zero unexpected console/page/network errors",
-      "ok": false,
+      "ok": true,
       "actual": {
-        "consoleErrors": [
-          {
-            "type": "error",
-            "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-            "location": {
-              "url": "http://127.0.0.1:4321/history.json",
-              "line": 0,
-              "column": 0,
-              "lineNumber": 0,
-              "columnNumber": 0
-            }
-          }
-        ],
+        "consoleErrors": [],
         "pageErrors": [],
         "failedRequests": [],
         "httpErrors": []
       }
     }
   ],
-  "finishedAt": "2026-10-27T00:29:56.351Z",
-  "status": "FAIL",
-  "consolePolicy": "Every error-level Chrome console entry fails, including expected-history-404 resource errors. The expected HTTP 404 remains an allowed response."
+  "finishedAt": "2026-10-27T01:50:04.431Z",
+  "status": "PASS"
 }

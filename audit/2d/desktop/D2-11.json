@@ -1,6 +1,6 @@
 {
   "id": "D2-11",
-  "startedAt": "2026-10-27T00:28:09.169Z",
+  "startedAt": "2026-10-27T01:48:12.967Z",
   "console": [],
   "pageErrors": [],
   "requests": [
@@ -20,6 +20,11 @@
       "type": "media"
     },
     {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
       "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
       "method": "GET",
       "type": "font"
@@ -28,11 +33,6 @@
       "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
       "method": "GET",
       "type": "font"
-    },
-    {
-      "url": "http://127.0.0.1:4321/history.json",
-      "method": "GET",
-      "type": "fetch"
     },
     {
       "url": "http://127.0.0.1:4321/evidence.html",
@@ -503,7 +503,6 @@
       }
     }
   ],
-  "finishedAt": "2026-10-27T00:28:11.216Z",
-  "status": "PASS",
-  "consolePolicy": "Every error-level Chrome console entry fails, including expected-history-404 resource errors. The expected HTTP 404 remains an allowed response."
+  "finishedAt": "2026-10-27T01:48:15.032Z",
+  "status": "PASS"
 }

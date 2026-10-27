@@ -1,6 +1,6 @@
 {
   "suite": "perf",
-  "recordedAt": "2026-10-27T01:09:01.075Z",
+  "recordedAt": "2026-10-27T01:52:15.351Z",
   "results": [
     {
       "name": "600-frame sample",
@@ -10,7 +10,7 @@
     {
       "name": "CPU p95 ≤ 4 ms",
       "ok": true,
-      "detail": "1.200 ms"
+      "detail": "1.300 ms"
     },
     {
       "name": "draw calls ≤ 50",
@@ -42,9 +42,9 @@
   "metrics": {
     "frames": 600,
     "cpuMs": {
-      "p50": 0.7999999821186066,
-      "p95": 1.199999988079071,
-      "max": 2.300000011920929
+      "p50": 0.800000011920929,
+      "p95": 1.300000011920929,
+      "max": 2.699999988079071
     },
     "drawCalls": {
       "p50": 48,
@@ -58,18 +58,18 @@
   "browserProfile": {
     "application": {
       "generation": 2,
-      "id": "tab-mvpzm81e-52123a",
+      "id": "tab-mvq15swq-nna2ql",
       "outerUrl": "https://localhost:8081/",
       "url": "https://localhost:8081/",
       "workspaceFramed": true
     },
     "calibrated": false,
     "classification": "host-browser-diagnostic",
-    "durationMs": 10790,
+    "durationMs": 10853,
     "droppedInterruptionCount": 0,
     "interruptions": [],
     "mode": "rendering",
-    "profileId": "c3f7caac-47bc-4bcc-aeec-5c1cf668721d",
+    "profileId": "2b3ac0b6-8a4d-4655-901f-f51e475128cd",
     "status": "stopped",
     "targetDevice": null,
     "environment": {
@@ -80,7 +80,7 @@
     },
     "summary": {
       "browserMetrics": {
-        "Timestamp": 143848.328723,
+        "Timestamp": 146442.298159,
         "AudioHandlers": 6,
         "AudioWorkletProcessors": 0,
         "Documents": 2,
@@ -99,23 +99,23 @@
         "ResourceFetchers": 2,
         "AdSubframes": 0,
         "DetachedScriptStates": 0,
-        "ArrayBufferContents": 3617,
+        "ArrayBufferContents": 3613,
         "LayoutCount": 34,
         "RecalcStyleCount": 85,
-        "LayoutDuration": 0.001521,
-        "RecalcStyleDuration": 0.008191,
-        "DevToolsCommandDuration": 0.093401,
-        "ScriptDuration": 1.130956,
+        "LayoutDuration": 0.001505,
+        "RecalcStyleDuration": 0.007829,
+        "DevToolsCommandDuration": 0.172433,
+        "ScriptDuration": 1.144131,
         "V8CompileDuration": 0,
-        "TaskDuration": 1.335609,
-        "TaskOtherDuration": 0.10154,
-        "ThreadTime": 1.145331,
-        "ProcessTime": 6.797423,
-        "JSHeapUsedSize": 172537776,
-        "JSHeapTotalSize": 240648192,
-        "FirstMeaningfulPaint": 143828.102291,
-        "DomContentLoaded": 143827.111665,
-        "NavigationStart": 143826.809317
+        "TaskDuration": 1.432077,
+        "TaskOtherDuration": 0.106179,
+        "ThreadTime": 1.248959,
+        "ProcessTime": 7.042103,
+        "JSHeapUsedSize": 182084812,
+        "JSHeapTotalSize": 249036800,
+        "FirstMeaningfulPaint": 146421.272355,
+        "DomContentLoaded": 146420.276008,
+        "NavigationStart": 146419.986951
       },
       "collection": {
         "eventTiming": false,
@@ -131,17 +131,17 @@
         "max": 16.80000000000291,
         "p50": 16.69999999999891,
         "p95": 16.700000000000728,
-        "sampleCount": 646,
+        "sampleCount": 650,
         "source": "requestAnimationFrame-interval"
       },
       "longTasks": {
         "count": 3,
-        "totalDurationMs": 645
+        "totalDurationMs": 634
       },
       "marks": [
         {
           "name": "iwsdk-browser-profile-rendering-start",
-          "startTime": 7953.0999999940395
+          "startTime": 7552
         }
       ]
     }
@@ -149,7 +149,7 @@
   "profile": {
     "application": {
       "generation": 2,
-      "id": "tab-mvpzm81e-52123a",
+      "id": "tab-mvq15swq-nna2ql",
       "outerUrl": "https://localhost:8081/",
       "url": "https://localhost:8081/",
       "workspaceFramed": true
@@ -160,7 +160,7 @@
     "droppedInterruptionCount": 0,
     "interruptions": [],
     "mode": "rendering",
-    "profileId": "c3f7caac-47bc-4bcc-aeec-5c1cf668721d",
+    "profileId": "2b3ac0b6-8a4d-4655-901f-f51e475128cd",
     "status": "started",
     "targetDevice": null
   },

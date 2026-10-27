@@ -1,6 +1,7 @@
 import {
   type Habit,
   type Ledger,
+  MAX_HABITS,
   activeHabits,
   archiveHabit,
   checkIn,
@@ -11,25 +12,29 @@ import {
 } from '@mebae/core';
 import {
   type Entity,
+  BoxGeometry,
   Color,
   CylinderGeometry,
   Group,
+  InstancedMesh,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   Quaternion,
   Vector3,
   createSystem,
 } from '@iwsdk/core';
 import { chimeGrow, chimeTap, chimeUndo, unlockAudio } from '../fx/chimes.js';
-import { makePressable, unregisterPressable } from '../interaction/press-router.js';
+import { PressRouter, makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { PlantMesh, mossMat } from '../plants/plant-mesh.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
 import { CanvasCard, roundRect } from '../ui/canvas-card.js';
 import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
-import { type AimSource, AimSystem } from './aim.js';
+import { type AimSource, type SelectEvent, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
+import { horizontalLabelRise, SAMPLE_PLANT_SCALE, SAMPLE_SPOTS } from './garden-layout.js';
 import { surfaceQuaternion } from './surface-pose.js';
 import { TrayEvents, TraySystem } from './tray.js';
 
@@ -47,17 +52,10 @@ interface Sprout {
   wallish: boolean;
 }
 
-/** Where sample plants sit around the tray (tray-local), clearly stamped. */
-const SAMPLE_SPOTS: [number, number, number][] = [
-  [0.0, 0.22, -0.42],
-  [0.42, 0, -0.08],
-  [-0.4, 0, -0.06],
-  [-0.24, 0, -0.32],
-  [0.26, 0, -0.32],
-];
-
 const stakeMat = new MeshStandardMaterial({ color: new Color('#b98a5c'), roughness: 0.8 });
 const stakeGeo = new CylinderGeometry(0.004, 0.003, 0.07, 6);
+const stakePickGeo = new BoxGeometry(0.03, 0.09, 0.05);
+const stakePickMat = new MeshBasicMaterial({ visible: false });
 
 /**
  * The living sprouts: one per habit, drawn only where its anchor really is.
@@ -66,6 +64,7 @@ const stakeGeo = new CylinderGeometry(0.004, 0.003, 0.07, 6);
  */
 export class SproutSystem extends createSystem({}) {
   private sprouts = new Map<string, Sprout>();
+  private stakes!: InstancedMesh;
   private lastVersion = -1;
   private lastDay = '';
   private dayCheck = 0;
@@ -74,6 +73,7 @@ export class SproutSystem extends createSystem({}) {
   private q = new Quaternion();
   private carryId: string | null = null;
   private carryStart = 0;
+  private pendingSelect: SelectEvent | null = null;
   private carrySrc: AimSource = 'right';
   private labelWorld = new Vector3();
   private nrm = new Vector3();
@@ -81,11 +81,15 @@ export class SproutSystem extends createSystem({}) {
   private up = new Vector3(0, 1, 0);
 
   init(): void {
+    this.stakes = new InstancedMesh(stakeGeo, stakeMat, MAX_HABITS);
+    this.stakes.name = 'Move stakes';
+    this.stakes.count = 0;
+    this.world.createTransformEntity(this.stakes, { persistent: true });
     const aim = () => this.world.getSystem(AimSystem);
     const wire = () => {
       const a = aim();
       if (!a) return void setTimeout(wire, 50);
-      this.cleanupFuncs.push(a.onSelect((e) => this.onSelect(e.source, e.startedAt)));
+      this.cleanupFuncs.push(a.onSelect((e) => this.onSelect(e)));
     };
     wire();
     this.cleanupFuncs.push(this.world.getSystem(TrayEvents)!.on('drop-in-tray', () => {
@@ -93,7 +97,9 @@ export class SproutSystem extends createSystem({}) {
     }));
     this.xrManager.addEventListener('sessionend', () => {
       for (const id of [...this.sprouts.keys()]) this.drop(id);
+      this.stakes.count = 0;
       this.carryId = null;
+      this.pendingSelect = null;
     });
   }
 
@@ -113,6 +119,16 @@ export class SproutSystem extends createSystem({}) {
   }
 
   update(dt: number): void {
+    // PressRouter runs first, so menu presses consume their pinch before a
+    // surface behind the menu can become a move or a tray removal.
+    const selection = this.pendingSelect;
+    this.pendingSelect = null;
+    if (selection && ui.mode.peek() === 'carrying' && this.carryId) {
+      const presses = this.world.getSystem(PressRouter)!;
+      if (!presses.wasPressedSince('tray-menu', selection.startedAt) && !presses.wasPressedSince('wrist-menu', selection.startedAt)) {
+        void this.finishCarry(selection.source, presses.wasPressedSince('tray-base', selection.startedAt));
+      }
+    }
     const tray = this.world.getSystem(TraySystem);
     if (!tray?.placed) return;
     const now = performance.now();
@@ -132,6 +148,7 @@ export class SproutSystem extends createSystem({}) {
     this.player.head.getWorldPosition(this.head);
     const anchors = this.world.getSystem(AnchorSystem)!;
     mossMat.uniforms.uTime.value = now / 1000;
+    let stakeCount = 0;
     for (const s of this.sprouts.values()) {
       if (!s.sample) {
         if (s.habitId === this.carryId) this.followCarry(s);
@@ -160,7 +177,7 @@ export class SproutSystem extends createSystem({}) {
         world.addScaledVector(this.nrm, 0.06);
         world.y += 0.13 * big;
       } else {
-        world.y += Math.max(0.1, (s.plant.group.userData.height ?? 0) + 0.075) + 0.02 * big;
+        world.y += horizontalLabelRise(s.plant.group.userData.height ?? 0, garden.settings.largeTargets, s.sample);
       }
       if (s.stake) {
         const st = s.stake.object3D!;
@@ -168,11 +185,16 @@ export class SproutSystem extends createSystem({}) {
         st.position.y -= 0.05 * big;
         st.quaternion.identity();
         st.scale.setScalar(big);
+        st.updateMatrixWorld();
+        this.stakes.setMatrixAt(stakeCount++, st.matrixWorld);
       }
       s.label.mesh.position.copy(s.group.worldToLocal(world));
       this.yawQ.setFromAxisAngle(this.up, yaw);
       s.label.mesh.quaternion.copy(s.group.quaternion).invert().multiply(this.yawQ);
     }
+    this.stakes.count = stakeCount;
+    this.stakes.instanceMatrix.needsUpdate = true;
+    if (stakeCount) this.stakes.computeBoundingSphere();
   }
 
   private ledgerAndHabits(): { ledger: Ledger; habits: Habit[] } {
@@ -229,6 +251,7 @@ export class SproutSystem extends createSystem({}) {
     const group = new Group();
     group.name = `Sprout: ${h.label}`;
     const plant = new PlantMesh(`${h.label} plant`);
+    if (sample) plant.group.scale.setScalar(SAMPLE_PLANT_SCALE);
     group.add(plant.group);
     const label = new CanvasCard(640, 400, 0.15, 0.094, `Label: ${h.label}`);
     group.add(label.mesh);
@@ -236,17 +259,22 @@ export class SproutSystem extends createSystem({}) {
     const key = `sprout:${h.id}`;
     const s: Sprout = { habitId: h.id, sample, entity, group, plant, label, stake: null, stage: -1, key: '', bounce: 0, wallish: false };
     if (!sample) {
+      // Mature foliage can overlap the wooden handle, especially on walls.
+      // Keep labels, move targets and menus ahead of decorative plant hits.
+      plant.group.pointerEventsOrder = -1;
       makePressable(entity, key, {
         tap: (p) => this.onTap(s, p),
         hold: () => {
           if (!garden.settings.oneHand) this.undo(s);
         },
       });
-      const stakeMesh = new Mesh(stakeGeo, stakeMat);
-      stakeMesh.name = `Move: ${h.label}`;
-      const stake = this.world.createTransformEntity(stakeMesh, { persistent: true });
-      makePressable(stake, `stake:${h.id}`, { tap: () => this.startCarry(h.id) });
-      s.stake = stake;
+      // Visible wood stays in one instanced draw. Each handle has its own
+      // wider invisible pick target, outside the label and above the foliage.
+      // Resolve the habit directly instead of guessing from a thin instance hit.
+      const handle = new Mesh(stakePickGeo, stakePickMat);
+      handle.name = `Move: ${h.label}`;
+      s.stake = this.world.createTransformEntity(handle, { persistent: true });
+      makePressable(s.stake, `move:${h.id}`, { tap: () => this.startCarry(h.id) });
     } else {
       makePressable(entity, key, { tap: () => garden.say('This is the example garden (sample data). Turn it off in the tray menu to tend your own.') });
     }
@@ -260,7 +288,7 @@ export class SproutSystem extends createSystem({}) {
     s.plant.dispose();
     s.label.texture.dispose();
     unregisterPressable(`sprout:${id}`);
-    unregisterPressable(`stake:${id}`);
+    unregisterPressable(`move:${id}`);
     s.stake?.destroy();
     s.entity.destroy();
     this.sprouts.delete(id);
@@ -331,12 +359,14 @@ export class SproutSystem extends createSystem({}) {
     s.group.quaternion.slerp(this.q, 0.35);
   }
 
-  private onSelect(src: AimSource, startedAt: number): void {
-    if (ui.mode.peek() !== 'carrying' || !this.carryId || startedAt < this.carryStart + 30) return;
-    void this.finishCarry(src);
+  private onSelect(selection: SelectEvent): void {
+    if (ui.mode.peek() !== 'carrying' || !this.carryId || selection.startedAt < this.carryStart + 30) return;
+    this.pendingSelect = selection;
   }
 
   private async finishCarry(src: AimSource, remove = false): Promise<void> {
+    if (ui.mode.peek() !== 'carrying' || !this.carryId) return;
+    this.pendingSelect = null;
     // Lock the flow before awaiting anchor work so one pinch cannot commit twice.
     ui.mode.value = 'flying';
     try {
@@ -353,14 +383,13 @@ export class SproutSystem extends createSystem({}) {
     const id = this.carryId!;
     const aim = this.world.getSystem(AimSystem)!;
     const anchors = this.world.getSystem(AnchorSystem)!;
-    const tray = this.world.getSystem(TraySystem)!;
     const hit = aim.hit(aim.preferred(src === 'left' ? 'left' : 'right'));
     const h = garden.real.habits.find((x) => x.id === id);
     this.carryId = null;
     aim.enabled = false;
     if (!h) return;
     const oldUuid = h.placement?.anchorUuid ?? null;
-    if (remove || (hit && tray.contains(hit.point))) {
+    if (remove) {
       await anchors.remove(id, oldUuid);
       archiveHabit(garden.real, id, garden.clock);
       chimeUndo();
@@ -448,10 +477,10 @@ export class SproutSystem extends createSystem({}) {
       c.fillText(`stage ${g.stage}/7`, 320, 252);
       c.font = `600 32px ${FONT_UI}`;
       const status =
-        g.vitality === 'resting'
-          ? 'Resting: a missed day pauses growth'
-          : g.inBloom
-            ? 'In bloom this week'
+        g.inBloom
+          ? 'In bloom this week'
+          : g.vitality === 'resting'
+            ? 'Resting: a missed day pauses growth'
             : g.streak > 1
               ? `${g.streak}-day streak`
               : g.vitality === 'fresh'
@@ -459,7 +488,7 @@ export class SproutSystem extends createSystem({}) {
                 : g.toNextStage > 0
                   ? `${g.toNextStage} more day${g.toNextStage > 1 ? 's' : ''} to grow`
                   : 'Fully grown';
-      c.fillStyle = g.vitality === 'resting' ? (hc ? '#ffe14d' : TERRACOTTA) : ink;
+      c.fillStyle = !g.inBloom && g.vitality === 'resting' ? (hc ? '#ffe14d' : TERRACOTTA) : ink;
       c.fillText(status, 30, 312);
       if (chip) {
         c.fillStyle = hc ? '#ffe14d' : TERRACOTTA;

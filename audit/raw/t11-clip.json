@@ -1,0 +1,152 @@
+{
+  "id": "VR-121",
+  "recordedAt": "2026-10-27T02:25:25.162Z",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4322/audit/vr/first-day.mp4",
+      "method": "GET"
+    }
+  ],
+  "playback": {
+    "duration": 35,
+    "advanced": 1.2032,
+    "currentTime": 32.2053,
+    "error": null,
+    "width": 898,
+    "height": 800
+  },
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 800,
+        "height": 800,
+        "nb_read_frames": "1050"
+      }
+    ],
+    "format": {
+      "duration": "35.000000",
+      "size": "190770"
+    }
+  },
+  "capture": {
+    "capturedAt": "2026-10-27T01:01:19.922Z",
+    "frames": 2100,
+    "error": null,
+    "multiDayFootage": false,
+    "marks": [
+      {
+        "at": 0,
+        "text": "Day 1 · 2026-10-27 · IWER Quest 3 · hands only"
+      },
+      {
+        "at": 4.434,
+        "text": "Stretch takes root on a detected surface · real XRAnchor"
+      },
+      {
+        "at": 5.259,
+        "text": "One real check-in · stage 1 · no clock advancement"
+      },
+      {
+        "at": 20.947,
+        "text": "Example garden (sample data) · NOT a recorded later day"
+      }
+    ],
+    "realAtStageOne": {
+      "today": "2026-10-27",
+      "xr": true,
+      "mode": "idle",
+      "weekOpen": false,
+      "sample": false,
+      "settings": {
+        "highContrast": false,
+        "largeTargets": false,
+        "oneHand": false
+      },
+      "tray": {
+        "placed": true,
+        "how": "desk",
+        "on": "desk",
+        "position": [
+          -0.07999999821186066,
+          0.7419999837875366,
+          -1.834999918937683
+        ]
+      },
+      "room": {
+        "planes": 13,
+        "meshes": 9
+      },
+      "anchors": {
+        "live": 1,
+        "persistentSupported": true,
+        "outcomes": [
+          {
+            "habitId": "stretch-1",
+            "status": "restored"
+          }
+        ]
+      },
+      "hitTest": true,
+      "habits": [
+        {
+          "id": "stretch-1",
+          "label": "Stretch",
+          "kind": "daily",
+          "today": 1,
+          "target": 1,
+          "stage": 1,
+          "vitality": "thriving",
+          "placement": {
+            "anchorUuid": "7e660121-1e6b-4a1a-a2b3-75d7ef1a0f6d",
+            "surfaceLabel": "door",
+            "surface": "wall"
+          }
+        }
+      ],
+      "sprouts": [
+        {
+          "id": "stretch-1",
+          "stage": 1,
+          "position": [
+            -0.5906524062156677,
+            1.2032991647720337,
+            1.5582257509231567
+          ],
+          "sample": false,
+          "triangles": 60
+        }
+      ],
+      "lastPlaced": {
+        "habitId": "stretch-1",
+        "point": [
+          -0.5906524062156677,
+          1.2032991647720337,
+          1.5582257509231567
+        ],
+        "label": "door",
+        "via": "hit-test"
+      },
+      "focus": {
+        "running": false,
+        "minutes": 25,
+        "remainingMs": 0,
+        "remainingFraction": 0,
+        "stones": 0,
+        "rakeMs": 0,
+        "rakeWrites": 0,
+        "ink": "#1d1a14"
+      },
+      "palmUp": false
+    }
+  },
+  "visualReview": "Decoded contact sheet and frames show seed/radial, Stretch on detected door, first check-in and stage-1 growth; sample preview caption: Example garden (sample data) · NOT a recorded later day. Existing 35-second recording re-opened on this commit; no second actual calendar day claimed.",
+  "ok": true,
+  "status": "PASS"
+}

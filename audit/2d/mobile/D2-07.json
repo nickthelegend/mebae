@@ -1,0 +1,104 @@
+{
+  "id": "D2-07",
+  "startedAt": "2026-10-27T01:49:05.269Z",
+  "console": [],
+  "pageErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    }
+  ],
+  "failedRequests": [],
+  "observations": [
+    {
+      "label": "Reduced motion; pass-through spy counts play() calls without changing behavior",
+      "actual": {
+        "autoplay": false,
+        "attr": false,
+        "paused": true,
+        "readyState": 4,
+        "playCalls": 0,
+        "query": false
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "No autoplay/play in reduced motion, video stays loaded",
+      "ok": true,
+      "actual": {
+        "autoplay": false,
+        "attr": false,
+        "paused": true,
+        "readyState": 4,
+        "playCalls": 0,
+        "query": false
+      }
+    },
+    {
+      "label": "Zero unexpected console/page/network errors",
+      "ok": true,
+      "actual": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "httpErrors": []
+      }
+    }
+  ],
+  "finishedAt": "2026-10-27T01:49:06.619Z",
+  "status": "PASS"
+}

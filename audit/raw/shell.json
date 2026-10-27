@@ -1,0 +1,135 @@
+{
+  "recordedAt": "2026-10-27T02:21:01.440Z",
+  "exited": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [],
+      "counts": {},
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "initialGate": [
+    {
+      "text": "Checking for mixed reality…",
+      "disabled": true,
+      "at": 19.19999998807907
+    },
+    {
+      "text": "Enter your garden",
+      "disabled": false,
+      "at": 509.09999999403954
+    }
+  ],
+  "supported": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [],
+      "counts": {},
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "mobile": {
+    "width": 375,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [],
+      "counts": {},
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "entered": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 0
+    },
+    "status": "",
+    "pageVisible": "none",
+    "bodyXR": true,
+    "xr": true,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [],
+      "counts": {},
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "returned": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [],
+      "counts": {},
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  }
+}

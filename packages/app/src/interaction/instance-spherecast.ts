@@ -1,4 +1,4 @@
-import { type InstancedMesh, Matrix4, Quaternion, Vector3 } from '@iwsdk/core';
+import { type InstancedMesh, type Intersection, Matrix4, Quaternion, Vector3 } from '@iwsdk/core';
 
 /**
  * The poke intersector sphere-tests an InstancedMesh as one mesh and ignores
@@ -8,14 +8,11 @@ import { type InstancedMesh, Matrix4, Quaternion, Vector3 } from '@iwsdk/core';
  * the ray is actually hitting. Test each instance's own bounding sphere.
  */
 type SphereLike = { center: Vector3; radius: number };
-type Hit = {
-  distance: number;
-  point: Vector3;
+type Hit = Intersection & {
   pointOnFace: Vector3;
   object: InstancedMesh;
   instanceId: number;
   normal: Vector3;
-  face: { normal: Vector3 };
 };
 
 const matrix = new Matrix4();
@@ -27,7 +24,7 @@ const toward = new Vector3();
 export function bindInstanceSpherecast(mesh: InstancedMesh): void {
   if (!mesh.geometry.boundingSphere) mesh.geometry.computeBoundingSphere();
   const geoRadius = mesh.geometry.boundingSphere?.radius ?? 0;
-  const spherecast = (pointerSphere: SphereLike, target: Hit[]) => {
+  const spherecast = (pointerSphere: SphereLike, target: Intersection[]) => {
     const n = mesh.count;
     for (let i = 0; i < n; i++) {
       mesh.getMatrixAt(i, matrix);
@@ -46,16 +43,17 @@ export function bindInstanceSpherecast(mesh: InstancedMesh): void {
       } else {
         normal = new Vector3(0, 1, 0);
       }
-      target.push({
+      const hit: Hit = {
         distance: Math.max(0, surface),
         point,
         pointOnFace: point.clone(),
         object: mesh,
         instanceId: i,
         normal,
-        face: { normal },
-      });
+        face: { normal, a: 0, b: 0, c: 0, materialIndex: 0 },
+      };
+      target.push(hit);
     }
   };
-  (mesh as InstancedMesh & { spherecast: typeof spherecast }).spherecast = spherecast;
+  mesh.spherecast = spherecast;
 }

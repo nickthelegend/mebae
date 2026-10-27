@@ -1,86 +1,122 @@
 {
-  "recordedAt": "2026-10-25T13:41:52.147Z",
-  "status": "completed_with_failures",
-  "ps": "/bin/ps",
-  "sourceCommit": "00cbb12",
-  "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware.",
-  "startup": {
-    "ps": "/bin/ps",
-    "command": "npx @iwsdk/cli dev restart --open --ai-mode agent --allow-browser-automation",
-    "note": "dev up --no-open left the managed browser not_launched, so no suite could run. The live server was restarted with --open. PATH resolved ps to /bin/ps. No lstart shim.",
-    "serverPid": 26670
+  "recordedAt": "2026-10-27T02:13:35.120429+00:00",
+  "scope": "t10: every former FAIL, landing desktop/375px, startup-error row, four IWER suites and native measurements. t11 refreshes all 99 remaining stale PASS rows using 6 exact t10 suite/capture references and 93 direct current-commit re-observations. All 17 UNTESTED conditions remain excluded.",
+  "auditTotals": {
+    "PASS": 147,
+    "FAIL": 0,
+    "UNTESTED": 17
   },
-  "commands": [
-    "hash -r && PATH=/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin:$PATH && command -v ps",
-    "node -e execFileSync('/bin/ps', ['-p', pid, '-o', 'lstart='], LC_ALL=C TZ=UTC)",
-    "/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh acquire mebae",
-    "npx @iwsdk/cli dev restart --open --ai-mode agent --allow-browser-automation",
-    "MEBAE_OUT=e2e-out node e2e/run.mjs kitchen",
-    "node scripts/set-device.mjs metaQuest3 home_office",
-    "MEBAE_OUT=e2e-out node e2e/run.mjs quest",
-    "node scripts/set-device.mjs metaVRGlasses home_office",
-    "MEBAE_OUT=e2e-out node e2e/run.mjs glasses",
-    "node scripts/set-device.mjs metaQuest3 home_office",
-    "MEBAE_OUT=e2e-out node e2e/run.mjs perf",
-    "restore packages/app/iwsdk.config.json to metaQuest3 / home_office",
-    "/Volumes/Extreme SSD/Projects/grokbot/tools/heavy-slot.sh release mebae"
+  "freshRowTotals": {
+    "PASS": 34,
+    "FAIL": 0,
+    "UNTESTED": 1
+  },
+  "freshRowIds": [
+    "VR-01",
+    "VR-13",
+    "VR-18",
+    "VR-62",
+    "VR-64",
+    "VR-70",
+    "VR-71",
+    "VR-78",
+    "VR-83",
+    "VR-84",
+    "VR-94",
+    "VR-96",
+    "VR-98",
+    "VR-116",
+    "D2-01",
+    "D2-02",
+    "D2-03",
+    "D2-04",
+    "D2-05",
+    "D2-06",
+    "D2-07",
+    "D2-08",
+    "D2-09",
+    "D2-10",
+    "D2-11",
+    "D2-12",
+    "D2-13",
+    "D2-14",
+    "D2-15",
+    "D2-16",
+    "D2-17",
+    "D2-18",
+    "D2-19",
+    "D2-20",
+    "D2-27"
   ],
-  "passFail": {
-    "quest": {
-      "passed": 30,
-      "failed": 0
+  "flat": {
+    "desktop": {
+      "PASS": 21,
+      "FAIL": 0,
+      "UNTESTED": 0
     },
-    "glasses": {
-      "passed": 8,
-      "failed": 0
-    },
-    "kitchen": {
-      "passed": 6,
-      "failed": 0
-    },
-    "perf": {
-      "passed": 6,
-      "failed": 1
+    "mobile": {
+      "PASS": 21,
+      "FAIL": 0,
+      "UNTESTED": 0
     }
   },
-  "consoleErrors": {
-    "quest": 0,
-    "glasses": 0,
-    "kitchen": 0,
-    "perf": 0
-  },
-  "perf": {
-    "frames": 600,
-    "cpuMs": {
-      "p95": 2
-    },
-    "drawCalls": {
-      "max": 92
-    },
-    "triangles": {
-      "max": 37556
-    },
-    "gate": {
-      "cpuMsP95": 4,
-      "drawCallsMax": 50,
-      "trianglesMax": 150000
-    },
-    "cpuMsP95Pass": true,
-    "drawCallsPass": false,
-    "trianglesPass": true
+  "suiteTotals": {
+    "passed": 51,
+    "failed": 0
   },
   "suites": [
     {
+      "suite": "kitchen",
+      "profile": {
+        "device": "metaQuest3",
+        "environment": "kitchen"
+      },
+      "recordedAt": "2026-10-27T01:50:27.283Z",
+      "passed": 6,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "tray uses detected furniture",
+          "ok": true,
+          "detail": "table"
+        },
+        {
+          "name": "habit pinned to a detected top",
+          "ok": true,
+          "detail": "table"
+        },
+        {
+          "name": "three water pinches reach 3/8",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "hold undoes one: 2/8",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "Week opens with a hand pinch",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "name": "zero console errors (room smoke)",
+          "ok": true,
+          "detail": "[]"
+        }
+      ],
+      "source": "audit/raw/kitchen.json"
+    },
+    {
       "suite": "quest",
-      "recordedAt": "2026-10-25T13:34:59.218Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "home_office"
       },
-      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs quest",
+      "recordedAt": "2026-10-27T01:50:49.802Z",
       "passed": 30,
       "failed": 0,
-      "consoleErrors": 0,
       "checks": [
         {
           "name": "cold load: tray placed on a real surface",
@@ -95,7 +131,7 @@
         {
           "name": "3. habit created with an XRAnchor",
           "ok": true,
-          "detail": "{\"anchorUuid\":\"17be7c02-f31a-4856-9b41-52c23ce70ecf\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
+          "detail": "{\"anchorUuid\":\"20d2ca4b-7f3d-48a4-8202-dd0abffd65f7\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
         },
         {
           "name": "3. surface label from the room scan",
@@ -115,7 +151,7 @@
         {
           "name": "first habit pinned and checked in under 60 s",
           "ok": true,
-          "detail": "11.8 s through check-in (10.0 s to pin)"
+          "detail": "11.6 s through check-in (9.9 s to pin)"
         },
         {
           "name": "5. water planted on the desk",
@@ -135,7 +171,7 @@
         {
           "name": "6. raking started the focus timer",
           "ok": true,
-          "detail": "rake 3302 ms, 191 texture writes, 25 min"
+          "detail": "rake 3304 ms, 191 texture writes, 25 min"
         },
         {
           "name": "7. history restored after reload",
@@ -195,7 +231,7 @@
         {
           "name": "8. next day check-in grows to stage 2",
           "ok": true,
-          "detail": "2026-10-26"
+          "detail": "2026-10-28"
         },
         {
           "name": "8. three missed days: resting, stage kept",
@@ -232,19 +268,18 @@
           "ok": true,
           "detail": ""
         }
-      ]
+      ],
+      "source": "audit/raw/quest.json"
     },
     {
       "suite": "glasses",
-      "recordedAt": "2026-10-25T13:36:22.597Z",
       "profile": {
         "device": "metaVRGlasses",
         "environment": "home_office"
       },
-      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs glasses",
+      "recordedAt": "2026-10-27T02:09:25.869Z",
       "passed": 8,
       "failed": 0,
-      "consoleErrors": 0,
       "checks": [
         {
           "name": "Glasses profile active with gaze",
@@ -286,63 +321,18 @@
           "ok": true,
           "detail": ""
         }
-      ]
-    },
-    {
-      "suite": "kitchen",
-      "recordedAt": "2026-10-25T13:33:55.489Z",
-      "profile": {
-        "device": "metaQuest3",
-        "environment": "kitchen"
-      },
-      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs kitchen",
-      "passed": 6,
-      "failed": 0,
-      "consoleErrors": 0,
-      "checks": [
-        {
-          "name": "tray uses detected furniture",
-          "ok": true,
-          "detail": "table"
-        },
-        {
-          "name": "habit pinned to a detected top",
-          "ok": true,
-          "detail": "table"
-        },
-        {
-          "name": "three water pinches reach 3/8",
-          "ok": true,
-          "detail": ""
-        },
-        {
-          "name": "hold undoes one: 2/8",
-          "ok": true,
-          "detail": ""
-        },
-        {
-          "name": "Week opens with a hand pinch",
-          "ok": true,
-          "detail": ""
-        },
-        {
-          "name": "zero console errors (room smoke)",
-          "ok": true,
-          "detail": "[]"
-        }
-      ]
+      ],
+      "source": "audit/raw/glasses.json"
     },
     {
       "suite": "perf",
-      "recordedAt": "2026-10-25T13:36:56.702Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "home_office"
       },
-      "command": "MEBAE_OUT=e2e-out node e2e/run.mjs perf",
-      "passed": 6,
-      "failed": 1,
-      "consoleErrors": 0,
+      "recordedAt": "2026-10-27T01:52:15.351Z",
+      "passed": 7,
+      "failed": 0,
       "checks": [
         {
           "name": "600-frame sample",
@@ -352,17 +342,17 @@
         {
           "name": "CPU p95 \u2264 4 ms",
           "ok": true,
-          "detail": "2.000 ms"
+          "detail": "1.300 ms"
         },
         {
           "name": "draw calls \u2264 50",
-          "ok": false,
-          "detail": "92"
+          "ok": true,
+          "detail": "48"
         },
         {
           "name": "triangles \u2264 150000",
           "ok": true,
-          "detail": "37556"
+          "detail": "37664"
         },
         {
           "name": "six grown plants still present",
@@ -380,18 +370,901 @@
           "detail": "[]"
         }
       ],
+      "source": "audit/raw/perf.json"
+    }
+  ],
+  "captures": {
+    "kitchen": {
+      "recordedAt": "2026-10-27T01:50:44.430Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 387,
+      "snapshots": 78
+    },
+    "quest": {
+      "recordedAt": "2026-10-27T01:51:51.007Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 1161,
+      "snapshots": 293
+    },
+    "glasses": {
+      "recordedAt": "2026-10-27T02:09:42.183Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 387,
+      "snapshots": 74
+    },
+    "perf": {
+      "recordedAt": "2026-10-27T01:52:36.324Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 387,
+      "snapshots": 98
+    },
+    "targeted": {
+      "recordedAt": "2026-10-27T02:10:30.729Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 14715,
+      "snapshots": 4631
+    }
+  },
+  "perf": {
+    "frames": 600,
+    "cpuMs": {
+      "p50": 0.800000011920929,
+      "p95": 1.300000011920929,
+      "max": 2.699999988079071
+    },
+    "drawCalls": {
+      "p50": 48,
+      "max": 48
+    },
+    "triangles": {
+      "p50": 37664,
+      "max": 37664
+    }
+  },
+  "perfQualification": "Raw stereo draw calls and triangles; uncalibrated desktop CPU proxy, real headset UNTESTED.",
+  "nativeMeasurements": "audit/raw/t10-verification.json.gz",
+  "remainingFailures": {},
+  "untestedDependencies": {
+    "VR-21": "Needs an emulator room with at least two overlapping labelled bounded semantic meshes to verify smallest-mesh priority. This office only established desk mesh-label and door plane-label. \u00b7 [evidence 1](audit/raw/quest-more-rows.json.gz) \u00b7 [evidence 2](audit/vr/VR-21.jpg)",
+    "VR-22": "Needs four genuinely unlabelled detected planes with the required orientations/heights; supplied rooms do not establish that matrix. No semantic-label result mock used. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-26": "Needs a native runtime that rejects anchor creation and subsequently succeeds. IWER capability denial did not supply that rejection/recovery pair. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-27": "Needs a native live anchor that does not return a persistent handle. This IWER runtime supplies persistent handles. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-61": "Needs a native runtime without restorePersistentAnchor in addition to null/no-placement histories; current IWER always exposes that API. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-63": "Needs native controllable interruption windows during anchor create and restore as well as flight/carry; no delayed promise or restore mock substituted. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-64": "One real same-ID import attempt: Playwright saw the native confirm, but accept failed with No dialog is showing after managed Chrome auto-dismissed it. Requires a managed browser whose native confirmation can be accepted; no successful import claimed. \u00b7 [fresh observation](audit/raw/t10-verification.json.gz) \u00b7 [session console/network](audit/raw/t10-targeted-events.jsonl.gz) \u00b7 [capture](audit/vr/VR-64.jpg)",
+    "VR-66": "Needs actual ledger/settings/tray transaction rejection. Chrome native zero-quota override did not reject these small writes; no storage method/result stubs substituted. \u00b7 [evidence 1](audit/raw/quest-native-rows.json)",
+    "VR-69": "Needs an actual local-midnight crossing (and DST crossing for a timezone with DST). Whole-day DEV jumps do not establish the cadence/next-render behavior. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-90": "Needs a genuine failed new-anchor rejection in addition to the no-hit move case; current runtime did not supply that failure/recovery fixture. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-99": "Needs a browser environment with Web Audio genuinely unavailable. Native AudioContext remains exposed here; no API-removal mock substituted. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-122": "Needs recordings of this same real garden on two separate actual calendar days; the fresh first-day/sample clip does not supply them. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-123": "Needs a physical Quest 3/3S and return on another actual day; desktop anchor restoration is not hardware verification. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-124": "Needs a physical scanned room and Quest hit-test/anchors; emulator analogue passed separately. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-125": "Needs physical Quest frame-time/fps measurements with six stage-7 plants; desktop CPU proxy is uncalibrated. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-126": "Needs physical Quest hand tracking for the 20-pinch/hold/under-60-second matrix; emulator hands are not hardware verification. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "D2-35": "Needs a physical Quest headset / Quest Browser. \u00b7 [evidence 1](audit/2d/D2-35.json) \u00b7 [evidence 2](audit/raw/shutdown.json)"
+  },
+  "evidenceBudget": {
+    "totalBytes": 14451394,
+    "limitBytes": 15000000,
+    "screenshots": 203,
+    "largestScreenshotBytes": 78818,
+    "screenshotLimitBytes": 200000,
+    "allScreenshotsJpegOrWebp": true
+  },
+  "restoredConfig": {
+    "device": "metaQuest3",
+    "environment": "home_office"
+  },
+  "shutdown": {
+    "recordedAt": "2026-10-27T02:11:45Z",
+    "rootPids": [
+      50810,
+      50738
+    ],
+    "originPushed": false,
+    "deployed": false,
+    "loomEdited": false,
+    "restoredConfig": {
+      "device": "metaQuest3",
+      "environment": "home_office"
+    },
+    "ownedPids": [
+      28380,
+      28390,
+      28391,
+      28392,
+      28394,
+      28434,
+      28435,
+      28474,
+      50738,
+      50810,
+      50869,
+      50870
+    ],
+    "survivingOwnedPids": [],
+    "slotOwnerBeforeRelease": "mebae 47320 2026-10-27T01:47:15Z",
+    "slotReleaseExitCode": 0,
+    "slotReleased": true,
+    "slotOwnerAfterRelease": null,
+    "telemetryPids": [
+      83940,
+      98085,
+      32447,
+      19740,
+      99738
+    ],
+    "survivingTelemetryPids": []
+  },
+  "noMocks": "No app logic or XR results replaced. Native hand inputs, actual static-file negative fixtures, actual IndexedDB corruption, native anchor.delete, DEV ledger/clock/perf setup and pass-through canvas/audio/GL telemetry are explicitly labelled. No hardware claims.",
+  "tests": {
+    "corePassed": 61,
+    "coreFailed": 0,
+    "typecheck": "PASS",
+    "build": "PASS; production build excludes test hooks and clock"
+  },
+  "originPushed": false,
+  "deployed": false,
+  "loomEdited": false,
+  "commits": "Left for Loom as required by authoritative worker session memory.",
+  "t11Refresh": {
+    "recordedAt": "2026-10-27T02:48:40.960478+00:00",
+    "integrationCommit": "ffb3152db34bd55879eb6f72f2d9be1539a9ae1e",
+    "task": "t11 refresh all 99 stale PASS rows",
+    "staleRowCount": 99,
+    "relinkedFromT10": [
+      "VR-113",
+      "VR-114",
+      "VR-115",
+      "VR-118",
+      "VR-119",
+      "VR-120"
+    ],
+    "reobservedIds": [
+      "VR-02",
+      "VR-03",
+      "VR-06",
+      "VR-07",
+      "VR-08",
+      "VR-09",
+      "VR-10",
+      "VR-11",
+      "VR-12",
+      "VR-14",
+      "VR-15",
+      "VR-16",
+      "VR-17",
+      "VR-19",
+      "VR-20",
+      "VR-23",
+      "VR-24",
+      "VR-25",
+      "VR-28",
+      "VR-29",
+      "VR-30",
+      "VR-31",
+      "VR-32",
+      "VR-33",
+      "VR-34",
+      "VR-35",
+      "VR-36",
+      "VR-37",
+      "VR-38",
+      "VR-39",
+      "VR-40",
+      "VR-41",
+      "VR-42",
+      "VR-43",
+      "VR-44",
+      "VR-45",
+      "VR-46",
+      "VR-47",
+      "VR-48",
+      "VR-49",
+      "VR-50",
+      "VR-51",
+      "VR-52",
+      "VR-53",
+      "VR-54",
+      "VR-55",
+      "VR-56",
+      "VR-57",
+      "VR-58",
+      "VR-59",
+      "VR-60",
+      "VR-65",
+      "VR-67",
+      "VR-68",
+      "VR-72",
+      "VR-73",
+      "VR-74",
+      "VR-75",
+      "VR-76",
+      "VR-77",
+      "VR-79",
+      "VR-80",
+      "VR-81",
+      "VR-82",
+      "VR-85",
+      "VR-86",
+      "VR-87",
+      "VR-88",
+      "VR-89",
+      "VR-91",
+      "VR-92",
+      "VR-93",
+      "VR-95",
+      "VR-97",
+      "VR-100",
+      "VR-101",
+      "VR-102",
+      "VR-103",
+      "VR-104",
+      "VR-105",
+      "VR-106",
+      "VR-107",
+      "VR-108",
+      "VR-109",
+      "VR-110",
+      "VR-111",
+      "VR-112",
+      "VR-117",
+      "VR-121",
+      "VR-127",
+      "VR-128",
+      "VR-129",
+      "D2-33"
+    ],
+    "auditTotals": {
+      "PASS": 147,
+      "FAIL": 0,
+      "UNTESTED": 17
+    },
+    "rows": {
+      "VR-20": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-features-rows.json.gz",
+        "summary": "Native IWER session without hit-test used plane-raycast on detected room geometry; root within 2 cm; empty-space pinch created 0 habits/anchors. No hit-test result override."
+      },
+      "VR-24": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-features-rows.json.gz",
+        "summary": "Native session with no detected-room features: float / in front of you, 42 cm ahead and 45 cm below eyes; 0 habit anchors or guessed sprouts after empty-space pinch."
+      },
+      "VR-25": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-features-rows.json.gz",
+        "summary": "Native anchors capability denied: exact setup-required toast; placement left 0 habits, 0 sprouts and 0 live habit anchors. No anchor API mock."
+      },
+      "VR-53": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-features-rows.json.gz",
+        "summary": "Only right hand connected: preset/place/check-in/chip undo/Week/start/extend/cancel/move/archive all completed with single pinches."
+      },
+      "VR-89": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-features-rows.json.gz",
+        "summary": "Water/Read/Deep work each moved horizontal\u2192wall moss\u2192original bamboo/fern/maple; counts/stage unchanged; recorded root +Y changed with wall/top normals."
+      },
+      "VR-28": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Clean-load hand-only Stretch door pin and check-in completed under 60000 ms; exactly 1 anchored habit, count 1 and stage 1; elapsedMs recorded."
+      },
+      "VR-19": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Disconnect after a fresh native hit removed placeable preview; disconnected select created 0 habits/anchors; reconnect plus fresh hit created exactly 1."
+      },
+      "VR-56": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Same scene-anchor handle restored tray local position/quaternion within 1 cm with how=restored and unchanged timer-running state."
+      },
+      "VR-38": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Sand tap showed exact rake instruction; stationary 1.6 s hold started no timer and added 0 stones."
+      },
+      "VR-39": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "One-second drag started no timer; >2 s actual animated hand drag started 25 minutes with persisted startedAt and running card."
+      },
+      "VR-40": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Continued >4 s raking extended 25\u219250 minutes inside the window, retained startedAt and created no completed/concurrent block."
+      },
+      "VR-41": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Existing 50-minute rake retained startedAt/duration; after a DEV two-minute advance, raking a 25-minute block neither restarted nor extended it."
+      },
+      "VR-43": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Active-block stationary hold cancelled with exact toast and unchanged stones; release left timer stopped."
+      },
+      "VR-46": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Real persisted elapsed-timer fixture settled exactly 1 saved block/stone on load; second reload retained the total with no running timer."
+      },
+      "VR-47": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "21-block real-ledger DEV fixture exported all 21, displayed stones 21 and drew 20; another actual completion produced 22 history blocks and still 20 drawn stones."
+      },
+      "VR-67": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "DEV one-day advance reset today to 0; next real pinch reached count 1/stage 2 and kept preceding-day count 1."
+      },
+      "VR-68": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "DEV three-day absence kept stage 2, resting vitality, exact resting label and identical grown geometry at its anchor."
+      },
+      "VR-87": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Stake selecting pinch entered carrying, closed Week, showed exact carry instruction, and did not drop/archive/check in or alter the ledger."
+      },
+      "VR-88": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "New detected hit replaced old live/persistent UUID, root within 2 cm, exactly 1 sprout/anchor, retained ID/counts/stage and exact moved-to surface toast."
+      },
+      "VR-91": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Stake then one tray pinch archived Stretch: active/sprout/live counts \u22121, today archivedDay, placement null, one freed slot, exact history-kept toast."
+      },
+      "VR-92": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-more-rows.json.gz",
+        "summary": "Archived sprout stayed absent after reload; complete archived counts stayed in export; freed slot planted a distinct new ID."
+      },
+      "VR-73": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-palm-rows.json.gz",
+        "summary": "Measured >250 ms palm-up and >400 ms palm-down thresholds and ~9 cm offset. All six wrist actions opened/selected; Close stayed latched through 900 ms palm-up and reopened only after drop/new raise."
+      },
+      "VR-37": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-edge-rows.json.gz",
+        "summary": "Hand disconnect and XR exit during Water press produced at most one mutation; fresh pinch added exactly one on return; separate Stretch history stayed at count 1."
+      },
+      "VR-31": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-edge-rows.json.gz",
+        "summary": "Native index-tip poke checked in Water exactly once; idle fingertip outside visible seed instances pressed no seed; left-hand far pinch still added exactly one."
+      },
+      "VR-23": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-edge-rows.json.gz",
+        "summary": "Moss on wall; fern/bamboo/maple on horizontal Read/Water/Deep work. Recorded root +Y/hit-normal alignment, upright labels, unchanged hit positions from directly above."
+      },
+      "VR-80": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-edge-rows.json.gz",
+        "summary": "Exact EXAMPLE GARDEN (SAMPLE DATA) stamps recorded on tray, every sample label, wrist and Week; sample focus caption visible and Week stamp remained when tray was occluded."
+      },
+      "VR-93": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-perf-extra-rows.json.gz",
+        "summary": "Six stage-7 anchored habits plus tray used 7 persistent slots; seventh seed attempt kept 6 habits/anchors and exact full-tray refusal/hint."
+      },
+      "VR-58": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-perf-extra-rows.json.gz",
+        "summary": "Six genuinely lost handles produced six separately positioned/named pots and no real sprouts; each pot selected its own existing ID with Large enabled."
+      },
+      "VR-59": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-perf-extra-rows.json.gz",
+        "summary": "One pot pinch skipped radial into aiming; surface pinch gave a new UUID, restored outcome, one root within 2 cm, removed pot and unchanged counts/stage/ID."
+      },
+      "VR-14": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-visual-rows.json.gz",
+        "summary": "Exactly 1 anchored Stretch on detected door, nonempty persistent UUID, \u201cStretch\u201d / \u201con: door\u201d, root within 2 cm of its recorded hit."
+      },
+      "VR-29": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-visual-rows.json.gz",
+        "summary": "New Stretch count 0\u21921, stage 0\u21921; \u201cPinch when done\u201d\u2192\u201cDone today\u201d and \u201cstage 1/7\u201d; first growth retained in runtime observation."
+      },
+      "VR-07": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Clean garden: 0 habits, 0 sprouts, 0 stones, 6 seeds, sample false; exact empty tray hint."
+      },
+      "VR-08": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Cold seated office tray: how=desk, on=desk, detected-top offset 0.2 cm."
+      },
+      "VR-09": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Active office scan: 13 planes and 9 meshes; detected desk/door geometry retained in the observation."
+      },
+      "VR-76": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Empty Week showed This week, stones 0 and exact no-habits message, with 0 ring segments."
+      },
+      "VR-15": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Distinct left and right native hits recorded; exactly 1 habit/anchor rooted at the selecting left-hand hit (0.00 cm error), with no gaze."
+      },
+      "VR-30": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Second Stretch pinch retained count/stage 1, exact done-today toast and exactly one completed calendar day in export."
+      },
+      "VR-32": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Water on detected desk: three separate short pinches produced 3/8, exact pinch/hold hint and stage 0."
+      },
+      "VR-33": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Stationary 2.3 s hold changed Water 3/8\u21922/8 once with exact undo toast; release/continued hold added no count or repeated undo."
+      },
+      "VR-35": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Water 7\u21928/8 showed full today and stage 1; extra pinch saturated at 8 with exact toast; undo returned 7/8 and stage 0."
+      },
+      "VR-36": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Eye breaks reached 4/4 and stage 1, saturated at 4, then undo returned 3; Water history stayed identical."
+      },
+      "VR-48": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "One-hand toggle gave exact on/off toasts and undo-chip text; highlighted state and real-label undo controls recorded."
+      },
+      "VR-49": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "With one-hand true: one short undo-chip pinch changed Water 3/8\u21922/8; separate main-label pinch returned 3/8."
+      },
+      "VR-50": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "One short stationary sand pinch started 25 minutes; exact next-action card shown; rakeWrites unchanged."
+      },
+      "VR-51": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Next short pinch extended 25\u219250 within 60 s, retained startedAt, exact 50-minute toast and pinch: cancel card."
+      },
+      "VR-52": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Next short pinch cancelled 50-minute timer with exact toast, 0 new stones and exact idle one-hand card."
+      },
+      "VR-44": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "25- and 50-minute timers survived reload with identical startedAt/minutes, correct decreasing remainingMs, uResume=1 and no added CPU strokes."
+      },
+      "VR-75": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Three reopen/close cycles via tray Week and panel produced exactly one panel per opening, no duplicate rings/panels, and unchanged ledger/anchors."
+      },
+      "VR-79": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Sample on: exactly 5 sample sprouts with the five expected labels; real sprouts hidden and real exported ledger/anchor handles unchanged."
+      },
+      "VR-81": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Sample sprout pinch showed exact refusal, left sample counts/stages and real export unchanged, and provided no move stake."
+      },
+      "VR-85": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Sample off showed exact return toast and real-only anchored sprouts/history; reload while sample on returned sample=false with real records only."
+      },
+      "VR-86": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-deep-rows.json.gz",
+        "summary": "Real startedAt/minutes survived sample mode; DEV elapsed end settled exactly one real stone, no sample focus merged."
+      },
+      "VR-77": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-week-rows.json.gz",
+        "summary": "Water seven-segment ring fractions were exactly 0.375 at 3/8 and 1 at 8/8; today marker present, archived Read omitted; displayed stones 1 excluded the prior-week block."
+      },
+      "VR-74": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-week-rows.json.gz",
+        "summary": "Palm-up wrist Week opened exactly one This week panel and one seven-segment active-habit ring, exact current Mon\u2013Sun date range/footer."
+      },
+      "VR-100": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-kitchen-rows.json.gz",
+        "summary": "Quest kitchen hands: nonzero planes/meshes; detected table-derived seating and tray how=desk / on=table."
+      },
+      "VR-101": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-kitchen-rows.json.gz",
+        "summary": "Kitchen Water: exactly 1 habit and live anchor, on: table label and root within 2 cm of recorded detected hit."
+      },
+      "VR-102": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-kitchen-rows.json.gz",
+        "summary": "Kitchen Water separate pinches displayed 3/8; \u22651 s stationary hold/release displayed 2/8 with no release increment."
+      },
+      "VR-103": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-kitchen-rows.json.gz",
+        "summary": "Kitchen hand-only Week opened This week and exactly one seven-segment ring; panel pinch closed it."
+      },
+      "VR-11": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "All 12 named sectors separately hovered and selected from clean attempts; 12 icons, Pick a habit / centre: cancel, each correct aiming preset and 0 habits; no text entry."
+      },
+      "VR-12": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Water: \u201c8 a day \u00b7 kitchen counter\u201d / \u00d78; Eye breaks: \u201c4 a day \u00b7 monitor\u201d / \u00d74; Stretch: \u201cdaily \u00b7 doorway\u201d; all hovers kept 0 habits."
+      },
+      "VR-16": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Radial-select pinch left aiming with 0 habits; separate surface pinch began more than 30 ms after aimStart and created exactly 1 habit/anchor."
+      },
+      "VR-54": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Reload retained identical complete exported/stored IndexedDB ledger: same 2 IDs/labels/day maps/focus history; Stretch stage 1, Water 2/8."
+      },
+      "VR-55": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Both outcomes restored with same persistent UUIDs and 2 live anchors; both root displacements \u22641 cm after reload."
+      },
+      "VR-57": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Existing native IWER persistent-data reset followed by reload: both outcomes pin-again, 0 live/drawn real sprouts, identical counts and stages."
+      },
+      "VR-95": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Actual menu/label pixels contained black/white/yellow #ffe14d; Contrast highlight yellow and sand uHC=1. Toggle off restored original colours, uHC=0 and exact on/off toasts."
+      },
+      "VR-97": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Combined Contrast/Large/One-hand persisted through reload; all three actual highlights yellow, contrasted labels scaled \u00d71.4, undo chip single-pinch. Each false value persisted independently with anchors/history retained."
+      },
+      "VR-112": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-special-rows.json.gz",
+        "summary": "Existing labelled DEV fixture created 6 actual tracked stage-7 real-ledger plants on detected surfaces, forced all six plant submissions after warm-up and recorded exactly 600 rendered frames."
+      },
+      "VR-17": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-aim-exact-rows.json.gz",
+        "summary": "Right aiming source hit door while left hit desk; preview exactly \u201cStretch  \u00b7  on: door\u201d; reticle +Y matched hit normal. Approximately 950 ms flight hid reticle/arc; duplicate pinches left 1 habit/anchor."
+      },
+      "VR-104": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Active Meta VR Glasses / home_office, hand mode, granted gaze-tracking, connected gaze XRInputSource; controller input absent."
+      },
+      "VR-105": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Gaze+right-hand pinch opened 12-sector radial; gaze+left-hand pinch selected Deep work into aiming with 0 habits."
+      },
+      "VR-106": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Recorded native gaze desk hit created exactly 1 Deep work/anchor, on: desk label and root within 2 cm."
+      },
+      "VR-107": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Gaze+pinch changed Deep work count 0\u21921, stage 0\u21921 with Done today / stage 1/7."
+      },
+      "VR-108": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Gaze+pinch opened This week with one seven-segment Deep work ring; gaze+panel pinch closed it."
+      },
+      "VR-109": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Native gaze disconnect: right hand ray closed Week; reconnect restored gaze+pinch Week selection with identical real ledger."
+      },
+      "VR-110": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Recorded actual geometry/canvas rectangle/icon corner angles at exact seated Glasses pose; tray/menu/focus/radial/12 icons/sprout/label/Week bounds all inside h\u00b134\u00b0, v\u221240\u00b0\u202622\u00b0 with none omitted."
+      },
+      "VR-111": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-glasses-rows.json.gz",
+        "summary": "Separate Large radial/Week and five-sample-sprout states all satisfied the same actual-corner angle gate; enlarged radial/Week selected and closed via gaze+pinch."
+      },
+      "VR-65": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-storage-final-rows.json.gz",
+        "summary": "Isolated actual IndexedDB v2 forced real open-v1 VersionError: exact storage-unavailable status, loaded=true and usable entry. XR/tray initialized with no guessed sprouts; local console/network capture clean."
+      },
+      "VR-34": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-focus-exact-rows.json.gz",
+        "summary": "Actual new-day Water hold at 0 retained 0, exact nothing-to-undo toast, and unchanged preceding-day 3/8 history (DEV calendar advance)."
+      },
+      "VR-42": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-focus-exact-rows.json.gz",
+        "summary": "Actual raking increased 256\u00d7256 CPU stroke writes. Over 1200 ms after release, rakeWrites/texture versions and native sand-bound texImage2D/texSubImage2D counts changed by 0; shader fade followed decreasing remainingFraction."
+      },
+      "VR-45": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-focus-exact-rows.json.gz",
+        "summary": "Actual XR exit/re-entry across DEV-supplied end time settled exactly 1 saved block/stone, null startedAt and exact completedAt; another reload added 0."
+      },
+      "VR-10": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-focus-exact-rows.json.gz",
+        "summary": "Quest hand mode, both controller devices disconnected, only hand XRInputSources, no gaze; seed/radial/place/check-in/Week completed. Head-only motion changed no history."
+      },
+      "VR-60": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-focus-exact-rows.json.gz",
+        "summary": "After native persisted loss of exactly one existing UUID, reload gave exactly one restored and one pin-again, one sprout/one pot; re-pin retained the other UUID and all history."
+      },
+      "VR-82": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-focus-exact-rows.json.gz",
+        "summary": "Idle real timer: sample sand tap and actual 2.5 s animated rake both showed exact refusal, started 0 real blocks/stones and preserved real export byte-for-byte excluding exportedAt."
+      },
+      "VR-02": {
+        "status": "PASS",
+        "observation": "audit/raw/shell.json",
+        "summary": "Reload mutation observer recorded disabled \u201cChecking for mixed reality\u2026\u201d before support completed; no XR session."
+      },
+      "VR-03": {
+        "status": "PASS",
+        "observation": "audit/raw/shell.json",
+        "summary": "Supported gate enabled with exact \u201cEnter your garden\u201d text."
+      },
+      "VR-06": {
+        "status": "PASS",
+        "observation": "audit/raw/shell.json",
+        "summary": "Entry launched immersive-ar and hid #page; exit revealed the gate; exported ledgers before/after are identical."
+      },
+      "VR-72": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-production.json",
+        "summary": "Fresh production build check-dist passed with required exclusion message; production HTTP runtime had undefined window.__mebae and real wall-clock progression, with clean events."
+      },
+      "VR-121": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-clip.json",
+        "summary": "Existing first-day.mp4 re-decoded and played in current Chrome: 35.000 s, frames >0, error null, multiDayFootage=false; seed/Stretch/real check-in/stage 1 and exact NOT a recorded later day sample caption verified."
+      },
+      "D2-33": {
+        "status": "PASS",
+        "observation": "audit/2d/D2-33.json",
+        "summary": "Pure undoOne contract and 61 core tests."
+      },
+      "VR-113": {
+        "status": "PASS",
+        "observation": "docs/emulator-results.json",
+        "summary": "t10 exact same-sample CPU observations: p50 0.800 ms, p95 1.300 ms, max 2.700 ms; priority \u2212100 PerfStart through scene.onAfterRender. Uncalibrated desktop proxy, no headset claim."
+      },
+      "VR-114": {
+        "status": "PASS",
+        "observation": "docs/emulator-results.json",
+        "summary": "t10 exact raw renderer.info.render.calls maximum 48 over 600 frames, both XR views included; limit remains \u226450."
+      },
+      "VR-115": {
+        "status": "PASS",
+        "observation": "docs/emulator-results.json",
+        "summary": "t10 exact raw triangle maximum 37664 over the same 600 frames; limit remains \u2264150000; no stereo division."
+      },
+      "VR-118": {
+        "status": "PASS",
+        "observation": "docs/emulator-results.json",
+        "summary": "t10 complete kitchen capture: 0 console errors, 0 page errors, 0 failed requests and 0 HTTP errors."
+      },
+      "VR-119": {
+        "status": "PASS",
+        "observation": "docs/emulator-results.json",
+        "summary": "t10 complete Glasses capture including disconnect/FoV checks: all four error counters 0."
+      },
+      "VR-120": {
+        "status": "PASS",
+        "observation": "docs/emulator-results.json",
+        "summary": "t10 performance setup/warm-up/600-frame/idle capture: all four error counters 0."
+      },
+      "VR-127": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-inventory.json.gz",
+        "summary": "Current-session create/check-in/focus/Week/sample/move/archive/reload network inventory: 0 application API calls and 0 history uploads; static SDK/font/scene requests and dev/test WebSockets classified separately."
+      },
+      "VR-128": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-inventory.json.gz",
+        "summary": "Current-session inventory: 0 chain RPC/contract calls, 0 wallet signature requests and 0 submitted transactions."
+      },
+      "VR-129": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-inventory.json.gz",
+        "summary": "Current-session inventory: 0 product MCP calls; IWSDK CLI/browser-command bridge recorded as test infrastructure."
+      },
+      "VR-117": {
+        "status": "PASS",
+        "observation": "audit/raw/t11-quest-capture.json",
+        "summary": "Complete t11 Quest reload/restore/edge interval and isolated-storage capture: 0 console errors, 0 page errors, 0 failed requests, 0 unexpected HTTP errors."
+      }
+    },
+    "noProductSourceChanges": true,
+    "untestedRetried": false,
+    "shutdown": {
+      "recordedAt": "2026-10-27T02:48:10.851870+00:00",
+      "ownedPids": [
+        59208,
+        59267,
+        59268,
+        74259,
+        74272,
+        74273,
+        74274,
+        74279,
+        74280,
+        74281,
+        74456,
+        93196
+      ],
+      "survivingOwnedPids": [],
+      "slotReleased": true,
+      "slotReleaseExitCode": 0,
+      "slotReleaseOutput": "",
+      "restoredConfig": {
+        "device": "metaQuest3",
+        "environment": "home_office"
+      },
+      "restoredEmptyLedger": {
+        "format": "mebae.history.v1",
+        "exportedAt": "2026-10-27T00:00:00.000Z",
+        "ledger": {
+          "format": "mebae.history.v1",
+          "sample": false,
+          "habits": [],
+          "counts": {},
+          "focus": {
+            "startedAt": null,
+            "minutes": 25,
+            "blocks": []
+          }
+        }
+      },
+      "originPushed": false,
+      "deployed": false,
+      "loomEdited": false,
+      "committed": false,
+      "commitOwner": "Loom, per authoritative worker session memory"
+    },
+    "captures": {
+      "t11-quest": {
+        "recordedAt": "2026-10-27T02:43:28.780Z",
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "requests": 27097,
+        "snapshots": 6303
+      },
+      "t11-kitchen": {
+        "recordedAt": "2026-10-27T02:44:08.745Z",
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "requests": 387,
+        "snapshots": 168
+      },
+      "t11-glasses": {
+        "recordedAt": "2026-10-27T02:45:00.968Z",
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "requests": 387,
+        "snapshots": 231
+      },
+      "t11-inventory-tail": {
+        "recordedAt": "2026-10-27T02:45:59.845Z",
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "requests": 774,
+        "snapshots": 182
+      },
+      "t11-visual": {
+        "recordedAt": "2026-10-27T02:46:39.997Z",
+        "consoleErrors": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "httpErrors": 0,
+        "requests": 387,
+        "snapshots": 75
+      }
+    },
+    "production": "audit/raw/t11-production.json",
+    "clip": "audit/raw/t11-clip.json",
+    "core": "audit/2d/D2-33.json",
+    "coreVitest": "audit/raw/t11-core-vitest.txt",
+    "typecheck": "audit/raw/t11-typecheck.txt",
+    "build": "audit/raw/t11-build.txt",
+    "inventory": "audit/raw/t11-inventory.json.gz",
+    "freshPerf": {
       "frames": 600,
       "cpuMs": {
-        "p95": 2
+        "p50": 0.7999999821186066,
+        "p95": 1.100000023841858,
+        "max": 2.100000023841858
       },
       "drawCalls": {
-        "max": 92
+        "p50": 48,
+        "max": 48
       },
       "triangles": {
-        "max": 37556
-      },
-      "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware.",
-      "note": "Desktop Chrome has no OCULUS_multiview, so renderer.info.render.calls counts both XR views. 92 is 46 submits per eye. The gate is the raw counter, max <= 50, and this run fails it. CPU p95 and triangles pass. Unverified on Quest hardware; not a 72 fps claim."
-    }
-  ]
+        "p50": 37664,
+        "max": 37664
+      }
+    },
+    "evidenceBudget": {
+      "totalBytes": 14451394,
+      "limitBytes": 15000000,
+      "screenshots": 203,
+      "largestScreenshotBytes": 78818,
+      "screenshotLimitBytes": 200000,
+      "allScreenshotsJpegOrWebp": true
+    },
+    "validation": {
+      "unchangedProtectedPassRows": 48,
+      "unchangedUntestedRows": 17,
+      "unchangedExpectedCells": 164,
+      "all99HaveCurrentCommitEvidence": true,
+      "allCaptureErrorsZero": true,
+      "allGzipEvidenceDecoded": true
+    },
+    "index": "audit/raw/t11-refresh.json"
+  }
 }

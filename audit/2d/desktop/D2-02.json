@@ -1,0 +1,199 @@
+{
+  "id": "D2-02",
+  "startedAt": "2026-10-27T01:47:53.479Z",
+  "console": [],
+  "pageErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    }
+  ],
+  "failedRequests": [],
+  "observations": [
+    {
+      "label": "unclipped layout",
+      "actual": {
+        "viewport": 375,
+        "scrollWidth": 375,
+        "headline": "Habits that grow where they happen",
+        "fontSize": "35.2px",
+        "rootFontSize": "16px",
+        "rect": {
+          "left": 16,
+          "right": 291.953125,
+          "top": 122.875,
+          "bottom": 233.734375
+        },
+        "textRects": [
+          {
+            "left": 16,
+            "right": 251.140625,
+            "top": 117.875,
+            "bottom": 163.875
+          },
+          {
+            "left": 16,
+            "right": 176.765625,
+            "top": 154.828125,
+            "bottom": 200.828125
+          },
+          {
+            "left": 16,
+            "right": 127.875,
+            "top": 191.78125,
+            "bottom": 237.78125
+          }
+        ],
+        "wideElements": []
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "0 horizontal overflow with body clipping removed",
+      "ok": true,
+      "actual": {
+        "viewport": 375,
+        "scrollWidth": 375,
+        "headline": "Habits that grow where they happen",
+        "fontSize": "35.2px",
+        "rootFontSize": "16px",
+        "rect": {
+          "left": 16,
+          "right": 291.953125,
+          "top": 122.875,
+          "bottom": 233.734375
+        },
+        "textRects": [
+          {
+            "left": 16,
+            "right": 251.140625,
+            "top": 117.875,
+            "bottom": 163.875
+          },
+          {
+            "left": 16,
+            "right": 176.765625,
+            "top": 154.828125,
+            "bottom": 200.828125
+          },
+          {
+            "left": 16,
+            "right": 127.875,
+            "top": 191.78125,
+            "bottom": 237.78125
+          }
+        ],
+        "wideElements": []
+      }
+    },
+    {
+      "label": "Headline exact and text in viewport",
+      "ok": true,
+      "actual": {
+        "viewport": 375,
+        "scrollWidth": 375,
+        "headline": "Habits that grow where they happen",
+        "fontSize": "35.2px",
+        "rootFontSize": "16px",
+        "rect": {
+          "left": 16,
+          "right": 291.953125,
+          "top": 122.875,
+          "bottom": 233.734375
+        },
+        "textRects": [
+          {
+            "left": 16,
+            "right": 251.140625,
+            "top": 117.875,
+            "bottom": 163.875
+          },
+          {
+            "left": 16,
+            "right": 176.765625,
+            "top": 154.828125,
+            "bottom": 200.828125
+          },
+          {
+            "left": 16,
+            "right": 127.875,
+            "top": 191.78125,
+            "bottom": 237.78125
+          }
+        ],
+        "wideElements": []
+      }
+    },
+    {
+      "label": "Headline 2.2rem",
+      "ok": true,
+      "actual": "35.2px"
+    },
+    {
+      "label": "Zero unexpected console/page/network errors",
+      "ok": true,
+      "actual": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "httpErrors": []
+      }
+    }
+  ],
+  "finishedAt": "2026-10-27T01:47:54.810Z",
+  "status": "PASS"
+}

@@ -1,0 +1,19 @@
+
+> @mebae/core@0.1.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t11/packages/core
+
+ ✓ test/clock.test.ts (5 tests) 1ms
+ ✓ test/growth.test.ts (9 tests) 3ms
+ ✓ test/timer.test.ts (7 tests) 5ms
+ ✓ test/history.test.ts (17 tests) 7ms
+ ✓ test/habits.test.ts (12 tests) 7ms
+ ✓ test/lsystem.test.ts (11 tests) 21ms
+
+ Test Files  6 passed (6)
+      Tests  61 passed (61)
+   Start at  07:50:05
+   Duration  263ms (transform 119ms, setup 0ms, collect 331ms, tests 44ms, environment 0ms, prepare 351ms)
+

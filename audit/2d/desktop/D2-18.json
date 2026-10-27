@@ -1,0 +1,282 @@
+{
+  "id": "D2-18",
+  "startedAt": "2026-10-27T01:48:25.554Z",
+  "console": [],
+  "pageErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    }
+  ],
+  "failedRequests": [],
+  "observations": [
+    {
+      "label": "index.html requests",
+      "actual": [
+        {
+          "url": "http://127.0.0.1:4321/index.html",
+          "method": "GET",
+          "type": "document"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+          "method": "GET",
+          "type": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+          "method": "GET",
+          "type": "media"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+          "method": "GET",
+          "type": "font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+          "method": "GET",
+          "type": "font"
+        },
+        {
+          "url": "http://127.0.0.1:4321/history.json",
+          "method": "GET",
+          "type": "fetch"
+        }
+      ]
+    },
+    {
+      "label": "evidence.html requests",
+      "actual": [
+        {
+          "url": "http://127.0.0.1:4321/evidence.html",
+          "method": "GET",
+          "type": "document"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+          "method": "GET",
+          "type": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:4321/history.json",
+          "method": "GET",
+          "type": "fetch"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+          "method": "GET",
+          "type": "font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+          "method": "GET",
+          "type": "font"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "label": "index.html only allowlisted requests",
+      "ok": true,
+      "actual": [
+        {
+          "url": "http://127.0.0.1:4321/index.html",
+          "method": "GET",
+          "type": "document"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+          "method": "GET",
+          "type": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+          "method": "GET",
+          "type": "media"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+          "method": "GET",
+          "type": "font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+          "method": "GET",
+          "type": "font"
+        },
+        {
+          "url": "http://127.0.0.1:4321/history.json",
+          "method": "GET",
+          "type": "fetch"
+        }
+      ]
+    },
+    {
+      "label": "index.html no API/chain/MCP URLs or favicon link",
+      "ok": true,
+      "actual": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+        "#how-it-works",
+        "#evidence",
+        "media/mebae-whoa.mp4",
+        "evidence.html",
+        "#demo"
+      ]
+    },
+    {
+      "label": "evidence.html only allowlisted requests",
+      "ok": true,
+      "actual": [
+        {
+          "url": "http://127.0.0.1:4321/evidence.html",
+          "method": "GET",
+          "type": "document"
+        },
+        {
+          "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+          "method": "GET",
+          "type": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:4321/history.json",
+          "method": "GET",
+          "type": "fetch"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+          "method": "GET",
+          "type": "font"
+        },
+        {
+          "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+          "method": "GET",
+          "type": "font"
+        }
+      ]
+    },
+    {
+      "label": "evidence.html no API/chain/MCP URLs or favicon link",
+      "ok": true,
+      "actual": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+        "index.html"
+      ]
+    },
+    {
+      "label": "Zero unexpected console/page/network errors",
+      "ok": true,
+      "actual": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "httpErrors": []
+      }
+    }
+  ],
+  "finishedAt": "2026-10-27T01:48:27.457Z",
+  "status": "PASS"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "VR-72",
+  "recordedAt": "2026-10-27T02:24:22.495Z",
+  "consoleErrors": [],
+  "pageErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4322/packages/app/dist/",
+      "method": "GET"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:4322/packages/app/dist/assets/index-CtTAM1or.js",
+      "method": "GET"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:4322/packages/app/dist/assets/world-initializer-pSH5-KNX.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:4322/packages/app/dist/scenes/main.iwsdk.scene.json",
+      "method": "GET"
+    }
+  ],
+  "failedRequests": [],
+  "httpErrors": [],
+  "observed": {
+    "a": {
+      "hook": "undefined",
+      "now": 1793067862919,
+      "status": "Setup required: this browser has no immersive-ar WebXR. Open this page in the Quest Browser (hands are enough)."
+    },
+    "endBrowser": 1793067864024,
+    "startNode": 1793067862918,
+    "endNode": 1793067864026,
+    "clockElapsedDifferenceMs": 3
+  },
+  "build": true,
+  "ok": true,
+  "status": "PASS"
+}

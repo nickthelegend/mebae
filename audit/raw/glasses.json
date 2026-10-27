@@ -1,0 +1,47 @@
+{
+  "suite": "glasses",
+  "recordedAt": "2026-10-27T02:09:25.869Z",
+  "results": [
+    {
+      "name": "Glasses profile active with gaze",
+      "ok": true,
+      "detail": "Meta VR Glasses; [\"local-floor\",\"bounded-floor\",\"hand-tracking\",\"anchors\",\"hit-test\",\"plane-detection\",\"mesh-detection\",\"gaze-tracking\",\"eye-tracking\",\"viewer\",\"local\"]"
+    },
+    {
+      "name": "gaze + pinch on the seed opens the radial",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "gaze aim + pinch pins a habit on the desk",
+      "ok": true,
+      "detail": "desk"
+    },
+    {
+      "name": "gaze + pinch checks in (stage 1)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "gaze + pinch opens the week rings",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "gaze disconnected: hand ray closes the week view",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "every key element inside the Glasses FoV (37/25/43 with 3° margin)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "zero console errors (Glasses)",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "failed": 0
+}

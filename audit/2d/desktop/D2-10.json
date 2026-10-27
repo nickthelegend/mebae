@@ -1,0 +1,829 @@
+{
+  "id": "D2-10",
+  "startedAt": "2026-10-27T01:48:05.206Z",
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:4321/history.json",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
+      "location": {
+        "url": "http://127.0.0.1:4321/history.json",
+        "line": 0,
+        "column": 0,
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "pageErrors": [],
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "method": "GET",
+      "type": "media"
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "method": "GET",
+      "type": "document"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "method": "GET",
+      "type": "stylesheet"
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "method": "GET",
+      "type": "fetch"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "method": "GET",
+      "type": "font"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "method": "GET",
+      "type": "font"
+    }
+  ],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 404
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 404
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/index.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/media/mebae-whoa.mp4",
+      "status": 206
+    },
+    {
+      "url": "http://127.0.0.1:4321/evidence.html",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;500;600;700;800&family=Sono:wght@400;500;600&display=swap",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/rethinksans/v7/AMOWz4SDuXOMCPfdoglY9JQEVFi34dpL4w.woff2",
+      "status": 200
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/sono/v12/aFTO7PNiY3U2Cqf_aYEN64CYaK18YUhIma9UZrHl.woff2",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4321/history.json",
+      "status": 200
+    }
+  ],
+  "failedRequests": [],
+  "observations": [
+    {
+      "label": "missing index.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "missing evidence.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "unparseable index.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "unparseable evidence.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "wrong-format index.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "wrong-format evidence.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "missing-ledger index.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "missing-ledger evidence.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "sample index.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "sample evidence.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "incomplete index.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "incomplete evidence.html",
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "missing index.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "missing evidence.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "unparseable index.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "unparseable evidence.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "wrong-format index.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "wrong-format evidence.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "missing-ledger index.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "missing-ledger evidence.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "sample index.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "sample evidence.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "incomplete index.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "incomplete evidence.html exact empty",
+      "ok": true,
+      "actual": {
+        "text": "No history recorded yet",
+        "painted": 0
+      }
+    },
+    {
+      "label": "No script console.error in bad-file subcases",
+      "ok": true,
+      "actual": []
+    },
+    {
+      "label": "Zero unexpected console/page/network errors",
+      "ok": true,
+      "actual": {
+        "consoleErrors": [],
+        "pageErrors": [],
+        "failedRequests": [],
+        "httpErrors": []
+      }
+    }
+  ],
+  "finishedAt": "2026-10-27T01:48:12.914Z",
+  "status": "PASS"
+}

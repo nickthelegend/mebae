@@ -1,5 +1,6 @@
 import type { PlantForm, Species, Vitality } from '@mebae/core';
 import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
+import { settledGeometry, settledMaterial } from './settled-geometry.js';
 import {
   BufferAttribute,
   BufferGeometry,
@@ -203,6 +204,7 @@ export class PlantMesh {
   private flowers: InstancedMesh | null = null;
   private moss: Mesh | null = null;
   private stems: Mesh | null = null;
+  private settled: Mesh | null = null;
   private form: PlantForm | null = null;
   private animT = 1;
   private animating = false;
@@ -218,6 +220,7 @@ export class PlantMesh {
     if (this.leaves) t += this.leaves.count * ((this.leaves.geometry.index?.count ?? 0) / 3);
     if (this.flowers) t += this.flowers.count * ((this.flowers.geometry.index?.count ?? 0) / 3);
     if (this.moss) t += (this.moss.geometry.index?.count ?? 0) / 3;
+    if (this.settled) t += this.settled.geometry.attributes.position.count / 3;
     return t;
   }
 
@@ -260,6 +263,7 @@ export class PlantMesh {
     this.animT = unfurl ? 0 : 1;
     this.animating = unfurl;
     this.writeInstances(this.animT);
+    if (!unfurl) this.settle();
   }
 
   /** Advances the unfurl. Returns true while animating. */
@@ -267,7 +271,10 @@ export class PlantMesh {
     if (!this.animating) return false;
     this.animT = Math.min(1, this.animT + dt / 1.6);
     this.writeInstances(this.animT);
-    if (this.animT >= 1) this.animating = false;
+    if (this.animT >= 1) {
+      this.animating = false;
+      this.settle();
+    }
     return true;
   }
 
@@ -311,7 +318,16 @@ export class PlantMesh {
     if (this.moss) this.moss.scale.setScalar((f.mossRadius || 0.01) * (0.7 + 0.3 * ease(t)));
   }
 
-  dispose(): void {
+  private settle(): void {
+    const parts = [this.stems, this.leaves, this.flowers].filter((p): p is Mesh => p !== null);
+    if (!parts.length) return;
+    this.settled = new Mesh(settledGeometry(parts), settledMaterial);
+    this.settled.name = `${this.group.name} settled`;
+    this.clearParts();
+    this.group.add(this.settled);
+  }
+
+  private clearParts(): void {
     if (this.stems) {
       this.stems.geometry.dispose();
       this.group.remove(this.stems);
@@ -320,8 +336,18 @@ export class PlantMesh {
       m.dispose();
       this.group.remove(m);
     }
-    if (this.moss) this.group.remove(this.moss);
     this.stems = this.leaves = this.flowers = null;
+  }
+
+  dispose(): void {
+    this.clearParts();
+    if (this.settled) {
+      this.settled.geometry.dispose();
+      this.group.remove(this.settled);
+      this.settled = null;
+    }
+    if (this.moss) this.group.remove(this.moss);
     this.moss = null;
+    this.animating = false;
   }
 }

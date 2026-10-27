@@ -1,0 +1,15 @@
+{
+  "format": "mebae.history.v1",
+  "exportedAt": "2026-10-27T00:00:00.000Z",
+  "ledger": {
+    "format": "mebae.history.v1",
+    "sample": false,
+    "habits": [],
+    "counts": {},
+    "focus": {
+      "startedAt": null,
+      "minutes": 25,
+      "blocks": []
+    }
+  }
+}

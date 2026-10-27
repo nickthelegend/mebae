@@ -328,7 +328,7 @@ export class PlantingSystem extends createSystem({}) {
     }
     if (mode === 'aiming') {
       const aim = this.world.getSystem(AimSystem)!;
-      this.hit = aim.hit(this.aimSrc) ?? (this.aimSrc !== 'gaze' ? aim.hit(this.aimSrc === 'right' ? 'left' : 'right') : null);
+      this.hit = aim.hit(this.aimSrc);
       this.seed.position.y += Math.sin(t * 3) * 0.0004;
       if (this.hit) {
         this.reticle.visible = true;

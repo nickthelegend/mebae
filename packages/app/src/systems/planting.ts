@@ -115,7 +115,14 @@ export class PlantingSystem extends createSystem({}) {
       this.radial.mesh.visible = false;
       makePressable(this.radialEntity, 'radial', { tap: (p) => this.onRadialTap(p) });
       this.seedEntity = this.world.createTransformEntity(this.seed, { persistent: true });
-      makePressable(this.seedEntity, 'lifted-seed', { tap: () => this.onSeed() });
+      // Keep a generous pick target attached to the tiny, animated seed.
+      // An invisible material still raycasts without adding a draw call.
+      const seedPick = new Mesh(new SphereGeometry(1, 12, 8), new MeshBasicMaterial({ visible: false }));
+      seedPick.name = 'Lifted seed pick target';
+      seedPick.scale.set(0.055 / 0.013, 0.055 / 0.009, 0.055 / 0.009);
+      const seedPickEntity = this.world.createTransformEntity(seedPick, { parent: this.seedEntity, persistent: true });
+      // Cancel on press start, before the deferred surface select can fly.
+      makePressable(seedPickEntity, 'lifted-seed', { down: () => this.onSeed() });
       this.seed.visible = false;
       this.reticleEntity = this.world.createTransformEntity(this.reticle, { persistent: true });
       this.reticle.visible = false;

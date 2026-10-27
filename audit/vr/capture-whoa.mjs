@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import {cli,ev,xr,sleep,until}from '../../packages/app/e2e/lib.mjs';
+fs.writeFileSync('audit/raw/phase.txt','whoa');
+const dir=fs.mkdtempSync('/tmp/mebae-t5-frames-');
+fs.writeFileSync('audit/raw/whoa-frames-path.txt',dir);
+process.env.MEBAE_REC_DIR=dir;
+ev('m.wipe()');cli(['browser','reload']);await sleep(2500);
+if(!xr('status').sessionActive)xr('enter');xr('set-input-mode',{mode:'hand'});
+xr('set-transform',{device:'headset',position:{x:-.08,y:1.2,z:-1.35},orientation:{pitch:-28,yaw:0,roll:0}});
+await until(()=>ev('m.state().tray?.placed'),'fresh tray',20000);
+const result=cli(['browser','run','e2e/whoa.mjs','--timeout','65000'],{timeout:80000,allowFail:true});
+fs.writeFileSync('audit/raw/whoa-cli.json',JSON.stringify(result,null,2));
+if(fs.existsSync(`${dir}/whoa.json`))fs.copyFileSync(`${dir}/whoa.json`,'audit/raw/whoa.json');
+console.log('Frames directory',dir,'run completed',result.ok!==false);

@@ -1,0 +1,315 @@
+{
+  "recordedAt": "2026-10-26T23:59:08.800Z",
+  "exited": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [
+        {
+          "id": "stretch-1",
+          "presetId": "stretch",
+          "label": "Stretch",
+          "glyph": "stretch",
+          "kind": "daily",
+          "target": 1,
+          "species": "moss",
+          "createdDay": "2026-10-27",
+          "archivedDay": "2026-10-27",
+          "placement": null
+        },
+        {
+          "id": "water-2",
+          "presetId": "water",
+          "label": "Water",
+          "glyph": "glass",
+          "kind": "counted",
+          "target": 8,
+          "species": "bamboo",
+          "createdDay": "2026-10-27",
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "surfaceLabel": "desk",
+            "surface": "table"
+          }
+        }
+      ],
+      "counts": {
+        "stretch-1": {
+          "2026-10-27": 1
+        },
+        "water-2": {
+          "2026-10-27": 2
+        }
+      },
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "initialGate": [
+    {
+      "text": "Checking for mixed reality…",
+      "disabled": true,
+      "at": 109.80000001192093
+    },
+    {
+      "text": "Enter your garden",
+      "disabled": false,
+      "at": 1229.300000011921
+    }
+  ],
+  "supported": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [
+        {
+          "id": "stretch-1",
+          "presetId": "stretch",
+          "label": "Stretch",
+          "glyph": "stretch",
+          "kind": "daily",
+          "target": 1,
+          "species": "moss",
+          "createdDay": "2026-10-27",
+          "archivedDay": "2026-10-27",
+          "placement": null
+        },
+        {
+          "id": "water-2",
+          "presetId": "water",
+          "label": "Water",
+          "glyph": "glass",
+          "kind": "counted",
+          "target": 8,
+          "species": "bamboo",
+          "createdDay": "2026-10-27",
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "surfaceLabel": "desk",
+            "surface": "table"
+          }
+        }
+      ],
+      "counts": {
+        "stretch-1": {
+          "2026-10-27": 1
+        },
+        "water-2": {
+          "2026-10-27": 2
+        }
+      },
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "mobile": {
+    "width": 375,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [
+        {
+          "id": "stretch-1",
+          "presetId": "stretch",
+          "label": "Stretch",
+          "glyph": "stretch",
+          "kind": "daily",
+          "target": 1,
+          "species": "moss",
+          "createdDay": "2026-10-27",
+          "archivedDay": "2026-10-27",
+          "placement": null
+        },
+        {
+          "id": "water-2",
+          "presetId": "water",
+          "label": "Water",
+          "glyph": "glass",
+          "kind": "counted",
+          "target": 8,
+          "species": "bamboo",
+          "createdDay": "2026-10-27",
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "surfaceLabel": "desk",
+            "surface": "table"
+          }
+        }
+      ],
+      "counts": {
+        "stretch-1": {
+          "2026-10-27": 1
+        },
+        "water-2": {
+          "2026-10-27": 2
+        }
+      },
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "entered": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 0
+    },
+    "status": "",
+    "pageVisible": "none",
+    "bodyXR": true,
+    "xr": true,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [
+        {
+          "id": "stretch-1",
+          "presetId": "stretch",
+          "label": "Stretch",
+          "glyph": "stretch",
+          "kind": "daily",
+          "target": 1,
+          "species": "moss",
+          "createdDay": "2026-10-27",
+          "archivedDay": "2026-10-27",
+          "placement": null
+        },
+        {
+          "id": "water-2",
+          "presetId": "water",
+          "label": "Water",
+          "glyph": "glass",
+          "kind": "counted",
+          "target": 8,
+          "species": "bamboo",
+          "createdDay": "2026-10-27",
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "surfaceLabel": "desk",
+            "surface": "table"
+          }
+        }
+      ],
+      "counts": {
+        "stretch-1": {
+          "2026-10-27": 1
+        },
+        "water-2": {
+          "2026-10-27": 2
+        }
+      },
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "returned": {
+    "width": 800,
+    "overflow": 0,
+    "enter": {
+      "text": "Enter your garden",
+      "disabled": false,
+      "height": 49.1875
+    },
+    "status": "",
+    "pageVisible": "block",
+    "bodyXR": false,
+    "xr": false,
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [
+        {
+          "id": "stretch-1",
+          "presetId": "stretch",
+          "label": "Stretch",
+          "glyph": "stretch",
+          "kind": "daily",
+          "target": 1,
+          "species": "moss",
+          "createdDay": "2026-10-27",
+          "archivedDay": "2026-10-27",
+          "placement": null
+        },
+        {
+          "id": "water-2",
+          "presetId": "water",
+          "label": "Water",
+          "glyph": "glass",
+          "kind": "counted",
+          "target": 8,
+          "species": "bamboo",
+          "createdDay": "2026-10-27",
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "surfaceLabel": "desk",
+            "surface": "table"
+          }
+        }
+      ],
+      "counts": {
+        "stretch-1": {
+          "2026-10-27": 1
+        },
+        "water-2": {
+          "2026-10-27": 2
+        }
+      },
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  }
+}

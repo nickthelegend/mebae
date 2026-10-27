@@ -1,0 +1,45 @@
+PASS  tray uses detected furniture  (table)
+PASS  habit pinned to a detected top  (table)
+PASS  three water pinches reach 3/8
+PASS  hold undoes one: 2/8
+PASS  Week opens with a hand pinch
+PASS  zero console errors (room smoke)  ([])
+
+6/6 checks passed
+{
+  "suite": "kitchen",
+  "recordedAt": "2026-10-26T23:52:01.053Z",
+  "results": [
+    {
+      "name": "tray uses detected furniture",
+      "ok": true,
+      "detail": "table"
+    },
+    {
+      "name": "habit pinned to a detected top",
+      "ok": true,
+      "detail": "table"
+    },
+    {
+      "name": "three water pinches reach 3/8",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "hold undoes one: 2/8",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Week opens with a hand pinch",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "zero console errors (room smoke)",
+      "ok": true,
+      "detail": "[]"
+    }
+  ],
+  "failed": 0
+}

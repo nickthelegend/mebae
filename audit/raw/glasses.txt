@@ -1,0 +1,102 @@
+PASS  Glasses profile active with gaze  (Meta VR Glasses; ["local-floor","bounded-floor","hand-tracking","anchors","hit-test","plane-detection","mesh-detection","gaze-tracking","eye-tracking","viewer","local"])
+PASS  gaze + pinch on the seed opens the radial
+PASS  gaze aim + pinch pins a habit on the desk  (desk)
+PASS  gaze + pinch checks in (stage 1)
+PASS  gaze + pinch opens the week rings
+PASS  gaze disconnected: hand ray closes the week view
+┌─────────┬──────────────────────┬───────┬───────┬────────┐
+│ (index) │ name                 │ h     │ v     │ inside │
+├─────────┼──────────────────────┼───────┼───────┼────────┤
+│ 0       │ 'tray centre'        │ 0     │ -13.4 │ true   │
+│ 1       │ 'tray menu (left)'   │ -15.5 │ -20   │ true   │
+│ 2       │ 'tray menu (right)'  │ 15.5  │ -20   │ true   │
+│ 3       │ 'sand centre'        │ 6.7   │ -12.5 │ true   │
+│ 4       │ 'radial top icon'    │ 0     │ 14.4  │ true   │
+│ 5       │ 'radial bottom icon' │ 0     │ -6.6  │ true   │
+│ 6       │ 'radial left icon'   │ -11.7 │ 2.9   │ true   │
+│ 7       │ 'radial right icon'  │ 11.7  │ 2.9   │ true   │
+│ 8       │ 'week panel'         │ 0     │ 4.7   │ true   │
+│ 9       │ 'sprout label'       │ 24.4  │ 5.5   │ true   │
+│ 10      │ 'tray corner 1'      │ -15.2 │ -8.1  │ true   │
+│ 11      │ 'tray corner 2'      │ -19.6 │ -19.9 │ true   │
+│ 12      │ 'tray corner 3'      │ 15.2  │ -8.1  │ true   │
+│ 13      │ 'tray corner 4'      │ 19.6  │ -19.9 │ true   │
+│ 14      │ 'menu corner 1'      │ -19.5 │ -22.7 │ true   │
+│ 15      │ 'menu corner 2'      │ -18.8 │ -17.3 │ true   │
+│ 16      │ 'menu corner 3'      │ 19.5  │ -22.7 │ true   │
+│ 17      │ 'menu corner 4'      │ 18.8  │ -17.3 │ true   │
+│ 18      │ 'focus corner 1'     │ 0     │ -6.2  │ true   │
+│ 19      │ 'focus corner 2'     │ 0     │ -3.5  │ true   │
+│ 20      │ 'focus corner 3'     │ 11.9  │ -6.2  │ true   │
+│ 21      │ 'focus corner 4'     │ 12    │ -3.5  │ true   │
+│ 22      │ 'radial corner 1'    │ -13.9 │ -9.6  │ true   │
+│ 23      │ 'radial corner 2'    │ -18.2 │ 19    │ true   │
+│ 24      │ 'radial corner 3'    │ 13.9  │ -9.6  │ true   │
+│ 25      │ 'radial corner 4'    │ 18.2  │ 19    │ true   │
+│ 26      │ 'week corner 1'      │ -18.8 │ -7    │ true   │
+│ 27      │ 'week corner 2'      │ -23.7 │ 19    │ true   │
+│ 28      │ 'week corner 3'      │ 18.8  │ -7    │ true   │
+│ 29      │ 'week corner 4'      │ 23.7  │ 19    │ true   │
+└─────────┴──────────────────────┴───────┴───────┴────────┘
+PASS  every key element inside the Glasses FoV (37/25/43 with 3° margin)
+screenshot {
+  generation: 2,
+  id: 'tab-mvpx4sii-cq488a',
+  outerUrl: 'https://localhost:8081/',
+  url: 'https://localhost:8081/',
+  workspaceFramed: true,
+  downscaled: false,
+  height: 800,
+  mimeType: 'image/png',
+  width: 800
+}
+PASS  zero console errors (Glasses)
+
+8/8 checks passed
+{
+  "suite": "glasses",
+  "recordedAt": "2026-10-26T23:59:42.452Z",
+  "results": [
+    {
+      "name": "Glasses profile active with gaze",
+      "ok": true,
+      "detail": "Meta VR Glasses; [\"local-floor\",\"bounded-floor\",\"hand-tracking\",\"anchors\",\"hit-test\",\"plane-detection\",\"mesh-detection\",\"gaze-tracking\",\"eye-tracking\",\"viewer\",\"local\"]"
+    },
+    {
+      "name": "gaze + pinch on the seed opens the radial",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "gaze aim + pinch pins a habit on the desk",
+      "ok": true,
+      "detail": "desk"
+    },
+    {
+      "name": "gaze + pinch checks in (stage 1)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "gaze + pinch opens the week rings",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "gaze disconnected: hand ray closes the week view",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "every key element inside the Glasses FoV (37/25/43 with 3° margin)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "zero console errors (Glasses)",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "failed": 0
+}

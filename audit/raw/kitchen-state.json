@@ -1,0 +1,465 @@
+{
+  "state": {
+    "today": "2026-10-27",
+    "xr": true,
+    "mode": "idle",
+    "weekOpen": true,
+    "sample": false,
+    "settings": {
+      "highContrast": false,
+      "largeTargets": false,
+      "oneHand": false
+    },
+    "tray": {
+      "placed": true,
+      "how": "desk",
+      "on": "table",
+      "position": [
+        0,
+        0.921999990940094,
+        -0.8925000429153442
+      ]
+    },
+    "room": {
+      "planes": 14,
+      "meshes": 16
+    },
+    "anchors": {
+      "live": 1,
+      "persistentSupported": true,
+      "outcomes": [
+        {
+          "habitId": "water-1",
+          "status": "restored"
+        }
+      ]
+    },
+    "hitTest": true,
+    "habits": [
+      {
+        "id": "water-1",
+        "label": "Water",
+        "kind": "counted",
+        "today": 2,
+        "target": 8,
+        "stage": 0,
+        "vitality": "fresh",
+        "placement": {
+          "anchorUuid": "c91532e4-026a-456a-9cb5-d546d1d29a4f",
+          "surfaceLabel": "table",
+          "surface": "table"
+        }
+      }
+    ],
+    "sprouts": [
+      {
+        "id": "water-1",
+        "stage": 0,
+        "position": [
+          -0.30000001192092896,
+          0.9200000166893005,
+          -1.2000000476837158
+        ],
+        "sample": false,
+        "triangles": 30
+      }
+    ],
+    "lastPlaced": {
+      "habitId": "water-1",
+      "point": [
+        -0.30000001192092896,
+        0.9200000166893005,
+        -1.2000000476837158
+      ],
+      "label": "table",
+      "via": "hit-test"
+    },
+    "focus": {
+      "running": false,
+      "minutes": 25,
+      "remainingMs": 0,
+      "remainingFraction": 0,
+      "stones": 0,
+      "rakeMs": 0,
+      "rakeWrites": 0,
+      "ink": "#1d1a14"
+    },
+    "palmUp": false
+  },
+  "targets": {
+    "tray": [
+      0,
+      0.921999990940094,
+      -0.8925000429153442
+    ],
+    "seed": [
+      -0.12,
+      0.955999990940094,
+      -0.9275000429153443
+    ],
+    "icons": null,
+    "sand": [
+      0.07500000298023224,
+      0.9357999907806516,
+      -0.8925000429153442
+    ],
+    "sandSpan": [
+      [
+        -0.004999997019767763,
+        0.9357999924920787,
+        -0.9425000412039172
+      ],
+      [
+        0.15500000298023225,
+        0.9357999924920787,
+        -0.9425000412039172
+      ],
+      [
+        -0.004999997019767763,
+        0.9357999890692245,
+        -0.8425000446267713
+      ],
+      [
+        0.15500000298023225,
+        0.9357999890692245,
+        -0.8425000446267713
+      ]
+    ],
+    "menuButtons": [
+      [
+        -0.144,
+        0.956999990940094,
+        -0.7625000429153442
+      ],
+      [
+        -0.072,
+        0.956999990940094,
+        -0.7625000429153442
+      ],
+      [
+        0,
+        0.956999990940094,
+        -0.7625000429153442
+      ],
+      [
+        0.07199999999999998,
+        0.956999990940094,
+        -0.7625000429153442
+      ],
+      [
+        0.144,
+        0.956999990940094,
+        -0.7625000429153442
+      ]
+    ],
+    "wrist": null,
+    "week": [
+      0,
+      1.1219999939203262,
+      -0.9525000415742397
+    ],
+    "reticle": null,
+    "sprouts": {
+      "water-1": {
+        "label": [
+          -0.3000000119209289,
+          1.0748923074172472,
+          -1.200000047683716
+        ],
+        "stake": [
+          -0.20800000429153442,
+          1.0248923301696777,
+          -1.2000000476837158
+        ],
+        "pot": null
+      }
+    },
+    "bounds": {
+      "tray": [
+        [
+          -0.2,
+          0.921999990940094,
+          -0.9925000429153442
+        ],
+        [
+          -0.2,
+          0.921999990940094,
+          -0.7925000429153443
+        ],
+        [
+          0.2,
+          0.921999990940094,
+          -0.9925000429153442
+        ],
+        [
+          0.2,
+          0.921999990940094,
+          -0.7925000429153443
+        ]
+      ],
+      "menu": [
+        [
+          -0.18,
+          0.9408381317650567,
+          -0.7421335432650297
+        ],
+        [
+          -0.18,
+          0.9731618501151313,
+          -0.7828665425656588
+        ],
+        [
+          0.18,
+          0.9408381317650567,
+          -0.7421335432650297
+        ],
+        [
+          0.18,
+          0.9731618501151313,
+          -0.7828665425656588
+        ]
+      ],
+      "radial": [
+        [
+          -0.16,
+          0.9619999939203262,
+          -0.9125000424683094
+        ],
+        [
+          -0.16,
+          1.2819999939203262,
+          -0.9125000424683094
+        ],
+        [
+          0.16,
+          0.9619999939203262,
+          -0.9125000424683094
+        ],
+        [
+          0.16,
+          1.2819999939203262,
+          -0.9125000424683094
+        ]
+      ],
+      "week": [
+        [
+          -0.23,
+          0.9694999939203263,
+          -0.9525000415742397
+        ],
+        [
+          -0.23,
+          1.2744999939203263,
+          -0.9525000415742397
+        ],
+        [
+          0.23,
+          0.9694999939203263,
+          -0.9525000415742397
+        ],
+        [
+          0.23,
+          1.2744999939203263,
+          -0.9525000415742397
+        ]
+      ],
+      "focus": [
+        [
+          0,
+          0.957560968465265,
+          -0.9844993312848738
+        ],
+        [
+          0,
+          0.9904390134149231,
+          -0.9965007545458147
+        ],
+        [
+          0.15,
+          0.957560968465265,
+          -0.9844993312848738
+        ],
+        [
+          0.15,
+          0.9904390134149231,
+          -0.9965007545458147
+        ]
+      ]
+    }
+  },
+  "xr": {
+    "deviceName": "Meta Quest 3",
+    "isRuntimeInstalled": true,
+    "sessionActive": true,
+    "sessionOffered": false,
+    "sessionMode": "immersive-ar",
+    "enabledFeatures": [
+      "local-floor",
+      "bounded-floor",
+      "hand-tracking",
+      "anchors",
+      "hit-test",
+      "plane-detection",
+      "mesh-detection",
+      "viewer",
+      "local"
+    ],
+    "visibilityState": "visible",
+    "runtimeKind": "emulated",
+    "browser": {
+      "lifecycle": {
+        "state": "running",
+        "policy": "eager",
+        "sessionId": "5bd7e81a-be2c-4678-afcc-da201017e300",
+        "browserEpoch": 1,
+        "revision": 11,
+        "stateEnteredAt": "2026-10-26T23:51:37.101Z",
+        "lastObservedAt": "2026-10-26T23:52:01.835Z",
+        "failures": 0,
+        "cleanupConfirmed": true,
+        "attemptLimit": 3,
+        "historyTruncated": false,
+        "retryEligible": false,
+        "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+        "history": [
+          {
+            "revision": 1,
+            "state": "launching",
+            "at": "2026-10-26T23:51:35.994Z",
+            "reason": "launch"
+          },
+          {
+            "revision": 2,
+            "state": "launching",
+            "at": "2026-10-26T23:51:35.995Z",
+            "reason": "prepared"
+          },
+          {
+            "revision": 3,
+            "state": "running",
+            "at": "2026-10-26T23:51:37.101Z",
+            "reason": "running"
+          }
+        ],
+        "attemptId": "8598d295-d067-4459-ba8f-3bdb6e2291e1"
+      },
+      "status": "connected",
+      "clients": [
+        {
+          "commandReady": true,
+          "sessionId": "5bd7e81a-be2c-4678-afcc-da201017e300",
+          "browserEpoch": 1,
+          "deviceClass": "managed",
+          "pageId": "tab-mvpwuqw4-c2adns",
+          "role": "app",
+          "tabGeneration": 2
+        },
+        {
+          "commandReady": true,
+          "sessionId": "5bd7e81a-be2c-4678-afcc-da201017e300",
+          "browserEpoch": 1,
+          "deviceClass": "managed",
+          "pageId": "tab-mvpwupgt-dsw4dy",
+          "role": "editor",
+          "sceneSessionId": "scene-n1hhe7z1dm",
+          "tabGeneration": 1
+        }
+      ],
+      "lastBridgeConnectedAt": "2026-10-26T23:52:01.790Z",
+      "lastCommandReadyAt": "2026-10-26T23:52:01.835Z",
+      "connected": true,
+      "commandReady": true,
+      "connectedClientCount": 2,
+      "lastTransitionAt": "2026-10-26T23:51:37.101Z",
+      "audioMuted": false
+    },
+    "browserConnected": true,
+    "browserCommandReady": true
+  },
+  "device": {
+    "headset": {
+      "position": {
+        "x": -0.30000001192092896,
+        "y": 1.3700000047683716,
+        "z": -0.42250004410743713
+      },
+      "orientation": {
+        "x": -0.258819043636322,
+        "y": 0,
+        "z": 0,
+        "w": 0.9659258127212524
+      }
+    },
+    "inputMode": "hand",
+    "controllers": {
+      "left": {
+        "connected": true,
+        "position": {
+          "x": -0.25,
+          "y": 1.5,
+          "z": -0.4000000059604645
+        },
+        "orientation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      },
+      "right": {
+        "connected": true,
+        "position": {
+          "x": 0.25,
+          "y": 1.5,
+          "z": -0.4000000059604645
+        },
+        "orientation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        }
+      }
+    },
+    "hands": {
+      "left": {
+        "connected": true,
+        "position": {
+          "x": -0.25,
+          "y": 1.5,
+          "z": -0.4000000059604645
+        },
+        "orientation": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "poseId": "default",
+        "pinchValue": 0
+      },
+      "right": {
+        "connected": true,
+        "position": {
+          "x": 0.25,
+          "y": 1.5,
+          "z": -0.4000000059604645
+        },
+        "orientation": {
+          "x": -0.35341277718544006,
+          "y": 0.3706910312175751,
+          "z": 0.15507985651493073,
+          "w": 0.8447708487510681
+        },
+        "poseId": "default",
+        "pinchValue": 0
+      }
+    },
+    "stereoEnabled": false,
+    "fov": 90
+  },
+  "runtimeKeys": [
+    "world",
+    "targetResolver"
+  ]
+}

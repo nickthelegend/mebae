@@ -23,7 +23,7 @@ import { ui } from '../state/ui-state.js';
 import { CanvasCard } from '../ui/canvas-card.js';
 import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
-import { type AimHit, type AimSource, AimSystem } from './aim.js';
+import { type AimHit, type AimSource, type SelectEvent, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
 import { surfaceQuaternion } from './surface-pose.js';
 import { TrayEvents, TraySystem } from './tray.js';
@@ -50,6 +50,7 @@ export class PlantingSystem extends createSystem({}) {
   private repinId: string | null = null;
   private aimStart = 0;
   private aimSrc: AimSource = 'right';
+  private pendingSelect: SelectEvent | null = null;
   private hit: AimHit | null = null;
   private flight: { from: Vector3; to: Vector3; normal: Vector3; t: number; hit: AimHit } | null = null;
   private seedHome = new Vector3();
@@ -95,10 +96,9 @@ export class PlantingSystem extends createSystem({}) {
       ev.on('pin-again', (id) => id && this.onPinAgain(id)),
       this.world.getSystem(AimSystem)!.onSelect((e) => {
         if (ui.mode.peek() !== 'aiming' || e.startedAt < this.aimStart + 30) return;
-        const aim = this.world.getSystem(AimSystem)!;
-        this.aimSrc = aim.preferred(e.source === 'left' ? 'left' : 'right');
-        this.hit = aim.hit(this.aimSrc);
-        this.place();
+        // Let PressRouter finish the UI pinch first. A seed/tray cancellation
+        // must win over the same session select event's surface placement.
+        this.pendingSelect = e;
       }),
     );
   }
@@ -114,6 +114,7 @@ export class PlantingSystem extends createSystem({}) {
       this.radial.mesh.visible = false;
       makePressable(this.radialEntity, 'radial', { tap: (p) => this.onRadialTap(p) });
       this.seedEntity = this.world.createTransformEntity(this.seed, { persistent: true });
+      makePressable(this.seedEntity, 'lifted-seed', { tap: () => this.onSeed() });
       this.seed.visible = false;
       this.reticleEntity = this.world.createTransformEntity(this.reticle, { persistent: true });
       this.reticle.visible = false;
@@ -124,6 +125,7 @@ export class PlantingSystem extends createSystem({}) {
   }
 
   private reset(): void {
+    this.pendingSelect = null;
     ui.mode.value = 'idle';
     this.flight = null;
     this.preset = null;
@@ -171,6 +173,7 @@ export class PlantingSystem extends createSystem({}) {
   }
 
   private cancel(msg: string): void {
+    this.pendingSelect = null;
     ui.mode.value = 'idle';
     this.radial.mesh.visible = false;
     this.reticle.visible = false;
@@ -282,6 +285,14 @@ export class PlantingSystem extends createSystem({}) {
   }
 
   update(dt: number): void {
+    const selection = this.pendingSelect;
+    this.pendingSelect = null;
+    if (selection && ui.mode.peek() === 'aiming' && selection.startedAt >= this.aimStart + 30) {
+      const aim = this.world.getSystem(AimSystem)!;
+      this.aimSrc = aim.preferred(selection.source === 'left' ? 'left' : 'right');
+      this.hit = aim.hit(this.aimSrc);
+      this.place();
+    }
     const mode = ui.mode.peek();
     if (mode === 'idle') return;
     this.player.head.getWorldPosition(this.head);

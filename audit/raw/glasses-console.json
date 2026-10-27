@@ -1,0 +1,279 @@
+{
+  "ok": true,
+  "data": {
+    "workspaceRoot": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t5/packages/app",
+    "operation": "browser.logs",
+    "result": [
+      {
+        "timestamp": 1793059166209,
+        "level": "info",
+        "message": "Frame navigated: https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]",
+        "args": [
+          "Frame navigated: https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]"
+        ],
+        "frameUrl": "https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]",
+        "kind": "navigation",
+        "url": "https://localhost:8081/?__iwsdkManagedWorkspace=[redacted]"
+      },
+      {
+        "timestamp": 1793059166218,
+        "level": "info",
+        "message": "Frame navigated: https://localhost:8081/",
+        "args": [
+          "Frame navigated: https://localhost:8081/"
+        ],
+        "frameUrl": "https://localhost:8081/",
+        "kind": "navigation",
+        "url": "https://localhost:8081/"
+      },
+      {
+        "timestamp": 1793059166461,
+        "level": "log",
+        "message": "[IWSDK Dev] Configuration: {device: metaVRGlasses, activation: localhost, verbose: false, sem: Object, ai: Object}",
+        "args": [
+          "\"[IWSDK Dev] Configuration:\"",
+          "{\"device\":\"metaVRGlasses\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"home_office\"},\"ai\":{\"mode\":\"agent\",\"headless\":true,\"devUI\":false,\"viewport\":{\"width\":800,\"height\":800},\"screenshotSize\":{\"width\":800,\"height\":800}},\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":true,\"devUI\":false,\"browserAutomation\":true,\"viewport\":{\"width\":800,\"height\":800},\"screenshotSize\":{\"width\":800,\"height\":800}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+        ],
+        "columnNumber": 1084215,
+        "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+        "kind": "console",
+        "lineNumber": 983,
+        "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+      },
+      {
+        "timestamp": 1793059167432,
+        "level": "log",
+        "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0-rc.2\nThree.js r185\nEliCS v3.4.2",
+        "args": [
+          "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0-rc.2\\nThree.js r185\\nEliCS v3.4.2\""
+        ],
+        "columnNumber": 8,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 122,
+        "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059167442,
+        "level": "info",
+        "message": "Frame navigated: about:blank",
+        "args": [
+          "Frame navigated: about:blank"
+        ],
+        "frameUrl": "about:blank",
+        "kind": "navigation",
+        "url": "about:blank",
+        "repeatCount": 2
+      },
+      {
+        "timestamp": 1793059167478,
+        "level": "info",
+        "message": "Frame navigated: https://localhost:8081/",
+        "args": [
+          "Frame navigated: https://localhost:8081/"
+        ],
+        "frameUrl": "https://localhost:8081/",
+        "kind": "navigation",
+        "url": "https://localhost:8081/"
+      },
+      {
+        "timestamp": 1793059167635,
+        "level": "warn",
+        "message": "THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+        "args": [
+          "\"THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\""
+        ],
+        "columnNumber": 14,
+        "frameUrl": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 296,
+        "url": "https://localhost:8081/node_modules/.vite/deps/chunk-WNIOHBZ6.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059167828,
+        "level": "log",
+        "message": "[IWSDK Dev] Configuration: {device: metaVRGlasses, activation: localhost, verbose: false, sem: Object, ai: Object}",
+        "args": [
+          "\"[IWSDK Dev] Configuration:\"",
+          "{\"device\":\"metaVRGlasses\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"home_office\"},\"ai\":{\"mode\":\"agent\",\"headless\":true,\"devUI\":false,\"viewport\":{\"width\":800,\"height\":800},\"screenshotSize\":{\"width\":800,\"height\":800}},\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":true,\"devUI\":false,\"browserAutomation\":true,\"viewport\":{\"width\":800,\"height\":800},\"screenshotSize\":{\"width\":800,\"height\":800}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+        ],
+        "columnNumber": 1084215,
+        "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+        "kind": "console",
+        "lineNumber": 983,
+        "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+      },
+      {
+        "timestamp": 1793059167941,
+        "level": "log",
+        "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0-rc.2\nThree.js r185\nEliCS v3.4.2",
+        "args": [
+          "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0-rc.2\\nThree.js r185\\nEliCS v3.4.2\""
+        ],
+        "columnNumber": 8,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 122,
+        "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059182849,
+        "level": "info",
+        "message": "Frame navigated: https://localhost:8081/",
+        "args": [
+          "Frame navigated: https://localhost:8081/"
+        ],
+        "frameUrl": "https://localhost:8081/",
+        "kind": "navigation",
+        "url": "https://localhost:8081/"
+      },
+      {
+        "timestamp": 1793059182931,
+        "level": "log",
+        "message": "[IWSDK Dev] Configuration: {device: metaVRGlasses, activation: localhost, verbose: false, sem: Object, ai: Object}",
+        "args": [
+          "\"[IWSDK Dev] Configuration:\"",
+          "{\"device\":\"metaVRGlasses\",\"activation\":\"localhost\",\"verbose\":false,\"sem\":{\"defaultScene\":\"home_office\"},\"ai\":{\"mode\":\"agent\",\"headless\":true,\"devUI\":false,\"viewport\":{\"width\":800,\"height\":800},\"screenshotSize\":{\"width\":800,\"height\":800}},\"workspace\":{\"enabled\":true,\"open\":true,\"headless\":true,\"devUI\":false,\"browserAutomation\":true,\"viewport\":{\"width\":800,\"height\":800},\"screenshotSize\":{\"width\":800,\"height\":800}},\"userAgentException\":\"/OculusBrowser/\",\"iwer\":true,\"nativeXRControl\":false}"
+        ],
+        "columnNumber": 1084215,
+        "frameUrl": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js",
+        "kind": "console",
+        "lineNumber": 983,
+        "url": "https://localhost:8081/@id/__x00__virtual:iwsdk-dev-runtime/chunks/injection-template-0HSd4CcE.js"
+      },
+      {
+        "timestamp": 1793059183097,
+        "level": "log",
+        "message": "                                                 \n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \n===============================================\nImmersive Web SDK v1.1.0-rc.2\nThree.js r185\nEliCS v3.4.2",
+        "args": [
+          "\"                                                 \\n▄▄▄▄▄▄  ▄▄      ▄▄   ▄▄▄▄    ▄▄▄▄▄     ▄▄   ▄▄▄ \\n▀▀██▀▀  ██      ██ ▄█▀▀▀▀█   ██▀▀▀██   ██  ██▀  \\n  ██    ▀█▄ ██ ▄█▀ ██▄       ██    ██  ██▄██    \\n  ██     ██ ██ ██   ▀████▄   ██    ██  █████    \\n  ██     ███▀▀███       ▀██  ██    ██  ██  ██▄  \\n▄▄██▄▄   ███  ███  █▄▄▄▄▄█▀  ██▄▄▄██   ██   ██▄ \\n▀▀▀▀▀▀   ▀▀▀  ▀▀▀   ▀▀▀▀▀    ▀▀▀▀▀     ▀▀    ▀▀                                                \\n===============================================\\nImmersive Web SDK v1.1.0-rc.2\\nThree.js r185\\nEliCS v3.4.2\""
+        ],
+        "columnNumber": 8,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 122,
+        "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/index.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059186443,
+        "level": "info",
+        "message": "[iwsdk][gaze] 'gaze-tracking' granted for this session. {enabledFeatures: Array(11)}",
+        "args": [
+          "\"[iwsdk][gaze] 'gaze-tracking' granted for this session.\"",
+          "{\"enabledFeatures\":[\"local-floor\",\"bounded-floor\",\"hand-tracking\",\"anchors\",\"hit-test\",\"plane-detection\",\"mesh-detection\",\"gaze-tracking\",\"eye-tracking\",\"viewer\",\"local\"]}"
+        ],
+        "columnNumber": 20,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 173,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059186443,
+        "level": "info",
+        "message": "[iwsdk][gaze] gaze XRInputSource appeared. {profiles: Array(1), handedness: none}",
+        "args": [
+          "\"[iwsdk][gaze] gaze XRInputSource appeared.\"",
+          "{\"profiles\":[\"eye-gaze\"],\"handedness\":\"none\"}"
+        ],
+        "columnNumber": 24,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 197,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059186443,
+        "level": "info",
+        "message": "[iwsdk][gaze] emulated gaze pose is valid (synthetic, not eye tracking).",
+        "args": [
+          "\"[iwsdk][gaze] emulated gaze pose is valid (synthetic, not eye tracking).\""
+        ],
+        "columnNumber": 20,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 227,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059186443,
+        "level": "info",
+        "message": "[iwsdk][gaze] no ray-interactable targets are available, so the gaze cone has nothing to hit.",
+        "args": [
+          "\"[iwsdk][gaze] no ray-interactable targets are available, so the gaze cone has nothing to hit.\""
+        ],
+        "columnNumber": 16,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 144,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059186444,
+        "level": "log",
+        "message": "[SceneUnderstandingSystem] Anchor needed but not present, triggering creation",
+        "args": [
+          "\"[SceneUnderstandingSystem] Anchor needed but not present, triggering creation\""
+        ],
+        "columnNumber": 20,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/core/dist/scene-understanding/scene-understanding-system.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 613,
+        "url": "https://localhost:8081/node_modules/@iwsdk/core/dist/scene-understanding/scene-understanding-system.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059187453,
+        "level": "info",
+        "message": "[iwsdk][gaze] real eye movement observed — the gaze ray separates from the head ray by up to 16.55°.",
+        "args": [
+          "\"[iwsdk][gaze] real eye movement observed — the gaze ray separates from the head ray by up to 16.55°.\""
+        ],
+        "columnNumber": 20,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 266,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059196237,
+        "level": "warn",
+        "message": "[iwsdk][gaze] the gaze XRInputSource disappeared; ordinary hand/controller far targeting is now active.",
+        "args": [
+          "\"[iwsdk][gaze] the gaze XRInputSource disappeared; ordinary hand/controller far targeting is now active.\""
+        ],
+        "columnNumber": 24,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 203,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059198221,
+        "level": "info",
+        "message": "[iwsdk][gaze] gaze XRInputSource appeared. {profiles: Array(1), handedness: none}",
+        "args": [
+          "\"[iwsdk][gaze] gaze XRInputSource appeared.\"",
+          "{\"profiles\":[\"eye-gaze\"],\"handedness\":\"none\"}"
+        ],
+        "columnNumber": 24,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 197,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      },
+      {
+        "timestamp": 1793059198222,
+        "level": "info",
+        "message": "[iwsdk][gaze] emulated gaze pose is valid (synthetic, not eye tracking).",
+        "args": [
+          "\"[iwsdk][gaze] emulated gaze pose is valid (synthetic, not eye tracking).\""
+        ],
+        "columnNumber": 20,
+        "frameUrl": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da",
+        "kind": "console",
+        "lineNumber": 227,
+        "url": "https://localhost:8081/node_modules/@iwsdk/xr-input/dist/pointer/gaze-pointer.js?v=307602da"
+      }
+    ]
+  }
+}

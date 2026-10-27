@@ -1,0 +1,209 @@
+{
+  "vrCounts": {
+    "FAIL": 78,
+    "PASS": 46,
+    "UNTESTED": 5
+  },
+  "allRowCounts": {
+    "FAIL": 79,
+    "PASS": 79,
+    "UNTESTED": 6
+  },
+  "browser": "Managed Chrome for Testing 156.0.8078.4 via IWSDK CDP; active IWER immersive-ar runtime, not a second browser",
+  "phaseSummary": {
+    "capacity-extra": {
+      "firstCapturedAt": "2026-10-27T00:02:08.144Z",
+      "lastCapturedAt": "2026-10-27T00:02:08.144Z",
+      "events": 1,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "glasses": {
+      "firstCapturedAt": "2026-10-26T23:59:40.282Z",
+      "lastCapturedAt": "2026-10-26T23:59:58.222Z",
+      "events": 784,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "glasses-extra": {
+      "firstCapturedAt": "2026-10-27T00:00:14.096Z",
+      "lastCapturedAt": "2026-10-27T00:00:34.711Z",
+      "events": 4,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "kitchen": {
+      "firstCapturedAt": "2026-10-26T23:52:01.417Z",
+      "lastCapturedAt": "2026-10-26T23:52:35.567Z",
+      "events": 782,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "perf": {
+      "firstCapturedAt": "2026-10-27T00:01:06.204Z",
+      "lastCapturedAt": "2026-10-27T00:01:15.353Z",
+      "events": 778,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "quest": {
+      "firstCapturedAt": "2026-10-26T23:53:10.924Z",
+      "lastCapturedAt": "2026-10-26T23:53:29.431Z",
+      "events": 795,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "quest-extra": {
+      "firstCapturedAt": "2026-10-26T23:54:26.039Z",
+      "lastCapturedAt": "2026-10-26T23:59:08.721Z",
+      "events": 12437,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "shell": {
+      "firstCapturedAt": "2026-10-26T23:59:09.001Z",
+      "lastCapturedAt": "2026-10-26T23:59:16.727Z",
+      "events": 777,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "startup": {
+      "firstCapturedAt": "2026-10-26T23:52:00.035Z",
+      "lastCapturedAt": "2026-10-26T23:52:00.035Z",
+      "events": 1,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "whoa": {
+      "firstCapturedAt": "2026-10-27T00:02:28.112Z",
+      "lastCapturedAt": "2026-10-27T00:04:01.889Z",
+      "events": 783,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    }
+  },
+  "coverageGaps": [
+    "Quest initial profile-change/reconnect interval not captured.",
+    "Kitchen screenshot overwritten; retained kitchen state and complete network/console interval.",
+    "CLI browser logs API accepts at most 200 entries.",
+    "Actual instanced sprout bounds were not measured correctly; normal Glasses sprout fit is not established."
+  ],
+  "productSourceChanges": "None. iwsdk.config.json restored to metaQuest3 / home_office.",
+  "fixtureQualification": "preparePerf uses synthetic DEV history for performance setup only. Quest DEV calendar jumps are not actual elapsed days. Whoa clip has no clock advance and explicitly labels sample preview.",
+  "performance": {
+    "frames": 600,
+    "cpuMs": {
+      "p50": 1.5,
+      "p95": 2.399999976158142,
+      "max": 3.100000023841858
+    },
+    "drawCalls": {
+      "p50": 92,
+      "max": 92
+    },
+    "triangles": {
+      "p50": 37556,
+      "max": 37556
+    }
+  },
+  "clip": {
+    "path": "audit/vr/first-day.mp4",
+    "durationSeconds": 35,
+    "sourceFrames": 2100,
+    "multiDayFootage": false,
+    "temporaryFramesDeleted": true
+  },
+  "shutdown": {
+    "ownedProcessRoot": 21714,
+    "ownedProcesses": [
+      {
+        "pid": 21714,
+        "ppid": 1,
+        "command": "npm run dev:runtime"
+      },
+      {
+        "pid": 21774,
+        "ppid": 21714,
+        "command": "node"
+      },
+      {
+        "pid": 22047,
+        "ppid": 21774,
+        "command": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t5/packages/app/node_modules/@esbuild/darwin-arm64/bin/esbuild"
+      },
+      {
+        "pid": 28442,
+        "ppid": 21774,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+      },
+      {
+        "pid": 28453,
+        "ppid": 28442,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (GPU).app/Contents/MacOS/Google Chrome for Testing Helper (GPU)"
+      },
+      {
+        "pid": 28454,
+        "ppid": 28442,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper"
+      },
+      {
+        "pid": 28455,
+        "ppid": 28442,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper"
+      },
+      {
+        "pid": 28533,
+        "ppid": 28442,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer)"
+      },
+      {
+        "pid": 28534,
+        "ppid": 28442,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer)"
+      },
+      {
+        "pid": 28535,
+        "ppid": 28442,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer)"
+      },
+      {
+        "pid": 28537,
+        "ppid": 28442,
+        "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper"
+      }
+    ],
+    "shutdownAt": 1793059500.555927,
+    "devDown": {
+      "code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"data\": {\n    \"stopped\": true,\n    \"workspaceRoot\": \"/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t5/packages/app\",\n    \"sessionId\": \"7fc3bf03-37c6-4549-8d3c-721f965537e1\"\n  }\n}\n",
+      "stderr": ""
+    },
+    "terminatedRemainingOwnedPids": [],
+    "slotRelease": {
+      "code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "noMocks": "No feature-denial, network, storage or anchor failure results were mocked. Canvas text wrappers forward original calls and only record telemetry."
+}

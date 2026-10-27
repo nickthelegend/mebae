@@ -1,0 +1,1 @@
+Frames directory /tmp/mebae-t5-frames-fREdVK run completed true

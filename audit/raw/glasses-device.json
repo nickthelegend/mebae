@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "data": {
+    "workspaceRoot": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t5/packages/app",
+    "operation": "xr.get-device-state",
+    "result": {
+      "headset": {
+        "position": {
+          "x": -0.07999999821186066,
+          "y": 1.2000000476837158,
+          "z": -1.350000023841858
+        },
+        "orientation": {
+          "x": -0.258819043636322,
+          "y": 0,
+          "z": 0,
+          "w": 0.9659258127212524
+        }
+      },
+      "inputMode": "hand",
+      "controllers": {
+        "left": {
+          "connected": true,
+          "position": {
+            "x": -0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          }
+        },
+        "right": {
+          "connected": true,
+          "position": {
+            "x": 0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          }
+        }
+      },
+      "hands": {
+        "left": {
+          "connected": true,
+          "position": {
+            "x": -0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": 0,
+            "y": 0,
+            "z": 0,
+            "w": 1
+          },
+          "poseId": "default",
+          "pinchValue": 0
+        },
+        "right": {
+          "connected": true,
+          "position": {
+            "x": 0.25,
+            "y": 1.5,
+            "z": -0.4000000059604645
+          },
+          "orientation": {
+            "x": -0.23415257036685944,
+            "y": 0.168351411819458,
+            "z": 0.04120726138353348,
+            "w": 0.9566255211830139
+          },
+          "poseId": "default",
+          "pinchValue": 0
+        }
+      },
+      "gaze": {
+        "connected": true,
+        "orientation": {
+          "x": -0.3979118764400482,
+          "y": 0.17504453659057617,
+          "z": 0.07763147354125977,
+          "w": 0.897217333316803
+        }
+      },
+      "stereoEnabled": false,
+      "fov": 90
+    }
+  }
+}

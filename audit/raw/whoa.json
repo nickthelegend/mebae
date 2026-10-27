@@ -1,0 +1,303 @@
+{
+  "capturedAt": "2026-10-27T00:02:49.614Z",
+  "initialDay": "2026-10-27",
+  "footage": {
+    "frames": 2100,
+    "dir": "/tmp/mebae-t5-frames-fREdVK"
+  },
+  "marks": [
+    {
+      "at": 0,
+      "text": "Day 1 · 2026-10-27 · IWER Quest 3 · hands only"
+    },
+    {
+      "at": 4.438,
+      "text": "Stretch takes root on a detected surface · real XRAnchor"
+    },
+    {
+      "at": 5.246,
+      "text": "One real check-in · stage 1 · no clock advancement"
+    },
+    {
+      "at": 20.959,
+      "text": "Example garden (sample data) · NOT a recorded later day"
+    }
+  ],
+  "realAtStageOne": {
+    "today": "2026-10-27",
+    "xr": true,
+    "mode": "idle",
+    "weekOpen": false,
+    "sample": false,
+    "settings": {
+      "highContrast": false,
+      "largeTargets": false,
+      "oneHand": false
+    },
+    "tray": {
+      "placed": true,
+      "how": "desk",
+      "on": "desk",
+      "position": [
+        -0.07999999821186066,
+        0.7419999837875366,
+        -1.834999918937683
+      ]
+    },
+    "room": {
+      "planes": 13,
+      "meshes": 9
+    },
+    "anchors": {
+      "live": 1,
+      "persistentSupported": true,
+      "outcomes": [
+        {
+          "habitId": "stretch-1",
+          "status": "restored"
+        }
+      ]
+    },
+    "hitTest": true,
+    "habits": [
+      {
+        "id": "stretch-1",
+        "label": "Stretch",
+        "kind": "daily",
+        "today": 1,
+        "target": 1,
+        "stage": 1,
+        "vitality": "thriving",
+        "placement": {
+          "anchorUuid": "35c6c985-c083-470a-949a-b47fef135ae3",
+          "surfaceLabel": "door",
+          "surface": "wall"
+        }
+      }
+    ],
+    "sprouts": [
+      {
+        "id": "stretch-1",
+        "stage": 1,
+        "position": [
+          -0.5906524062156677,
+          1.2032991647720337,
+          1.5582257509231567
+        ],
+        "sample": false,
+        "triangles": 60
+      }
+    ],
+    "lastPlaced": {
+      "habitId": "stretch-1",
+      "point": [
+        -0.5906524062156677,
+        1.2032991647720337,
+        1.5582257509231567
+      ],
+      "label": "door",
+      "via": "hit-test"
+    },
+    "focus": {
+      "running": false,
+      "minutes": 25,
+      "remainingMs": 0,
+      "remainingFraction": 0,
+      "stones": 0,
+      "rakeMs": 0,
+      "rakeWrites": 0,
+      "ink": "#1d1a14"
+    },
+    "palmUp": false
+  },
+  "final": {
+    "today": "2026-10-27",
+    "xr": true,
+    "mode": "idle",
+    "weekOpen": false,
+    "sample": true,
+    "settings": {
+      "highContrast": false,
+      "largeTargets": false,
+      "oneHand": false
+    },
+    "tray": {
+      "placed": true,
+      "how": "desk",
+      "on": "desk",
+      "position": [
+        -0.07999999821186066,
+        0.7419999837875366,
+        -1.834999918937683
+      ]
+    },
+    "room": {
+      "planes": 13,
+      "meshes": 9
+    },
+    "anchors": {
+      "live": 1,
+      "persistentSupported": true,
+      "outcomes": [
+        {
+          "habitId": "stretch-1",
+          "status": "restored"
+        }
+      ]
+    },
+    "hitTest": true,
+    "habits": [
+      {
+        "id": "sample-stretch",
+        "label": "Stretch",
+        "kind": "daily",
+        "today": 1,
+        "target": 1,
+        "stage": 7,
+        "vitality": "thriving",
+        "placement": {
+          "anchorUuid": null,
+          "surfaceLabel": "door",
+          "surface": "wall"
+        }
+      },
+      {
+        "id": "sample-deep-work",
+        "label": "Deep work",
+        "kind": "daily",
+        "today": 1,
+        "target": 1,
+        "stage": 7,
+        "vitality": "thriving",
+        "placement": {
+          "anchorUuid": null,
+          "surfaceLabel": "desk",
+          "surface": "table"
+        }
+      },
+      {
+        "id": "sample-water",
+        "label": "Water",
+        "kind": "counted",
+        "today": 4,
+        "target": 8,
+        "stage": 7,
+        "vitality": "waiting",
+        "placement": {
+          "anchorUuid": null,
+          "surfaceLabel": "counter",
+          "surface": "table"
+        }
+      },
+      {
+        "id": "sample-read",
+        "label": "Read",
+        "kind": "daily",
+        "today": 0,
+        "target": 1,
+        "stage": 6,
+        "vitality": "waiting",
+        "placement": {
+          "anchorUuid": null,
+          "surfaceLabel": "nightstand",
+          "surface": "table"
+        }
+      },
+      {
+        "id": "sample-lights-out",
+        "label": "Lights out",
+        "kind": "daily",
+        "today": 0,
+        "target": 1,
+        "stage": 6,
+        "vitality": "resting",
+        "placement": {
+          "anchorUuid": null,
+          "surfaceLabel": "floor",
+          "surface": "floor"
+        }
+      }
+    ],
+    "sprouts": [
+      {
+        "id": "sample-stretch",
+        "stage": 7,
+        "position": [
+          -0.07999999821186066,
+          0.9620000123977661,
+          -2.254999876022339
+        ],
+        "sample": true,
+        "triangles": 96
+      },
+      {
+        "id": "sample-deep-work",
+        "stage": 7,
+        "position": [
+          0.3400000035762787,
+          0.7419999837875366,
+          -1.9149999618530273
+        ],
+        "sample": true,
+        "triangles": 2173
+      },
+      {
+        "id": "sample-water",
+        "stage": 7,
+        "position": [
+          -0.47999998927116394,
+          0.7419999837875366,
+          -1.8949998617172241
+        ],
+        "sample": true,
+        "triangles": 765
+      },
+      {
+        "id": "sample-read",
+        "stage": 6,
+        "position": [
+          -0.3199999928474426,
+          0.7419999837875366,
+          -2.1549999713897705
+        ],
+        "sample": true,
+        "triangles": 1536
+      },
+      {
+        "id": "sample-lights-out",
+        "stage": 6,
+        "position": [
+          0.18000000715255737,
+          0.7419999837875366,
+          -2.1549999713897705
+        ],
+        "sample": true,
+        "triangles": 1536
+      }
+    ],
+    "lastPlaced": {
+      "habitId": "stretch-1",
+      "point": [
+        -0.5906524062156677,
+        1.2032991647720337,
+        1.5582257509231567
+      ],
+      "label": "door",
+      "via": "hit-test"
+    },
+    "focus": {
+      "running": false,
+      "minutes": 25,
+      "remainingMs": 0,
+      "remainingFraction": 0,
+      "stones": 0,
+      "rakeMs": 0,
+      "rakeWrites": 0,
+      "ink": "#1d1a14"
+    },
+    "palmUp": false
+  },
+  "error": null,
+  "multiDayFootage": false,
+  "qualification": "First-day capture plus labelled sample preview. Real separate-day footage is still required."
+}

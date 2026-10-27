@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-27T00:35:55.770Z",
+  "recordedAt": "2026-10-27T02:21:01.440Z",
   "exited": {
     "width": 800,
     "overflow": 0,
@@ -15,59 +15,12 @@
     "ledger": {
       "format": "mebae.history.v1",
       "sample": false,
-      "habits": [
-        {
-          "id": "stretch-1",
-          "presetId": "stretch",
-          "label": "Stretch",
-          "glyph": "stretch",
-          "kind": "daily",
-          "target": 1,
-          "species": "moss",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
-            "surfaceLabel": "door",
-            "surface": "wall"
-          }
-        },
-        {
-          "id": "water-2",
-          "presetId": "water",
-          "label": "Water",
-          "glyph": "glass",
-          "kind": "counted",
-          "target": 8,
-          "species": "bamboo",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
-            "surfaceLabel": "desk",
-            "surface": "table"
-          }
-        }
-      ],
-      "counts": {
-        "stretch-1": {
-          "2026-10-27": 1,
-          "2026-10-28": 1
-        },
-        "water-2": {
-          "2026-10-27": 2
-        }
-      },
+      "habits": [],
+      "counts": {},
       "focus": {
         "startedAt": null,
-        "minutes": 50,
-        "blocks": [
-          {
-            "startedAt": 1793061332180,
-            "minutes": 50,
-            "completedAt": 1793064332180
-          }
-        ]
+        "minutes": 25,
+        "blocks": []
       }
     }
   },
@@ -75,12 +28,12 @@
     {
       "text": "Checking for mixed reality…",
       "disabled": true,
-      "at": 34.900000005960464
+      "at": 19.19999998807907
     },
     {
       "text": "Enter your garden",
       "disabled": false,
-      "at": 438.2000000178814
+      "at": 509.09999999403954
     }
   ],
   "supported": {
@@ -98,59 +51,12 @@
     "ledger": {
       "format": "mebae.history.v1",
       "sample": false,
-      "habits": [
-        {
-          "id": "stretch-1",
-          "presetId": "stretch",
-          "label": "Stretch",
-          "glyph": "stretch",
-          "kind": "daily",
-          "target": 1,
-          "species": "moss",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
-            "surfaceLabel": "door",
-            "surface": "wall"
-          }
-        },
-        {
-          "id": "water-2",
-          "presetId": "water",
-          "label": "Water",
-          "glyph": "glass",
-          "kind": "counted",
-          "target": 8,
-          "species": "bamboo",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
-            "surfaceLabel": "desk",
-            "surface": "table"
-          }
-        }
-      ],
-      "counts": {
-        "stretch-1": {
-          "2026-10-27": 1,
-          "2026-10-28": 1
-        },
-        "water-2": {
-          "2026-10-27": 2
-        }
-      },
+      "habits": [],
+      "counts": {},
       "focus": {
         "startedAt": null,
-        "minutes": 50,
-        "blocks": [
-          {
-            "startedAt": 1793061332180,
-            "minutes": 50,
-            "completedAt": 1793064332180
-          }
-        ]
+        "minutes": 25,
+        "blocks": []
       }
     }
   },
@@ -169,59 +75,12 @@
     "ledger": {
       "format": "mebae.history.v1",
       "sample": false,
-      "habits": [
-        {
-          "id": "stretch-1",
-          "presetId": "stretch",
-          "label": "Stretch",
-          "glyph": "stretch",
-          "kind": "daily",
-          "target": 1,
-          "species": "moss",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
-            "surfaceLabel": "door",
-            "surface": "wall"
-          }
-        },
-        {
-          "id": "water-2",
-          "presetId": "water",
-          "label": "Water",
-          "glyph": "glass",
-          "kind": "counted",
-          "target": 8,
-          "species": "bamboo",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
-            "surfaceLabel": "desk",
-            "surface": "table"
-          }
-        }
-      ],
-      "counts": {
-        "stretch-1": {
-          "2026-10-27": 1,
-          "2026-10-28": 1
-        },
-        "water-2": {
-          "2026-10-27": 2
-        }
-      },
+      "habits": [],
+      "counts": {},
       "focus": {
         "startedAt": null,
-        "minutes": 50,
-        "blocks": [
-          {
-            "startedAt": 1793061332180,
-            "minutes": 50,
-            "completedAt": 1793064332180
-          }
-        ]
+        "minutes": 25,
+        "blocks": []
       }
     }
   },
@@ -240,59 +99,12 @@
     "ledger": {
       "format": "mebae.history.v1",
       "sample": false,
-      "habits": [
-        {
-          "id": "stretch-1",
-          "presetId": "stretch",
-          "label": "Stretch",
-          "glyph": "stretch",
-          "kind": "daily",
-          "target": 1,
-          "species": "moss",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
-            "surfaceLabel": "door",
-            "surface": "wall"
-          }
-        },
-        {
-          "id": "water-2",
-          "presetId": "water",
-          "label": "Water",
-          "glyph": "glass",
-          "kind": "counted",
-          "target": 8,
-          "species": "bamboo",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
-            "surfaceLabel": "desk",
-            "surface": "table"
-          }
-        }
-      ],
-      "counts": {
-        "stretch-1": {
-          "2026-10-27": 1,
-          "2026-10-28": 1
-        },
-        "water-2": {
-          "2026-10-27": 2
-        }
-      },
+      "habits": [],
+      "counts": {},
       "focus": {
         "startedAt": null,
-        "minutes": 50,
-        "blocks": [
-          {
-            "startedAt": 1793061332180,
-            "minutes": 50,
-            "completedAt": 1793064332180
-          }
-        ]
+        "minutes": 25,
+        "blocks": []
       }
     }
   },
@@ -311,59 +123,12 @@
     "ledger": {
       "format": "mebae.history.v1",
       "sample": false,
-      "habits": [
-        {
-          "id": "stretch-1",
-          "presetId": "stretch",
-          "label": "Stretch",
-          "glyph": "stretch",
-          "kind": "daily",
-          "target": 1,
-          "species": "moss",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
-            "surfaceLabel": "door",
-            "surface": "wall"
-          }
-        },
-        {
-          "id": "water-2",
-          "presetId": "water",
-          "label": "Water",
-          "glyph": "glass",
-          "kind": "counted",
-          "target": 8,
-          "species": "bamboo",
-          "createdDay": "2026-10-27",
-          "archivedDay": null,
-          "placement": {
-            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
-            "surfaceLabel": "desk",
-            "surface": "table"
-          }
-        }
-      ],
-      "counts": {
-        "stretch-1": {
-          "2026-10-27": 1,
-          "2026-10-28": 1
-        },
-        "water-2": {
-          "2026-10-27": 2
-        }
-      },
+      "habits": [],
+      "counts": {},
       "focus": {
         "startedAt": null,
-        "minutes": 50,
-        "blocks": [
-          {
-            "startedAt": 1793061332180,
-            "minutes": 50,
-            "completedAt": 1793064332180
-          }
-        ]
+        "minutes": 25,
+        "blocks": []
       }
     }
   }

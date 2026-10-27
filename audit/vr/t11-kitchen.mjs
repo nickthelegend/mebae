@@ -1,0 +1,30 @@
+// Final-run real-runtime observations and hand-input edge cases.
+import fs from 'node:fs';
+import sharp from '../../packages/app/node_modules/sharp/dist/index.mjs';
+import {cli,ev,xr,pinchAt,sleep,until,dist,v3} from '../../packages/app/e2e/lib.mjs';
+const phase='t11-kitchen',records=[];
+const e=x=>ev(`(async()=>{const w=window.FRAMEWORK_MCP_RUNTIME.world,sys=n=>w.systems.find(s=>s.constructor.name===n);const {garden}=await import('/src/state/garden.ts');return (${x});})()`);
+const state=()=>ev('m.state()'),targets=()=>ev('m.targets()');
+const inspect=()=>e(`(()=>{const cards=[];w.scene.traverse(o=>{if(!o.visible)return;for(let p=o.parent;p;p=p.parent)if(!p.visible)return;const im=o.material?.map?.image;if(im?.__auditText)cards.push({name:o.name,text:im.__auditText,arcs:im.__auditArcs??[],scale:o.scale.toArray()});});const p=sys('PlantingSystem'),t=sys('TraySystem'),r=sys('RoomSystem'),sp=sys('SproutSystem'),a=sys('AnchorSystem'),f=sys('FocusSystem');const desk=r.findDesk(w.player.head.position);return {state:m.state(),targets:m.targets(),cards,toast:garden.toast.peek()?.text,free:t.freeSlots(),seeds:t.seeds.count,trayLocal:{p:t.root.position.toArray(),q:t.root.quaternion.toArray()},desk:desk?{y:desk.y,label:desk.label}:null,planting:{preset:p.preset?.label,seed:p.seed.visible,reticle:p.reticle.visible,arc:p.arc.visible,preview:p.lastPreview},plants:[...sp.sprouts.values()].map(s=>({id:s.habitId,wallish:s.wallish,rootQuaternion:s.group.quaternion.toArray(),species:s.plant.form?.species,labelScale:s.label.mesh.scale.toArray(),stake:!!s.stake})),sand:{width:f.canvas.width,height:f.canvas.height,textureVersion:f.tex.version,uploadVersion:f.tex.source.version,writes:f.rakeWrites,fade:f.mat.uniforms.uFade.value,resume:f.mat.uniforms.uResume.value},ledger:JSON.parse(m.exportJson()).ledger,persistent:JSON.parse(localStorage.getItem('@immersive-web-emulation-runtime/persistent-anchors')??'null')};})()`);
+const texts=o=>o.cards.flatMap(c=>c.text);
+const card=(o,name)=>o.cards.find(c=>c.name===name);
+async function shot(name){const tmp=`/tmp/mebae-t7-${name}.png`;cli(['browser','screenshot','--output-file',tmp]);await sharp(tmp).resize({width:1000,withoutEnlargement:true}).jpeg({quality:45}).toFile(`audit/vr/${name}.jpg`);fs.rmSync(tmp);return `audit/vr/${name}.jpg`;}
+async function row(n,fn){const startedAt=new Date().toISOString();let result;try{result=await fn();}catch(err){result={ok:false,observed:{error:err.message}};}const id=`VR-${String(n).padStart(2,'0')}`;let screenshot;try{screenshot=await shot(id);}catch(err){result.ok=false;result.screenshotError=err.message;}records.push({id,startedAt,finishedAt:new Date().toISOString(),status:result.ok?'PASS':'FAIL',...result,screenshot});fs.writeFileSync(`audit/raw/${phase}-rows.json`,JSON.stringify({phase,records},null,2));console.log(id,result.ok?'PASS':'FAIL',result.ok?'':JSON.stringify(result.observed).slice(0,600));}
+async function metrics(){e(`(()=>{if(window.__auditCanvasMetrics)return;window.__auditCanvasMetrics=true;const p=CanvasRenderingContext2D.prototype,a=p.arc,c=p.clearRect;p.arc=function(...args){(this.canvas.__auditArcs??=[]).push({args,width:this.lineWidth,stroke:this.strokeStyle});return a.apply(this,args);};p.clearRect=function(...args){this.canvas.__auditArcs=[];return c.apply(this,args);};})()`);}
+async function seated(){if(!xr('status').sessionActive)xr('enter');xr('set-input-mode',{mode:'hand'});xr('set-transform',{device:'headset',position:{x:-.08,y:1.2,z:-1.35},orientation:{pitch:-28,yaw:0,roll:0}});await until(()=>state().tray?.placed,'tray');await metrics();}
+async function reset(){ev('m.wipe()');cli(['browser','reload']);await sleep(2500);await seated();}
+async function choose(index,hand='hand-right'){await pinchAt(hand,targets().seed);await until(()=>state().mode==='radial','radial');await pinchAt(hand,targets().icons[index]);await until(()=>state().mode==='aiming','aiming');}
+async function plant(index,point,hand='hand-right'){await choose(index,hand);await pinchAt(hand,point);await until(()=>state().mode==='idle'&&state().habits.length>0,'rooted');await sleep(350);return state().habits.at(-1);}
+const desk=()=>{const t=targets();return[t.tray[0]+.31,t.tray[1]+.003,t.tray[2]-.17];};
+const border=()=>{const t=targets().tray;return[t[0]-.19,t[1]+.025,t[2]+.075];};
+const label=id=>targets().sprouts[id].label;
+const chip=id=>e(`(()=>{const s=sys('SproutSystem').sprouts.get(${JSON.stringify(id)});return s.label.mesh.localToWorld(w.camera.position.clone().set(0,-s.label.mH*.405,0)).toArray();})()`);
+const tap=async p=>{await pinchAt('hand-right',p);await sleep(250);};
+const reload=async()=>{cli(['browser','reload']);await sleep(2500);await seated();await until(()=>state().anchors.outcomes!==null,'restore');await sleep(350);};
+{
+ await metrics();
+ await row(100,async()=>{const o=inspect(),st=xr('status');return{ok:st.deviceName==='Meta Quest 3'&&o.state.room.planes>0&&o.state.room.meshes>0&&o.state.tray.how==='desk'&&o.state.tray.on==='table',observed:o};});
+ await row(101,async()=>{const o=inspect();return{ok:o.state.habits.length===1&&o.state.anchors.live===1&&o.state.habits[0].placement.surfaceLabel==='table'&&texts(o).includes('on: table')&&dist(o.state.lastPlaced.point,o.state.sprouts[0].position)<.02,observed:o};});
+ await row(102,async()=>{const h=state().habits[0];if(state().weekOpen)await tap(targets().week);for(let i=0;i<2;i++)await pinchAt('hand-right',label(h.id),1.3);for(let i=0;i<3;i++)await tap(label(h.id));const three=inspect();await pinchAt('hand-right',label(h.id),1.3);const two=inspect();return{ok:three.state.habits[0].today===3&&texts(three).includes('3/8')&&two.state.habits[0].today===2&&texts(two).includes('2/8'),observed:{three,two}};});
+ await row(103,async()=>{await tap(targets().menuButtons[0]);const open=inspect(),arcs=card(open,'Week view')?.arcs.filter(a=>a.args[2]===78&&a.stroke.replaceAll(' ','')==='rgba(29,26,20,0.12)')??[];await tap(targets().week);return{ok:open.state.weekOpen&&texts(open).includes('This week')&&arcs.length===7&&!state().weekOpen,observed:{open,baseSegments:arcs.length,closed:state()}};});
+}

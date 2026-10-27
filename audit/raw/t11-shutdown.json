@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-10-27T02:48:10.851870+00:00",
+  "ownedPids": [
+    59208,
+    59267,
+    59268,
+    74259,
+    74272,
+    74273,
+    74274,
+    74279,
+    74280,
+    74281,
+    74456,
+    93196
+  ],
+  "survivingOwnedPids": [],
+  "slotReleased": true,
+  "slotReleaseExitCode": 0,
+  "slotReleaseOutput": "",
+  "restoredConfig": {
+    "device": "metaQuest3",
+    "environment": "home_office"
+  },
+  "restoredEmptyLedger": {
+    "format": "mebae.history.v1",
+    "exportedAt": "2026-10-27T00:00:00.000Z",
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [],
+      "counts": {},
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "originPushed": false,
+  "deployed": false,
+  "loomEdited": false,
+  "committed": false,
+  "commitOwner": "Loom, per authoritative worker session memory"
+}

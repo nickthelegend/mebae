@@ -33,6 +33,7 @@ import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
 import { type AimSource, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
+import { horizontalLabelRise, SAMPLE_PLANT_SCALE, SAMPLE_SPOTS } from './garden-layout.js';
 import { surfaceQuaternion } from './surface-pose.js';
 import { TrayEvents, TraySystem } from './tray.js';
 
@@ -49,15 +50,6 @@ interface Sprout {
   bounce: number;
   wallish: boolean;
 }
-
-/** Where sample plants sit around the tray (tray-local), clearly stamped. */
-const SAMPLE_SPOTS: [number, number, number][] = [
-  [0.0, 0.22, -0.42],
-  [0.42, 0, -0.08],
-  [-0.4, 0, -0.06],
-  [-0.24, 0, -0.32],
-  [0.26, 0, -0.32],
-];
 
 const stakeMat = new MeshStandardMaterial({ color: new Color('#b98a5c'), roughness: 0.8 });
 const stakeGeo = new CylinderGeometry(0.004, 0.003, 0.07, 6);
@@ -184,7 +176,7 @@ export class SproutSystem extends createSystem({}) {
         world.addScaledVector(this.nrm, 0.06);
         world.y += 0.13 * big;
       } else {
-        world.y += Math.max(0.1, (s.plant.group.userData.height ?? 0) + 0.075) + 0.02 * big;
+        world.y += horizontalLabelRise(s.plant.group.userData.height ?? 0, garden.settings.largeTargets, s.sample);
       }
       if (s.stake) {
         const st = s.stake.object3D!;
@@ -258,6 +250,7 @@ export class SproutSystem extends createSystem({}) {
     const group = new Group();
     group.name = `Sprout: ${h.label}`;
     const plant = new PlantMesh(`${h.label} plant`);
+    if (sample) plant.group.scale.setScalar(SAMPLE_PLANT_SCALE);
     group.add(plant.group);
     const label = new CanvasCard(640, 400, 0.15, 0.094, `Label: ${h.label}`);
     group.add(label.mesh);

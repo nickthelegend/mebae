@@ -25,6 +25,7 @@ import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
 import { type AimHit, type AimSource, type SelectEvent, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
+import { RADIAL_Y } from './garden-layout.js';
 import { surfaceQuaternion } from './surface-pose.js';
 import { TrayEvents, TraySystem } from './tray.js';
 
@@ -110,7 +111,7 @@ export class PlantingSystem extends createSystem({}) {
       if (this.radialEntity) return;
       if (!tray.entity) return void setTimeout(wire, 50);
       this.radialEntity = this.world.createTransformEntity(this.radial.mesh, { parent: tray.entity, persistent: true });
-      this.radial.mesh.position.set(0, 0.2, -0.02);
+      this.radial.mesh.position.set(0, RADIAL_Y, -0.02);
       this.radial.mesh.visible = false;
       makePressable(this.radialEntity, 'radial', { tap: (p) => this.onRadialTap(p) });
       this.seedEntity = this.world.createTransformEntity(this.seed, { persistent: true });
@@ -306,7 +307,7 @@ export class PlantingSystem extends createSystem({}) {
       }
       // seed lifts and bobs above the tray, radial faces the viewer
       const tray = this.world.getSystem(TraySystem)!;
-      this.tmp.set(0, 0.2, -0.02);
+      this.tmp.set(0, RADIAL_Y, -0.02);
       tray.root.localToWorld(this.tmp);
       this.seed.position.lerp(this.tmp, Math.min(1, dt * 8));
       this.seed.rotation.y += dt * 2;

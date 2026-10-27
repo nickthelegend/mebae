@@ -40,7 +40,7 @@ only on Meta VR Glasses (IWSDK gaze source + pinch). The Glasses emulator suite 
 ```
 packages/core     pure TypeScript: habits, growth, focus timer, export/import, sample garden, L-system, restore plan (Vitest)
 packages/app      the IWSDK app (Vite + IWER emulator in dev); e2e drivers in packages/app/e2e
-packages/landing  one static page (seed packet). The hero uses media/mebae-whoa.mp4 and the almanac looks for history.json (not in this tree)
+packages/landing  one static page (seed packet). The hero uses media/mebae-whoa.mp4 and the almanac looks for packages/landing/history.json, the empty recorded-run file a judge can replace with a real export
 ```
 
 ## Run it

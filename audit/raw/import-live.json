@@ -1,0 +1,203 @@
+{
+  "id": "VR-64",
+  "startedAt": "2026-10-27T01:00:09.669Z",
+  "source": {
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [
+        {
+          "id": "water-1",
+          "presetId": "water",
+          "label": "Water",
+          "glyph": "glass",
+          "kind": "counted",
+          "target": 8,
+          "species": "bamboo",
+          "createdDay": "2026-10-27",
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "1b3ec9d2-cc38-41c5-bc9c-6519ea0a355f",
+            "surfaceLabel": "desk",
+            "surface": "table"
+          }
+        }
+      ],
+      "counts": {
+        "water-1": {
+          "2026-10-27": 1
+        }
+      },
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    },
+    "settings": {
+      "highContrast": false,
+      "largeTargets": false,
+      "oneHand": true
+    },
+    "tray": {
+      "local": {
+        "p": [
+          -0.07999999821186066,
+          0.7419999837875366,
+          -1.834999918937683
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "anchorUuid": "9515d608-e50a-4185-a7e3-f4a0fa56caf0"
+    },
+    "storage": {
+      "iwsdk_scene_anchor_uuid": "9515d608-e50a-4185-a7e3-f4a0fa56caf0",
+      "@immersive-web-emulation-runtime/persistent-anchors": "{\"6bf45f2c-b258-4f88-bf08-3975984c3970\":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],\"1b3ec9d2-cc38-41c5-bc9c-6519ea0a355f\":[0.9065678715705872,-0.00004220599657855928,0.4220599830150604,0,4.474274683391455e-13,1,0.0000999999901978299,0,-0.4220599830150604,-0.00009065678023034707,0.9065678715705872,0,0.22986754775047302,0.7400000095367432,-2.0156290531158447,1],\"9515d608-e50a-4185-a7e3-f4a0fa56caf0\":[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]}"
+    }
+  },
+  "console": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "before": {
+    "today": "2026-10-27",
+    "xr": true,
+    "mode": "idle",
+    "weekOpen": false,
+    "sample": false,
+    "settings": {
+      "highContrast": false,
+      "largeTargets": false,
+      "oneHand": true
+    },
+    "tray": {
+      "placed": true,
+      "how": "restored",
+      "on": "",
+      "position": [
+        -0.07999999821186066,
+        0.7419999837875366,
+        -1.834999918937683
+      ]
+    },
+    "room": {
+      "planes": 13,
+      "meshes": 9
+    },
+    "anchors": {
+      "live": 1,
+      "persistentSupported": true,
+      "outcomes": [
+        {
+          "habitId": "water-1",
+          "status": "restored"
+        }
+      ]
+    },
+    "hitTest": true,
+    "habits": [
+      {
+        "id": "water-1",
+        "label": "Water",
+        "kind": "counted",
+        "today": 1,
+        "target": 8,
+        "stage": 0,
+        "vitality": "fresh",
+        "placement": {
+          "anchorUuid": "1b3ec9d2-cc38-41c5-bc9c-6519ea0a355f",
+          "surfaceLabel": "desk",
+          "surface": "table"
+        }
+      }
+    ],
+    "sprouts": [
+      {
+        "id": "water-1",
+        "stage": 0,
+        "position": [
+          0.22986754775047302,
+          0.7400000095367432,
+          -2.0156290531158447
+        ],
+        "sample": false,
+        "triangles": 30
+      }
+    ],
+    "lastPlaced": null,
+    "focus": {
+      "running": false,
+      "minutes": 25,
+      "remainingMs": 0,
+      "remainingFraction": 0,
+      "stones": 0,
+      "rakeMs": 0,
+      "rakeWrites": 0,
+      "ink": "#1d1a14"
+    },
+    "palmUp": false
+  },
+  "imported": {
+    "format": "mebae.history.v1",
+    "exportedAt": "2026-10-27T01:00:11.217Z",
+    "ledger": {
+      "format": "mebae.history.v1",
+      "sample": false,
+      "habits": [
+        {
+          "id": "water-1",
+          "presetId": "water",
+          "label": "Water",
+          "glyph": "glass",
+          "kind": "counted",
+          "target": 8,
+          "species": "bamboo",
+          "createdDay": "2026-10-27",
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "f174275c-7269-4156-99e3-e8ded88b7ec4",
+            "surfaceLabel": "desk",
+            "surface": "table"
+          }
+        },
+        {
+          "id": "stretch-1",
+          "presetId": "stretch",
+          "label": "Stretch",
+          "glyph": "stretch",
+          "kind": "daily",
+          "target": 1,
+          "species": "moss",
+          "createdDay": "2026-10-27",
+          "archivedDay": "2026-10-31",
+          "placement": null
+        }
+      ],
+      "counts": {
+        "water-1": {
+          "2026-10-27": 8
+        },
+        "stretch-1": {
+          "2026-10-27": 1,
+          "2026-10-28": 1
+        }
+      },
+      "focus": {
+        "startedAt": null,
+        "minutes": 25,
+        "blocks": []
+      }
+    }
+  },
+  "confirm": "Replace this browser's history with 2 habits from same-id-new-handles.json? Anchors from another headset will ask to be pinned again.",
+  "dialogError": "dialog.accept: Protocol error (Page.handleJavaScriptDialog): No dialog is showing",
+  "ok": false,
+  "error": "page.waitForNavigation: Timeout 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+  "finishedAt": "2026-10-27T01:00:41.229Z",
+  "status": "FAIL"
+}

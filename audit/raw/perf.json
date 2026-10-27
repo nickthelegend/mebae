@@ -1,6 +1,6 @@
 {
   "suite": "perf",
-  "recordedAt": "2026-10-27T00:01:08.392Z",
+  "recordedAt": "2026-10-27T01:09:01.075Z",
   "results": [
     {
       "name": "600-frame sample",
@@ -10,17 +10,17 @@
     {
       "name": "CPU p95 ≤ 4 ms",
       "ok": true,
-      "detail": "2.400 ms"
+      "detail": "1.200 ms"
     },
     {
       "name": "draw calls ≤ 50",
-      "ok": false,
-      "detail": "92"
+      "ok": true,
+      "detail": "48"
     },
     {
       "name": "triangles ≤ 150000",
       "ok": true,
-      "detail": "37556"
+      "detail": "37664"
     },
     {
       "name": "six grown plants still present",
@@ -38,38 +38,38 @@
       "detail": "[]"
     }
   ],
-  "failed": 1,
+  "failed": 0,
   "metrics": {
     "frames": 600,
     "cpuMs": {
-      "p50": 1.5,
-      "p95": 2.399999976158142,
-      "max": 3.100000023841858
+      "p50": 0.7999999821186066,
+      "p95": 1.199999988079071,
+      "max": 2.300000011920929
     },
     "drawCalls": {
-      "p50": 92,
-      "max": 92
+      "p50": 48,
+      "max": 48
     },
     "triangles": {
-      "p50": 37556,
-      "max": 37556
+      "p50": 37664,
+      "max": 37664
     }
   },
   "browserProfile": {
     "application": {
       "generation": 2,
-      "id": "tab-mvpx6gxg-03ygka",
+      "id": "tab-mvpzm81e-52123a",
       "outerUrl": "https://localhost:8081/",
       "url": "https://localhost:8081/",
       "workspaceFramed": true
     },
     "calibrated": false,
     "classification": "host-browser-diagnostic",
-    "durationMs": 10812,
+    "durationMs": 10790,
     "droppedInterruptionCount": 0,
     "interruptions": [],
     "mode": "rendering",
-    "profileId": "686b1a2c-082a-4b23-bdd2-70d08e2e3f04",
+    "profileId": "c3f7caac-47bc-4bcc-aeec-5c1cf668721d",
     "status": "stopped",
     "targetDevice": null,
     "environment": {
@@ -80,42 +80,42 @@
     },
     "summary": {
       "browserMetrics": {
-        "Timestamp": 139775.379493,
+        "Timestamp": 143848.328723,
         "AudioHandlers": 6,
         "AudioWorkletProcessors": 0,
         "Documents": 2,
         "Frames": 2,
         "JSEventListeners": 853,
-        "LayoutObjects": 77,
+        "LayoutObjects": 78,
         "MediaKeySessions": 0,
         "MediaKeys": 0,
-        "Nodes": 1040,
+        "Nodes": 1041,
         "Resources": 355,
-        "ContextLifecycleStateObservers": 64,
-        "V8PerContextDatas": 52,
+        "ContextLifecycleStateObservers": 66,
+        "V8PerContextDatas": 50,
         "WorkerGlobalScopes": 0,
         "UACSSResources": 0,
         "RTCPeerConnections": 0,
         "ResourceFetchers": 2,
         "AdSubframes": 0,
         "DetachedScriptStates": 0,
-        "ArrayBufferContents": 3542,
+        "ArrayBufferContents": 3617,
         "LayoutCount": 34,
         "RecalcStyleCount": 85,
-        "LayoutDuration": 0.002092,
-        "RecalcStyleDuration": 0.009006,
-        "DevToolsCommandDuration": 0.09316,
-        "ScriptDuration": 1.578081,
+        "LayoutDuration": 0.001521,
+        "RecalcStyleDuration": 0.008191,
+        "DevToolsCommandDuration": 0.093401,
+        "ScriptDuration": 1.130956,
         "V8CompileDuration": 0,
-        "TaskDuration": 1.815608,
-        "TaskOtherDuration": 0.133269,
-        "ThreadTime": 1.641567,
-        "ProcessTime": 9.516135,
-        "JSHeapUsedSize": 166232744,
-        "JSHeapTotalSize": 283607040,
-        "FirstMeaningfulPaint": 139733.913598,
-        "DomContentLoaded": 139732.93068,
-        "NavigationStart": 139732.614495
+        "TaskDuration": 1.335609,
+        "TaskOtherDuration": 0.10154,
+        "ThreadTime": 1.145331,
+        "ProcessTime": 6.797423,
+        "JSHeapUsedSize": 172537776,
+        "JSHeapTotalSize": 240648192,
+        "FirstMeaningfulPaint": 143828.102291,
+        "DomContentLoaded": 143827.111665,
+        "NavigationStart": 143826.809317
       },
       "collection": {
         "eventTiming": false,
@@ -131,17 +131,17 @@
         "max": 16.80000000000291,
         "p50": 16.69999999999891,
         "p95": 16.700000000000728,
-        "sampleCount": 648,
+        "sampleCount": 646,
         "source": "requestAnimationFrame-interval"
       },
       "longTasks": {
         "count": 3,
-        "totalDurationMs": 679
+        "totalDurationMs": 645
       },
       "marks": [
         {
           "name": "iwsdk-browser-profile-rendering-start",
-          "startTime": 7635.700000017881
+          "startTime": 7953.0999999940395
         }
       ]
     }
@@ -149,7 +149,7 @@
   "profile": {
     "application": {
       "generation": 2,
-      "id": "tab-mvpx6gxg-03ygka",
+      "id": "tab-mvpzm81e-52123a",
       "outerUrl": "https://localhost:8081/",
       "url": "https://localhost:8081/",
       "workspaceFramed": true
@@ -160,7 +160,7 @@
     "droppedInterruptionCount": 0,
     "interruptions": [],
     "mode": "rendering",
-    "profileId": "686b1a2c-082a-4b23-bdd2-70d08e2e3f04",
+    "profileId": "c3f7caac-47bc-4bcc-aeec-5c1cf668721d",
     "status": "started",
     "targetDevice": null
   },

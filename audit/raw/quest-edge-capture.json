@@ -1,0 +1,14 @@
+{
+  "recordedAt": "2026-10-27T01:03:25.435Z",
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "httpErrors": 0,
+  "requests": 11221,
+  "snapshots": 3078,
+  "supersededAttemptRemoved": {
+    "start": "2026-10-27T00:59:20.230Z",
+    "end": "2026-10-27T00:59:23.870Z",
+    "reason": "about:blank IndexedDB setup error; guard added, row rerun with fresh capture in storage-final"
+  }
+}

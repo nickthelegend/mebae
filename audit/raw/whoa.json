@@ -1,26 +1,26 @@
 {
-  "capturedAt": "2026-10-27T00:02:49.614Z",
+  "capturedAt": "2026-10-27T01:01:19.922Z",
   "initialDay": "2026-10-27",
   "footage": {
     "frames": 2100,
-    "dir": "/tmp/mebae-t5-frames-fREdVK"
+    "dir": "/tmp/mebae-t5-frames-ihc2Bz"
   },
   "marks": [
     {
       "at": 0,
-      "text": "Day 1 · 2026-10-27 · IWER Quest 3 · hands only"
+      "text": "Day 1 \u00b7 2026-10-27 \u00b7 IWER Quest 3 \u00b7 hands only"
     },
     {
-      "at": 4.438,
-      "text": "Stretch takes root on a detected surface · real XRAnchor"
+      "at": 4.434,
+      "text": "Stretch takes root on a detected surface \u00b7 real XRAnchor"
     },
     {
-      "at": 5.246,
-      "text": "One real check-in · stage 1 · no clock advancement"
+      "at": 5.259,
+      "text": "One real check-in \u00b7 stage 1 \u00b7 no clock advancement"
     },
     {
-      "at": 20.959,
-      "text": "Example garden (sample data) · NOT a recorded later day"
+      "at": 20.947,
+      "text": "Example garden (sample data) \u00b7 NOT a recorded later day"
     }
   ],
   "realAtStageOne": {
@@ -69,7 +69,7 @@
         "stage": 1,
         "vitality": "thriving",
         "placement": {
-          "anchorUuid": "35c6c985-c083-470a-949a-b47fef135ae3",
+          "anchorUuid": "7e660121-1e6b-4a1a-a2b3-75d7ef1a0f6d",
           "surfaceLabel": "door",
           "surface": "wall"
         }
@@ -224,8 +224,8 @@
         "stage": 7,
         "position": [
           -0.07999999821186066,
-          0.9620000123977661,
-          -2.254999876022339
+          0.7919999957084656,
+          -2.31499981880188
         ],
         "sample": true,
         "triangles": 96
@@ -234,9 +234,9 @@
         "id": "sample-deep-work",
         "stage": 7,
         "position": [
-          0.3400000035762787,
+          0.20000000298023224,
           0.7419999837875366,
-          -1.9149999618530273
+          -2.134999990463257
         ],
         "sample": true,
         "triangles": 2173
@@ -245,9 +245,9 @@
         "id": "sample-water",
         "stage": 7,
         "position": [
-          -0.47999998927116394,
+          -0.35999998450279236,
           0.7419999837875366,
-          -1.8949998617172241
+          -2.134999990463257
         ],
         "sample": true,
         "triangles": 765
@@ -256,9 +256,9 @@
         "id": "sample-read",
         "stage": 6,
         "position": [
-          -0.3199999928474426,
+          -0.30000001192092896,
           0.7419999837875366,
-          -2.1549999713897705
+          -2.5149998664855957
         ],
         "sample": true,
         "triangles": 1536
@@ -267,9 +267,9 @@
         "id": "sample-lights-out",
         "stage": 6,
         "position": [
-          0.18000000715255737,
+          0.14000000059604645,
           0.7419999837875366,
-          -2.1549999713897705
+          -2.5149998664855957
         ],
         "sample": true,
         "triangles": 1536
@@ -299,5 +299,7 @@
   },
   "error": null,
   "multiDayFootage": false,
-  "qualification": "First-day capture plus labelled sample preview. Real separate-day footage is still required."
+  "qualification": "First-day capture plus labelled sample preview. Real separate-day footage is still required.",
+  "temporaryFramesDeleted": true,
+  "video": "audit/vr/first-day.mp4"
 }

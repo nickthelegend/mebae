@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {cli,ev,xr,sleep,until}from '../../packages/app/e2e/lib.mjs';
 fs.writeFileSync('audit/raw/phase.txt','whoa');
-const dir=fs.mkdtempSync('/tmp/mebae-t5-frames-');
+const dir=fs.mkdtempSync('/tmp/mebae-t7-frames-');
 fs.writeFileSync('audit/raw/whoa-frames-path.txt',dir);
 process.env.MEBAE_REC_DIR=dir;
 ev('m.wipe()');cli(['browser','reload']);await sleep(2500);

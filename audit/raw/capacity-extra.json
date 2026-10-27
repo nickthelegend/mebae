@@ -2,7 +2,7 @@
   "phase": "capacity-extra",
   "records": [
     {
-      "at": "2026-10-27T00:02:06.148Z",
+      "at": "2026-10-27T01:09:22.950Z",
       "name": "six-before",
       "state": {
         "today": "2026-10-27",
@@ -45,7 +45,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "0bf724ea-136c-464b-b01e-5cb9480ed3e1",
+              "anchorUuid": "84a05d8e-edba-47be-98ea-acf8ca4f5c5d",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -59,7 +59,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "acc32596-000b-45d8-af27-1032199c5405",
+              "anchorUuid": "41de112c-229a-4749-b4c0-5ff13bb28692",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -73,7 +73,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "2bafc4b6-c658-498c-882d-1105c77c4766",
+              "anchorUuid": "f2b2183d-d292-4dc9-92ce-2c326a13e1a7",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -87,7 +87,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "4ee7d845-8d98-4aa3-b995-2e34aecb096d",
+              "anchorUuid": "f8ae97aa-cb5d-434c-9997-6e49b99b54db",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -101,7 +101,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "a9dc9592-184d-4ecc-9e8f-23541b97d130",
+              "anchorUuid": "617bb76b-848b-48d9-a443-742bb6630443",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -115,7 +115,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "a66275f9-e280-4614-829b-78592b117a6c",
+              "anchorUuid": "32721cb5-6247-471d-9c29-5e4e907ef2ff",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -395,22 +395,22 @@
           "radial": [
             [
               -0.23999999821186066,
-              0.7819999867677688,
+              0.761999990940094,
               -1.8549999184906483
             ],
             [
               -0.23999999821186066,
-              1.1019999867677688,
+              1.081999990940094,
               -1.8549999184906483
             ],
             [
               0.08000000178813935,
-              0.7819999867677688,
+              0.761999990940094,
               -1.8549999184906483
             ],
             [
               0.08000000178813935,
-              1.1019999867677688,
+              1.081999990940094,
               -1.8549999184906483
             ]
           ],
@@ -598,7 +598,7 @@
         "arc": false
       },
       "freeSlots": [],
-      "trayAnchor": "4c9442ba-a78f-4975-af95-f10a676fc71f",
+      "trayAnchor": "27b53b58-0f08-4240-b91d-7baf59972234",
       "roomTargets": [
         {
           "name": "",
@@ -695,6 +695,7 @@
             0,
             0.9808202981948853
           ],
+          "species": "fern",
           "stake": true
         },
         {
@@ -706,6 +707,7 @@
             0,
             1
           ],
+          "species": "bamboo",
           "stake": true
         },
         {
@@ -717,6 +719,7 @@
             0,
             0.9808202981948853
           ],
+          "species": "maple",
           "stake": true
         },
         {
@@ -728,6 +731,7 @@
             0,
             0.9898831844329834
           ],
+          "species": "moss",
           "stake": true
         },
         {
@@ -739,6 +743,7 @@
             0,
             1
           ],
+          "species": "fern",
           "stake": true
         },
         {
@@ -750,6 +755,7 @@
             0,
             0.9898831844329834
           ],
+          "species": "maple",
           "stake": true
         }
       ],
@@ -768,7 +774,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "0bf724ea-136c-464b-b01e-5cb9480ed3e1",
+              "anchorUuid": "84a05d8e-edba-47be-98ea-acf8ca4f5c5d",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -784,7 +790,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "acc32596-000b-45d8-af27-1032199c5405",
+              "anchorUuid": "41de112c-229a-4749-b4c0-5ff13bb28692",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -800,7 +806,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "2bafc4b6-c658-498c-882d-1105c77c4766",
+              "anchorUuid": "f2b2183d-d292-4dc9-92ce-2c326a13e1a7",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -816,7 +822,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "4ee7d845-8d98-4aa3-b995-2e34aecb096d",
+              "anchorUuid": "f8ae97aa-cb5d-434c-9997-6e49b99b54db",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -832,7 +838,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "a9dc9592-184d-4ecc-9e8f-23541b97d130",
+              "anchorUuid": "617bb76b-848b-48d9-a443-742bb6630443",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -848,7 +854,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "a66275f9-e280-4614-829b-78592b117a6c",
+              "anchorUuid": "32721cb5-6247-471d-9c29-5e4e907ef2ff",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1020,13 +1026,13 @@
       }
     },
     {
-      "at": "2026-10-27T00:02:07.793Z",
+      "at": "2026-10-27T01:09:24.569Z",
       "name": "seventh-refused",
       "state": {
         "today": "2026-10-27",
         "xr": true,
         "mode": "idle",
-        "weekOpen": false,
+        "weekOpen": true,
         "sample": false,
         "settings": {
           "highContrast": false,
@@ -1063,7 +1069,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "0bf724ea-136c-464b-b01e-5cb9480ed3e1",
+              "anchorUuid": "84a05d8e-edba-47be-98ea-acf8ca4f5c5d",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1077,7 +1083,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "acc32596-000b-45d8-af27-1032199c5405",
+              "anchorUuid": "41de112c-229a-4749-b4c0-5ff13bb28692",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1091,7 +1097,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "2bafc4b6-c658-498c-882d-1105c77c4766",
+              "anchorUuid": "f2b2183d-d292-4dc9-92ce-2c326a13e1a7",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1105,7 +1111,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "4ee7d845-8d98-4aa3-b995-2e34aecb096d",
+              "anchorUuid": "f8ae97aa-cb5d-434c-9997-6e49b99b54db",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1119,7 +1125,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "a9dc9592-184d-4ecc-9e8f-23541b97d130",
+              "anchorUuid": "617bb76b-848b-48d9-a443-742bb6630443",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1133,7 +1139,7 @@
             "stage": 7,
             "vitality": "waiting",
             "placement": {
-              "anchorUuid": "a66275f9-e280-4614-829b-78592b117a6c",
+              "anchorUuid": "32721cb5-6247-471d-9c29-5e4e907ef2ff",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1283,7 +1289,11 @@
           ]
         ],
         "wrist": null,
-        "week": null,
+        "week": [
+          -0.07999999821186066,
+          0.9419999867677689,
+          -1.8949999175965786
+        ],
         "reticle": null,
         "sprouts": {
           "read-1": {
@@ -1413,22 +1423,22 @@
           "radial": [
             [
               -0.23999999821186066,
-              0.7819999867677688,
+              0.761999990940094,
               -1.8549999184906483
             ],
             [
               -0.23999999821186066,
-              1.1019999867677688,
+              1.081999990940094,
               -1.8549999184906483
             ],
             [
               0.08000000178813935,
-              0.7819999867677688,
+              0.761999990940094,
               -1.8549999184906483
             ],
             [
               0.08000000178813935,
-              1.1019999867677688,
+              1.081999990940094,
               -1.8549999184906483
             ]
           ],
@@ -1483,20 +1493,9 @@
           "name": "",
           "text": [],
           "scale": [
-            2.3259560107118014,
-            2.3259560107118014,
-            2.3259560107118014
-          ]
-        },
-        {
-          "name": "Sample stamp",
-          "text": [
-            "6 of 6 habits · move a sprout into the tray to free a seed"
-          ],
-          "scale": [
-            1,
-            1,
-            1
+            2.2818647575249065,
+            2.2818647575249065,
+            2.2818647575249065
           ]
         },
         {
@@ -1526,10 +1525,24 @@
           ]
         },
         {
-          "name": "Toast",
+          "name": "Week view",
           "text": [
-            "Rake the sand: pinch and drag across it for 2 s to",
-            "start 25 minutes (4 s for 50)."
+            "This week",
+            "Oct 26 – Nov 1",
+            "stones 0",
+            "Read",
+            "in bloom",
+            "Water",
+            "in bloom",
+            "Deep work",
+            "in bloom",
+            "Stretch",
+            "in bloom",
+            "Read",
+            "in bloom",
+            "Deep work",
+            "in bloom",
+            "Mon → Sun · a missed day pauses growth, never kills it · pinch to close"
           ],
           "scale": [
             1,
@@ -1637,7 +1650,7 @@
         "arc": false
       },
       "freeSlots": [],
-      "trayAnchor": "4c9442ba-a78f-4975-af95-f10a676fc71f",
+      "trayAnchor": "27b53b58-0f08-4240-b91d-7baf59972234",
       "roomTargets": [
         {
           "name": "",
@@ -1734,6 +1747,7 @@
             0,
             0.9808202981948853
           ],
+          "species": "fern",
           "stake": true
         },
         {
@@ -1745,6 +1759,7 @@
             0,
             1
           ],
+          "species": "bamboo",
           "stake": true
         },
         {
@@ -1756,6 +1771,7 @@
             0,
             0.9808202981948853
           ],
+          "species": "maple",
           "stake": true
         },
         {
@@ -1767,6 +1783,7 @@
             0,
             0.9898831844329834
           ],
+          "species": "moss",
           "stake": true
         },
         {
@@ -1778,6 +1795,7 @@
             0,
             1
           ],
+          "species": "fern",
           "stake": true
         },
         {
@@ -1789,6 +1807,7 @@
             0,
             0.9898831844329834
           ],
+          "species": "maple",
           "stake": true
         }
       ],
@@ -1807,7 +1826,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "0bf724ea-136c-464b-b01e-5cb9480ed3e1",
+              "anchorUuid": "84a05d8e-edba-47be-98ea-acf8ca4f5c5d",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1823,7 +1842,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "acc32596-000b-45d8-af27-1032199c5405",
+              "anchorUuid": "41de112c-229a-4749-b4c0-5ff13bb28692",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1839,7 +1858,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "2bafc4b6-c658-498c-882d-1105c77c4766",
+              "anchorUuid": "f2b2183d-d292-4dc9-92ce-2c326a13e1a7",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1855,7 +1874,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "4ee7d845-8d98-4aa3-b995-2e34aecb096d",
+              "anchorUuid": "f8ae97aa-cb5d-434c-9997-6e49b99b54db",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1871,7 +1890,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "a9dc9592-184d-4ecc-9e8f-23541b97d130",
+              "anchorUuid": "617bb76b-848b-48d9-a443-742bb6630443",
               "surfaceLabel": "other",
               "surface": "table"
             }
@@ -1887,7 +1906,7 @@
             "createdDay": "2026-10-27",
             "archivedDay": null,
             "placement": {
-              "anchorUuid": "a66275f9-e280-4614-829b-78592b117a6c",
+              "anchorUuid": "32721cb5-6247-471d-9c29-5e4e907ef2ff",
               "surfaceLabel": "other",
               "surface": "table"
             }

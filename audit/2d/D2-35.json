@@ -1,9 +1,7 @@
 {
   "id": "D2-35",
+  "recordedAt": "2026-10-27T01:30:50.818428+00:00",
   "status": "UNTESTED",
-  "dependency": "needs a Quest headset",
-  "execution": "Not run: no real Quest headset is connected or available. No emulator result substitutes for this row.",
-  "console": [],
-  "pageErrors": [],
-  "network": []
+  "dependency": "Needs a physical Quest headset / Quest Browser.",
+  "hardwareTested": false
 }

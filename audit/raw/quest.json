@@ -1,6 +1,6 @@
 {
   "suite": "quest",
-  "recordedAt": "2026-10-26T23:52:39.013Z",
+  "recordedAt": "2026-10-27T01:03:34.076Z",
   "results": [
     {
       "name": "cold load: tray placed on a real surface",
@@ -15,7 +15,7 @@
     {
       "name": "3. habit created with an XRAnchor",
       "ok": true,
-      "detail": "{\"anchorUuid\":\"b5b0d6ae-5c23-479b-b5ab-c8a0535e551d\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
+      "detail": "{\"anchorUuid\":\"0b83159a-4ac2-4bbf-b8c5-896c480bd344\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
     },
     {
       "name": "3. surface label from the room scan",
@@ -35,7 +35,7 @@
     {
       "name": "first habit pinned and checked in under 60 s",
       "ok": true,
-      "detail": "11.6 s through check-in (9.9 s to pin)"
+      "detail": "14.1 s through check-in (12.1 s to pin)"
     },
     {
       "name": "5. water planted on the desk",
@@ -55,7 +55,7 @@
     {
       "name": "6. raking started the focus timer",
       "ok": true,
-      "detail": "rake 3303 ms, 191 texture writes, 25 min"
+      "detail": "rake 3301 ms, 191 texture writes, 25 min"
     },
     {
       "name": "7. history restored after reload",

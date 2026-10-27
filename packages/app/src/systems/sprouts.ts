@@ -12,18 +12,19 @@ import {
 } from '@mebae/core';
 import {
   type Entity,
+  BoxGeometry,
   Color,
   CylinderGeometry,
   Group,
   InstancedMesh,
+  Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
-  Object3D,
   Quaternion,
   Vector3,
   createSystem,
 } from '@iwsdk/core';
 import { chimeGrow, chimeTap, chimeUndo, unlockAudio } from '../fx/chimes.js';
-import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
 import { PressRouter, makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { PlantMesh, mossMat } from '../plants/plant-mesh.js';
 import { garden } from '../state/garden.js';
@@ -53,6 +54,8 @@ interface Sprout {
 
 const stakeMat = new MeshStandardMaterial({ color: new Color('#b98a5c'), roughness: 0.8 });
 const stakeGeo = new CylinderGeometry(0.004, 0.003, 0.07, 6);
+const stakePickGeo = new BoxGeometry(0.03, 0.09, 0.05);
+const stakePickMat = new MeshBasicMaterial({ visible: false });
 
 /**
  * The living sprouts: one per habit, drawn only where its anchor really is.
@@ -81,21 +84,7 @@ export class SproutSystem extends createSystem({}) {
     this.stakes = new InstancedMesh(stakeGeo, stakeMat, MAX_HABITS);
     this.stakes.name = 'Move stakes';
     this.stakes.count = 0;
-    bindInstanceSpherecast(this.stakes);
-    const stakesEntity = this.world.createTransformEntity(this.stakes, { persistent: true });
-    makePressable(stakesEntity, 'move-stakes', {
-      tap: (point) => {
-        if (!point) return;
-        let closest: Sprout | null = null;
-        let distance = Infinity;
-        for (const s of this.sprouts.values()) {
-          if (!s.stake) continue;
-          const d = s.stake.object3D!.position.distanceToSquared(point);
-          if (d < distance) { closest = s; distance = d; }
-        }
-        if (closest) this.startCarry(closest.habitId);
-      },
-    });
+    this.world.createTransformEntity(this.stakes, { persistent: true });
     const aim = () => this.world.getSystem(AimSystem);
     const wire = () => {
       const a = aim();
@@ -270,17 +259,22 @@ export class SproutSystem extends createSystem({}) {
     const key = `sprout:${h.id}`;
     const s: Sprout = { habitId: h.id, sample, entity, group, plant, label, stake: null, stage: -1, key: '', bounce: 0, wallish: false };
     if (!sample) {
+      // Mature foliage can overlap the wooden handle, especially on walls.
+      // Keep labels, move targets and menus ahead of decorative plant hits.
+      plant.group.pointerEventsOrder = -1;
       makePressable(entity, key, {
         tap: (p) => this.onTap(s, p),
         hold: () => {
           if (!garden.settings.oneHand) this.undo(s);
         },
       });
-      // Keep a named transform per handle; all six visible handles share one
-      // instanced draw and retain per-instance ray/poke hit testing.
-      const handle = new Object3D();
+      // Visible wood stays in one instanced draw. Each handle has its own
+      // wider invisible pick target, outside the label and above the foliage.
+      // Resolve the habit directly instead of guessing from a thin instance hit.
+      const handle = new Mesh(stakePickGeo, stakePickMat);
       handle.name = `Move: ${h.label}`;
       s.stake = this.world.createTransformEntity(handle, { persistent: true });
+      makePressable(s.stake, `move:${h.id}`, { tap: () => this.startCarry(h.id) });
     } else {
       makePressable(entity, key, { tap: () => garden.say('This is the example garden (sample data). Turn it off in the tray menu to tend your own.') });
     }
@@ -294,6 +288,7 @@ export class SproutSystem extends createSystem({}) {
     s.plant.dispose();
     s.label.texture.dispose();
     unregisterPressable(`sprout:${id}`);
+    unregisterPressable(`move:${id}`);
     s.stake?.destroy();
     s.entity.destroy();
     this.sprouts.delete(id);

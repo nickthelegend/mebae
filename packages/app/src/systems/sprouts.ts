@@ -24,14 +24,14 @@ import {
 } from '@iwsdk/core';
 import { chimeGrow, chimeTap, chimeUndo, unlockAudio } from '../fx/chimes.js';
 import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
-import { makePressable, unregisterPressable } from '../interaction/press-router.js';
+import { PressRouter, makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { PlantMesh, mossMat } from '../plants/plant-mesh.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
 import { CanvasCard, roundRect } from '../ui/canvas-card.js';
 import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
-import { type AimSource, AimSystem } from './aim.js';
+import { type AimSource, type SelectEvent, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
 import { horizontalLabelRise, SAMPLE_PLANT_SCALE, SAMPLE_SPOTS } from './garden-layout.js';
 import { surfaceQuaternion } from './surface-pose.js';
@@ -70,6 +70,7 @@ export class SproutSystem extends createSystem({}) {
   private q = new Quaternion();
   private carryId: string | null = null;
   private carryStart = 0;
+  private pendingSelect: SelectEvent | null = null;
   private carrySrc: AimSource = 'right';
   private labelWorld = new Vector3();
   private nrm = new Vector3();
@@ -99,7 +100,7 @@ export class SproutSystem extends createSystem({}) {
     const wire = () => {
       const a = aim();
       if (!a) return void setTimeout(wire, 50);
-      this.cleanupFuncs.push(a.onSelect((e) => this.onSelect(e.source, e.startedAt)));
+      this.cleanupFuncs.push(a.onSelect((e) => this.onSelect(e)));
     };
     wire();
     this.cleanupFuncs.push(this.world.getSystem(TrayEvents)!.on('drop-in-tray', () => {
@@ -109,6 +110,7 @@ export class SproutSystem extends createSystem({}) {
       for (const id of [...this.sprouts.keys()]) this.drop(id);
       this.stakes.count = 0;
       this.carryId = null;
+      this.pendingSelect = null;
     });
   }
 
@@ -128,6 +130,16 @@ export class SproutSystem extends createSystem({}) {
   }
 
   update(dt: number): void {
+    // PressRouter runs first, so menu presses consume their pinch before a
+    // surface behind the menu can become a move or a tray removal.
+    const selection = this.pendingSelect;
+    this.pendingSelect = null;
+    if (selection && ui.mode.peek() === 'carrying' && this.carryId) {
+      const presses = this.world.getSystem(PressRouter)!;
+      if (!presses.wasPressedSince('tray-menu', selection.startedAt) && !presses.wasPressedSince('wrist-menu', selection.startedAt)) {
+        void this.finishCarry(selection.source, presses.wasPressedSince('tray-base', selection.startedAt));
+      }
+    }
     const tray = this.world.getSystem(TraySystem);
     if (!tray?.placed) return;
     const now = performance.now();
@@ -352,12 +364,14 @@ export class SproutSystem extends createSystem({}) {
     s.group.quaternion.slerp(this.q, 0.35);
   }
 
-  private onSelect(src: AimSource, startedAt: number): void {
-    if (ui.mode.peek() !== 'carrying' || !this.carryId || startedAt < this.carryStart + 30) return;
-    void this.finishCarry(src);
+  private onSelect(selection: SelectEvent): void {
+    if (ui.mode.peek() !== 'carrying' || !this.carryId || selection.startedAt < this.carryStart + 30) return;
+    this.pendingSelect = selection;
   }
 
   private async finishCarry(src: AimSource, remove = false): Promise<void> {
+    if (ui.mode.peek() !== 'carrying' || !this.carryId) return;
+    this.pendingSelect = null;
     // Lock the flow before awaiting anchor work so one pinch cannot commit twice.
     ui.mode.value = 'flying';
     try {
@@ -374,14 +388,13 @@ export class SproutSystem extends createSystem({}) {
     const id = this.carryId!;
     const aim = this.world.getSystem(AimSystem)!;
     const anchors = this.world.getSystem(AnchorSystem)!;
-    const tray = this.world.getSystem(TraySystem)!;
     const hit = aim.hit(aim.preferred(src === 'left' ? 'left' : 'right'));
     const h = garden.real.habits.find((x) => x.id === id);
     this.carryId = null;
     aim.enabled = false;
     if (!h) return;
     const oldUuid = h.placement?.anchorUuid ?? null;
-    if (remove || (hit && tray.contains(hit.point))) {
+    if (remove) {
       await anchors.remove(id, oldUuid);
       archiveHabit(garden.real, id, garden.clock);
       chimeUndo();

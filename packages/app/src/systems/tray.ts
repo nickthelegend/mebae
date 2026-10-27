@@ -16,7 +16,7 @@ import {
   createSystem,
 } from '@iwsdk/core';
 import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
-import { makePressable, unregisterPressable } from '../interaction/press-router.js';
+import { PressRouter, makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
 import { CanvasCard, roundRect } from '../ui/canvas-card.js';
@@ -138,13 +138,17 @@ export class TraySystem extends createSystem({}) {
     this.entity.addComponent(XRAnchor);
     const baseEntity = this.world.createTransformEntity(this.base, { parent: this.entity, persistent: true });
     let removing = false;
+    let pressStartedAt = 0;
     makePressable(baseEntity, 'tray-base', {
       down: () => {
         removing = ui.mode.peek() === 'carrying';
-        if (removing) this.world.getSystem(TrayEvents)?.emit('drop-in-tray');
+        pressStartedAt = performance.now();
       },
       tap: () => {
-        if (!removing) this.world.getSystem(TrayEvents)?.emit('seed');
+        const presses = this.world.getSystem(PressRouter)!;
+        if (presses.wasPressedSince('tray-menu', pressStartedAt) || presses.wasPressedSince('wrist-menu', pressStartedAt)) return;
+        if (removing) this.world.getSystem(TrayEvents)?.emit('drop-in-tray');
+        else this.world.getSystem(TrayEvents)?.emit('seed');
       },
     });
     this.world.createTransformEntity(this.toastCard.mesh, { persistent: true });

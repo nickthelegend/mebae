@@ -27,6 +27,7 @@ export interface PressHandlers {
 }
 
 interface Live {
+  key: string;
   downAt: number;
   held: boolean;
   lastMoveAt: number;
@@ -71,6 +72,7 @@ export class PressRouter extends createSystem({
   pressed: { required: [Pressable, Pressed] },
 }) {
   private live = new Map<number, Live>();
+  private pressTimes = new Map<string, number>();
   private prevPoint = new Map<string, Vector3>();
   private raycaster = new Raycaster();
   private rayOrigin = new Vector3();
@@ -81,7 +83,8 @@ export class PressRouter extends createSystem({
       this.queries.pressed.subscribe('qualify', (e) => {
         const key = e.getValue(Pressable, 'key') as string;
         const now = performance.now();
-        this.live.set(e.index, { downAt: now, held: false, lastMoveAt: now });
+        this.live.set(e.index, { key, downAt: now, held: false, lastMoveAt: now });
+        this.pressTimes.set(key, now);
         const p = pointFor(key);
         if (p) this.prevPoint.set(key, p.clone());
         handlers.get(key)?.down?.(p);
@@ -89,6 +92,7 @@ export class PressRouter extends createSystem({
       this.queries.pressed.subscribe('disqualify', (e) => {
         const key = e.getValue(Pressable, 'key') as string;
         const st = this.live.get(e.index);
+        this.pressTimes.set(key, performance.now());
         this.live.delete(e.index);
         this.prevPoint.delete(key);
         const h = handlers.get(key);
@@ -97,6 +101,13 @@ export class PressRouter extends createSystem({
         h.up?.();
       }),
     );
+  }
+
+  /** Includes a just-released press, until the next selection starts. */
+  wasPressedSince(key: string, startedAt: number): boolean {
+    if ((this.pressTimes.get(key) ?? -Infinity) >= startedAt) return true;
+    for (const press of this.live.values()) if (press.key === key) return true;
+    return false;
   }
 
   update(): void {

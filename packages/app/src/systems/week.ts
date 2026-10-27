@@ -24,6 +24,7 @@ export class WeekSystem extends createSystem({}) {
   private wristEntity: Entity | null = null;
   private palmUpSince = 0;
   private palmDownSince = 0;
+  private wristClosed = false;
   palmUp = false;
   private lastKey = '';
   private wristVer = -1;
@@ -64,7 +65,10 @@ export class WeekSystem extends createSystem({}) {
             if (y < top) return;
             const row = Math.max(0, Math.min(2, Math.floor(((y - top) / (this.wrist.pxH - top)) * 3)));
             const item = WRIST_ITEMS[row * 2 + col];
-            if (item === 'Close') this.wristGroup.visible = false;
+            if (item === 'Close') {
+              this.wristClosed = true;
+              this.wristGroup.visible = false;
+            }
             else this.world.getSystem(TraySystem)!.menuAction(item);
           },
         });
@@ -135,14 +139,17 @@ export class WeekSystem extends createSystem({}) {
     if (up) {
       this.palmDownSince = 0;
       if (!this.palmUpSince) this.palmUpSince = now;
-      if (now - this.palmUpSince > 250 && !this.wristGroup.visible) {
+      if (now - this.palmUpSince > 250 && !this.wristClosed && !this.wristGroup.visible) {
         this.drawWrist();
         this.wristGroup.visible = true;
       }
     } else {
       this.palmUpSince = 0;
       if (!this.palmDownSince) this.palmDownSince = now;
-      if (now - this.palmDownSince > 400) this.wristGroup.visible = false;
+      if (now - this.palmDownSince > 400) {
+        this.wristGroup.visible = false;
+        this.wristClosed = false;
+      }
     }
     this.palmUp = up;
   }

@@ -101,7 +101,15 @@ describe('growth', () => {
     const g = growthOf(l, h, '2026-11-01');
     expect(g.bloomWeeks).toEqual(['2026-10-26']);
     expect(g.inBloom).toBe(true);
-    expect(growthOf(l, h, '2026-11-08').inBloom).toBe(true);
+    // Missed days can make a flowering plant resting. Flowers (and the bloom
+    // label in the app) last through every day of the following week.
+    for (let d = 0; d < 7; d++) {
+      expect(growthOf(l, h, addDays('2026-11-02', d))).toMatchObject({
+        inBloom: true,
+        vitality: 'resting',
+        completedDays: 5,
+      });
+    }
     expect(growthOf(l, h, '2026-11-09').inBloom).toBe(false);
   });
 

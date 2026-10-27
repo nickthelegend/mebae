@@ -469,10 +469,10 @@ export class SproutSystem extends createSystem({}) {
       c.fillText(`stage ${g.stage}/7`, 320, 252);
       c.font = `600 32px ${FONT_UI}`;
       const status =
-        g.vitality === 'resting'
-          ? 'Resting: a missed day pauses growth'
-          : g.inBloom
-            ? 'In bloom this week'
+        g.inBloom
+          ? 'In bloom this week'
+          : g.vitality === 'resting'
+            ? 'Resting: a missed day pauses growth'
             : g.streak > 1
               ? `${g.streak}-day streak`
               : g.vitality === 'fresh'
@@ -480,7 +480,7 @@ export class SproutSystem extends createSystem({}) {
                 : g.toNextStage > 0
                   ? `${g.toNextStage} more day${g.toNextStage > 1 ? 's' : ''} to grow`
                   : 'Fully grown';
-      c.fillStyle = g.vitality === 'resting' ? (hc ? '#ffe14d' : TERRACOTTA) : ink;
+      c.fillStyle = !g.inBloom && g.vitality === 'resting' ? (hc ? '#ffe14d' : TERRACOTTA) : ink;
       c.fillText(status, 30, 312);
       if (chip) {
         c.fillStyle = hc ? '#ffe14d' : TERRACOTTA;

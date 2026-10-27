@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-26T23:59:08.800Z",
+  "recordedAt": "2026-10-27T00:35:55.770Z",
   "exited": {
     "width": 800,
     "overflow": 0,
@@ -25,8 +25,12 @@
           "target": 1,
           "species": "moss",
           "createdDay": "2026-10-27",
-          "archivedDay": "2026-10-27",
-          "placement": null
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
+            "surfaceLabel": "door",
+            "surface": "wall"
+          }
         },
         {
           "id": "water-2",
@@ -39,7 +43,7 @@
           "createdDay": "2026-10-27",
           "archivedDay": null,
           "placement": {
-            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
             "surfaceLabel": "desk",
             "surface": "table"
           }
@@ -47,7 +51,8 @@
       ],
       "counts": {
         "stretch-1": {
-          "2026-10-27": 1
+          "2026-10-27": 1,
+          "2026-10-28": 1
         },
         "water-2": {
           "2026-10-27": 2
@@ -55,8 +60,14 @@
       },
       "focus": {
         "startedAt": null,
-        "minutes": 25,
-        "blocks": []
+        "minutes": 50,
+        "blocks": [
+          {
+            "startedAt": 1793061332180,
+            "minutes": 50,
+            "completedAt": 1793064332180
+          }
+        ]
       }
     }
   },
@@ -64,12 +75,12 @@
     {
       "text": "Checking for mixed reality…",
       "disabled": true,
-      "at": 109.80000001192093
+      "at": 34.900000005960464
     },
     {
       "text": "Enter your garden",
       "disabled": false,
-      "at": 1229.300000011921
+      "at": 438.2000000178814
     }
   ],
   "supported": {
@@ -97,8 +108,12 @@
           "target": 1,
           "species": "moss",
           "createdDay": "2026-10-27",
-          "archivedDay": "2026-10-27",
-          "placement": null
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
+            "surfaceLabel": "door",
+            "surface": "wall"
+          }
         },
         {
           "id": "water-2",
@@ -111,7 +126,7 @@
           "createdDay": "2026-10-27",
           "archivedDay": null,
           "placement": {
-            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
             "surfaceLabel": "desk",
             "surface": "table"
           }
@@ -119,7 +134,8 @@
       ],
       "counts": {
         "stretch-1": {
-          "2026-10-27": 1
+          "2026-10-27": 1,
+          "2026-10-28": 1
         },
         "water-2": {
           "2026-10-27": 2
@@ -127,8 +143,14 @@
       },
       "focus": {
         "startedAt": null,
-        "minutes": 25,
-        "blocks": []
+        "minutes": 50,
+        "blocks": [
+          {
+            "startedAt": 1793061332180,
+            "minutes": 50,
+            "completedAt": 1793064332180
+          }
+        ]
       }
     }
   },
@@ -157,8 +179,12 @@
           "target": 1,
           "species": "moss",
           "createdDay": "2026-10-27",
-          "archivedDay": "2026-10-27",
-          "placement": null
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
+            "surfaceLabel": "door",
+            "surface": "wall"
+          }
         },
         {
           "id": "water-2",
@@ -171,7 +197,7 @@
           "createdDay": "2026-10-27",
           "archivedDay": null,
           "placement": {
-            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
             "surfaceLabel": "desk",
             "surface": "table"
           }
@@ -179,7 +205,8 @@
       ],
       "counts": {
         "stretch-1": {
-          "2026-10-27": 1
+          "2026-10-27": 1,
+          "2026-10-28": 1
         },
         "water-2": {
           "2026-10-27": 2
@@ -187,8 +214,14 @@
       },
       "focus": {
         "startedAt": null,
-        "minutes": 25,
-        "blocks": []
+        "minutes": 50,
+        "blocks": [
+          {
+            "startedAt": 1793061332180,
+            "minutes": 50,
+            "completedAt": 1793064332180
+          }
+        ]
       }
     }
   },
@@ -217,8 +250,12 @@
           "target": 1,
           "species": "moss",
           "createdDay": "2026-10-27",
-          "archivedDay": "2026-10-27",
-          "placement": null
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
+            "surfaceLabel": "door",
+            "surface": "wall"
+          }
         },
         {
           "id": "water-2",
@@ -231,7 +268,7 @@
           "createdDay": "2026-10-27",
           "archivedDay": null,
           "placement": {
-            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
             "surfaceLabel": "desk",
             "surface": "table"
           }
@@ -239,7 +276,8 @@
       ],
       "counts": {
         "stretch-1": {
-          "2026-10-27": 1
+          "2026-10-27": 1,
+          "2026-10-28": 1
         },
         "water-2": {
           "2026-10-27": 2
@@ -247,8 +285,14 @@
       },
       "focus": {
         "startedAt": null,
-        "minutes": 25,
-        "blocks": []
+        "minutes": 50,
+        "blocks": [
+          {
+            "startedAt": 1793061332180,
+            "minutes": 50,
+            "completedAt": 1793064332180
+          }
+        ]
       }
     }
   },
@@ -277,8 +321,12 @@
           "target": 1,
           "species": "moss",
           "createdDay": "2026-10-27",
-          "archivedDay": "2026-10-27",
-          "placement": null
+          "archivedDay": null,
+          "placement": {
+            "anchorUuid": "e18ff113-b170-472b-8daf-c0b141767b19",
+            "surfaceLabel": "door",
+            "surface": "wall"
+          }
         },
         {
           "id": "water-2",
@@ -291,7 +339,7 @@
           "createdDay": "2026-10-27",
           "archivedDay": null,
           "placement": {
-            "anchorUuid": "c15efaec-df92-49ec-a380-084706ae02bc",
+            "anchorUuid": "7730ce84-405c-4bb8-8927-3270b442b466",
             "surfaceLabel": "desk",
             "surface": "table"
           }
@@ -299,7 +347,8 @@
       ],
       "counts": {
         "stretch-1": {
-          "2026-10-27": 1
+          "2026-10-27": 1,
+          "2026-10-28": 1
         },
         "water-2": {
           "2026-10-27": 2
@@ -307,8 +356,14 @@
       },
       "focus": {
         "startedAt": null,
-        "minutes": 25,
-        "blocks": []
+        "minutes": 50,
+        "blocks": [
+          {
+            "startedAt": 1793061332180,
+            "minutes": 50,
+            "completedAt": 1793064332180
+          }
+        ]
       }
     }
   }

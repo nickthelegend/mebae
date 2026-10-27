@@ -1,0 +1,2344 @@
+{
+  "phase": "quest-palm",
+  "records": [
+    {
+      "id": "VR-73",
+      "startedAt": "2026-10-27T00:57:54.499Z",
+      "finishedAt": "2026-10-27T00:57:58.225Z",
+      "status": "PASS",
+      "ok": true,
+      "observed": {
+        "qualification": "Pass-through WeekSystem.update observer; original update runs unchanged; observer restored afterward.",
+        "showMs": 251.5,
+        "hideMs": 401.30000001192093,
+        "samples": [
+          {
+            "at": 5713.700000017881,
+            "normalY": -0.9619264978901677,
+            "visible": false,
+            "distance": 1.5713593711685763,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5730.9000000059605,
+            "normalY": -0.9619264978901677,
+            "visible": false,
+            "distance": 1.5713593711685763,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5747.0999999940395,
+            "normalY": -0.9619264978901677,
+            "visible": false,
+            "distance": 1.5713593711685763,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5763.800000011921,
+            "normalY": -0.9619264978901677,
+            "visible": false,
+            "distance": 1.5713593711685763,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5779.9000000059605,
+            "normalY": -0.9619264978901677,
+            "visible": false,
+            "distance": 1.5713593711685763,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5796.4000000059605,
+            "normalY": -0.9619264978901677,
+            "visible": false,
+            "distance": 1.5713593711685763,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5814.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5828.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5847.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5863.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5878.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5896.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5912.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5928.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5946.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5963.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5980.5,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 5997.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6012.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6029.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6046.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6063.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6080.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6098,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6113,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6131.5,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6147.4000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6163.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6180.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6195.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6213.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6230.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6246.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6262.5999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6280.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6295.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6314.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6329.4000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6346.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6364.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6381.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6397.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6415.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6429.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6448.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6463,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6481.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6495.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6512.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6531,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6547.5999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6563.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6580.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 1.965173277218981,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6596,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6614.0999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6631,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6647.300000011921,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6663.700000017881,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6680.200000017881,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6696.700000017881,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6712.700000017881,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6729,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6747,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6764.200000017881,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6780.4000000059605,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6797.0999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6813.700000017881,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6830.800000011921,
+            "normalY": 0.9658364775428845,
+            "visible": false,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6847.5,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6863.5,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6879.5999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6896.800000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6914.0999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6931,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6946.5,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6963.4000000059605,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6979.700000017881,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 6995.9000000059605,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7013.4000000059605,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7030.300000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7046.5,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7063,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7080.0999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7096.200000017881,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7113.5999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7129.5,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7145.800000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7163.5999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7180.9000000059605,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7197.200000017881,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7213.800000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7230.4000000059605,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7246.300000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7261.5999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7279.800000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7295.800000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7312.5999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7328.800000011921,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7347.5999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7364.0999999940395,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7380,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7395.9000000059605,
+            "normalY": 0.9658364775428845,
+            "visible": true,
+            "distance": 0.09000004205801634,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7412.5,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7430.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7447.5,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7462.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7480.5999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7495.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7511.5,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7530.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7545.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7563.5999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7580.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7597.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7613.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7629.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7646.5,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7663.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7679.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7696.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7714,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7730.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7748.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7763.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7780.5,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7795.5,
+            "normalY": -0.965836681182837,
+            "visible": true,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7813.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7830.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7846.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7864.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7880.4000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7897.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7912.5999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7928.5999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7947.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7963.0999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7979.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 7997.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8013.9000000059605,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8030.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8046.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8062.5,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8080.5,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8097.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8114,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8129.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8147.5999999940395,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8164.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8180.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8196.40000000596,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8212.09999999404,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8230.59999999404,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8246.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8263.59999999404,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8279.5,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8297.200000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8312.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8329,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8349.40000000596,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8364.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8378.5,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8395.09999999404,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8411.800000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8428.59999999404,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8446.300000011921,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          },
+          {
+            "at": 8463.700000017881,
+            "normalY": -0.965836681182837,
+            "visible": false,
+            "distance": 0.10842319134101035,
+            "text": [
+              "Week",
+              "Sample",
+              "Contrast",
+              "Large",
+              "One-hand",
+              "Close"
+            ]
+          }
+        ]
+      },
+      "screenshot": "audit/vr/VR-73.jpg"
+    }
+  ]
+}

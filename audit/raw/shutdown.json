@@ -1,72 +1,41 @@
 {
-  "ownedProcessRoot": 21714,
-  "ownedProcesses": [
-    {
-      "pid": 21714,
-      "ppid": 1,
-      "command": "npm run dev:runtime"
-    },
-    {
-      "pid": 21774,
-      "ppid": 21714,
-      "command": "node"
-    },
-    {
-      "pid": 22047,
-      "ppid": 21774,
-      "command": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t5/packages/app/node_modules/@esbuild/darwin-arm64/bin/esbuild"
-    },
-    {
-      "pid": 28442,
-      "ppid": 21774,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
-    },
-    {
-      "pid": 28453,
-      "ppid": 28442,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (GPU).app/Contents/MacOS/Google Chrome for Testing Helper (GPU)"
-    },
-    {
-      "pid": 28454,
-      "ppid": 28442,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper"
-    },
-    {
-      "pid": 28455,
-      "ppid": 28442,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper"
-    },
-    {
-      "pid": 28533,
-      "ppid": 28442,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer)"
-    },
-    {
-      "pid": 28534,
-      "ppid": 28442,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer)"
-    },
-    {
-      "pid": 28535,
-      "ppid": 28442,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper (Renderer).app/Contents/MacOS/Google Chrome for Testing Helper (Renderer)"
-    },
-    {
-      "pid": 28537,
-      "ppid": 28442,
-      "command": "/Users/jaibajrang/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/Frameworks/Google Chrome for Testing Framework.framework/Versions/156.0.8078.4/Helpers/Google Chrome for Testing Helper.app/Contents/MacOS/Google Chrome for Testing Helper"
-    }
-  ],
-  "shutdownAt": 1793059500.555927,
-  "devDown": {
-    "code": 0,
-    "stdout": "{\n  \"ok\": true,\n  \"data\": {\n    \"stopped\": true,\n    \"workspaceRoot\": \"/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t5/packages/app\",\n    \"sessionId\": \"7fc3bf03-37c6-4549-8d3c-721f965537e1\"\n  }\n}\n",
-    "stderr": ""
+  "at": "2026-10-27T01:25:48.770023+00:00",
+  "originPushed": false,
+  "deployed": false,
+  "loomEdited": false,
+  "restoredConfig": {
+    "device": "metaQuest3",
+    "environment": "home_office"
   },
-  "terminatedRemainingOwnedPids": [],
-  "slotRelease": {
-    "code": 0,
-    "stdout": "",
-    "stderr": ""
-  }
+  "ownedPids": [
+    6109,
+    6168,
+    6206,
+    9903,
+    17878,
+    39506,
+    39507,
+    39508,
+    39509,
+    39510,
+    39518,
+    39519,
+    39520,
+    39522,
+    39523,
+    39524,
+    39780
+  ],
+  "rootPids": [
+    6168,
+    6109,
+    17878,
+    9903
+  ],
+  "survivingOwnedPids": [],
+  "slotOwnerBeforeRelease": "mebae 17413 2026-10-27T00:27:17Z",
+  "slotReleaseExitCode": 0,
+  "slotReleased": true,
+  "slotOwnerAfterRelease": null,
+  "completedAt": "2026-10-27T01:31:45.324836+00:00"
 }

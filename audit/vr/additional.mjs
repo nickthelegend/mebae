@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import sharp from '../../packages/app/node_modules/sharp/dist/index.mjs';
 import {cli,ev,xr,pinchAt,sleep,until,dist} from '../../packages/app/e2e/lib.mjs';
 const root=process.cwd(),out=`${root}/audit/raw`;
 const phase=process.argv[2]??'quest-extra';fs.writeFileSync(`${out}/phase.txt`,phase);
@@ -12,10 +13,10 @@ const observe=()=>ev(`(()=>{
  return {state:m.state(),targets:m.targets(),cards,planting:{preset:p.preset?.label,hovered:p.hovered,preview:p.lastPreview,seed:p.seed.visible,reticle:p.reticle.visible,arc:p.arc.visible},
  freeSlots:t.freeSlots(),trayAnchor:localStorage.getItem('iwsdk_scene_anchor_uuid'),
  roomTargets:r.targets.map(o=>({name:o.name,userData:o.userData})),
- plants:[...sp.sprouts.values()].map(s=>({id:s.habitId,wallish:s.wallish,rootQuaternion:s.group.quaternion.toArray(),species:s.plant.species,stake:!!s.stake})),
+ plants:[...sp.sprouts.values()].map(s=>({id:s.habitId,wallish:s.wallish,rootQuaternion:s.group.quaternion.toArray(),species:s.plant.form?.species,stake:!!s.stake})),
  ledger:JSON.parse(m.exportJson()).ledger};})()`);
 async function snap(name){await sleep(250);const data=observe();records.push({at:new Date().toISOString(),name,...data});fs.writeFileSync(`${out}/${phase}.json`,JSON.stringify({phase,records},null,2));return data;}
-async function shot(name){fs.writeFileSync(`${out}/capture.txt`,name);await sleep(800);}
+async function shot(name){await sleep(500);const tmp=`/tmp/mebae-t7-${name}.png`;cli(['browser','screenshot','--output-file',tmp]);await sharp(tmp).resize({width:1000,withoutEnlargement:true}).jpeg({quality:50}).toFile(`${root}/audit/vr/${name}.jpg`);fs.rmSync(tmp);}
 async function seated(){if(!xr('status').sessionActive)xr('enter');xr('set-input-mode',{mode:'hand'});xr('set-transform',{device:'headset',position:{x:-0.08,y:1.2,z:-1.35},orientation:{pitch:-28,yaw:0,roll:0}});await until(()=>state().tray?.placed,'tray');}
 async function plant(index,point,hand='hand-right'){
  await pinchAt(hand,targets().seed);await until(()=>state().mode==='radial','radial');
@@ -51,7 +52,7 @@ try{
   xr('set-transform',{device:'hand-left',position:{x:-.2,y:1,z:-1.65},orientation:{fingers:'forward',palm:'up'},anchor:'wrist'});await sleep(700);
   await pinchAt('hand-right',targets().menuButtons[0]);await snap('sample-week-wrist-stamps');await shot('quest-sample-week');
   await pinchAt('hand-right',targets().week);await pinchAt('hand-right',targets().sand);await snap('sample-focus-refusal');
-  await pinchAt('hand-right',targets().tray);await snap('sample-seed-refusal');
+  const st=targets().tray;await pinchAt('hand-right',[st[0]-.19,st[1]+.025,st[2]+.075]);await snap('sample-seed-refusal');
   const sampleSprout=Object.values(targets().sprouts).find(s=>s.label);if(sampleSprout){await pinchAt('hand-right',sampleSprout.label);await snap('sample-sprout-refusal');}
   await pinchAt('hand-right',targets().menuButtons[1]);await snap('sample-off');
   xr('set-transform',{device:'hand-left',position:{x:-.2,y:1,z:-1.65},orientation:{fingers:'forward',palm:'down'},anchor:'wrist'});await sleep(600);
@@ -62,7 +63,7 @@ try{
   cli(['browser','reload']);await sleep(2500);await seated();await snap('archive-reloaded');await shot('quest-archive');
  }
  if(phase==='capacity-extra'){
-  await snap('six-before');await pinchAt('hand-right',targets().tray);await snap('seventh-refused');await shot('quest-capacity');
+  await snap('six-before');const st=targets().tray;await pinchAt('hand-right',[st[0]-.19,st[1]+.025,st[2]+.075]);await snap('seventh-refused');await shot('quest-capacity');
  }
  if(phase==='glasses-extra'){
   const gaze=async p=>{xr('look-at',{device:'gaze',target:{x:p[0],y:p[1],z:p[2]}});await sleep(300);xr('select',{device:'hand-right'});await sleep(300);};
@@ -71,7 +72,9 @@ try{
     w.scene.traverse(o=>{if(!o.visible)return;for(let p=o.parent;p;p=p.parent)if(!p.visible)return;
      if(!o.name.startsWith('Sprout: ')&&!o.name.startsWith('Label: '))return;
      const corners=[];o.traverse(c=>{if(!c.visible||!c.geometry)return;const g=c.geometry;if(!g.boundingBox)g.computeBoundingBox();const b=g.boundingBox;if(!b)return;c.updateWorldMatrix(true,false);
-      for(const x of[b.min.x,b.max.x])for(const y of[b.min.y,b.max.y])for(const z of[b.min.z,b.max.z])corners.push(w.camera.position.clone().set(x,y,z).applyMatrix4(c.matrixWorld).toArray());});groups.push({name:o.name,corners});});return groups;})()`);
+ const instances=c.isInstancedMesh?c.count:1;
+ for(let i=0;i<instances;i++){const matrix=c.matrixWorld.clone();if(c.isInstancedMesh){const local=c.matrixWorld.clone();c.getMatrixAt(i,local);matrix.multiply(local);}
+ for(const x of[b.min.x,b.max.x])for(const y of[b.min.y,b.max.y])for(const z of[b.min.z,b.max.z])corners.push(w.camera.position.clone().set(x,y,z).applyMatrix4(matrix).toArray());}});groups.push({name:o.name,corners});});return groups;})()`);
    const t=targets();for(const[key,corners]of Object.entries(t.bounds))shapes.push({name:key,corners});
    const pitch=-30*Math.PI/180,head=[-.08,1.2,-1.35];
    for(const shape of shapes)shape.angles=shape.corners.map(p=>{const d=p.map((v,i)=>v-head[i]),y=d[1]*Math.cos(pitch)+d[2]*Math.sin(pitch),z=-d[1]*Math.sin(pitch)+d[2]*Math.cos(pitch);const h=Math.atan2(d[0],-z)*180/Math.PI,v=Math.atan2(y,-z)*180/Math.PI;return{h,v,inside:Math.abs(h)<=34&&v<=22&&v>=-40};});

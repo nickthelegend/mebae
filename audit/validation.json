@@ -1,0 +1,21 @@
+{
+  "rowCount": 164,
+  "counts": {
+    "FAIL": 33,
+    "PASS": 114,
+    "UNTESTED": 17
+  },
+  "expectedCellsUnchanged": true,
+  "localEvidenceLinksResolve": true,
+  "driverChecksPassed": 51,
+  "coreTestsPassed": 61,
+  "allHarnessesParse": true,
+  "noPngScreenshots": true,
+  "largestScreenshotBytes": 48457,
+  "restoredConfig": {
+    "device": "metaQuest3",
+    "environment": "home_office"
+  },
+  "slotReleased": true,
+  "originPushed": false
+}

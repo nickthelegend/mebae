@@ -1,0 +1,210 @@
+{
+  "ok": true,
+  "data": {
+    "workspaceRoot": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t7/packages/app",
+    "runtimeUrls": {
+      "local": "https://localhost:8081/",
+      "network": [
+        "https://192.168.0.6:8081/"
+      ]
+    },
+    "state": {
+      "workspaceRoot": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t7/packages/app",
+      "running": true,
+      "starting": false,
+      "browserConnected": true,
+      "browserCommandReady": true,
+      "session": {
+        "schemaVersion": 2,
+        "sessionId": "637120c0-7b75-49c2-8e70-c8cb07352d86",
+        "workspaceRoot": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t7/packages/app",
+        "pid": 6168,
+        "processStart": "Tue Oct 27 00:31:00 2026",
+        "port": 8081,
+        "localUrl": "https://localhost:8081/",
+        "networkUrls": [
+          "https://192.168.0.6:8081/"
+        ],
+        "aiMode": "agent",
+        "browser": {
+          "lifecycle": {
+            "state": "running",
+            "policy": "eager",
+            "sessionId": "637120c0-7b75-49c2-8e70-c8cb07352d86",
+            "browserEpoch": 1,
+            "revision": 8,
+            "stateEnteredAt": "2026-10-27T00:34:06.372Z",
+            "lastObservedAt": "2026-10-27T00:34:08.205Z",
+            "failures": 0,
+            "cleanupConfirmed": true,
+            "attemptLimit": 3,
+            "historyTruncated": false,
+            "retryEligible": false,
+            "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+            "history": [
+              {
+                "revision": 1,
+                "state": "launching",
+                "at": "2026-10-27T00:34:05.869Z",
+                "reason": "launch"
+              },
+              {
+                "revision": 2,
+                "state": "launching",
+                "at": "2026-10-27T00:34:05.869Z",
+                "reason": "prepared"
+              },
+              {
+                "revision": 3,
+                "state": "running",
+                "at": "2026-10-27T00:34:06.372Z",
+                "reason": "running"
+              }
+            ],
+            "attemptId": "f23ad123-480c-41e4-9321-a2c7ba496e35"
+          },
+          "status": "connected",
+          "clients": [
+            {
+              "commandReady": true,
+              "sessionId": "637120c0-7b75-49c2-8e70-c8cb07352d86",
+              "browserEpoch": 1,
+              "deviceClass": "managed",
+              "pageId": "tab-mvpyddl9-gir05x",
+              "role": "app",
+              "tabGeneration": 1
+            },
+            {
+              "commandReady": true,
+              "sessionId": "637120c0-7b75-49c2-8e70-c8cb07352d86",
+              "browserEpoch": 1,
+              "deviceClass": "managed",
+              "pageId": "tab-mvpydcim-uf43ju",
+              "role": "editor",
+              "sceneSessionId": "scene-iosjzqqjiv",
+              "tabGeneration": 1
+            }
+          ],
+          "lastBridgeConnectedAt": "2026-10-27T00:34:08.155Z",
+          "lastCommandReadyAt": "2026-10-27T00:34:08.205Z",
+          "connected": true,
+          "commandReady": true,
+          "connectedClientCount": 2,
+          "lastTransitionAt": "2026-10-27T00:34:06.372Z",
+          "audioMuted": false
+        },
+        "browserAutomation": {
+          "configured": true,
+          "enabled": true,
+          "endpoint": "http://127.0.0.1:62431",
+          "targetId": "2B577F307A90D0BECC719DAC3A5DDB24",
+          "protocol": "cdp"
+        },
+        "registeredAt": "2026-10-27T00:34:05.868Z",
+        "updatedAt": "2026-10-27T00:34:08.211Z"
+      },
+      "launch": {
+        "schemaVersion": 2,
+        "claimId": "afe67ae7-80cd-441b-be2e-d605bda28291",
+        "workspaceRoot": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t7/packages/app",
+        "pid": 6168,
+        "processStart": "Tue Oct 27 00:31:00 2026",
+        "launcherPid": 6109,
+        "processGroupId": 6109,
+        "command": "npm",
+        "args": [
+          "run",
+          "dev:runtime"
+        ],
+        "logPath": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t7/packages/app/.iwsdk/runtime/logs/dev-1793061060288.log",
+        "scriptName": "dev:runtime",
+        "port": 8081,
+        "openBrowser": true,
+        "createdAt": "2026-10-27T00:31:00.289Z"
+      }
+    },
+    "adapters": [
+      {
+        "tool": "claude",
+        "file": ".mcp.json",
+        "exists": false,
+        "status": "missing",
+        "support": {
+          "instruction": {
+            "file": "CLAUDE.md",
+            "status": "configured"
+          },
+          "permissions": {
+            "file": ".claude/settings.json",
+            "status": "configured"
+          }
+        }
+      },
+      {
+        "tool": "cursor",
+        "file": ".cursor/mcp.json",
+        "exists": false,
+        "status": "missing",
+        "support": {
+          "instruction": {
+            "file": "AGENTS.md",
+            "status": "configured"
+          },
+          "permissions": {
+            "file": ".cursor/permissions.json",
+            "status": "configured"
+          }
+        }
+      },
+      {
+        "tool": "copilot",
+        "file": ".vscode/mcp.json",
+        "exists": false,
+        "status": "missing",
+        "support": {
+          "instruction": {
+            "file": "AGENTS.md",
+            "status": "configured"
+          },
+          "permissions": {
+            "file": null,
+            "status": "manual",
+            "note": "VS Code stores MCP tool approvals interactively; approve the IWSDK server once for the workspace."
+          }
+        }
+      },
+      {
+        "tool": "codex",
+        "file": ".codex/config.toml",
+        "exists": false,
+        "status": "missing",
+        "support": {
+          "instruction": {
+            "file": "AGENTS.md",
+            "status": "configured"
+          },
+          "permissions": {
+            "file": ".codex/config.toml",
+            "status": "missing"
+          }
+        }
+      },
+      {
+        "tool": "opencode",
+        "file": "opencode.json",
+        "exists": true,
+        "status": "configured",
+        "support": {
+          "instruction": {
+            "file": "AGENTS.md",
+            "status": "configured"
+          },
+          "permissions": {
+            "file": "opencode.json",
+            "status": "configured"
+          }
+        }
+      }
+    ]
+  }
+}

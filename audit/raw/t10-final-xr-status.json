@@ -1,0 +1,86 @@
+{
+  "ok": true,
+  "data": {
+    "workspaceRoot": "/Volumes/Extreme SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t10/packages/app",
+    "operation": "xr.status",
+    "result": {
+      "deviceName": "Meta Quest 3",
+      "isRuntimeInstalled": true,
+      "sessionActive": false,
+      "sessionOffered": true,
+      "sessionMode": null,
+      "enabledFeatures": [],
+      "visibilityState": "visible",
+      "runtimeKind": "emulated",
+      "browser": {
+        "lifecycle": {
+          "state": "running",
+          "policy": "eager",
+          "sessionId": "e58e8d0d-c1ee-479e-a64f-94a03ebf625f",
+          "browserEpoch": 1,
+          "revision": 8,
+          "stateEnteredAt": "2026-10-27T02:10:31.229Z",
+          "lastObservedAt": "2026-10-27T02:10:32.988Z",
+          "failures": 0,
+          "cleanupConfirmed": true,
+          "attemptLimit": 3,
+          "historyTruncated": false,
+          "retryEligible": false,
+          "nextAction": "Use runtime_list_targets to inspect endpoint readiness.",
+          "history": [
+            {
+              "revision": 1,
+              "state": "launching",
+              "at": "2026-10-27T02:10:30.717Z",
+              "reason": "launch"
+            },
+            {
+              "revision": 2,
+              "state": "launching",
+              "at": "2026-10-27T02:10:30.717Z",
+              "reason": "prepared"
+            },
+            {
+              "revision": 3,
+              "state": "running",
+              "at": "2026-10-27T02:10:31.229Z",
+              "reason": "running"
+            }
+          ],
+          "attemptId": "a10ca164-1a15-4a45-bce5-6b35c3e65872"
+        },
+        "status": "connected",
+        "clients": [
+          {
+            "commandReady": true,
+            "sessionId": "e58e8d0d-c1ee-479e-a64f-94a03ebf625f",
+            "browserEpoch": 1,
+            "deviceClass": "managed",
+            "pageId": "tab-mvq1td5r-tkyq90",
+            "role": "app",
+            "tabGeneration": 1
+          },
+          {
+            "commandReady": true,
+            "sessionId": "e58e8d0d-c1ee-479e-a64f-94a03ebf625f",
+            "browserEpoch": 1,
+            "deviceClass": "managed",
+            "pageId": "tab-mvq1tc31-835e0h",
+            "role": "editor",
+            "sceneSessionId": "scene-80a2zqbyi7",
+            "tabGeneration": 1
+          }
+        ],
+        "lastBridgeConnectedAt": "2026-10-27T02:10:32.933Z",
+        "lastCommandReadyAt": "2026-10-27T02:10:32.988Z",
+        "connected": true,
+        "commandReady": true,
+        "connectedClientCount": 2,
+        "lastTransitionAt": "2026-10-27T02:10:31.229Z",
+        "audioMuted": false
+      },
+      "browserConnected": true,
+      "browserCommandReady": true
+    }
+  }
+}

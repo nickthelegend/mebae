@@ -1,6 +1,6 @@
 {
   "id": "D2-11",
-  "startedAt": "2026-10-27T00:29:47.786Z",
+  "startedAt": "2026-10-27T01:49:17.279Z",
   "console": [],
   "pageErrors": [],
   "requests": [
@@ -503,7 +503,6 @@
       }
     }
   ],
-  "finishedAt": "2026-10-27T00:29:49.847Z",
-  "status": "PASS",
-  "consolePolicy": "Every error-level Chrome console entry fails, including expected-history-404 resource errors. The expected HTTP 404 remains an allowed response."
+  "finishedAt": "2026-10-27T01:49:19.359Z",
+  "status": "PASS"
 }

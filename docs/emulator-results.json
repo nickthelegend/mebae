@@ -1,196 +1,77 @@
 {
-  "recordedAt": "2026-10-27T01:32:24.216728+00:00",
-  "status": "completed_with_audit_failures_and_unverified_dependencies",
-  "sourceCommit": "f2e5ceec4a8a48d7d90e34fa555300d515f5c415",
-  "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware.",
-  "browser": "Chrome for Testing 156.0.8078.4; Playwright flat-page pass, then IWSDK-managed IWER runtime.",
-  "passFail": {
-    "kitchen": {
-      "passed": 6,
-      "failed": 0
+  "recordedAt": "2026-10-27T02:13:35.120429+00:00",
+  "scope": "t10: every former FAIL, all landing rows desktop and 375px, native startup-error row, four IWER regression suites and native measurements. Other PASS/UNTESTED rows retain the preceding full-plan evidence.",
+  "auditTotals": {
+    "PASS": 147,
+    "FAIL": 0,
+    "UNTESTED": 17
+  },
+  "freshRowTotals": {
+    "PASS": 34,
+    "FAIL": 0,
+    "UNTESTED": 1
+  },
+  "freshRowIds": [
+    "VR-01",
+    "VR-13",
+    "VR-18",
+    "VR-62",
+    "VR-64",
+    "VR-70",
+    "VR-71",
+    "VR-78",
+    "VR-83",
+    "VR-84",
+    "VR-94",
+    "VR-96",
+    "VR-98",
+    "VR-116",
+    "D2-01",
+    "D2-02",
+    "D2-03",
+    "D2-04",
+    "D2-05",
+    "D2-06",
+    "D2-07",
+    "D2-08",
+    "D2-09",
+    "D2-10",
+    "D2-11",
+    "D2-12",
+    "D2-13",
+    "D2-14",
+    "D2-15",
+    "D2-16",
+    "D2-17",
+    "D2-18",
+    "D2-19",
+    "D2-20",
+    "D2-27"
+  ],
+  "flat": {
+    "desktop": {
+      "PASS": 21,
+      "FAIL": 0,
+      "UNTESTED": 0
     },
-    "quest": {
-      "passed": 30,
-      "failed": 0
-    },
-    "glasses": {
-      "passed": 8,
-      "failed": 0
-    },
-    "perf": {
-      "passed": 7,
-      "failed": 0
+    "mobile": {
+      "PASS": 21,
+      "FAIL": 0,
+      "UNTESTED": 0
     }
   },
-  "driverTotals": {
+  "suiteTotals": {
     "passed": 51,
     "failed": 0
   },
-  "consoleErrors": {
-    "kitchen": 0,
-    "quest": 0,
-    "glasses": 0,
-    "perf": 0
-  },
-  "auditCounts": {
-    "PASS": 114,
-    "FAIL": 33,
-    "UNTESTED": 17
-  },
-  "d2Capture": {
-    "desktop": {
-      "executed": 33,
-      "passed": 13,
-      "failed": 20,
-      "consoleErrors": 28,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "unexpectedHttpErrors": 0
-    },
-    "mobile": {
-      "executed": 33,
-      "passed": 13,
-      "failed": 20,
-      "consoleErrors": 28,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "unexpectedHttpErrors": 0
-    }
-  },
-  "captures": {
-    "glasses": {
-      "recordedAt": "2026-10-27T01:06:06.675Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 387,
-      "snapshots": 185
-    },
-    "glasses-week": {
-      "recordedAt": "2026-10-27T01:08:58.089Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 387,
-      "snapshots": 308
-    },
-    "growth": {
-      "recordedAt": "2026-10-27T01:14:39.875Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 1162,
-      "snapshots": 836
-    },
-    "kitchen": {
-      "recordedAt": "2026-10-27T00:33:59.299Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 387,
-      "snapshots": 724
-    },
-    "perf": {
-      "recordedAt": "2026-10-27T01:10:04.993Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 774,
-      "snapshots": 62
-    },
-    "quest": {
-      "recordedAt": "2026-10-27T00:51:53.960Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 22835,
-      "snapshots": 4680
-    },
-    "quest-edge": {
-      "recordedAt": "2026-10-27T01:03:25.435Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 11221,
-      "snapshots": 3078,
-      "supersededAttemptRemoved": {
-        "start": "2026-10-27T00:59:20.230Z",
-        "end": "2026-10-27T00:59:23.870Z",
-        "reason": "about:blank IndexedDB setup error; guard added, row rerun with fresh capture in storage-final"
-      }
-    },
-    "quest-final": {
-      "recordedAt": "2026-10-27T01:05:23.975Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 1161,
-      "snapshots": 547
-    },
-    "storage-final": {
-      "recordedAt": "2026-10-27T01:25:06.315Z",
-      "consoleErrors": 0,
-      "pageErrors": 0,
-      "failedRequests": 0,
-      "httpErrors": 0,
-      "requests": 385,
-      "snapshots": 588
-    }
-  },
-  "core": {
-    "testFiles": 6,
-    "passedFiles": 6,
-    "tests": 61,
-    "passedTests": 61,
-    "failedTests": 0,
-    "exactSupplementalAssertions": 5,
-    "source": "audit/raw/core-vitest.txt"
-  },
-  "typecheck": "PASS",
-  "build": "PASS",
-  "productionRuntime": "PASS",
-  "perf": {
-    "frames": 600,
-    "cpuMs": {
-      "p50": 0.7999999821186066,
-      "p95": 1.199999988079071,
-      "max": 2.300000011920929
-    },
-    "drawCalls": {
-      "p50": 48,
-      "max": 48
-    },
-    "triangles": {
-      "p50": 37664,
-      "max": 37664
-    },
-    "gate": {
-      "cpuMsP95": 4,
-      "drawCallsMax": 50,
-      "trianglesMax": 150000
-    },
-    "cpuMsP95Pass": true,
-    "drawCallsPass": true,
-    "trianglesPass": true
-  },
-  "measurementScope": "PerfStart system priority -100 through scene.onAfterRender; CPU application update/render submission timing and raw renderer.info counters. Both XR views included. Capture overhead is present. No stereo division or 72 fps hardware claim.",
   "suites": [
     {
       "suite": "kitchen",
-      "recordedAt": "2026-10-27T00:31:32.392Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "kitchen"
       },
-      "command": "MEBAE_OUT=../../audit/raw node e2e/run.mjs kitchen",
+      "recordedAt": "2026-10-27T01:50:27.283Z",
       "passed": 6,
       "failed": 0,
       "checks": [
@@ -229,12 +110,11 @@
     },
     {
       "suite": "quest",
-      "recordedAt": "2026-10-27T01:03:34.076Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "home_office"
       },
-      "command": "MEBAE_OUT=../../audit/raw node e2e/run.mjs quest",
+      "recordedAt": "2026-10-27T01:50:49.802Z",
       "passed": 30,
       "failed": 0,
       "checks": [
@@ -251,7 +131,7 @@
         {
           "name": "3. habit created with an XRAnchor",
           "ok": true,
-          "detail": "{\"anchorUuid\":\"0b83159a-4ac2-4bbf-b8c5-896c480bd344\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
+          "detail": "{\"anchorUuid\":\"20d2ca4b-7f3d-48a4-8202-dd0abffd65f7\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
         },
         {
           "name": "3. surface label from the room scan",
@@ -259,7 +139,7 @@
           "detail": "door"
         },
         {
-          "name": "3. sprout at the hit point (±2 cm)",
+          "name": "3. sprout at the hit point (\u00b12 cm)",
           "ok": true,
           "detail": "0.00 cm, via hit-test"
         },
@@ -271,7 +151,7 @@
         {
           "name": "first habit pinned and checked in under 60 s",
           "ok": true,
-          "detail": "14.1 s through check-in (12.1 s to pin)"
+          "detail": "11.6 s through check-in (9.9 s to pin)"
         },
         {
           "name": "5. water planted on the desk",
@@ -291,7 +171,7 @@
         {
           "name": "6. raking started the focus timer",
           "ok": true,
-          "detail": "rake 3301 ms, 191 texture writes, 25 min"
+          "detail": "rake 3304 ms, 191 texture writes, 25 min"
         },
         {
           "name": "7. history restored after reload",
@@ -304,7 +184,7 @@
           "detail": "[{\"habitId\":\"stretch-1\",\"status\":\"restored\"},{\"habitId\":\"water-2\",\"status\":\"restored\"}]"
         },
         {
-          "name": "7. sprouts back on their spots (±1 cm)",
+          "name": "7. sprouts back on their spots (\u00b11 cm)",
           "ok": true,
           "detail": "0.00 cm, 0.00 cm"
         },
@@ -393,12 +273,11 @@
     },
     {
       "suite": "glasses",
-      "recordedAt": "2026-10-27T01:05:28.057Z",
       "profile": {
         "device": "metaVRGlasses",
         "environment": "home_office"
       },
-      "command": "MEBAE_OUT=../../audit/raw node e2e/run.mjs glasses",
+      "recordedAt": "2026-10-27T02:09:25.869Z",
       "passed": 8,
       "failed": 0,
       "checks": [
@@ -433,7 +312,7 @@
           "detail": ""
         },
         {
-          "name": "every key element inside the Glasses FoV (37/25/43 with 3° margin)",
+          "name": "every key element inside the Glasses FoV (37/25/43 with 3\u00b0 margin)",
           "ok": true,
           "detail": ""
         },
@@ -447,12 +326,11 @@
     },
     {
       "suite": "perf",
-      "recordedAt": "2026-10-27T01:09:01.075Z",
       "profile": {
         "device": "metaQuest3",
         "environment": "home_office"
       },
-      "command": "MEBAE_OUT=../../audit/raw node e2e/run.mjs perf",
+      "recordedAt": "2026-10-27T01:52:15.351Z",
       "passed": 7,
       "failed": 0,
       "checks": [
@@ -462,17 +340,17 @@
           "detail": "600 frames"
         },
         {
-          "name": "CPU p95 ≤ 4 ms",
+          "name": "CPU p95 \u2264 4 ms",
           "ok": true,
-          "detail": "1.200 ms"
+          "detail": "1.300 ms"
         },
         {
-          "name": "draw calls ≤ 50",
+          "name": "draw calls \u2264 50",
           "ok": true,
           "detail": "48"
         },
         {
-          "name": "triangles ≤ 150000",
+          "name": "triangles \u2264 150000",
           "ok": true,
           "detail": "37664"
         },
@@ -495,27 +373,109 @@
       "source": "audit/raw/perf.json"
     }
   ],
-  "clip": {
-    "path": "audit/vr/first-day.mp4",
-    "seconds": 35,
-    "frames": 2100,
-    "error": null,
-    "multiDayFootage": false,
-    "qualification": "Actual first-day hands-only capture plus clearly captioned sample preview; no actual separate-day claim."
+  "captures": {
+    "kitchen": {
+      "recordedAt": "2026-10-27T01:50:44.430Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 387,
+      "snapshots": 78
+    },
+    "quest": {
+      "recordedAt": "2026-10-27T01:51:51.007Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 1161,
+      "snapshots": 293
+    },
+    "glasses": {
+      "recordedAt": "2026-10-27T02:09:42.183Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 387,
+      "snapshots": 74
+    },
+    "perf": {
+      "recordedAt": "2026-10-27T01:52:36.324Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 387,
+      "snapshots": 98
+    },
+    "targeted": {
+      "recordedAt": "2026-10-27T02:10:30.729Z",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0,
+      "requests": 14715,
+      "snapshots": 4631
+    }
+  },
+  "perf": {
+    "frames": 600,
+    "cpuMs": {
+      "p50": 0.800000011920929,
+      "p95": 1.300000011920929,
+      "max": 2.699999988079071
+    },
+    "drawCalls": {
+      "p50": 48,
+      "max": 48
+    },
+    "triangles": {
+      "p50": 37664,
+      "max": 37664
+    }
+  },
+  "perfQualification": "Raw stereo draw calls and triangles; uncalibrated desktop CPU proxy, real headset UNTESTED.",
+  "nativeMeasurements": "audit/raw/t10-verification.json.gz",
+  "remainingFailures": {},
+  "untestedDependencies": {
+    "VR-21": "Needs an emulator room with at least two overlapping labelled bounded semantic meshes to verify smallest-mesh priority. This office only established desk mesh-label and door plane-label. \u00b7 [evidence 1](audit/raw/quest-more-rows.json.gz) \u00b7 [evidence 2](audit/vr/VR-21.jpg)",
+    "VR-22": "Needs four genuinely unlabelled detected planes with the required orientations/heights; supplied rooms do not establish that matrix. No semantic-label result mock used. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-26": "Needs a native runtime that rejects anchor creation and subsequently succeeds. IWER capability denial did not supply that rejection/recovery pair. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-27": "Needs a native live anchor that does not return a persistent handle. This IWER runtime supplies persistent handles. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-61": "Needs a native runtime without restorePersistentAnchor in addition to null/no-placement histories; current IWER always exposes that API. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-63": "Needs native controllable interruption windows during anchor create and restore as well as flight/carry; no delayed promise or restore mock substituted. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-64": "One real same-ID import attempt: Playwright saw the native confirm, but accept failed with No dialog is showing after managed Chrome auto-dismissed it. Requires a managed browser whose native confirmation can be accepted; no successful import claimed. \u00b7 [fresh observation](audit/raw/t10-verification.json.gz) \u00b7 [session console/network](audit/raw/t10-targeted-events.jsonl.gz) \u00b7 [capture](audit/vr/VR-64.jpg)",
+    "VR-66": "Needs actual ledger/settings/tray transaction rejection. Chrome native zero-quota override did not reject these small writes; no storage method/result stubs substituted. \u00b7 [evidence 1](audit/raw/quest-native-rows.json)",
+    "VR-69": "Needs an actual local-midnight crossing (and DST crossing for a timezone with DST). Whole-day DEV jumps do not establish the cadence/next-render behavior. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-90": "Needs a genuine failed new-anchor rejection in addition to the no-hit move case; current runtime did not supply that failure/recovery fixture. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-99": "Needs a browser environment with Web Audio genuinely unavailable. Native AudioContext remains exposed here; no API-removal mock substituted. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-122": "Needs recordings of this same real garden on two separate actual calendar days; the fresh first-day/sample clip does not supply them. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-123": "Needs a physical Quest 3/3S and return on another actual day; desktop anchor restoration is not hardware verification. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-124": "Needs a physical scanned room and Quest hit-test/anchors; emulator analogue passed separately. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-125": "Needs physical Quest frame-time/fps measurements with six stage-7 plants; desktop CPU proxy is uncalibrated. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "VR-126": "Needs physical Quest hand tracking for the 20-pinch/hold/under-60-second matrix; emulator hands are not hardware verification. \u00b7 [evidence 1](audit/raw/quest-events.jsonl.gz)",
+    "D2-35": "Needs a physical Quest headset / Quest Browser. \u00b7 [evidence 1](audit/2d/D2-35.json) \u00b7 [evidence 2](audit/raw/shutdown.json)"
   },
   "evidenceBudget": {
-    "totalBytes": 11503680,
+    "totalBytes": 13914141,
     "limitBytes": 15000000,
-    "screenshots": 197,
-    "largestScreenshotBytes": 48457,
-    "screenshotLimitBytes": 200000
+    "screenshots": 195,
+    "largestScreenshotBytes": 78818,
+    "screenshotLimitBytes": 200000,
+    "allScreenshotsJpegOrWebp": true
   },
   "restoredConfig": {
     "device": "metaQuest3",
     "environment": "home_office"
   },
   "shutdown": {
-    "at": "2026-10-27T01:25:48.770023+00:00",
+    "recordedAt": "2026-10-27T02:11:45Z",
+    "rootPids": [
+      50810,
+      50738
+    ],
     "originPushed": false,
     "deployed": false,
     "loomEdited": false,
@@ -524,93 +484,42 @@
       "environment": "home_office"
     },
     "ownedPids": [
-      6109,
-      6168,
-      6206,
-      9903,
-      17878,
-      39506,
-      39507,
-      39508,
-      39509,
-      39510,
-      39518,
-      39519,
-      39520,
-      39522,
-      39523,
-      39524,
-      39780
-    ],
-    "rootPids": [
-      6168,
-      6109,
-      17878,
-      9903
+      28380,
+      28390,
+      28391,
+      28392,
+      28394,
+      28434,
+      28435,
+      28474,
+      50738,
+      50810,
+      50869,
+      50870
     ],
     "survivingOwnedPids": [],
-    "slotOwnerBeforeRelease": "mebae 17413 2026-10-27T00:27:17Z",
+    "slotOwnerBeforeRelease": "mebae 47320 2026-10-27T01:47:15Z",
     "slotReleaseExitCode": 0,
     "slotReleased": true,
     "slotOwnerAfterRelease": null,
-    "completedAt": "2026-10-27T01:31:45.324836+00:00"
+    "telemetryPids": [
+      83940,
+      98085,
+      32447,
+      19740,
+      99738
+    ],
+    "survivingTelemetryPids": []
+  },
+  "noMocks": "No app logic or XR results replaced. Native hand inputs, actual static-file negative fixtures, actual IndexedDB corruption, native anchor.delete, DEV ledger/clock/perf setup and pass-through canvas/audio/GL telemetry are explicitly labelled. No hardware claims.",
+  "tests": {
+    "corePassed": 61,
+    "coreFailed": 0,
+    "typecheck": "PASS",
+    "build": "PASS; production build excludes test hooks and clock"
   },
   "originPushed": false,
   "deployed": false,
   "loomEdited": false,
-  "noMocks": "No product methods or XR results replaced. Static file inputs, actual IndexedDB/version and quota behavior, native IWER capability configuration and pass-through telemetry are identified in evidence. DEV history/clock/perf fixtures are test setup, not actual multi-day footage.",
-  "remainingFailures": {
-    "VR-13": "Aiming-seed attempt: Pressed targets [], mode flying, lifted seed true, not idle. Radial centre/seed/tray and aiming-tray cancellation passed; five attempts recorded.",
-    "VR-83": "Actual seed refusal toast: Example garden (sample data). Turn off the example garden to plant your own habits. Expected cell omits that prefix. Counts/anchors/history unchanged.",
-    "VR-18": "No-hit right-hand attempt still displayed reticle=true and arc=true from the other hand’s wall hit. Placement refused with 0 habits; later valid placement recovered.",
-    "VR-70": "All stage totals matched and forms were deterministic, but the final four-plant fixture rendered moss / fern / moss / maple: Water hit a vertical desk surface, so the bamboo stage matrix has 0 complete captures.",
-    "VR-71": "Five-day fixture produced 6 flowers per plant, but labels showed Resting: a missed day pauses growth instead of In bloom this week; the next-week labels also omitted bloom text.",
-    "VR-84": "During carrying, a Sample-target pinch archived Stretch (active habits 1 → 0) and said Stretch is back in the tray as a seed. Its history is kept (export includes it). Expected no mutation.",
-    "VR-78": "Wrist toggles worked, but closed=false immediately after Close while the palm stayed up; menu reappeared before a new palm-up gesture.",
-    "VR-116": "6 tracked stage-7 plants and zero rakeWrites/texture-version deltas observed over 1200 ms; 0 native GL upload counters captured. Version counters do not establish the required actual upload count.",
-    "VR-94": "Capacity move was not established: after the stake attempt mode remained idle, all six handles unchanged, peak reserved slots 7. No capacity-move PASS claimed.",
-    "VR-01": "Execution contract incomplete: required tracked-pose-loss, enlarged-target and native audio/upload measurements remain absent. See explicit coverage failures below.",
-    "VR-62": "0 complete tracked-pose-loss observations captured; rejected restore alone does not establish the entire row.",
-    "VR-96": "0 complete enlarged seed/stake/radial/pot ray-and-poke matrices captured. Large settings/label scale persistence and six enlarged Pin again targets were observed, which is partial coverage.",
-    "VR-98": "Synthesized oscillator schedules and 0 sound-file requests captured, but 0 native AudioContext-running/unlock measurements were retained; complete root/tap/grow/undo audio assertion not established.",
-    "D2-01": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-02": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-03": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-04": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-05": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-06": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-07": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-08": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-09": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-10": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-12": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-13": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-14": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-15": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-16": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-17": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-18": "Desktop + 375 px: 4 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-19": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-20": "Desktop + 375 px: 2 error-level console entries. Chrome resource error: Failed to load resource: the server responded with a status of 404 (File not found), for history.json. HTTP 404 is expected; console error is still a failure under the user rule.",
-    "D2-27": "Desktop + 375 px: 2 error-level console entries. TypeError: Cannot read properties of null (reading 'filter'). Exact startup status matched; zero-error rule failed."
-  },
-  "untestedDependencies": {
-    "VR-21": "Needs an emulator room with at least two overlapping labelled bounded semantic meshes to verify smallest-mesh priority. This office only established desk mesh-label and door plane-label.",
-    "VR-22": "Needs four genuinely unlabelled detected planes with the required orientations/heights; supplied rooms do not establish that matrix. No semantic-label result mock used.",
-    "VR-26": "Needs a native runtime that rejects anchor creation and subsequently succeeds. IWER capability denial did not supply that rejection/recovery pair.",
-    "VR-27": "Needs a native live anchor that does not return a persistent handle. This IWER runtime supplies persistent handles.",
-    "VR-61": "Needs a native runtime without restorePersistentAnchor in addition to null/no-placement histories; current IWER always exposes that API.",
-    "VR-63": "Needs native controllable interruption windows during anchor create and restore as well as flight/carry; no delayed promise or restore mock substituted.",
-    "VR-64": "Managed Chrome automation auto-dismissed the real import confirm, including the isolated-context attempt. Needs a browser session in which that native confirmation can be accepted. No successful same-ID live-anchor import claimed.",
-    "VR-66": "Needs actual ledger/settings/tray transaction rejection. Chrome native zero-quota override did not reject these small writes; no storage method/result stubs substituted.",
-    "VR-69": "Needs an actual local-midnight crossing (and DST crossing for a timezone with DST). Whole-day DEV jumps do not establish the cadence/next-render behavior.",
-    "VR-90": "Needs a genuine failed new-anchor rejection in addition to the no-hit move case; current runtime did not supply that failure/recovery fixture.",
-    "VR-99": "Needs a browser environment with Web Audio genuinely unavailable. Native AudioContext remains exposed here; no API-removal mock substituted.",
-    "VR-122": "Needs recordings of this same real garden on two separate actual calendar days; the fresh first-day/sample clip does not supply them.",
-    "VR-123": "Needs a physical Quest 3/3S and return on another actual day; desktop anchor restoration is not hardware verification.",
-    "VR-124": "Needs a physical scanned room and Quest hit-test/anchors; emulator analogue passed separately.",
-    "VR-125": "Needs physical Quest frame-time/fps measurements with six stage-7 plants; desktop CPU proxy is uncalibrated.",
-    "VR-126": "Needs physical Quest hand tracking for the 20-pinch/hold/under-60-second matrix; emulator hands are not hardware verification.",
-    "D2-35": "Needs a physical Quest headset / Quest Browser."
-  }
+  "commits": "Left for Loom as required by authoritative worker session memory."
 }

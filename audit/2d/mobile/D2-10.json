@@ -1,6 +1,6 @@
 {
   "id": "D2-10",
-  "startedAt": "2026-10-27T00:29:40.071Z",
+  "startedAt": "2026-10-27T01:49:09.535Z",
   "console": [
     {
       "type": "error",
@@ -809,40 +809,21 @@
       }
     },
     {
+      "label": "No script console.error in bad-file subcases",
+      "ok": true,
+      "actual": []
+    },
+    {
       "label": "Zero unexpected console/page/network errors",
-      "ok": false,
+      "ok": true,
       "actual": {
-        "consoleErrors": [
-          {
-            "type": "error",
-            "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-            "location": {
-              "url": "http://127.0.0.1:4321/history.json",
-              "line": 0,
-              "column": 0,
-              "lineNumber": 0,
-              "columnNumber": 0
-            }
-          },
-          {
-            "type": "error",
-            "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-            "location": {
-              "url": "http://127.0.0.1:4321/history.json",
-              "line": 0,
-              "column": 0,
-              "lineNumber": 0,
-              "columnNumber": 0
-            }
-          }
-        ],
+        "consoleErrors": [],
         "pageErrors": [],
         "failedRequests": [],
         "httpErrors": []
       }
     }
   ],
-  "finishedAt": "2026-10-27T00:29:47.737Z",
-  "status": "FAIL",
-  "consolePolicy": "Every error-level Chrome console entry fails, including expected-history-404 resource errors. The expected HTTP 404 remains an allowed response."
+  "finishedAt": "2026-10-27T01:49:17.211Z",
+  "status": "PASS"
 }

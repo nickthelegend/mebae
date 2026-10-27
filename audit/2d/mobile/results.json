@@ -1,305 +1,53 @@
 [
   {
     "id": "D2-01",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-02",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-03",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-04",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-05",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-06",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-07",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-08",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-09",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-10",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-11",
@@ -308,407 +56,51 @@
   },
   {
     "id": "D2-12",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-13",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-14",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-15",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-16",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-17",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-18",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            },
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-19",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
+    "status": "PASS",
+    "failedChecks": []
   },
   {
     "id": "D2-20",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "Failed to load resource: the server responded with a status of 404 (File not found)",
-              "location": {
-                "url": "http://127.0.0.1:4321/history.json",
-                "line": 0,
-                "column": 0,
-                "lineNumber": 0,
-                "columnNumber": 0
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
-  },
-  {
-    "id": "D2-21",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-22",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-23",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-24",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-25",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-26",
     "status": "PASS",
     "failedChecks": []
   },
   {
     "id": "D2-27",
-    "status": "FAIL",
-    "failedChecks": [
-      {
-        "label": "Zero unexpected console/page/network errors",
-        "ok": false,
-        "actual": {
-          "consoleErrors": [
-            {
-              "type": "error",
-              "text": "TypeError: Cannot read properties of null (reading 'filter')\n    at activeHabits (https://localhost:8081/@fs/Volumes/Extreme%20SSD/Projects/grokbot/projects/.loom-worktrees/mebae-b1fe5b8c1893/omvpvtbff/t7/packages/core/src/habits.ts:24:19)\n    at summary (https://localhost:8081/src/index.ts:23:13)\n    at main (https://localhost:8081/src/index.ts:33:3)",
-              "location": {
-                "url": "https://localhost:8081/src/index.ts",
-                "line": 81,
-                "column": 10,
-                "lineNumber": 81,
-                "columnNumber": 10
-              }
-            }
-          ],
-          "pageErrors": [],
-          "failedRequests": [],
-          "httpErrors": []
-        }
-      }
-    ]
-  },
-  {
-    "id": "D2-28",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-29",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-30",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-31",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-32",
-    "status": "PASS",
-    "failedChecks": []
-  },
-  {
-    "id": "D2-34",
     "status": "PASS",
     "failedChecks": []
   }

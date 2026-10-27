@@ -1,0 +1,30 @@
+// Final-run real-runtime observations and hand-input edge cases.
+import fs from 'node:fs';
+import sharp from '../../packages/app/node_modules/sharp/dist/index.mjs';
+import {cli,ev,xr,pinchAt,sleep,until,dist,v3} from '../../packages/app/e2e/lib.mjs';
+const phase='t10-carry',records=[];
+const e=x=>ev(`(async()=>{const w=window.FRAMEWORK_MCP_RUNTIME.world,sys=n=>w.systems.find(s=>s.constructor.name===n);const {garden}=await import('/src/state/garden.ts');return (${x});})()`);
+const state=()=>ev('m.state()'),targets=()=>ev('m.targets()');
+const inspect=()=>e(`(()=>{const cards=[];w.scene.traverse(o=>{if(!o.visible)return;for(let p=o.parent;p;p=p.parent)if(!p.visible)return;const im=o.material?.map?.image;if(im?.__auditText)cards.push({name:o.name,text:im.__auditText,arcs:im.__auditArcs??[],scale:o.scale.toArray()});});const p=sys('PlantingSystem'),t=sys('TraySystem'),r=sys('RoomSystem'),sp=sys('SproutSystem'),a=sys('AnchorSystem'),f=sys('FocusSystem');const desk=r.findDesk(w.player.head.position);return {state:m.state(),targets:m.targets(),cards,toast:garden.toast.peek()?.text,free:t.freeSlots(),seeds:t.seeds.count,trayLocal:{p:t.root.position.toArray(),q:t.root.quaternion.toArray()},desk:desk?{y:desk.y,label:desk.label}:null,planting:{preset:p.preset?.label,seed:p.seed.visible,reticle:p.reticle.visible,arc:p.arc.visible,preview:p.lastPreview},plants:[...sp.sprouts.values()].map(s=>({id:s.habitId,wallish:s.wallish,rootQuaternion:s.group.quaternion.toArray(),species:s.plant.form?.species,labelScale:s.label.mesh.scale.toArray(),stake:!!s.stake})),sand:{width:f.canvas.width,height:f.canvas.height,textureVersion:f.tex.version,uploadVersion:f.tex.source.version,writes:f.rakeWrites,fade:f.mat.uniforms.uFade.value,resume:f.mat.uniforms.uResume.value},ledger:JSON.parse(m.exportJson()).ledger,persistent:JSON.parse(localStorage.getItem('@immersive-web-emulation-runtime/persistent-anchors')??'null')};})()`);
+const texts=o=>o.cards.flatMap(c=>c.text);
+const card=(o,name)=>o.cards.find(c=>c.name===name);
+async function shot(name){const tmp=`/tmp/mebae-t10-${name}.png`;cli(['browser','screenshot','--output-file',tmp]);await sharp(tmp).resize({width:1000,withoutEnlargement:true}).jpeg({quality:45}).toFile(`audit/vr/${name}.jpg`);fs.rmSync(tmp);return `audit/vr/${name}.jpg`;}
+async function row(n,fn){const startedAt=new Date().toISOString();let result;try{result=await fn();}catch(err){result={ok:false,observed:{error:err.message}};}const id=`VR-${String(n).padStart(2,'0')}`;let screenshot;try{screenshot=await shot(id);}catch(err){result.ok=false;result.screenshotError=err.message;}records.push({id,startedAt,finishedAt:new Date().toISOString(),status:result.ok?'PASS':'FAIL',...result,screenshot});fs.writeFileSync(`audit/raw/${phase}-rows.json`,JSON.stringify({phase,records},null,2));console.log(id,result.ok?'PASS':'FAIL',result.ok?'':JSON.stringify(result.observed).slice(0,600));}
+async function metrics(){e(`(()=>{if(window.__auditCanvasMetrics)return;window.__auditCanvasMetrics=true;const p=CanvasRenderingContext2D.prototype,a=p.arc,c=p.clearRect;p.arc=function(...args){(this.canvas.__auditArcs??=[]).push({args,width:this.lineWidth,stroke:this.strokeStyle});return a.apply(this,args);};p.clearRect=function(...args){this.canvas.__auditArcs=[];return c.apply(this,args);};})()`);}
+async function seated(){if(!xr('status').sessionActive)xr('enter');xr('set-input-mode',{mode:'hand'});xr('set-transform',{device:'headset',position:{x:-.08,y:1.2,z:-1.35},orientation:{pitch:-28,yaw:0,roll:0}});await until(()=>state().tray?.placed,'tray');await metrics();}
+async function reset(){ev('m.wipe()');cli(['browser','reload']);await sleep(2500);await seated();}
+async function choose(index,hand='hand-right'){await pinchAt(hand,targets().seed);await until(()=>state().mode==='radial','radial');await pinchAt(hand,targets().icons[index]);await until(()=>state().mode==='aiming','aiming');}
+async function plant(index,point,hand='hand-right'){const count=state().habits.length;await choose(index,hand);await pinchAt(hand,point);await until(()=>state().mode==='idle'&&state().habits.length===count+1,'rooted');await sleep(350);return state().habits.at(-1);}
+const desk=()=>ev('m.roomFixture().centre');
+const border=()=>{const t=targets().tray;return[t[0]-.19,t[1]+.025,t[2]+.075];};
+const label=id=>targets().sprouts[id].label;
+const chip=id=>e(`(()=>{const s=sys('SproutSystem').sprouts.get(${JSON.stringify(id)});return s.label.mesh.localToWorld(w.camera.position.clone().set(0,-s.label.mH*.405,0)).toArray();})()`);
+const tap=async p=>{await pinchAt('hand-right',p);await sleep(250);};
+const reload=async()=>{cli(['browser','reload']);await sleep(2500);await seated();await until(()=>state().anchors.outcomes!==null,'restore');await sleep(350);};
+import {chromium} from '../../packages/app/node_modules/playwright/index.mjs';
+import {instrument} from './telemetry.mjs';
+const browser=await chromium.connectOverCDP(cli(['dev','status']).state.session.browserAutomation.endpoint);
+for(const c of browser.contexts()){await c.addInitScript(instrument);for(const p of c.pages())for(const f of p.frames())await f.evaluate(instrument).catch(()=>{});}
+await row(84,async()=>{await reset();const h=await plant(0,[-.6,1.2,1.58]);await tap(label(h.id));const before=inspect();await tap(targets().sprouts[h.id].stake);const carried=inspect();await tap(targets().menuButtons[1]);const refused=inspect();await tap(e(`sys('TraySystem').root.localToWorld(w.camera.position.clone().set(-.194,.03,0)).toArray()`));await until(()=>state().mode==='idle','archive');const after=inspect();return{ok:carried.state.mode==='carrying'&&refused.state.mode==='carrying'&&refused.toast==='Finish pinning or moving this sprout before switching gardens.'&&refused.state.habits.length===before.state.habits.length&&JSON.stringify(before.ledger)===JSON.stringify(refused.ledger)&&after.state.habits.length===0&&JSON.stringify(before.ledger.counts)===JSON.stringify(after.ledger.counts)&&after.ledger.habits[0].archivedDay===after.state.today,observed:{before,carried,refused,after}};});
+
+await browser.close();

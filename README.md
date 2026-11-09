@@ -83,3 +83,7 @@ Still unverified on hardware: persistent-anchor restore across days in Quest Bro
 
 MIT, © 2026 Nivesh Gajengi. Fonts: Rethink Sans and Sono (SIL OFL, loaded from Google Fonts). All meshes, textures and sounds
 are procedural; there are no third-party assets.
+
+## Art
+
+Art generated with ChatGPT (image generation); prompts and art direction in [docs/ART.md](docs/ART.md). The app ships WebP copies in `packages/app/public/art/`.

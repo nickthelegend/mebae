@@ -8,3 +8,5 @@ dist/
 e2e-out/
 packages/app/.mcp.json
 .loom/
+art-src/
+art-src-wif/

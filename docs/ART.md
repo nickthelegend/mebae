@@ -20,3 +20,14 @@ Generated with ChatGPT's image model (via the Codex image tool on a ChatGPT plan
 | mebae-feature-1.webp | square 1024x1024: a hand pinching a sprout and it grows a leaf |
 | mebae-feature-2.webp | square 1024x1024: a sprout by a doorway beside stretching feet |
 | mebae-feature-3.webp | square 1024x1024: a garden of habits blooming over weeks |
+
+## Wave 2: film, social and onboarding
+
+| File | Prompt |
+|---|---|
+| mebae-film-title.webp | landscape 1536x1024: glowing sprouts growing from everyday places in a room; a cinematic title-card background for this product's demo film, its core metaphor at dusk, wide calm area in the center for a title added later |
+| mebae-social-square.webp | square 1024x1024: glowing sprouts growing from everyday places in a room; a bold social post image showing the product's single most exciting moment |
+| mebae-banner.webp | landscape 1536x512 wide banner: glowing sprouts growing from everyday places in a room; a panoramic strip of the product's world, low detail in the middle third |
+| mebae-onboard-1.webp | portrait 1024x1536: glowing sprouts growing from everyday places in a room; onboarding slide 1, a newcomer discovering the product's core idea |
+| mebae-onboard-2.webp | portrait 1024x1536: glowing sprouts growing from everyday places in a room; onboarding slide 2, the newcomer taking the main action for the first time |
+| mebae-loading.webp | transparent PNG with a real alpha channel, no background, no ground shadow, centered, 1024x1024: glowing sprouts growing from everyday places in a room; a tiny looping-friendly loading mascot or object from the product's world, centered |

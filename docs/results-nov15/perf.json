@@ -1,0 +1,59 @@
+{
+ "suite": "perf",
+ "recordedAt": "2026-11-15T14:28:56.401Z",
+ "results": [
+  {
+   "name": "600-frame sample",
+   "ok": true,
+   "detail": "600 frames"
+  },
+  {
+   "name": "CPU p95 \u2264 4 ms",
+   "ok": true,
+   "detail": "2.700 ms"
+  },
+  {
+   "name": "draw calls \u2264 50",
+   "ok": true,
+   "detail": "50"
+  },
+  {
+   "name": "triangles \u2264 150000",
+   "ok": true,
+   "detail": "37424"
+  },
+  {
+   "name": "six grown plants still present",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "idle sand makes no CPU texture writes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "zero console errors (performance)",
+   "ok": true,
+   "detail": "[]"
+  }
+ ],
+ "failed": 0,
+ "metrics": {
+  "frames": 600,
+  "cpuMs": {
+   "p50": 2,
+   "p95": 2.7000000029802322,
+   "max": 4.200000002980232
+  },
+  "drawCalls": {
+   "p50": 50,
+   "max": 50
+  },
+  "triangles": {
+   "p50": 37424,
+   "max": 37424
+  }
+ },
+ "qualification": "Uncalibrated desktop CPU/render proxy; unverified on Quest hardware."
+}

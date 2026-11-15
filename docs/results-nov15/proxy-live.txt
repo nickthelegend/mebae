@@ -1,0 +1,19 @@
+✔ health reports configuration without the key (12.517459ms)
+✔ no key: setup_required, loudly (0.60875ms)
+✔ only allowed origins; no-origin calls only when enabled (0.46175ms)
+✔ preflight answers with CORS headers (0.144542ms)
+✔ only two routes and POST (0.32075ms)
+✔ bad input is rejected before any upstream call (1.502167ms)
+✔ checkWav and checkSummary (0.412375ms)
+✔ limiter: per-minute, per-IP daily and global daily caps (0.729875ms)
+✔ rate limit answers 429 with retry-after before calling upstream (0.239041ms)
+  heard: "Drink water by the counter. Eight a day." -> {"preset":"water","target":8,"surface":"counter","label":"Drink water by the counter"} in 4030 ms
+✔ live: spoken habit -> transcript -> structured habit (4045.225042ms)
+  note (4896 ms): Your water habit is already a Seedling after 3 days together, with three days meeting your goal and a lovely 3-day streak growing. With one glass logged today, there's still room to gently sip toward your rhythm. Try linking a glass to one focus moment tomorrow to keep it sprouting.
+✔ live: weekly note from counts (4897.873667ms)
+  200: {"ok":false,"error":"not_a_habit","message":"Not a daily habit Mebae can track.","transcript":"What's the weather going to be like in Paris tomorrow?"}
+✔ live: a sentence that is not a habit is refused, not guessed (5082.778375ms)
+✔ proxy preset ids match packages/core presets (0.70175ms)
+ℹ pass 13
+ℹ fail 0
+ℹ skipped 0

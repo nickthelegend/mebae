@@ -1,0 +1,172 @@
+{
+ "suite": "quest",
+ "recordedAt": "2026-11-15T14:38:10.836Z",
+ "results": [
+  {
+   "name": "cold load: tray placed on a real surface",
+   "ok": true,
+   "detail": "desk on desk"
+  },
+  {
+   "name": "scene understanding sees the room",
+   "ok": true,
+   "detail": "planes 13, meshes 9"
+  },
+  {
+   "name": "3. habit created with an XRAnchor",
+   "ok": true,
+   "detail": "{\"anchorUuid\":\"18ca7fd3-d351-4b16-a075-a82b949c7e8a\",\"surfaceLabel\":\"door\",\"surface\":\"wall\"}"
+  },
+  {
+   "name": "3. surface label from the room scan",
+   "ok": true,
+   "detail": "door"
+  },
+  {
+   "name": "3. sprout at the hit point (\u00b12 cm)",
+   "ok": true,
+   "detail": "0.00 cm, via hit-test"
+  },
+  {
+   "name": "3. door plant drawn at a seat-readable size",
+   "ok": true,
+   "detail": "15.4 cm drawn, 2.95 m from the seat"
+  },
+  {
+   "name": "3. label text \u2265 18 mm cap height at 1 m equivalent",
+   "ok": true,
+   "detail": "pill, 54.3 mm cap at 2.95 m = 18.4 mm at 1 m"
+  },
+  {
+   "name": "4. check-in reaches stage 1",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "4. check-in plays the reward (petals, ring, count)",
+   "ok": true,
+   "detail": "{\"kind\":\"grow\",\"text\":\"Stage 2 \u00b7 Sprout\",\"parts\":64,\"at\":11048}"
+  },
+  {
+   "name": "first habit pinned and checked in under 60 s",
+   "ok": true,
+   "detail": "12.2 s through check-in (10.4 s to pin)"
+  },
+  {
+   "name": "5. water planted on the desk",
+   "ok": true,
+   "detail": "desk"
+  },
+  {
+   "name": "5. three pinches: 3/8",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "5. pinch-hold 1 s undoes one: 2/8",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "6. raking started the focus timer",
+   "ok": true,
+   "detail": "rake 3304 ms, 191 texture writes, 25 min"
+  },
+  {
+   "name": "7. history restored after reload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "7. persistent anchors restored",
+   "ok": true,
+   "detail": "[{\"habitId\":\"stretch-1\",\"status\":\"restored\"},{\"habitId\":\"water-2\",\"status\":\"restored\"}]"
+  },
+  {
+   "name": "7. sprouts back on their spots (\u00b11 cm)",
+   "ok": true,
+   "detail": "0.00 cm, 0.00 cm"
+  },
+  {
+   "name": "7. focus timer survived the reload",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "one-hand focus cancellation uses a single pinch",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "one-hand focus starts 25 minutes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "one-hand focus extends to 50 minutes",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "suspend completion adds exactly one stone",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "7b. lost anchors go to \"Pin again\"",
+   "ok": true,
+   "detail": "[\"pin-again\",\"pin-again\"]"
+  },
+  {
+   "name": "7b. a \"Pin again\" pot is in the tray",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "7b. one pinch re-pins it with a new anchor",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "8. next day check-in grows to stage 2",
+   "ok": true,
+   "detail": "2026-11-16"
+  },
+  {
+   "name": "8. three missed days: resting, stage kept",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "palm up shows the wrist menu",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "wrist \"Week\" opens the week rings",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "sample garden on: only sample sprouts drawn",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "sample focus interaction leaves real history untouched",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "sample garden off: real history untouched",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "zero console errors",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "failed": 0
+}

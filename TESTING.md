@@ -1,5 +1,49 @@
 # Testing Mebae
 
+## Nov 15, 2026: judge pass (readability, check-in payoff, voice coach)
+
+All counts below are from runs on Nov 15 against the code at `main` (results in [docs/results-nov15/](docs/results-nov15/)).
+Emulator runs: IWSDK IWER, dev server in agent mode at 1920×1080, real emulated hands (Glasses: gaze + pinch), real
+detected planes/meshes, real XRAnchors and IndexedDB. Nothing in the app is mocked.
+
+| Suite | Result | Notes |
+|---|---:|---|
+| Core unit tests (Vitest, 10 files) | **115 passed, 0 failed** | +54 since Oct 27: legibility bar for every card (`CARDS`), per-stage display sizes, coach contract (habit/target/surface/note validation, sample refusal), spoken-count `createHabit`, WAV encoding |
+| Proxy tests (`node --test`) | **13 passed, 0 failed** (10 offline + 3 live) | Live = real Meta Model API calls with Chatterbox-spoken WAVs: "Drink water by the counter. Eight a day." → `water`, 8, `counter` (4.0 s); weekly note (4.9 s); a weather question → `200 {ok:false, error:"not_a_habit"}`. Without a key the 3 live tests skip with "Setup required" ([output](docs/results-nov15/proxy-live.txt)) |
+| Typecheck + production build | pass | `check-dist`: no test hooks or test clock in the production build |
+| e2e Quest 3, `home_office` (`run-quest.mjs`) | **33/33** | adds: door plant drawn ≥ 7 cm at 2.95 m from the seat (15.4 cm), its label 18.4 mm cap height at 1 m equivalent (pill, 54.3 mm at 2.95 m), check-in plays the reward (64 petals, grow); first habit pinned and checked in in 12.2 s; 0 console errors |
+| e2e voice coach, live proxy (`run-coach.mjs`, `MEBAE_COACH_PHASE=live`) | **11/11** | pinch-hold a seed → 3.58 s captured from the emulated mic → transcript → Water · 8 a day · counter (4.9-5.4 s proxy round trip) → aimed at the desk, ✓ match → planted with target 8; Speak button + a non-habit sentence → refused, no habit created; weekly note from real counts; 0 console errors |
+| e2e voice coach, proxy without a key (`nokey`) | **3/3** | "AI unavailable: setup required (the coach proxy has no Meta Model API key)…"; the icons still plant a habit; the only console error is Chrome's own log of the expected 503 |
+| e2e voice coach, proxy stopped (`down`) | **3/3** | "AI unavailable: the coach could not be reached…"; icons still plant; only the expected 500 from the dev proxy is logged |
+| e2e Meta VR Glasses (`run-glasses.mjs`) | **8/8** | gaze + pinch for seed, radial, aim, check-in, week; every key element (now including the wider week panel) inside the 37/25/43° FoV with a 3° margin |
+| e2e kitchen room (`run-room.mjs`) | **6/6** | tray on detected furniture (table), habit pinned to a detected top, counted check-ins and undo, Week |
+| Performance (`run-perf.mjs`, six stage-7 plants) | **7/7** | CPU p95 2.7 ms (gate ≤ 4), draw calls max **50 (gate ≤ 50: at the limit, the new halo ring is one instanced draw per view)**, triangles 37,424 (gate ≤ 150k), 0 console errors. Desktop emulator proxy, not headset numbers |
+
+The nokey/down suites were run once each; their JSON reports were not kept (only the console output above).
+
+**How the emulated microphone works.** IWER has no microphone. `e2e/fake-mic.mjs` (and the film driver) replace
+`navigator.mediaDevices.getUserMedia` in the test page with a stream that plays a recorded WAV, the way Chrome's
+`--use-file-for-fake-audio-capture` would. Everything after the mic is the shipped path: Web Audio capture, 16 kHz WAV
+encoding, the proxy, Muse. The WAVs are Chatterbox TTS lines (`grokbot/videos/mebae/film/voice/`).
+
+**Voice output.** Mebae never uses `speechSynthesis`. The four fixed lines it speaks ("Got it. Now point to the spot,
+and pinch.", "Planted. Pinch it every time you do it.", "It grew!", "The voice coach isn't available right now…") are
+pre-rendered with Chatterbox (`packages/app/public/voice/*.mp3`). Muse's weekly note is dynamic, so it is shown as text only.
+
+Run the coach suites (key sourced in a subshell, never printed):
+
+```bash
+(set -a; . /path/to/.env; set +a; cd packages/proxy && node dev-server.mjs) &        # http://127.0.0.1:8787
+cd packages/app && MEBAE_PROXY_TARGET=http://127.0.0.1:8787 VITE_MEBAE_COACH_URL=/api/coach \
+  npx @iwsdk/cli dev up --ai-mode agent --allow-browser-automation --screenshot-width 1920 --screenshot-height 1080
+MEBAE_COACH_PHASE=live MEBAE_MIC_WAV=habit-line.wav MEBAE_MIC_WAV_OTHER=not-habit.wav node e2e/run.mjs coach
+```
+
+Still unverified on hardware: everything above is the desktop emulator. Quest Browser microphone permission and capture,
+persistent anchors across real days, real hit-test surfaces and 72 fps on a Quest 3 are untested.
+
+## Oct 27, 2026 audit (unchanged below)
+
 Evidence refreshed on **2026-10-27**, integration source **ffb3152**: **147 PASS / 0 FAIL / 17 UNTESTED**, across 164 rows in [AUDIT.md](AUDIT.md). The 48 existing current-commit PASS evidence cells remain unchanged. All 99 stale PASS rows were refreshed: **6 exact t10 suite/capture references and 93 direct re-observations**. The 17 excluded UNTESTED rows were not retried.
 
 [Machine-readable results](docs/emulator-results.json) retain the original t10 suite values and add `t11Refresh`. [The 99-row index](audit/raw/t11-refresh.json) lists every relinked/re-observed ID and its evidence file. No product source changes were required.

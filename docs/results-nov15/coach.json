@@ -1,0 +1,62 @@
+{
+ "suite": "coach",
+ "recordedAt": "2026-11-15T14:39:14.084Z",
+ "results": [
+  {
+   "name": "voice: hold a seed -> listening -> heard",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "voice: mic captured the spoken line",
+   "ok": true,
+   "detail": "3.58 s of audio"
+  },
+  {
+   "name": "voice: Muse transcript",
+   "ok": true,
+   "detail": "\"Drink water by the counter, eight a day.\""
+  },
+  {
+   "name": "voice: structured habit = Water, 8 a day, counter",
+   "ok": true,
+   "detail": "{\"preset\":\"water\",\"target\":8,\"surface\":\"counter\",\"label\":\"Drink water by the counter\"}"
+  },
+  {
+   "name": "voice: round trip time recorded",
+   "ok": true,
+   "detail": "5079 ms proxy round trip, 10.3 s hold-to-answer"
+  },
+  {
+   "name": "voice: the seed is lifted and aiming",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "name": "voice: Water planted with the spoken count",
+   "ok": true,
+   "detail": "{\"target\":8,\"kind\":\"counted\",\"on\":\"desk\"}"
+  },
+  {
+   "name": "voice: aimed surface matched the spoken place",
+   "ok": true,
+   "detail": "{\"target\":8,\"surface\":\"counter\",\"heard\":\"Drink water by the counter, eight a day.\",\"matched\":true}"
+  },
+  {
+   "name": "voice: a non-habit is refused, not guessed",
+   "ok": true,
+   "detail": "This is not a daily habit that fits a preset. Try again, or pinch a seed to pick from the icons."
+  },
+  {
+   "name": "weekly note: Muse answers from real counts",
+   "ok": true,
+   "detail": "5203 ms \u00b7  \u00b7 You planted your water habit very recently, with plantedDaysAgo at 0, and your Seed is settling in. Since daysElapsedThisWeek is 7, a gentle next step could be filling your glass once tomorrow morning to begin."
+  },
+  {
+   "name": "zero console errors",
+   "ok": true,
+   "detail": "0 unexpected; 0 expected coach network failure(s)"
+  }
+ ],
+ "failed": 0
+}

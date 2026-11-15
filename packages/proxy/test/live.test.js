@@ -25,7 +25,7 @@ test('live: spoken habit -> transcript -> structured habit', { skip: skip || (!w
 
 test('live: weekly note from counts', { skip }, async () => {
   const h = createHandler({ env });
-  const summary = { habits: [{ label: 'Water', target: 8, daysDone: 3, daysSoFar: 4, todayCount: 1, streak: 3, stage: 'Seedling', resting: false, inBloom: false, ageDays: 3 }], focusBlocksThisWeek: 1 };
+  const summary = { habits: [{ label: 'Water', target: 8, goalMetDaysThisWeek: 3, daysElapsedThisWeek: 4, todayCount: 1, streak: 3, stage: 'Seedling', resting: false, inBloom: false, plantedDaysAgo: 3 }], focusBlocksThisWeek: 1 };
   const r = await h(new Request('http://local/api/coach?route=note', { method: 'POST', body: JSON.stringify({ summary }), headers: { 'content-type': 'application/json' } }));
   const j = await r.json();
   assert.equal(r.status, 200, JSON.stringify(j));
@@ -38,5 +38,7 @@ test('live: a sentence that is not a habit is refused, not guessed', { skip: ski
   const r = await h(new Request('http://local/api/coach?route=habit', { method: 'POST', body: readFileSync(process.env.MEBAE_LIVE_NOT_HABIT_WAV), headers: { 'content-type': 'audio/wav' } }));
   const j = await r.json();
   console.log(`  ${r.status}: ${JSON.stringify(j)}`);
-  assert.equal(r.status, 422);
+  assert.equal(r.status, 200);
+  assert.equal(j.ok, false);
+  assert.equal(j.error, 'not_a_habit');
 });

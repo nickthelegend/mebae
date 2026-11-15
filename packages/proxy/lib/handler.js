@@ -10,7 +10,8 @@
  *        -> muse-spark-1.3 (JSON schema)  <- { note, ms }
  *
  * Errors: 503 setup_required (no key), 429 rate_limited|daily_cap, 400/413 bad
- * input, 422 not_a_habit, 502 upstream. The app shows each as "AI unavailable: …".
+ * input, 502 upstream. A sentence that is not a habit is an answer, not an
+ * error: 200 { ok: false, error: 'not_a_habit' | 'not_heard', message }. The app shows each as "AI unavailable: …".
  */
 import { Limiter } from './limits.js';
 
@@ -55,7 +56,7 @@ target: how many times a day they said (1 if they gave no number). surface: the 
 label: their habit in at most 6 words. If the sentence is not a daily habit that fits a preset, set ok=false and explain in problem; otherwise ok=true and problem="".`;
 
 const NOTE_PROMPT = `You write a short weekly note for a person using Mebae, a habit garden where each habit is a plant in their room.
-Use only the numbers given. Call habits naturally ("your water habit", "reading"). At most 3 short sentences and 55 words, warm and specific: one thing that went well, one gentle concrete suggestion for the coming days.
+Use only the numbers given, exactly as named (plantedDaysAgo is how long they have had the habit; daysElapsedThisWeek is just today's position in the week; stage is the plant's growth stage). Call habits naturally ("your water habit", "reading"). At most 3 short sentences and 55 words, warm and specific: one thing that went well, one gentle concrete suggestion for the coming days.
 In Mebae a missed day only pauses growth; plants never die. No guilt, no medical claims, no emojis, no lists.`;
 
 export function createHandler({ env, fetchImpl = fetch, now = () => Date.now(), limiter } = {}) {
@@ -113,13 +114,13 @@ export function createHandler({ env, fetchImpl = fetch, now = () => Date.now(), 
     try {
       if (route === 'habit') {
         const transcript = await transcribe(fetchImpl, key, body);
-        if (!transcript) return reply(422, { error: 'not_heard', message: 'Nothing was heard. Hold the seed, wait for the chime, then speak.' });
+        if (!transcript) return reply(200, { ok: false, error: 'not_heard', message: 'Nothing was heard. Hold the seed, wait for the chime, then speak.' });
         const h = await spark(fetchImpl, key, HABIT_PROMPT, transcript, HABIT_SCHEMA, 700);
-        if (!h.ok) return reply(422, { error: 'not_a_habit', message: h.problem || 'That did not sound like a daily habit.', transcript });
-        return reply(200, { transcript, habit: { preset: h.preset, target: h.target, surface: h.surface, label: h.label }, models: MODELS, ms: now() - t0 });
+        if (!h.ok) return reply(200, { ok: false, error: 'not_a_habit', message: h.problem || 'That did not sound like a daily habit.', transcript });
+        return reply(200, { ok: true, transcript, habit: { preset: h.preset, target: h.target, surface: h.surface, label: h.label }, models: MODELS, ms: now() - t0 });
       }
       const n = await spark(fetchImpl, key, NOTE_PROMPT, JSON.stringify(input), NOTE_SCHEMA, 900);
-      return reply(200, { note: n.note, model: MODELS.spark, ms: now() - t0 });
+      return reply(200, { ok: true, note: n.note, model: MODELS.spark, ms: now() - t0 });
     } catch (e) {
       // Upstream detail is logged server-side; the key never appears in it.
       console.error(`[coach] ${route} failed: ${e.message}`);
@@ -173,19 +174,19 @@ export function checkSummary(b) {
   const num = (x, lo, hi) => typeof x === 'number' && Number.isFinite(x) && x >= lo && x <= hi;
   const habits = s.habits.map((h, i) => {
     if (typeof h?.label !== 'string' || h.label.length > 40) throw new Error(`habits[${i}].label must be a short string.`);
-    for (const k of ['target', 'daysDone', 'daysSoFar', 'todayCount', 'streak', 'ageDays'])
+    for (const k of ['target', 'goalMetDaysThisWeek', 'daysElapsedThisWeek', 'todayCount', 'streak', 'plantedDaysAgo'])
       if (!num(h[k], 0, 10_000)) throw new Error(`habits[${i}].${k} must be a number.`);
     return {
       label: h.label,
       target: h.target,
-      daysDone: h.daysDone,
-      daysSoFar: h.daysSoFar,
+      goalMetDaysThisWeek: h.goalMetDaysThisWeek,
+      daysElapsedThisWeek: h.daysElapsedThisWeek,
       todayCount: h.todayCount,
       streak: h.streak,
       stage: typeof h.stage === 'string' ? h.stage.slice(0, 20) : '',
       resting: !!h.resting,
       inBloom: !!h.inBloom,
-      ageDays: h.ageDays,
+      plantedDaysAgo: h.plantedDaysAgo,
     };
   });
   return { habits, focusBlocksThisWeek: num(s.focusBlocksThisWeek, 0, 1000) ? s.focusBlocksThisWeek : 0 };

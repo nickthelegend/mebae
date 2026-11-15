@@ -36,7 +36,7 @@ const req = (method, route, { body, type, origin = ORIGIN, ip = '1.2.3.4' } = {}
     headers: { ...(origin ? { origin } : {}), ...(type ? { 'content-type': type } : {}), 'x-forwarded-for': `${ip}, 10.0.0.1` },
   });
 
-const summary = { summary: { habits: [{ label: 'Water', target: 8, daysDone: 3, daysSoFar: 4, todayCount: 1, streak: 3, stage: 'Seedling', resting: false, inBloom: false, ageDays: 3 }], focusBlocksThisWeek: 1 } };
+const summary = { summary: { habits: [{ label: 'Water', target: 8, goalMetDaysThisWeek: 3, daysElapsedThisWeek: 4, todayCount: 1, streak: 3, stage: 'Seedling', resting: false, inBloom: false, plantedDaysAgo: 3 }], focusBlocksThisWeek: 1 } };
 
 test('health reports configuration without the key', async () => {
   const h = createHandler({ env: { MODEL_API_KEY: 'k-secret' }, fetchImpl: noUpstream });

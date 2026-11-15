@@ -15,7 +15,8 @@ in-memory per function instance (so the real ceiling is instances × cap; the ca
 body caps (16 s of audio, 8 KB of JSON); input validated before any upstream call; unknown summary fields dropped.
 
 Failures are loud and readable: `503 setup_required` (no key), `429 rate_limited | daily_cap` (with `Retry-After`),
-`400/413` bad input, `422 not_a_habit | not_heard` (Muse is never asked to guess), `502 upstream`. The app shows each as
+`400/413` bad input, `502 upstream`. A sentence that is not a habit is an answer, not a failure:
+`200 { ok: false, error: "not_a_habit" | "not_heard", message }` (Muse is told to refuse rather than guess). The app shows each as
 "AI unavailable: …" and the icon path keeps working.
 
 ## Tests

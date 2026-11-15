@@ -13,7 +13,15 @@ const coreEntry = fileURLToPath(new URL('../core/src/index.ts', import.meta.url)
 
 export default defineConfig({
   plugins: [iwsdkDev()],
-  server: { host: '0.0.0.0', port: 8081, open: false, fs: { allow: ['..'] } },
+  server: {
+    host: '0.0.0.0',
+    port: 8081,
+    open: false,
+    fs: { allow: ['..'] },
+    // Dev only: forward /api/coach to a locally running packages/proxy
+    // (MEBAE_PROXY_TARGET=http://127.0.0.1:8787) so the page stays same-origin.
+    proxy: process.env.MEBAE_PROXY_TARGET ? { '/api/coach': { target: process.env.MEBAE_PROXY_TARGET, changeOrigin: true } } : undefined,
+  },
   build: {
     outDir: 'dist',
     sourcemap: process.env.NODE_ENV !== 'production',
@@ -45,5 +53,6 @@ export default defineConfig({
     esbuildOptions: { target: 'esnext' },
   },
   publicDir: 'public',
-  base: './',
+  // GitHub Pages serves the app at /<repo>/app/; MEBAE_BASE overrides for that build.
+  base: process.env.MEBAE_BASE ?? './',
 });

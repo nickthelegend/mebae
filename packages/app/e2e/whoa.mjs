@@ -60,7 +60,7 @@ export default async function run({ page, frame, cdp }) {
     marks.push({ at: (Date.now() - start) / 1000, text: 'One real check-in · stage 1 · no clock advancement' });
     await pause(Math.max(0, 20000 - (Date.now() - start)));
     await xr('set-transform', { device: 'headset', position: { x: -0.08, y: 1.2, z: -1.35 }, orientation: { pitch: -28, yaw: 0, roll: 0 } });
-    await pinch((await targets()).menuButtons[1]);
+    await pinch((await targets()).menuButtons[2]);
     marks.push({ at: (Date.now() - start) / 1000, text: 'Example garden (sample data) · NOT a recorded later day' });
   } catch (e) {
     error = e.stack ?? String(e);

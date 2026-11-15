@@ -25,7 +25,7 @@ import {
 import { chimeGrow, chimeTap, chimeUndo, unlockAudio } from '../fx/chimes.js';
 import { makePressable } from '../interaction/press-router.js';
 import { garden } from '../state/garden.js';
-import { CanvasCard, roundRect } from '../ui/canvas-card.js';
+import { type CanvasCard, cardFor, roundRect } from '../ui/canvas-card.js';
 import { stoneGeometry } from '../ui/geometry.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER } from '../ui/palette.js';
 import { TraySystem } from './tray.js';
@@ -99,8 +99,8 @@ export class FocusSystem extends createSystem({}) {
     this.stones = new InstancedMesh(stoneGeometry(), new MeshStandardMaterial({ color: new Color('#8a8f88'), roughness: 0.55 }), MAX_STONES);
     this.stones.name = 'Focus stones';
     this.stones.count = 0;
-    this.card = new CanvasCard(640, 150, 0.15, 0.035, 'Focus timer');
-    this.card.mesh.position.set(0.075, 0.052, -0.098);
+    this.card = cardFor('focus', 'Focus timer');
+    this.card.mesh.position.set(0.06, 0.062, -0.098);
     this.card.mesh.rotation.x = -0.35;
 
     const start = () => {
@@ -265,7 +265,7 @@ export class FocusSystem extends createSystem({}) {
         roundRect(g, 4, 4, w - 8, h - 8, 34);
         g.fill();
         g.fillStyle = hc ? '#ffe14d' : SEED_PAPER;
-        g.font = `600 ${st.running ? `52px ${FONT_MONO}` : `40px ${FONT_UI}`}`;
+        g.font = `600 ${st.running ? `56px ${FONT_MONO}` : `44px ${FONT_UI}`}`;
         g.textAlign = 'center';
         g.textBaseline = 'middle';
         g.fillText(label, w / 2, h / 2 + 2, w - 40);

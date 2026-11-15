@@ -19,7 +19,7 @@ import { bindInstanceSpherecast } from '../interaction/instance-spherecast.js';
 import { PressRouter, makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
-import { CanvasCard, roundRect } from '../ui/canvas-card.js';
+import { CanvasCard, cardFor, roundRect } from '../ui/canvas-card.js';
 import { drawIcon } from '../ui/icons.js';
 import { FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
 import { mergedBoxes, woodTexture } from '../ui/geometry.js';
@@ -31,7 +31,7 @@ export const TRAY_W = 0.4;
 export const TRAY_D = 0.2;
 const SLOT_X = [-0.165, -0.12, -0.075];
 const SLOT_Z = [-0.035, 0.035];
-const MENU = ['Week', 'Sample', 'Contrast', 'Large', 'One-hand'] as const;
+export const MENU = ['Speak', 'Week', 'Sample', 'Contrast', 'Large', 'One-hand'] as const;
 
 export function slotLocal(i: number, out: Vector3): Vector3 {
   return out.set(SLOT_X[i % 3], 0.034, SLOT_Z[Math.floor(i / 3) % 2]);
@@ -110,18 +110,19 @@ export class TraySystem extends createSystem({}) {
     soil.name = 'Seed soil';
     this.root.add(soil);
 
-    this.menu = new CanvasCard(1024, 150, 0.36, 0.052, 'Tray menu');
+    this.menu = cardFor('trayMenu', 'Tray menu');
     this.menu.mesh.position.set(0, 0.035, TRAY_D / 2 + 0.03);
     this.menu.mesh.rotation.x = -0.9;
     this.root.add(this.menu.mesh);
 
-    this.toastCard = new CanvasCard(1024, 200, 0.34, 0.066, 'Toast');
+    this.toastCard = cardFor('toast', 'Toast');
     this.toastCard.mesh.visible = false;
     this.toastCard.mesh.renderOrder = 30;
     (this.toastCard.mesh.material as { depthTest: boolean }).depthTest = false;
 
-    this.stampCard = new CanvasCard(1024, 110, 0.36, 0.039, 'Sample stamp');
+    this.stampCard = cardFor('stamp', 'Sample stamp');
     this.stampCard.mesh.position.set(0, 0.195, -0.06);
+    this.stampCard.mesh.rotation.x = -0.4; // face the seated eye line
     this.stampCard.mesh.visible = false;
     this.drawSampleStamp();
     this.root.add(this.stampCard.mesh);
@@ -153,7 +154,13 @@ export class TraySystem extends createSystem({}) {
     });
     this.world.createTransformEntity(this.toastCard.mesh, { persistent: true });
     this.seedsEntity = this.world.createTransformEntity(this.makeSeeds(), { parent: this.entity, persistent: true });
-    makePressable(this.seedsEntity, 'seeds', { tap: () => this.world.getSystem(TrayEvents)?.emit('seed') });
+    // Pinch a seed: pick from the icon radial. Pinch-hold it (1 s): say the
+    // habit to the voice coach, release to send.
+    makePressable(this.seedsEntity, 'seeds', {
+      tap: () => this.world.getSystem(TrayEvents)?.emit('seed'),
+      hold: () => this.world.getSystem(TrayEvents)?.emit('voice-hold'),
+      up: () => this.world.getSystem(TrayEvents)?.emit('voice-release'),
+    });
     const menuEntity = this.world.createTransformEntity(new Object3D(), { parent: this.entity, persistent: true });
     menuEntity.object3D!.add(this.menu.mesh);
     menuEntity.object3D!.name = 'Tray menu';
@@ -175,7 +182,8 @@ export class TraySystem extends createSystem({}) {
 
   menuAction(a: (typeof MENU)[number]): void {
     const s = garden.settings;
-    if (a === 'Week') ui.weekOpen.value = !ui.weekOpen.peek();
+    if (a === 'Speak') this.world.getSystem(TrayEvents)?.emit('voice-toggle');
+    else if (a === 'Week') ui.weekOpen.value = !ui.weekOpen.peek();
     else if (a === 'Sample') {
       if (ui.mode.peek() !== 'idle') return garden.say('Finish pinning or moving this sprout before switching gardens.');
       garden.setSample(!garden.isSample);
@@ -243,7 +251,7 @@ export class TraySystem extends createSystem({}) {
       this.refresh();
     }
     // The week panel supplies its own sample stamp and occupies this space.
-    this.stampCard.mesh.visible = !ui.weekOpen.peek() && (garden.isSample || (ui.mode.peek() === 'idle' && this.showGardenHint));
+    this.stampCard.mesh.visible = !ui.weekOpen.peek() && ui.coach.peek() === 'idle' && (garden.isSample || (ui.mode.peek() === 'idle' && this.showGardenHint));
     if (this.toastCard.mesh.visible) {
       if (performance.now() > this.toastUntil) this.toastCard.mesh.visible = false;
       else this.followHead(this.toastCard.mesh);
@@ -373,10 +381,10 @@ export class TraySystem extends createSystem({}) {
     pinAgain.forEach((h, k) => {
       const existing = this.pots.get(h.id);
       if (existing) {
-        existing.object3D!.position.set((k % 3 - 1) * 0.14, 0.01 + Math.floor(k / 3) * 0.065, -0.01);
+        existing.object3D!.position.set((k % 3 - 1) * 0.175, 0.01 + Math.floor(k / 3) * 0.085, -0.01);
         return;
       }
-      const card = new CanvasCard(512, 220, 0.11, 0.047, `Pin again: ${h.label}`);
+      const card = cardFor('pinAgain', `Pin again: ${h.label}`);
       card.draw((g, w, hh) => {
         const hc = garden.settings.highContrast;
         g.fillStyle = hc ? '#000' : SEED_PAPER;
@@ -389,9 +397,9 @@ export class TraySystem extends createSystem({}) {
         g.fillStyle = hc ? '#fff' : LOAM;
         g.font = `700 54px ${FONT_UI}`;
         g.textBaseline = 'middle';
-        g.fillText('Pin again', 130, hh / 2 - 30);
-        g.font = `500 44px ${FONT_UI}`;
-        g.fillText(h.label, 130, hh / 2 + 34);
+        g.fillText('Pin again', 130, hh / 2 - 32, w - 150);
+        g.font = `600 50px ${FONT_UI}`;
+        g.fillText(h.label, 130, hh / 2 + 36, w - 150);
       });
       const pot = new Mesh(new SphereGeometry(0.016, 10, 6, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), new MeshStandardMaterial({ color: new Color(TERRACOTTA), roughness: 0.8 }));
       pot.rotation.x = Math.PI;
@@ -400,10 +408,10 @@ export class TraySystem extends createSystem({}) {
       // The holder origin is the pot, and that point sits inside the tray
       // base, so a ray aimed there presses the tray instead of this card.
       holder.add(pot);
-      card.mesh.position.set(0, 0.05, 0);
+      card.mesh.position.set(0, 0.06, 0);
       holder.add(card.mesh);
       // Six independent cards, with a gap even when larger targets are on.
-      holder.position.set((k % 3 - 1) * 0.14, 0.01 + Math.floor(k / 3) * 0.065, -0.01);
+      holder.position.set((k % 3 - 1) * 0.175, 0.01 + Math.floor(k / 3) * 0.085, -0.01);
       holder.scale.setScalar(garden.settings.largeTargets ? 1.2 : 1);
       const e = this.world.createTransformEntity(holder, { parent: this.entity!, persistent: true });
       makePressable(e, this.potKeyFor(h.id), { tap: () => this.world.getSystem(TrayEvents)?.emit('pin-again', h.id) });
@@ -421,7 +429,7 @@ export class TraySystem extends createSystem({}) {
       g.font = `700 42px ${FONT_UI}`;
       g.textAlign = 'center';
       g.textBaseline = 'middle';
-      g.fillText(free.length ? 'No habits yet · pinch a seed or the tray to begin' : '6 of 6 habits · move a sprout into the tray to free a seed', w / 2, h / 2, w - 40);
+      g.fillText(free.length ? 'Pinch a seed to pick a habit · hold it to say one' : '6 of 6 habits · move a sprout into the tray to free a seed', w / 2, h / 2, w - 40);
     });
     else this.drawSampleStamp();
   }
@@ -442,7 +450,7 @@ export class TraySystem extends createSystem({}) {
   private drawMenu(): void {
     const s = garden.settings;
     const hc = s.highContrast;
-    const on = [ui.weekOpen.peek(), garden.isSample, s.highContrast, s.largeTargets, s.oneHand];
+    const on = [ui.coach.peek() === 'listening', ui.weekOpen.peek(), garden.isSample, s.highContrast, s.largeTargets, s.oneHand];
     this.menu.draw((g, w, h) => {
       const bw = w / MENU.length;
       MENU.forEach((label, i) => {
@@ -456,7 +464,7 @@ export class TraySystem extends createSystem({}) {
         g.font = `700 ${hc ? 46 : 42}px ${FONT_UI}`;
         g.textAlign = 'center';
         g.textBaseline = 'middle';
-        g.fillText(label, i * bw + bw / 2, h / 2 + 2);
+        g.fillText(label, i * bw + bw / 2, h / 2 + 2, bw - 30);
       });
     });
   }

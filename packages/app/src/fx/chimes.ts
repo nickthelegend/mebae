@@ -74,3 +74,56 @@ export function chimeUndo(): void {
   bell(note(4), c.currentTime, 0.12, 0.5);
   bell(note(0), c.currentTime + 0.08, 0.12, 0.6);
 }
+
+/** The day's goal is met: a quick bright run up the scale. */
+export function chimeSparkle(): void {
+  const c = ac();
+  if (!c) return;
+  [0, 2, 4, 5, 7].forEach((s, i) => bell(note(PENTA[s]), c.currentTime + i * 0.07, 0.16, 1.2));
+}
+
+/** The voice coach starts listening: two soft rising notes. */
+export function chimeListen(): void {
+  const c = ac();
+  if (!c) return;
+  bell(note(PENTA[2]), c.currentTime, 0.14, 0.7);
+  bell(note(PENTA[4]), c.currentTime + 0.1, 0.14, 0.9);
+}
+
+/**
+ * Fixed spoken lines (pre-rendered with Chatterbox TTS, shipped in
+ * public/voice/). Played through the same Web Audio master as the chimes.
+ * Dynamic AI text is never voiced: it is shown as text only.
+ */
+export type VoiceLine = 'heard' | 'planted' | 'unavailable' | 'grew';
+const lines = new Map<VoiceLine, Promise<AudioBuffer | null>>();
+let warned = false;
+
+export function voiceLine(id: VoiceLine): void {
+  const c = ac();
+  if (!c || !master) return;
+  let p = lines.get(id);
+  if (!p) {
+    p = fetch(`${import.meta.env.BASE_URL}voice/${id}.mp3`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.arrayBuffer();
+      })
+      .then((b) => c.decodeAudioData(b))
+      .catch((e) => {
+        if (!warned) console.warn(`[mebae] voice line ${id} unavailable: ${(e as Error).message}`);
+        warned = true;
+        return null;
+      });
+    lines.set(id, p);
+  }
+  void p.then((buf) => {
+    if (!buf || !master) return;
+    const src = c.createBufferSource();
+    const g = c.createGain();
+    g.gain.value = 2.2; // master is 0.35 for chimes; speech sits a little above them
+    src.buffer = buf;
+    src.connect(g).connect(master);
+    src.start(c.currentTime + 0.05);
+  });
+}

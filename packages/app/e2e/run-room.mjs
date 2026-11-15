@@ -31,7 +31,7 @@ export async function main() {
   check('three water pinches reach 3/8', ev('m.state().habits[0].today') === 3);
   await pinchAt('hand-right', t.sprouts[h.id].label, 1.3);
   check('hold undoes one: 2/8', ev('m.state().habits[0].today') === 2);
-  await pinchAt('hand-right', t.menuButtons[0]);
+  await pinchAt('hand-right', t.menuButtons[1]);
   check('Week opens with a hand pinch', ev('m.state().weekOpen'));
   const errors = consoleErrors(cli(['browser', 'logs', '--input-json', JSON.stringify({ count: 200 })]), started);
   check('zero console errors (room smoke)', errors.length === 0, JSON.stringify(errors));

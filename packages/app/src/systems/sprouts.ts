@@ -5,14 +5,22 @@ import {
   activeHabits,
   archiveHabit,
   checkIn,
+  displayScale,
+  distanceScale,
   growthOf,
   plantForm,
+  stageName,
   setPlacement,
   undoOne,
 } from '@mebae/core';
 import {
   type Entity,
+  AdditiveBlending,
   BoxGeometry,
+  CanvasTexture,
+  Matrix4,
+  PlaneGeometry,
+  SRGBColorSpace,
   Color,
   CylinderGeometry,
   Group,
@@ -24,17 +32,18 @@ import {
   Vector3,
   createSystem,
 } from '@iwsdk/core';
-import { chimeGrow, chimeTap, chimeUndo, unlockAudio } from '../fx/chimes.js';
+import { chimeGrow, chimeSparkle, chimeTap, chimeUndo, unlockAudio, voiceLine } from '../fx/chimes.js';
+import { RewardSystem } from '../fx/reward.js';
 import { PressRouter, makePressable, unregisterPressable } from '../interaction/press-router.js';
 import { PlantMesh, mossMat } from '../plants/plant-mesh.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
-import { CanvasCard, roundRect } from '../ui/canvas-card.js';
+import { CanvasCard, cardFor, roundRect } from '../ui/canvas-card.js';
 import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
 import { type AimSource, type SelectEvent, AimSystem } from './aim.js';
 import { AnchorSystem } from './anchors.js';
-import { horizontalLabelRise, SAMPLE_PLANT_SCALE, SAMPLE_SPOTS } from './garden-layout.js';
+import { SAMPLE_PLANT_SCALE, SAMPLE_SPOTS } from './garden-layout.js';
 import { surfaceQuaternion } from './surface-pose.js';
 import { TrayEvents, TraySystem } from './tray.js';
 
@@ -50,12 +59,53 @@ interface Sprout {
   key: string;
   bounce: number;
   wallish: boolean;
+  /** Display scale of the plant (legibility, see displayScale in core). */
+  baseScale: number;
+  /** Drawn size: height (upright) or radius (moss), metres, after the seat boost. */
+  size: number;
+  /** Stage size before the seat boost. */
+  sizeBase: number;
+  /** Plant scale actually applied (baseScale × seat boost). */
+  scaleNow: number;
+  /** 'full' card near, 'pill' beyond ~1.5 m. */
+  layout: 'full' | 'pill';
+  labelScale: number;
 }
 
 const stakeMat = new MeshStandardMaterial({ color: new Color('#b98a5c'), roughness: 0.8 });
 const stakeGeo = new CylinderGeometry(0.004, 0.003, 0.07, 6);
 const stakePickGeo = new BoxGeometry(0.03, 0.09, 0.05);
 const stakePickMat = new MeshBasicMaterial({ visible: false });
+
+/** Soft glowing ring texture for the halo that marks each plant's spot. */
+function haloTexture(): CanvasTexture {
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const g = c.getContext('2d')!;
+  const grad = g.createRadialGradient(64, 64, 18, 64, 64, 63);
+  grad.addColorStop(0, 'rgba(255,255,255,0)');
+  grad.addColorStop(0.55, 'rgba(255,255,255,0.12)');
+  grad.addColorStop(0.8, 'rgba(255,255,255,0.9)');
+  grad.addColorStop(0.88, 'rgba(255,255,255,0.55)');
+  grad.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 128, 128);
+  const t = new CanvasTexture(c);
+  t.colorSpace = SRGBColorSpace;
+  return t;
+}
+const HALO_TODO = new Color('#ffab4a');
+const HALO_DONE = new Color('#a6e05c');
+const HALO_REST = new Color('#9a8d5f');
+/** Labels switch to the compact pill beyond this distance (with hysteresis). */
+const PILL_AT = 1.6;
+/** Plants far from the tray (the seat) are drawn bigger so they read from there; capped. */
+const SEAT_REF_M = 1.2;
+const SEAT_BOOST_MAX = 2.2;
+const MAX_UPRIGHT_M = 0.75;
+const MAX_MOSS_R_M = 0.45;
+const _trayPos = new Vector3();
+const FULL_AT = 1.35;
 
 /**
  * The living sprouts: one per habit, drawn only where its anchor really is.
@@ -65,6 +115,10 @@ const stakePickMat = new MeshBasicMaterial({ visible: false });
 export class SproutSystem extends createSystem({}) {
   private sprouts = new Map<string, Sprout>();
   private stakes!: InstancedMesh;
+  private halos!: InstancedMesh;
+  private haloM = new Matrix4();
+  private haloS = new Vector3();
+  private haloC = new Color();
   private lastVersion = -1;
   private lastDay = '';
   private dayCheck = 0;
@@ -85,6 +139,18 @@ export class SproutSystem extends createSystem({}) {
     this.stakes.name = 'Move stakes';
     this.stakes.count = 0;
     this.world.createTransformEntity(this.stakes, { persistent: true });
+    // One instanced draw for every plant's halo: a glowing ring on its real
+    // surface, amber while today is open, green once it is done.
+    this.halos = new InstancedMesh(
+      new PlaneGeometry(2, 2).rotateX(-Math.PI / 2),
+      new MeshBasicMaterial({ map: haloTexture(), transparent: true, depthWrite: false, toneMapped: false, blending: AdditiveBlending, side: 2 }),
+      MAX_HABITS,
+    );
+    this.halos.name = 'Plant halos';
+    this.halos.count = 0;
+    this.halos.frustumCulled = false;
+    this.halos.renderOrder = 3;
+    this.world.createTransformEntity(this.halos, { persistent: true });
     const aim = () => this.world.getSystem(AimSystem);
     const wire = () => {
       const a = aim();
@@ -98,6 +164,7 @@ export class SproutSystem extends createSystem({}) {
     this.xrManager.addEventListener('sessionend', () => {
       for (const id of [...this.sprouts.keys()]) this.drop(id);
       this.stakes.count = 0;
+      this.halos.count = 0;
       this.carryId = null;
       this.pendingSelect = null;
     });
@@ -108,13 +175,17 @@ export class SproutSystem extends createSystem({}) {
   }
 
   /** For tests and the perf HUD. */
-  snapshot(): { id: string; stage: number; position: number[]; sample: boolean; triangles: number }[] {
+  snapshot(): { id: string; stage: number; position: number[]; sample: boolean; triangles: number; drawnSize: number; layout: string; labelScale: number; labelWidthM: number }[] {
     return [...this.sprouts.values()].map((s) => ({
       id: s.habitId,
       stage: s.stage,
       position: s.group.getWorldPosition(new Vector3()).toArray(),
       sample: s.sample,
       triangles: s.plant.triangles,
+      drawnSize: s.size,
+      layout: s.layout,
+      labelScale: s.labelScale,
+      labelWidthM: s.label.mW * s.labelScale,
     }));
   }
 
@@ -149,6 +220,8 @@ export class SproutSystem extends createSystem({}) {
     const anchors = this.world.getSystem(AnchorSystem)!;
     mossMat.uniforms.uTime.value = now / 1000;
     let stakeCount = 0;
+    let haloCount = 0;
+    const pulse = 0.62 + 0.38 * Math.sin(now / 1000 * 2.6);
     for (const s of this.sprouts.values()) {
       if (!s.sample) {
         if (s.habitId === this.carryId) this.followCarry(s);
@@ -161,40 +234,92 @@ export class SproutSystem extends createSystem({}) {
         }
       }
       s.plant.tick(dt);
-      if (s.bounce > 0) {
-        s.bounce = Math.max(0, s.bounce - dt * 2.5);
-        s.plant.group.scale.setScalar(1 + Math.sin(s.bounce * Math.PI * 3) * 0.08 * s.bounce);
-      }
-      // label stays upright and turns to face you
-      const big = garden.settings.largeTargets ? 1.4 : 1;
-      s.label.mesh.scale.setScalar(big);
       s.group.updateMatrixWorld();
       const base = s.group.getWorldPosition(this.v);
+      if (!s.sample) {
+        // Seat boost: the farther from the tray (where you sit), the bigger it is drawn.
+        tray.root.getWorldPosition(_trayPos);
+        const boost = Math.min(SEAT_BOOST_MAX, Math.max(1, Math.pow(base.distanceTo(_trayPos) / SEAT_REF_M, 0.8)));
+        const cap = (s.wallish ? MAX_MOSS_R_M : MAX_UPRIGHT_M) / Math.max(1e-3, s.sizeBase);
+        const k = Math.max(1, Math.min(boost, cap));
+        const scale = s.baseScale * k;
+        if (Math.abs(scale - s.scaleNow) > s.scaleNow * 0.01) {
+          s.scaleNow = scale;
+          s.size = s.sizeBase * k;
+          if (s.bounce <= 0) s.plant.group.scale.setScalar(scale);
+        }
+      }
+      if (s.bounce > 0) {
+        s.bounce = Math.max(0, s.bounce - dt * 1.8);
+        // squash-and-stretch pop on a check-in
+        const k = Math.sin(s.bounce * Math.PI * 3) * 0.16 * s.bounce;
+        s.plant.group.scale.set(s.scaleNow * (1 - k * 0.5), s.scaleNow * (1 + k), s.scaleNow * (1 - k * 0.5));
+      }
+      const dist = base.distanceTo(this.head);
+      // Labels keep their angular size: about 18 mm cap height at 1 m from any seat.
+      const big = garden.settings.largeTargets ? 1.4 : 1;
+      if (s.layout === 'full' && dist > PILL_AT && !garden.settings.oneHand) this.setLayout(s, 'pill');
+      else if (s.layout === 'pill' && (dist < FULL_AT || garden.settings.oneHand)) this.setLayout(s, 'full');
+      s.labelScale = distanceScale(dist) * big;
+      s.label.mesh.scale.setScalar(s.labelScale);
       const yaw = Math.atan2(this.head.x - base.x, this.head.z - base.z);
       const world = this.labelWorld.copy(base);
+      const halfH = (s.label.mH * s.labelScale) / 2;
       if (s.wallish) {
         this.nrm.set(0, 1, 0).applyQuaternion(s.group.quaternion).setY(0).normalize();
-        world.addScaledVector(this.nrm, 0.06);
-        world.y += 0.13 * big;
+        world.addScaledVector(this.nrm, 0.08);
+        world.y += s.size + 0.03 + halfH;
       } else {
-        world.y += horizontalLabelRise(s.plant.group.userData.height ?? 0, garden.settings.largeTargets, s.sample);
+        world.y += s.size + 0.04 + halfH;
       }
       if (s.stake) {
         const st = s.stake.object3D!;
-        st.position.set(Math.cos(yaw), 0, -Math.sin(yaw)).multiplyScalar(0.092 * big).add(world);
-        st.position.y -= 0.05 * big;
+        const side = (s.label.mW * s.labelScale) / 2 + 0.025 * Math.min(2, s.labelScale);
+        st.position.set(Math.cos(yaw), 0, -Math.sin(yaw)).multiplyScalar(side).add(world);
+        st.position.y -= halfH * 0.4;
         st.quaternion.identity();
-        st.scale.setScalar(big);
+        st.scale.setScalar(big * Math.min(2.2, Math.max(1, s.labelScale)));
         st.updateMatrixWorld();
         this.stakes.setMatrixAt(stakeCount++, st.matrixWorld);
       }
       s.label.mesh.position.copy(s.group.worldToLocal(world));
       this.yawQ.setFromAxisAngle(this.up, yaw);
       s.label.mesh.quaternion.copy(s.group.quaternion).invert().multiply(this.yawQ);
+      if (!s.sample) {
+        const g = s.plant.group.userData.vitality as string | undefined;
+        const done = s.plant.group.userData.doneToday as boolean | undefined;
+        const moss = s.plant.group.userData.species === 'moss';
+        const r = Math.max(0.08, moss ? s.size * 1.15 : s.size * 0.35);
+        this.haloS.setScalar(r * (done ? 1 : 0.94 + 0.06 * pulse));
+        this.haloM.compose(this.v.set(0, 0.004, 0), this.q.identity(), this.haloS).premultiply(s.group.matrixWorld);
+        this.halos.setMatrixAt(haloCount, this.haloM);
+        // additive: several overlapping halos must not blow out to white
+        if (done) this.haloC.copy(HALO_DONE).multiplyScalar(0.55);
+        else if (g === 'resting') this.haloC.copy(HALO_REST).multiplyScalar(0.3);
+        else this.haloC.copy(HALO_TODO).multiplyScalar(0.22 + 0.3 * pulse);
+        this.halos.setColorAt(haloCount++, this.haloC);
+      }
     }
     this.stakes.count = stakeCount;
     this.stakes.instanceMatrix.needsUpdate = true;
     if (stakeCount) this.stakes.computeBoundingSphere();
+    this.halos.count = haloCount;
+    this.halos.instanceMatrix.needsUpdate = true;
+    if (this.halos.instanceColor) this.halos.instanceColor.needsUpdate = true;
+  }
+
+  private setLayout(s: Sprout, layout: 'full' | 'pill'): void {
+    if (s.layout === layout) return;
+    const old = s.label;
+    const next = cardFor(layout === 'full' ? 'sproutLabel' : 'sproutPill', old.mesh.name);
+    s.group.remove(old.mesh);
+    old.texture.dispose();
+    (old.mesh.material as MeshBasicMaterial).dispose();
+    s.group.add(next.mesh);
+    s.label = next;
+    s.layout = layout;
+    s.key = '';
+    this.redraw(s);
   }
 
   private ledgerAndHabits(): { ledger: Ledger; habits: Habit[] } {
@@ -237,9 +362,21 @@ export class SproutSystem extends createSystem({}) {
         const form = plantForm(h.species, g.stage, h.id, g.inBloom);
         s.plant.set(form, g.vitality, grew || fresh);
         s.plant.group.userData.formKey = formKey;
-        s.plant.group.userData.height = form.height;
-        if (grew) chimeGrow();
+        s.plant.group.userData.species = form.species;
+        s.baseScale = s.sample ? SAMPLE_PLANT_SCALE : displayScale(form);
+        s.plant.group.scale.setScalar(s.baseScale);
+        s.sizeBase = (form.species === 'moss' ? form.mossRadius : form.height) * s.baseScale;
+        s.size = s.sizeBase;
+        s.scaleNow = s.baseScale;
+        s.plant.group.userData.height = form.height * s.baseScale;
+        if (grew) {
+          chimeGrow();
+          voiceLine('grew');
+          this.reward(s, 'grow', stageName(g.stage), g.stage);
+        }
       }
+      s.plant.group.userData.vitality = g.vitality;
+      s.plant.group.userData.doneToday = g.todayCount >= h.target;
       s.stage = g.stage;
       s.wallish = h.placement?.surface === 'wall';
       this.redraw(s);
@@ -253,11 +390,11 @@ export class SproutSystem extends createSystem({}) {
     const plant = new PlantMesh(`${h.label} plant`);
     if (sample) plant.group.scale.setScalar(SAMPLE_PLANT_SCALE);
     group.add(plant.group);
-    const label = new CanvasCard(640, 400, 0.15, 0.094, `Label: ${h.label}`);
+    const label = cardFor('sproutLabel', `Label: ${h.label}`);
     group.add(label.mesh);
     const entity = this.world.createTransformEntity(group, { persistent: true });
     const key = `sprout:${h.id}`;
-    const s: Sprout = { habitId: h.id, sample, entity, group, plant, label, stake: null, stage: -1, key: '', bounce: 0, wallish: false };
+    const s: Sprout = { habitId: h.id, sample, entity, group, plant, label, stake: null, stage: -1, key: '', bounce: 0, wallish: false, baseScale: 1, size: 0.1, sizeBase: 0.1, scaleNow: 1, layout: 'full', labelScale: 1 };
     if (!sample) {
       // Mature foliage can overlap the wooden handle, especially on walls.
       // Keep labels, move targets and menus ahead of decorative plant hits.
@@ -300,7 +437,7 @@ export class SproutSystem extends createSystem({}) {
     if (ui.mode.peek() !== 'idle') return;
     if (garden.settings.oneHand && p) {
       const l = s.label.mesh.worldToLocal(p.clone());
-      if (Math.abs(l.x) <= s.label.mW * 0.4625 && l.y >= -s.label.mH * 0.47 && l.y <= -s.label.mH * 0.34) return this.undo(s);
+      if (Math.abs(l.x) <= s.label.mW * 0.4625 && l.y >= -s.label.mH * 0.48 && l.y <= -s.label.mH * 0.35) return this.undo(s);
     }
     let r;
     try {
@@ -315,9 +452,28 @@ export class SproutSystem extends createSystem({}) {
     }
     s.bounce = 1;
     if (!r.completedNow) chimeTap(r.count);
-    else chimeTap(5);
+    else chimeSparkle();
+    const h = r.habit;
+    this.reward(
+      s,
+      r.completedNow ? 'complete' : 'tap',
+      h.kind === 'counted' ? (r.completedNow ? `${r.count}/${h.target} · done!` : `+1 · ${r.count}/${h.target}`) : 'Done today ✓',
+    );
     s.key = '';
     void garden.commit();
+  }
+
+  /** Plays the check-in / growth payoff at a sprout (see fx/reward.ts). */
+  private reward(s: Sprout, kind: 'tap' | 'complete' | 'grow', text: string, stage = -1): void {
+    const fx = this.world.getSystem(RewardSystem);
+    if (!fx || s.sample) return;
+    s.group.updateMatrixWorld();
+    const base = s.group.getWorldPosition(new Vector3());
+    const normal = new Vector3(0, 1, 0).applyQuaternion(s.group.getWorldQuaternion(new Quaternion())).normalize();
+    const top = base.clone().addScaledVector(normal, s.wallish ? 0.03 : s.size * 0.85);
+    const labelTop = s.label.mesh.getWorldPosition(new Vector3());
+    labelTop.y += (s.label.mH * s.labelScale) / 2;
+    fx.burst(kind, { base, normal, top, labelTop, size: s.size }, kind === 'grow' ? `Stage ${stage + 1} · ${text}` : text, stage);
   }
 
   private undo(s: Sprout): void {
@@ -428,81 +584,102 @@ export class SproutSystem extends createSystem({}) {
     const g = growthOf(ledger, h, garden.today());
     const st = garden.settings;
     const chip = st.oneHand && !s.sample;
-    const key = JSON.stringify([g, st, chip, s.sample, h.placement?.surfaceLabel, garden.isSample]);
+    const key = JSON.stringify([g, st, chip, s.sample, h.placement?.surfaceLabel, garden.isSample, s.layout]);
     if (key === s.key) return;
     s.key = key;
     const hc = st.highContrast;
+    const ink = hc ? '#fff' : LOAM;
+    const accent = hc ? '#ffe14d' : MOSS;
+    const done = g.todayCount >= h.target;
+    const today = h.kind === 'counted' ? `${g.todayCount}/${h.target}` : done ? 'Done today' : 'Pinch when done';
+    const status =
+      g.inBloom
+        ? 'In bloom'
+        : g.vitality === 'resting'
+          ? 'Resting · growth paused'
+          : g.streak > 1
+            ? `${g.streak}-day streak`
+            : g.vitality === 'fresh'
+              ? 'Just planted'
+              : g.toNextStage > 0
+                ? `${g.toNextStage} day${g.toNextStage > 1 ? 's' : ''} to grow`
+                : 'Fully grown';
+    // All text here is ≥ 56 px: 18 mm cap height at 1 m (CARDS in @mebae/core).
     s.label.draw((c, w, hh) => {
-      c.fillStyle = hc ? '#000' : 'rgba(243,236,217,0.95)';
-      roundRect(c, 4, 4, w - 8, hh - 8, 34);
+      c.fillStyle = hc ? '#000' : 'rgba(243,236,217,0.96)';
+      roundRect(c, 4, 4, w - 8, hh - 8, 40);
       c.fill();
-      c.lineWidth = hc ? 8 : 3;
-      c.strokeStyle = hc ? '#fff' : 'rgba(29,26,20,0.25)';
+      c.lineWidth = hc ? 8 : 6;
+      c.strokeStyle = hc ? '#fff' : done ? MOSS : TERRACOTTA;
       c.stroke();
-      const ink = hc ? '#fff' : LOAM;
-      const accent = hc ? '#ffe14d' : MOSS;
-      c.fillStyle = accent;
-      c.beginPath();
-      c.arc(68, 72, 46, 0, Math.PI * 2);
-      c.fill();
-      drawIcon(c, h.glyph, 68, 72, 56, hc ? '#000' : SEED_PAPER, 0.14);
-      c.fillStyle = ink;
       c.textBaseline = 'middle';
-      c.font = `700 50px ${FONT_UI}`;
-      c.fillText(h.label, 130, 58);
-      c.font = `500 30px ${FONT_MONO}`;
-      c.fillStyle = hc ? '#fff' : 'rgba(29,26,20,0.65)';
-      c.fillText(`on: ${h.placement?.surfaceLabel ?? '?'}`, 132, 102);
-      // today
-      c.fillStyle = ink;
-      if (h.kind === 'counted') {
-        c.font = `700 74px ${FONT_MONO}`;
-        c.fillText(`${g.todayCount}/${h.target}`, 30, 182);
-        c.font = `500 30px ${FONT_UI}`;
-        c.fillText(g.todayCount >= h.target ? 'full today' : st.oneHand ? 'pinch +1' : 'pinch +1 · hold 1 s: −1', 250, 182);
-      } else {
-        c.font = `700 46px ${FONT_UI}`;
-        c.fillStyle = g.todayCount ? accent : ink;
-        c.fillText(g.todayCount ? 'Done today' : 'Pinch when done', 30, 180);
+      c.textAlign = 'start';
+      if (s.layout === 'pill') {
+        c.fillStyle = done ? accent : hc ? '#ffe14d' : TERRACOTTA;
+        c.beginPath();
+        c.arc(84, hh / 2, 62, 0, Math.PI * 2);
+        c.fill();
+        drawIcon(c, h.glyph, 84, hh / 2, 76, hc ? '#000' : SEED_PAPER, 0.14);
+        c.fillStyle = ink;
+        c.font = `700 72px ${FONT_UI}`;
+        c.fillText(h.label, 168, 66, w - 190);
+        c.font = `700 60px ${h.kind === 'counted' ? FONT_MONO : FONT_UI}`;
+        c.fillStyle = done ? accent : ink;
+        c.fillText(`${today} · St ${g.stage + 1}/8`, 168, 152, w - 190);
+        return;
       }
-      // stage dots
+      c.fillStyle = done ? accent : hc ? '#ffe14d' : TERRACOTTA;
+      c.beginPath();
+      c.arc(74, 72, 52, 0, Math.PI * 2);
+      c.fill();
+      drawIcon(c, h.glyph, 74, 72, 64, hc ? '#000' : SEED_PAPER, 0.14);
+      c.fillStyle = ink;
+      c.font = `700 64px ${FONT_UI}`;
+      c.fillText(h.label, 144, 74, w - 170);
+      // today
+      if (h.kind === 'counted') {
+        c.font = `700 96px ${FONT_MONO}`;
+        c.fillStyle = done ? accent : ink;
+        c.fillText(today, 34, 172);
+        const after = 34 + c.measureText(today).width + 24;
+        c.font = `600 56px ${FONT_UI}`;
+        c.fillStyle = ink;
+        c.fillText(done ? 'full today' : 'today', after, 176, w - after - 24);
+      } else {
+        c.font = `700 64px ${FONT_UI}`;
+        c.fillStyle = done ? accent : ink;
+        c.fillText(today, 34, 172, w - 60);
+      }
+      // stage: 8 pips + "2/8"
       for (let i = 0; i < 8; i++) {
         c.beginPath();
-        c.arc(42 + i * 34, 252, 11, 0, Math.PI * 2);
-        c.fillStyle = i < g.stage ? accent : hc ? '#444' : 'rgba(29,26,20,0.15)';
+        c.arc(48 + i * 40, 262, 15, 0, Math.PI * 2);
+        c.fillStyle = i <= g.stage ? accent : hc ? '#444' : 'rgba(29,26,20,0.16)';
         c.fill();
       }
-      c.fillStyle = hc ? '#fff' : 'rgba(29,26,20,0.8)';
-      c.font = `500 28px ${FONT_MONO}`;
-      c.fillText(`stage ${g.stage}/7`, 320, 252);
-      c.font = `600 32px ${FONT_UI}`;
-      const status =
-        g.inBloom
-          ? 'In bloom this week'
-          : g.vitality === 'resting'
-            ? 'Resting: a missed day pauses growth'
-            : g.streak > 1
-              ? `${g.streak}-day streak`
-              : g.vitality === 'fresh'
-                ? 'Just planted'
-                : g.toNextStage > 0
-                  ? `${g.toNextStage} more day${g.toNextStage > 1 ? 's' : ''} to grow`
-                  : 'Fully grown';
+      c.fillStyle = ink;
+      c.font = `700 56px ${FONT_UI}`;
+      c.fillText(`${stageName(g.stage)}`, 370, 264, w - 390);
+      c.font = `600 56px ${FONT_UI}`;
       c.fillStyle = !g.inBloom && g.vitality === 'resting' ? (hc ? '#ffe14d' : TERRACOTTA) : ink;
-      c.fillText(status, 30, 312);
+      c.fillText(status, 34, 348, w - 60);
       if (chip) {
         c.fillStyle = hc ? '#ffe14d' : TERRACOTTA;
-        roundRect(c, 24, 336, w - 48, 52, 24);
+        roundRect(c, 24, 392, w - 48, 58, 26);
         c.fill();
         c.fillStyle = hc ? '#000' : SEED_PAPER;
-        c.font = `700 32px ${FONT_UI}`;
+        c.font = `700 56px ${FONT_UI}`;
         c.textAlign = 'center';
-        c.fillText('Pinch here to undo one', w / 2, 363);
+        c.fillText('Pinch here: undo one', w / 2, 422, w - 80);
         c.textAlign = 'start';
       } else if (s.sample) {
         c.fillStyle = TERRACOTTA;
-        c.font = `700 26px ${FONT_UI}`;
-        c.fillText('EXAMPLE GARDEN (SAMPLE DATA)', 30, 366);
+        c.font = `700 56px ${FONT_UI}`;
+        c.fillText('SAMPLE DATA', 34, 420, w - 60);
+      } else {
+        c.fillStyle = hc ? '#fff' : 'rgba(29,26,20,0.7)';
+        c.font = `600 56px ${FONT_MONO}`;
+        c.fillText(`on: ${h.placement?.surfaceLabel ?? '?'}`, 34, 420, w - 60);
       }
     });
   }

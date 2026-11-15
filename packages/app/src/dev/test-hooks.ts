@@ -5,7 +5,7 @@
  * a test can advance the day. The shipped app always uses the system clock.
  */
 import { type World, Vector3, VisibilityState, createSystem } from '@iwsdk/core';
-import { activeHabits, addDays, countOn, createHabit, exportLedger, growthOf, setPlacement } from '@mebae/core';
+import { CARDS, activeHabits, addDays, countOn, createHabit, exportLedger, growthOf, setPlacement } from '@mebae/core';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
 import { clear } from '../state/store.js';
@@ -15,8 +15,10 @@ import { FocusSystem } from '../systems/focus.js';
 import { PlantingSystem } from '../systems/planting.js';
 import { RoomSystem } from '../systems/room.js';
 import { SproutSystem } from '../systems/sprouts.js';
-import { TraySystem } from '../systems/tray.js';
+import { MENU, TraySystem } from '../systems/tray.js';
 import { WeekSystem } from '../systems/week.js';
+import { VoiceCoachSystem } from '../systems/coach.js';
+import { RewardSystem } from '../fx/reward.js';
 import { surfaceQuaternion } from '../systems/surface-pose.js';
 import { Quaternion } from '@iwsdk/core';
 
@@ -88,6 +90,14 @@ export function install(world: World): void {
         lastPlaced: sys(PlantingSystem)?.lastPlaced,
         focus: sys(FocusSystem)?.status,
         palmUp: sys(WeekSystem)?.palmUp,
+        coach: {
+          state: ui.coach.peek(),
+          last: sys(VoiceCoachSystem)?.last ?? null,
+          error: sys(VoiceCoachSystem)?.error ?? null,
+          recordedSeconds: sys(VoiceCoachSystem)?.recordedSeconds ?? 0,
+          note: sys(WeekSystem)?.note ?? null,
+        },
+        reward: sys(RewardSystem)?.last ?? null,
       };
     },
     /** Test-only: move the injectable clock forward by whole days. */
@@ -121,7 +131,7 @@ export function install(world: World): void {
       const icons = radial?.visible
         ? Array.from({ length: 12 }, (_, i) => {
             const a = (i / 12) * Math.PI * 2;
-            const r = 0.16 * 0.73;
+            const r = (CARDS.radial.mW / 2) * 0.73;
             return radial.localToWorld(new Vector3(Math.sin(a) * r, Math.cos(a) * r, 0)).toArray();
           })
         : null;
@@ -130,11 +140,11 @@ export function install(world: World): void {
       const menu = scene.getObjectByName('Tray menu');
       const menuMesh = menu?.children.find((c) => c.name === 'Tray menu') ?? menu;
       const menuButtons = menuMesh
-        ? ['Week', 'Sample', 'Contrast', 'Large', 'One-hand'].map((_, i) => menuMesh.localToWorld(new Vector3(-0.18 + 0.036 + i * 0.072, 0, 0)).toArray())
+        ? MENU.map((_, i) => menuMesh.localToWorld(new Vector3(-CARDS.trayMenu.mW / 2 + (CARDS.trayMenu.mW / MENU.length) * (i + 0.5), 0, 0)).toArray())
         : null;
       const wristMesh = scene.getObjectByName('Wrist menu')?.children[0];
       const wrist = wristMesh?.parent?.visible
-        ? [0, 1, 2, 3, 4, 5].map((k) => wristMesh.localToWorld(new Vector3((k % 2 ? 1 : -1) * 0.0325, 0.0303 - Math.floor(k / 2) * 0.0303, 0)).toArray())
+        ? [0, 1, 2, 3, 4, 5].map((k) => wristMesh.localToWorld(new Vector3((k % 2 ? 1 : -1) * CARDS.wrist.mW / 4, (1 - Math.floor(k / 2)) * CARDS.wrist.mH / 3, 0)).toArray())
         : null;
       const sprouts: Record<string, unknown> = {};
       for (const h of activeHabits(garden.ledger)) {
@@ -153,15 +163,16 @@ export function install(world: World): void {
         menuButtons,
         wrist,
         week: w('Week view'),
+        noteStrip: w('Week view', [CARDS.week.mW * (1140 / CARDS.week.pxW - 0.5), 0, 0]),
         reticle: w('Aim reticle'),
         sprouts,
         // Actual rectangle corners, not only centres, for the Glasses mask gate.
         bounds: Object.fromEntries([
           ['tray', 'Seed tray', 0.4, 0.2, true],
-          ['menu', 'Tray menu', 0.36, 0.052, false],
-          ['radial', 'Icon radial', 0.32, 0.32, false],
-          ['week', 'Week view', 0.46, 0.305, false],
-          ['focus', 'Focus timer', 0.15, 0.035, false],
+          ['menu', 'Tray menu', CARDS.trayMenu.mW, CARDS.trayMenu.mH, false],
+          ['radial', 'Icon radial', CARDS.radial.mW, CARDS.radial.mH, false],
+          ['week', 'Week view', CARDS.week.mW, CARDS.week.mH, false],
+          ['focus', 'Focus timer', CARDS.focus.mW, CARDS.focus.mH, false],
         ].map(([key, name, width, height, horizontal]) => {
           // Tray menu has a named wrapper, so use its actual card mesh.
           const o = scene.getObjectByName(name as string);
@@ -184,6 +195,12 @@ export function install(world: World): void {
       }
       void garden.commit();
       return activeHabits(garden.real).map((h) => growthOf(garden.real, h, today).stage);
+    },
+    /** The canvas behind a named text card, as a PNG data URL (legibility evidence). */
+    cardImage(name: string) {
+      const o = world.scene.getObjectByName(name) as unknown as { material?: { map?: { image?: HTMLCanvasElement } } } | undefined;
+      const img = o?.material?.map?.image;
+      return img && 'toDataURL' in img ? img.toDataURL('image/png') : null;
     },
     exportJson: () => exportLedger(garden.real, new Date(garden.clock.now())),
     roomFixture() {

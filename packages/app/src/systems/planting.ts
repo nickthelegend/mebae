@@ -1,4 +1,4 @@
-import { HabitError, PRESETS, type Preset, createHabit, presetById, setPlacement } from '@mebae/core';
+import { CARDS, HabitError, PRESETS, type Preset, createHabit, distanceScale, presetById, setPlacement, surfaceHint, surfaceMatches } from '@mebae/core';
 import {
   type Entity,
   BufferAttribute,
@@ -20,7 +20,7 @@ import { chimeRoot, chimeTap, unlockAudio } from '../fx/chimes.js';
 import { makePressable, pointFor } from '../interaction/press-router.js';
 import { garden } from '../state/garden.js';
 import { ui } from '../state/ui-state.js';
-import { CanvasCard } from '../ui/canvas-card.js';
+import { CanvasCard, cardFor } from '../ui/canvas-card.js';
 import { drawIcon } from '../ui/icons.js';
 import { FONT_MONO, FONT_UI, LOAM, MOSS, SEED_PAPER, TERRACOTTA } from '../ui/palette.js';
 import { type AimHit, type AimSource, type SelectEvent, AimSystem } from './aim.js';
@@ -29,7 +29,7 @@ import { RADIAL_Y } from './garden-layout.js';
 import { surfaceQuaternion } from './surface-pose.js';
 import { TrayEvents, TraySystem } from './tray.js';
 
-const RADIAL_M = 0.32;
+const RADIAL_M = CARDS.radial.mW;
 const FLIGHT_S = 0.95;
 
 /**
@@ -49,6 +49,8 @@ export class PlantingSystem extends createSystem({}) {
   private hovered = -1;
   private preset: Preset | null = null;
   private repinId: string | null = null;
+  /** Set when the voice coach chose the habit: spoken count and place. */
+  private coach: { target: number; surface: string; heard: string } | null = null;
   private aimStart = 0;
   private aimSrc: AimSource = 'right';
   private pendingSelect: SelectEvent | null = null;
@@ -60,11 +62,17 @@ export class PlantingSystem extends createSystem({}) {
   private q = new Quaternion();
   private lastPreview = '';
   private radialStyle = '';
-  lastPlaced: { habitId: string; point: [number, number, number]; label: string; via: string } | null = null;
+  lastPlaced: {
+    habitId: string;
+    point: [number, number, number];
+    label: string;
+    via: string;
+    coach: { target: number; surface: string; heard: string; matched: boolean } | null;
+  } | null = null;
 
   init(): void {
-    this.radial = new CanvasCard(1024, 1024, RADIAL_M, RADIAL_M, 'Icon radial');
-    this.preview = new CanvasCard(640, 150, 0.17, 0.04, 'Aim label');
+    this.radial = cardFor('radial', 'Icon radial');
+    this.preview = cardFor('aimLabel', 'Aim label');
     this.seed = new Mesh(
       new SphereGeometry(1, 14, 10),
       new MeshStandardMaterial({ color: new Color('#d8b070'), roughness: 0.5, emissive: new Color('#3a2508'), emissiveIntensity: 0.5 }),
@@ -73,13 +81,13 @@ export class PlantingSystem extends createSystem({}) {
     this.seed.name = 'Lifted seed';
     this.reticle = new Group();
     this.reticle.name = 'Aim reticle';
-    const ring = new Mesh(new RingGeometry(0.03, 0.038, 40), new MeshBasicMaterial({ color: new Color(MOSS), transparent: true, opacity: 0.95, depthTest: false, toneMapped: false }));
+    const ring = new Mesh(new RingGeometry(0.045, 0.058, 48), new MeshBasicMaterial({ color: new Color(MOSS), transparent: true, opacity: 0.95, depthTest: false, toneMapped: false }));
     ring.rotation.x = -Math.PI / 2;
-    const dot = new Mesh(new RingGeometry(0, 0.008, 20), new MeshBasicMaterial({ color: new Color(SEED_PAPER), depthTest: false, toneMapped: false }));
+    const dot = new Mesh(new RingGeometry(0, 0.012, 20), new MeshBasicMaterial({ color: new Color(SEED_PAPER), depthTest: false, toneMapped: false }));
     dot.rotation.x = -Math.PI / 2;
     ring.renderOrder = dot.renderOrder = 20;
     this.reticle.add(ring, dot);
-    this.preview.mesh.position.set(0, 0.07, 0);
+    this.preview.mesh.position.set(0, 0.09, 0);
     this.reticle.add(this.preview.mesh);
     const g = new BufferGeometry();
     g.setAttribute('position', new BufferAttribute(new Float32Array(24 * 3), 3));
@@ -138,6 +146,7 @@ export class PlantingSystem extends createSystem({}) {
     this.flight = null;
     this.preset = null;
     this.repinId = null;
+    this.coach = null;
     this.radial.mesh.visible = this.seed.visible = this.reticle.visible = this.arc.visible = false;
     this.world.getSystem(AimSystem)!.enabled = false;
   }
@@ -189,6 +198,7 @@ export class PlantingSystem extends createSystem({}) {
     this.seed.visible = false;
     this.preset = null;
     this.repinId = null;
+    this.coach = null;
     this.world.getSystem(AimSystem)!.enabled = false;
     garden.say(msg);
     garden.bump();
@@ -226,8 +236,33 @@ export class PlantingSystem extends createSystem({}) {
     garden.say(
       this.repinId
         ? `Point at the spot for ${preset.label} and pinch to pin it again.`
-        : `Point at where you ${preset.label.toLowerCase()} (${preset.hint}?) and pinch.`,
+        : this.coach
+          ? `${preset.label}${this.coach.target > 1 ? `, ${this.coach.target} a day` : ''}. Point at ${surfaceHint(this.coach.surface)} and pinch.`
+          : `Point at where you ${preset.label.toLowerCase()} (${preset.hint}?) and pinch.`,
     );
+  }
+
+  /**
+   * The voice coach picked a habit: lift a seed and go straight to aiming,
+   * carrying the spoken count and place. Same real hit-test placement after.
+   */
+  beginFromCoach(presetId: string, target: number, surface: string, heard: string): boolean {
+    const preset = presetById(presetId);
+    if (!preset || ui.mode.peek() !== 'idle' || garden.isSample) return false;
+    const tray = this.world.getSystem(TraySystem)!;
+    const free = tray.freeSlots();
+    if (!free.length) {
+      garden.say('All 6 habits are planted. Move a sprout into the tray to free a seed.');
+      return false;
+    }
+    ui.weekOpen.value = false;
+    tray.slotWorld(free[0], this.seedHome);
+    this.seed.position.copy(this.seedHome);
+    this.seed.visible = true;
+    this.coach = { target, surface, heard };
+    this.beginAim(preset);
+    garden.bump();
+    return true;
   }
 
   private place(): void {
@@ -269,7 +304,7 @@ export class PlantingSystem extends createSystem({}) {
         anchors.markPlaced(this.repinId);
         habitId = this.repinId;
       } else {
-        habitId = createHabit(garden.real, preset.id, garden.clock, placement).id;
+        habitId = createHabit(garden.real, preset.id, garden.clock, placement, this.coach ? { target: this.coach.target } : {}).id;
         anchors.rename(tempId, habitId);
       }
     } catch (e) {
@@ -280,7 +315,14 @@ export class PlantingSystem extends createSystem({}) {
       garden.bump();
       return;
     }
-    this.lastPlaced = { habitId, point: hit.point.toArray() as [number, number, number], label: hit.info.label, via: hit.via };
+    this.lastPlaced = {
+      habitId,
+      point: hit.point.toArray() as [number, number, number],
+      label: hit.info.label,
+      via: hit.via,
+      coach: this.coach ? { ...this.coach, matched: surfaceMatches(this.coach.surface, hit.info.label, hit.info.surface) } : null,
+    };
+    this.coach = null;
     chimeRoot();
     garden.say(
       `${preset.label} took root on: ${hit.info.label}.${uuid ? '' : ' This browser gave no persistent anchor, so it will ask to be pinned again next session.'}`,
@@ -334,11 +376,16 @@ export class PlantingSystem extends createSystem({}) {
         this.reticle.visible = true;
         this.reticle.position.copy(this.hit.point);
         surfaceQuaternion(this.hit.normal, this.hit.point, this.head, this.reticle.quaternion);
-        const text = `${this.preset!.label}  ·  on: ${this.hit.info.label}`;
+        const c = this.coach;
+        const match = c ? surfaceMatches(c.surface, this.hit.info.label, this.hit.info.surface) : false;
+        const text = `${match ? '✓ ' : ''}${this.preset!.label}${c && c.target > 1 ? ` ×${c.target}` : ''}  ·  on: ${this.hit.info.label}`;
         if (text !== this.lastPreview) {
           this.lastPreview = text;
-          this.drawPreview(text);
+          this.drawPreview(text, match);
         }
+        // reticle + label keep their angular size at any distance
+        const k = distanceScale(this.head.distanceTo(this.hit.point));
+        this.reticle.scale.setScalar(k);
         // keep the label upright and facing you on walls too
         const inv = this.preview.mesh.quaternion.copy(this.reticle.quaternion).invert();
         this.preview.mesh.position.set(0, 0.065, 0).addScaledVector(this.hit.normal, 0.03).applyQuaternion(inv);
@@ -380,18 +427,18 @@ export class PlantingSystem extends createSystem({}) {
     this.arc.computeLineDistances();
   }
 
-  private drawPreview(text: string): void {
+  private drawPreview(text: string, match = false): void {
     const hc = garden.settings.highContrast;
     this.preview.draw((g, w, h) => {
-      g.fillStyle = hc ? '#000' : 'rgba(29,26,20,0.9)';
+      g.fillStyle = hc ? '#000' : match ? MOSS : 'rgba(29,26,20,0.9)';
       g.beginPath();
       g.roundRect(4, 4, w - 8, h - 8, 40);
       g.fill();
       g.fillStyle = hc ? '#ffe14d' : SEED_PAPER;
-      g.font = `600 52px ${FONT_UI}`;
+      g.font = `700 62px ${FONT_UI}`;
       g.textAlign = 'center';
       g.textBaseline = 'middle';
-      g.fillText(text, w / 2, h / 2 + 2);
+      g.fillText(text, w / 2, h / 2 + 2, w - 50);
     });
   }
 
@@ -424,9 +471,9 @@ export class PlantingSystem extends createSystem({}) {
         drawIcon(g, p.glyph, x, y, on ? 104 : 92, on ? (hc ? '#000' : SEED_PAPER) : hc ? '#fff' : LOAM, 0.12);
         if (p.kind === 'counted') {
           g.fillStyle = TERRACOTTA;
-          g.font = `700 30px ${FONT_MONO}`;
+          g.font = `700 40px ${FONT_MONO}`;
           g.textAlign = 'center';
-          g.fillText(`×${p.target}`, x, y + 66);
+          g.fillText(`×${p.target}`, x, y + 70);
         }
       });
       g.textAlign = 'center';
@@ -436,15 +483,15 @@ export class PlantingSystem extends createSystem({}) {
         g.fillStyle = hc ? '#ffe14d' : SEED_PAPER;
         g.font = `700 64px ${FONT_UI}`;
         g.fillText(p.label, c, c - 22);
-        g.font = `500 34px ${FONT_MONO}`;
-        g.fillStyle = hc ? '#fff' : 'rgba(243,236,217,0.75)';
+        g.font = `500 40px ${FONT_MONO}`;
+        g.fillStyle = hc ? '#fff' : 'rgba(243,236,217,0.85)';
         g.fillText(p.kind === 'counted' ? `${p.target} a day · ${p.hint}` : `daily · ${p.hint}`, c, c + 36);
       } else {
         g.fillStyle = hc ? '#fff' : 'rgba(243,236,217,0.8)';
-        g.font = `600 44px ${FONT_UI}`;
-        g.fillText('Pick a habit', c, c - 18);
-        g.font = `500 32px ${FONT_MONO}`;
-        g.fillText('centre: cancel', c, c + 30);
+        g.font = `700 52px ${FONT_UI}`;
+        g.fillText('Pick a habit', c, c - 22);
+        g.font = `500 40px ${FONT_MONO}`;
+        g.fillText('centre: cancel', c, c + 34);
       }
     });
   }

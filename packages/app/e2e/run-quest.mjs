@@ -54,6 +54,12 @@ export async function main() {
   const sp = s.sprouts.find((x) => x.id === stretch?.id);
   check('3. sprout at the hit point (±2 cm)', sp && dist(sp.position, s.lastPlaced.point) <= 0.02, sp && `${(dist(sp.position, s.lastPlaced.point) * 100).toFixed(2)} cm, via ${s.lastPlaced.via}`);
   const firstPinMs = Date.now() - t0;
+  // Nov 15 legibility: the door plant and its label read from the chair
+  const doorDist = dist([SEATED.x, SEATED.y, SEATED.z], sp.position);
+  check('3. door plant drawn at a seat-readable size', sp.drawnSize >= 0.07, `${(sp.drawnSize * 100).toFixed(1)} cm drawn, ${doorDist.toFixed(2)} m from the seat`);
+  const card = sp.layout === 'pill' ? { pxH: 220, mH: 0.103125 } : { pxH: 460, mH: 0.215625 };
+  const cap = (56 * 0.7 * card.mH / card.pxH) * sp.labelScale;
+  check('3. label text ≥ 18 mm cap height at 1 m equivalent', cap / doorDist >= 0.018, `${sp.layout}, ${(cap * 1000).toFixed(1)} mm cap at ${doorDist.toFixed(2)} m = ${(cap / doorDist * 1000).toFixed(1)} mm at 1 m`);
 
   // 4: check in -> stage 1
   let t = targets();
@@ -61,6 +67,7 @@ export async function main() {
   await sleep(400);
   s = state();
   check('4. check-in reaches stage 1', s.habits.find((h) => h.id === stretch.id).stage === 1);
+  check('4. check-in plays the reward (petals, ring, count)', s.reward && ['complete', 'grow'].includes(s.reward.kind) && s.reward.parts >= 40, JSON.stringify(s.reward));
   check('first habit pinned and checked in under 60 s', Date.now() - t0 < 60_000, `${((Date.now() - t0) / 1000).toFixed(1)} s through check-in (${(firstPinMs / 1000).toFixed(1)} s to pin)`);
 
   // 5: counted water on the desk: 3 pinches -> 3/8, hold 1 s -> 2/8
@@ -118,7 +125,7 @@ export async function main() {
   // One-hand focus must run while the raked 25-minute block is still going.
   // A later day jump settles that block into a stone, and these pinches would
   // then start a second block instead of extending and cancelling the first.
-  await pinchAt('hand-right', targets().menuButtons[4]);
+  await pinchAt('hand-right', targets().menuButtons[5]);
   await pinchAt('hand-right', targets().sand); // 25 -> 50, or cancel an existing 50
   if (state().focus.running) await pinchAt('hand-right', targets().sand);
   check('one-hand focus cancellation uses a single pinch', !state().focus.running);
@@ -175,14 +182,14 @@ export async function main() {
 
   // sample garden: stamped and never mixed
   t = targets();
-  await pinchAt('hand-right', t.menuButtons[1]);
+  await pinchAt('hand-right', t.menuButtons[2]);
   await sleep(500);
   s = state();
   check('sample garden on: only sample sprouts drawn', s.sample && s.sprouts.every((x) => x.sample) && s.sprouts.length === 5);
   const realBeforeSampleRake = ev('m.exportJson()');
   await pinchAt('hand-right', targets().sand);
   check('sample focus interaction leaves real history untouched', ev('m.exportJson()').replace(/"exportedAt": "[^"]+"/, '') === realBeforeSampleRake.replace(/"exportedAt": "[^"]+"/, ''));
-  await pinchAt('hand-right', targets().menuButtons[1]);
+  await pinchAt('hand-right', targets().menuButtons[2]);
   await sleep(500);
   s = state();
   check('sample garden off: real history untouched', !s.sample && s.habits.length === 2 && s.sprouts.every((x) => !x.sample));

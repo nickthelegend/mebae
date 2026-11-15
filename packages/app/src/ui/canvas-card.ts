@@ -6,6 +6,7 @@ import {
   PlaneGeometry,
   SRGBColorSpace,
 } from '@iwsdk/core';
+import { type CardName, CARDS } from '@mebae/core';
 
 /**
  * A flat card whose face is a 2D canvas: one draw call, redrawn only when
@@ -70,4 +71,33 @@ export function roundRect(
   g.arcTo(x, y + h, x, y, r);
   g.arcTo(x, y, x + w, y, r);
   g.closePath();
+}
+
+/** A card built from the legibility table in @mebae/core (CARDS). */
+export function cardFor(name: CardName, label: string): CanvasCard {
+  const c = CARDS[name];
+  return new CanvasCard(c.pxW, c.pxH, c.mW, c.mH, label);
+}
+
+/** Wraps `text` into at most `maxLines` lines of width `maxW`; the last line is ellipsised. */
+export function wrapLines(g: CanvasRenderingContext2D, text: string, maxW: number, maxLines: number): string[] {
+  const words = text.split(/\s+/).filter(Boolean);
+  const lines: string[] = [];
+  let cur = '';
+  for (const w of words) {
+    const t = cur ? `${cur} ${w}` : w;
+    if (g.measureText(t).width > maxW && cur) {
+      lines.push(cur);
+      cur = w;
+    } else cur = t;
+  }
+  if (cur) lines.push(cur);
+  if (lines.length > maxLines) {
+    const kept = lines.slice(0, maxLines);
+    let last = kept[maxLines - 1];
+    while (last.length > 1 && g.measureText(`${last}…`).width > maxW) last = last.slice(0, -1);
+    kept[maxLines - 1] = `${last}…`;
+    return kept;
+  }
+  return lines;
 }

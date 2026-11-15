@@ -40,7 +40,7 @@ export async function main() {
 
   // FoV: tray corners, menu, focus card, radial and week panel
   let t = ev('m.targets()');
-  const pts = { 'tray centre': t.tray, 'tray menu (left)': t.menuButtons[0], 'tray menu (right)': t.menuButtons[4], 'sand centre': t.sand };
+  const pts = { 'tray centre': t.tray, 'tray menu (left)': t.menuButtons[0], 'tray menu (right)': t.menuButtons[5], 'sand centre': t.sand };
   const corners = {};
   const includeBounds = (bounds, names) => names.forEach((name) => {
     bounds[name]?.forEach((p, i) => { corners[`${name} corner ${i + 1}`] = p; });
@@ -70,7 +70,7 @@ export async function main() {
   await gazePinch(t.sprouts[dw.id].label);
   await sleep(400);
   check('gaze + pinch checks in (stage 1)', ev('m.state()').habits.find((h) => h.id === dw.id).stage === 1);
-  await gazePinch(t.menuButtons[0]);
+  await gazePinch(t.menuButtons[1]);
   await sleep(500);
   t = ev('m.targets()');
   check('gaze + pinch opens the week rings', ev('m.state().weekOpen') === true);
@@ -81,7 +81,7 @@ export async function main() {
   // with gaze disconnected, the hand ray works again
   xr('set-connected', { device: 'gaze', connected: false });
   await sleep(300);
-  xr('look-at', { device: 'hand-right', target: v3(t.menuButtons[0]) });
+  xr('look-at', { device: 'hand-right', target: v3(t.menuButtons[1]) });
   await sleep(250);
   xr('select', { device: 'hand-right' });
   await sleep(500);

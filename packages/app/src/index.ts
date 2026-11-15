@@ -5,6 +5,8 @@ import { PressRouter } from './interaction/press-router.js';
 import { garden } from './state/garden.js';
 import { AimSystem } from './systems/aim.js';
 import { AnchorSystem } from './systems/anchors.js';
+import { VoiceCoachSystem } from './systems/coach.js';
+import { RewardSystem } from './fx/reward.js';
 import { FocusSystem } from './systems/focus.js';
 import { PlantingSystem } from './systems/planting.js';
 import { RoomSystem } from './systems/room.js';
@@ -12,6 +14,7 @@ import { SproutSystem } from './systems/sprouts.js';
 import { TrayEvents, TraySystem } from './systems/tray.js';
 import { WeekSystem } from './systems/week.js';
 import { fontsReady } from './ui/palette.js';
+import { coachConfigured } from './coach/client.js';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const status = (text: string, err = false) => {
@@ -36,6 +39,9 @@ async function main(): Promise<void> {
     status(`Storage unavailable: ${(e as Error).message}. History cannot be saved in this browser.`, true);
   }
   summary();
+  $('coach').textContent = coachConfigured()
+    ? 'Voice coach (optional, Muse AI): when you hold a seed and speak, that recording goes to Muse through the Mebae proxy to become a habit; the weekly note sends counts only. Nothing is stored there.'
+    : 'Voice coach: AI unavailable (setup required: this build has no coach proxy). Everything else works without it.';
   await fontsReady();
 
   const world = await World.create($('scene-container') as HTMLDivElement, projectOptions);
@@ -49,7 +55,9 @@ async function main(): Promise<void> {
     .registerSystem(PlantingSystem, { priority: 11 })
     .registerSystem(SproutSystem, { priority: 12 })
     .registerSystem(FocusSystem, { priority: 13 })
-    .registerSystem(WeekSystem, { priority: 14 });
+    .registerSystem(WeekSystem, { priority: 14 })
+    .registerSystem(VoiceCoachSystem, { priority: 15 })
+    .registerSystem(RewardSystem, { priority: 16 });
 
   const enter = $<HTMLButtonElement>('enter');
   const supported = !!navigator.xr && (await navigator.xr.isSessionSupported('immersive-ar').catch(() => false));

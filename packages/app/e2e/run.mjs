@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const suite = process.argv[2] ?? 'quest';
-const suites = { quest: './run-quest.mjs', glasses: './run-glasses.mjs', kitchen: './run-room.mjs', perf: './run-perf.mjs' };
+const suites = { quest: './run-quest.mjs', glasses: './run-glasses.mjs', kitchen: './run-room.mjs', perf: './run-perf.mjs', coach: './run-coach.mjs' };
 if (!(suite in suites)) throw new Error(`Unknown suite ${suite}. Choose ${Object.keys(suites).join(', ')}.`);
 const out = resolve(process.env.MEBAE_OUT ?? 'e2e-out');
 mkdirSync(out, { recursive: true });

@@ -214,7 +214,7 @@ export class VoiceCoachSystem extends createSystem({}) {
         const hb = this.last.habit;
         const preset = presetById(hb.preset)!;
         const placed = planting?.lastPlaced && planting.lastPlaced !== this.placedRef ? planting.lastPlaced : null;
-        tag(placed ? `Planted ✓ on: ${placed.label}` : 'Heard you', hc ? '#ffe14d' : '#a6e05c');
+        tag(`${placed ? `Planted ✓ on: ${placed.label}` : 'Heard you'} · ${(this.last.ms / 1000).toFixed(1)} s`, hc ? '#ffe14d' : '#a6e05c');
         g.fillStyle = hc ? '#fff' : 'rgba(243,236,217,0.85)';
         g.font = `italic 500 40px ${FONT_UI}`;
         wrapLines(g, `“${this.last.transcript}”`, w - 96, 1).forEach((l) => g.fillText(l, 48, 112));
@@ -228,9 +228,7 @@ export class VoiceCoachSystem extends createSystem({}) {
         g.fillText(`${preset.label}${hb.target > 1 ? ` · ${hb.target} a day` : ' · daily'}`, 176, 196, w - 220);
         g.font = `500 40px ${FONT_UI}`;
         g.fillStyle = hc ? '#fff' : 'rgba(243,236,217,0.85)';
-        g.fillText(placed ? `Pinch it there each time you do it.` : `Point at ${surfaceHint(hb.surface)} and pinch`, 176, 256, w - 220);
-        g.font = `500 40px ${FONT_MONO}`;
-        g.fillText(`${(this.last.ms / 1000).toFixed(1)} s round trip`, 48, 298, w - 96);
+        g.fillText(placed ? `Pinch it there each time you do it.` : `Point at ${surfaceHint(hb.surface)} and pinch`, 176, 262, w - 220);
       } else {
         tag('AI unavailable', hc ? '#ffe14d' : TERRACOTTA);
         g.fillStyle = paper;

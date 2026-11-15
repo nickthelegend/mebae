@@ -261,8 +261,6 @@ export class WeekSystem extends createSystem({}) {
       g.fillText('This week', 44, 62);
       g.font = `600 36px ${FONT_MONO}`;
       g.fillText(`${fmtDay(ws)} – ${fmtDay(we)}`, 330, 66);
-      g.textAlign = 'end';
-      g.fillText(`stones ${stonesThisWeek}`, NOTE_LEFT - 30, 66);
       g.textAlign = 'center';
       if (!habits.length) {
         g.font = `600 40px ${FONT_UI}`;
@@ -333,7 +331,7 @@ export class WeekSystem extends createSystem({}) {
         g.fillStyle = hc ? '#fff' : 'rgba(29,26,20,0.6)';
         g.font = `500 34px ${FONT_MONO}`;
         g.textAlign = 'center';
-        g.fillText('pinch elsewhere: close', NOTE_LEFT / 2, h - 44);
+        g.fillText(`${stonesThisWeek} focus stone${stonesThisWeek === 1 ? '' : 's'} · pinch here to close`, NOTE_LEFT / 2, h - 44, NOTE_LEFT - 60);
       }
     });
   }

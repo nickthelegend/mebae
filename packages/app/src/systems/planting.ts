@@ -1,4 +1,4 @@
-import { CARDS, HabitError, PRESETS, type Preset, createHabit, distanceScale, presetById, setPlacement, surfaceHint, surfaceMatches } from '@mebae/core';
+import { CARDS, HabitError, PRESETS, type Preset, createHabit, distanceScale, presetById, setPlacement, surfaceMatches } from '@mebae/core';
 import {
   type Entity,
   BufferAttribute,
@@ -88,6 +88,9 @@ export class PlantingSystem extends createSystem({}) {
     ring.renderOrder = dot.renderOrder = 20;
     this.reticle.add(ring, dot);
     this.preview.mesh.position.set(0, 0.09, 0);
+    // The aim label (with its ✓ match) must never hide behind the coach card or a sprout label.
+    this.preview.mesh.renderOrder = 35;
+    (this.preview.mesh.material as MeshBasicMaterial).depthTest = false;
     this.reticle.add(this.preview.mesh);
     const g = new BufferGeometry();
     g.setAttribute('position', new BufferAttribute(new Float32Array(24 * 3), 3));
@@ -233,12 +236,12 @@ export class PlantingSystem extends createSystem({}) {
     this.aimStart = performance.now();
     this.lastPreview = '';
     ui.mode.value = 'aiming';
+    // The coach card above the tray already says where to point.
+    if (this.coach) return;
     garden.say(
       this.repinId
         ? `Point at the spot for ${preset.label} and pinch to pin it again.`
-        : this.coach
-          ? `${preset.label}${this.coach.target > 1 ? `, ${this.coach.target} a day` : ''}. Point at ${surfaceHint(this.coach.surface)} and pinch.`
-          : `Point at where you ${preset.label.toLowerCase()} (${preset.hint}?) and pinch.`,
+        : `Point at where you ${preset.label.toLowerCase()} (${preset.hint}?) and pinch.`,
     );
   }
 

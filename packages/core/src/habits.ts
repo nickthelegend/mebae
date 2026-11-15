@@ -56,7 +56,7 @@ export interface Ledger {
 
 export class HabitError extends Error {
   constructor(
-    public code: 'limit' | 'unknown-preset' | 'unknown-habit' | 'archived' | 'sample',
+    public code: 'limit' | 'bad-target' | 'unknown-preset' | 'unknown-habit' | 'archived' | 'sample',
     message: string,
   ) {
     super(message);
@@ -84,11 +84,24 @@ function nextId(l: Ledger, presetId: string): string {
   return `${presetId}-${n}`;
 }
 
+/** Highest per-day count a habit can ask for (counted habits: water 8, eye breaks 4...). */
+export const MAX_TARGET = 12;
+
+export interface HabitOptions {
+  /**
+   * Per-day count, for example from the voice coach ("eight a day").
+   * 1 makes a daily yes/no habit; 2..MAX_TARGET makes it counted.
+   * Omitted: the preset's own kind and target.
+   */
+  target?: number;
+}
+
 export function createHabit(
   l: Ledger,
   presetId: string,
   clock: Clock,
   placement: Placement | null = null,
+  opts: HabitOptions = {},
 ): Habit {
   requireReal(l);
   const preset = presetById(presetId);
@@ -100,13 +113,21 @@ export function createHabit(
     );
   }
   const species = placement?.surface === 'wall' ? 'moss' : preset.species;
+  let target: number = preset.target;
+  let kind: HabitKind = preset.kind;
+  if (opts.target !== undefined) {
+    if (!Number.isInteger(opts.target) || opts.target < 1 || opts.target > MAX_TARGET)
+      throw new HabitError('bad-target', `A habit's daily count must be a whole number from 1 to ${MAX_TARGET}.`);
+    target = opts.target;
+    kind = target > 1 ? 'counted' : 'daily';
+  }
   const habit: Habit = {
     id: nextId(l, presetId),
     presetId,
     label: preset.label,
     glyph: preset.glyph,
-    kind: preset.kind,
-    target: preset.target,
+    kind,
+    target,
     species,
     createdDay: dayKey(clock.now()),
     archivedDay: null,

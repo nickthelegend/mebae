@@ -10,3 +10,4 @@ export * from './rng.js';
 export * from './restore.js';
 export * from './display.js';
 export * from './legibility.js';
+export * from './coach.js';

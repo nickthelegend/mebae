@@ -11,3 +11,4 @@ export * from './restore.js';
 export * from './display.js';
 export * from './legibility.js';
 export * from './coach.js';
+export * from './wav.js';

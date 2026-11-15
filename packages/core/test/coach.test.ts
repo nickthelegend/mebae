@@ -92,7 +92,7 @@ describe('voice coach: weekly note input', () => {
     l.focus.blocks.push({ startedAt: c.now() - 25 * 60_000, minutes: 25, completedAt: c.now() });
     const s = weeklySummary(l, dayKey(c.now()), (ms) => dayKey(ms));
     expect(s.weekOf).toBe('2026-11-16');
-    expect(s.habits[0]).toMatchObject({ label: 'Water', target: 8, daysDone: 3, daysSoFar: 4, todayCount: 1, streak: 3, stage: 'Seedling' });
+    expect(s.habits[0]).toMatchObject({ label: 'Water', target: 8, goalMetDaysThisWeek: 3, daysElapsedThisWeek: 4, plantedDaysAgo: 3, todayCount: 1, streak: 3, stage: 'Seedling' });
     expect(s.focusBlocksThisWeek).toBe(1);
     expect(JSON.stringify(s)).not.toContain('secret-uuid');
     expect(JSON.stringify(s)).not.toContain('counter');

@@ -71,13 +71,13 @@ export const CARDS = {
   stageBanner: { pxW: 900, pxH: 200, mW: 0.42, mH: 0.0933, minFontPx: 60, viewM: 1, scalesWithDistance: true },
   /** Aim preview at the reticle ("Water · on: counter"). */
   aimLabel: { pxW: 900, pxH: 170, mW: 0.42, mH: 0.0793, minFontPx: 56, viewM: 1, scalesWithDistance: true },
-  trayMenu: { pxW: 1024, pxH: 150, mW: 0.45, mH: 0.0659, minFontPx: 42, viewM: 0.6 },
+  trayMenu: { pxW: 1200, pxH: 150, mW: 0.45, mH: 0.05625, minFontPx: 42, viewM: 0.6 },
   toast: { pxW: 1024, pxH: 220, mW: 0.44, mH: 0.0945, minFontPx: 40, viewM: 0.55 },
   stamp: { pxW: 1024, pxH: 110, mW: 0.44, mH: 0.0473, minFontPx: 42, viewM: 0.6 },
   focus: { pxW: 640, pxH: 150, mW: 0.25, mH: 0.0586, minFontPx: 44, viewM: 0.6 },
   radial: { pxW: 1024, pxH: 1024, mW: 0.38, mH: 0.38, minFontPx: 40, viewM: 0.5 },
   pinAgain: { pxW: 512, pxH: 220, mW: 0.165, mH: 0.0709, minFontPx: 50, viewM: 0.6 },
-  week: { pxW: 1024, pxH: 900, mW: 0.54, mH: 0.4746, minFontPx: 30, viewM: 0.6 },
+  week: { pxW: 1400, pxH: 700, mW: 0.66, mH: 0.33, minFontPx: 34, viewM: 0.6 },
   wrist: { pxW: 600, pxH: 420, mW: 0.1625, mH: 0.11375, minFontPx: 40, viewM: 0.4 },
   /** Voice coach card above the tray (listening, heard, planted). */
   coach: { pxW: 1024, pxH: 330, mW: 0.46, mH: 0.1482, minFontPx: 40, viewM: 0.6 },

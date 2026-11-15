@@ -77,17 +77,17 @@ export interface WeekHabitSummary {
   label: string;
   /** Per-day goal. */
   target: number;
-  /** Days this week (Mon..today) the goal was met. */
-  daysDone: number;
-  /** Days this week so far, including today. */
-  daysSoFar: number;
+  /** Days this week (Mon..today) the daily goal was met. */
+  goalMetDaysThisWeek: number;
+  /** Days of this week so far, including today (Mon = 1 … Sun = 7). */
+  daysElapsedThisWeek: number;
   todayCount: number;
   streak: number;
   stage: string;
   resting: boolean;
   inBloom: boolean;
-  /** Days since it was planted. */
-  ageDays: number;
+  /** Days since it was planted (0 = planted today). */
+  plantedDaysAgo: number;
 }
 
 export interface WeekSummary {
@@ -106,20 +106,20 @@ export function weeklySummary(l: Ledger, today: DayKey, blockDay: (ms: number) =
   const ws = weekStart(today);
   const daysSoFar = daysBetween(ws, today) + 1;
   const habits = activeHabits(l).map((h) => {
-    let daysDone = 0;
-    for (let i = 0; i < daysSoFar; i++) if (countOn(l, h.id, addDays(ws, i)) >= h.target) daysDone++;
+    let goalMetDaysThisWeek = 0;
+    for (let i = 0; i < daysSoFar; i++) if (countOn(l, h.id, addDays(ws, i)) >= h.target) goalMetDaysThisWeek++;
     const g = growthOf(l, h, today);
     return {
       label: h.label,
       target: h.target,
-      daysDone,
-      daysSoFar,
+      goalMetDaysThisWeek,
+      daysElapsedThisWeek: daysSoFar,
       todayCount: g.todayCount,
       streak: g.streak,
       stage: stageName(g.stage),
       resting: g.vitality === 'resting',
       inBloom: g.inBloom,
-      ageDays: Math.max(0, daysBetween(h.createdDay, today)),
+      plantedDaysAgo: Math.max(0, daysBetween(h.createdDay, today)),
     };
   });
   const focusBlocksThisWeek = l.focus.blocks.filter((b) => {

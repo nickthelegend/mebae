@@ -8,3 +8,5 @@ export * from './sample.js';
 export * from './lsystem.js';
 export * from './rng.js';
 export * from './restore.js';
+export * from './display.js';
+export * from './legibility.js';
